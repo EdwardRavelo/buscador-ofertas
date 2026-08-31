@@ -696,9 +696,9 @@
       try { localStorage.setItem(clave, valor); } catch (e) { /* ventana privada */ }
     }
 
-    soloNuevas.setAttribute('aria-pressed', leer('solo-nuevas', 'false'));
+    soloNuevas.setAttribute('aria-pressed', leer('radar:solo-nuevas', 'false'));
     botonesTema.forEach(function (b) {
-      b.setAttribute('aria-pressed', leer('tema:' + b.dataset.tema, 'true'));
+      b.setAttribute('aria-pressed', leer('radar:tema:' + b.dataset.tema, 'true'));
     });
 
     function aplicar() {
@@ -720,14 +720,14 @@
     soloNuevas.addEventListener('click', function () {
       var v = this.getAttribute('aria-pressed') !== 'true';
       this.setAttribute('aria-pressed', String(v));
-      guardar('solo-nuevas', String(v));
+      guardar('radar:solo-nuevas', String(v));
       aplicar();
     });
     botonesTema.forEach(function (b) {
       b.addEventListener('click', function () {
         var v = this.getAttribute('aria-pressed') !== 'true';
         this.setAttribute('aria-pressed', String(v));
-        guardar('tema:' + this.dataset.tema, String(v));
+        guardar('radar:tema:' + this.dataset.tema, String(v));
         aplicar();
       });
     });
