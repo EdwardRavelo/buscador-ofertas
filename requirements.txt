@@ -1,0 +1,7 @@
+feedparser
+httpx
+pyyaml
+jinja2
+gspread
+google-auth
+python-dotenv

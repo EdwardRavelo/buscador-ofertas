@@ -1,9 +1,25 @@
-# Radar de Talleres y Cursos
+# Buscador de ofertas, cursos y talleres
 
-Sitio generado automáticamente por el Buscador de Ofertas.
+Vigila talleres, cursos y ofertas formativas en Buenos Aires y publica los hallazgos
+en un sitio estático.
 
-**Este repo contiene solo el HTML publicado.** El código fuente y las credenciales
-viven en otro lado y nunca se versionan acá: es deliberado, para que un `.gitignore`
-mal puesto no pueda filtrar la service account de Google ni el `.env`.
+**Sitio:** https://edwardravelo.github.io/buscador-ofertas/
 
-Se regenera y despliega solo en cada corrida de la tarea programada de Windows.
+## Cómo funciona
+
+1. `fuentes/` consulta Google News RSS y feeds propios declarados en `config/feeds.yaml`
+2. `nucleo/puntuador.py` filtra por zona, actividad, recencia y tope por dominio
+3. `nucleo/almacen.py` deduplica en SQLite (hash de título + medio)
+4. `nucleo/sheets.py` sincroniza a Google Sheets, una pestaña por tema
+5. `salidas/dashboard.py` genera el `index.html` que sirve GitHub Pages
+
+Agregar un tema o una fuente es editar YAML. No requiere tocar código.
+
+## Buscar ahora
+
+Pestaña **Actions** → **Buscar ofertas** → **Run workflow**.
+
+## Credenciales
+
+Nunca se versionan. Viven en GitHub Secrets (`GOOGLE_SERVICE_ACCOUNT`, `GOOGLE_SHEET_ID`)
+y, para uso local, en `config/.env` y `config/service_account.json`, ambos ignorados por git.

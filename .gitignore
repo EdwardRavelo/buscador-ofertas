@@ -1,0 +1,18 @@
+# --- NUNCA versionar: el repo es publico ---------------------------------
+config/.env
+config/*.json
+*.pem
+*.key
+
+# --- Entorno y basura local ----------------------------------------------
+.venv/
+__pycache__/
+*.pyc
+dashboard.html
+datos/corridas.log
+publicar/
+
+# --- Estado que SI se versiona -------------------------------------------
+# ofertas.db lleva el dedup. Sin el, cada corrida en GitHub Actions
+# empezaria de cero y volveria a "descubrir" lo mismo todos los dias.
+!datos/ofertas.db

@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar de Talleres y Cursos</title>
+<meta name="description" content="Vigilancia de talleres, cursos y ofertas formativas en Buenos Aires.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>📻</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Piazzolla:opsz,wght@8..30,400;8..30,600;8..30,800&display=swap">
+
+<style>
+  /* Paleta clara completa: papel frio, acento teal, y un solo tono calido
+     reservado para lo recien publicado. */
+  :root {
+    --ground:    #F5F8F9;
+    --surface:   #FFFFFF;
+    --sunken:    #ECF1F3;
+    --border:    #DBE4E8;
+    --hairline:  #E8EEF1;
+    --ink:       #101820;
+    --muted:     #56666F;
+    --faint:     #83959E;
+    --accent:    #0A6A87;
+    --accent-suave: #E2F0F5;
+    --sobre-acento: #FFFFFF;
+    --urgente:   #A6360F;
+    --urgente-suave: #FBEAE3;
+    --alto:      #14664C;
+    --medio:     #855A0B;
+    --bajo:      #56666F;
+    --sombra:    0 1px 2px rgba(16,24,32,.05), 0 2px 12px rgba(16,24,32,.05);
+    --sombra-alta: 0 2px 6px rgba(16,24,32,.07), 0 12px 34px rgba(16,24,32,.09);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:    #0B1116;
+      --surface:   #131D24;
+      --sunken:    #1A252D;
+      --border:    #26343D;
+      --hairline:  #1D2931;
+      --ink:       #E7EEF2;
+      --muted:     #93A5AF;
+      --faint:     #6D808B;
+      --accent:    #52B7D6;
+      --accent-suave: #10303C;
+      --sobre-acento: #07161C;
+      --urgente:   #F09070;
+      --urgente-suave: #3A1B10;
+      --alto:      #5FC49F;
+      --medio:     #D5A345;
+      --bajo:      #93A5AF;
+      --sombra:    0 1px 2px rgba(0,0,0,.35), 0 2px 12px rgba(0,0,0,.25);
+      --sombra-alta: 0 2px 6px rgba(0,0,0,.4), 0 12px 34px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:    #0B1116;
+    --surface:   #131D24;
+    --sunken:    #1A252D;
+    --border:    #26343D;
+    --hairline:  #1D2931;
+    --ink:       #E7EEF2;
+    --muted:     #93A5AF;
+    --faint:     #6D808B;
+    --accent:    #52B7D6;
+    --accent-suave: #10303C;
+    --sobre-acento: #07161C;
+    --urgente:   #F09070;
+    --urgente-suave: #3A1B10;
+    --alto:      #5FC49F;
+    --medio:     #D5A345;
+    --bajo:      #93A5AF;
+    --sombra:    0 1px 2px rgba(0,0,0,.35), 0 2px 12px rgba(0,0,0,.25);
+    --sombra-alta: 0 2px 6px rgba(0,0,0,.4), 0 12px 34px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Archivo, "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .envoltorio { max-width: 1080px; margin: 0 auto; padding: 44px 24px 80px; }
+
+  /* --- Encabezado --------------------------------------------------------- */
+  .encabezado { display: flex; flex-direction: column; gap: 8px; margin-bottom: 30px; }
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .encabezado h1 {
+    font-family: Piazzolla, Georgia, serif;
+    font-optical-sizing: auto;
+    font-size: clamp(36px, 6.5vw, 62px);
+    font-weight: 800;
+    letter-spacing: -.025em;
+    line-height: .98;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .sello { color: var(--faint); font-size: 13px; margin: 0; }
+
+  /* --- Destacada: la tesis de la pagina ----------------------------------- */
+  .destacada {
+    position: relative;
+    display: grid; grid-template-columns: auto 1fr; gap: 26px; align-items: start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--urgente);
+    border-radius: 14px;
+    padding: 28px 30px;
+    margin-bottom: 14px;
+    box-shadow: var(--sombra-alta);
+  }
+  .destacada .cifra {
+    font-family: Piazzolla, Georgia, serif;
+    font-size: 72px; font-weight: 800; line-height: .85;
+    letter-spacing: -.04em;
+    color: var(--urgente);
+    font-variant-numeric: tabular-nums;
+  }
+  .destacada .rotulo {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--urgente);
+    display: block; margin-bottom: 10px;
+  }
+  .destacada h2 {
+    font-family: Piazzolla, Georgia, serif;
+    font-size: clamp(21px, 2.9vw, 30px);
+    font-weight: 600; line-height: 1.2; letter-spacing: -.012em;
+    margin: 0 0 12px; text-wrap: balance;
+  }
+  .destacada h2 a { color: var(--ink); text-decoration: none; }
+  .destacada h2 a:hover { color: var(--accent); }
+
+  /* --- Tira de metricas --------------------------------------------------- */
+  .metricas {
+    display: flex; flex-wrap: wrap; gap: 0;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px 20px; margin-bottom: 26px;
+    box-shadow: var(--sombra);
+  }
+  .metrica { display: flex; flex-direction: column; gap: 1px; padding: 0 28px 0 0; }
+  .metrica + .metrica { border-left: 1px solid var(--hairline); padding-left: 28px; }
+  .metrica .valor {
+    font-family: Piazzolla, Georgia, serif;
+    font-size: 30px; font-weight: 800; line-height: 1;
+    letter-spacing: -.03em; font-variant-numeric: tabular-nums;
+  }
+  .metrica .valor.acento { color: var(--accent); }
+  .metrica .valor.calor { color: var(--urgente); }
+  .metrica .clave {
+    font-size: 10px; text-transform: uppercase; letter-spacing: .1em;
+    color: var(--faint); font-weight: 700; margin-top: 4px;
+  }
+
+  /* --- Filtros ------------------------------------------------------------ */
+  .filtros { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 34px; }
+  .filtro {
+    font: inherit; font-size: 13px; font-weight: 600;
+    padding: 7px 15px; border-radius: 999px; cursor: pointer;
+    background: var(--surface); color: var(--muted);
+    border: 1px solid var(--border);
+    transition: background .14s ease, color .14s ease, border-color .14s ease;
+  }
+  .filtro:hover { border-color: var(--accent); color: var(--ink); }
+  .filtro[aria-pressed="true"] {
+    background: var(--accent); border-color: var(--accent); color: var(--sobre-acento);
+  }
+  .filtro:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* --- Secciones y tarjetas ----------------------------------------------- */
+  .seccion { margin-bottom: 44px; }
+  .seccion[hidden] { display: none; }
+  .titulo-seccion {
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .titulo-seccion h2 {
+    font-family: Piazzolla, Georgia, serif;
+    font-size: 25px; font-weight: 800; margin: 0; letter-spacing: -.02em;
+  }
+  .conteo {
+    font-size: 12px; color: var(--faint); font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(316px, 1fr)); gap: 14px; }
+
+  .tarjeta {
+    display: flex; flex-direction: column; gap: 9px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--border);
+    border-radius: 11px;
+    padding: 17px 19px;
+    box-shadow: var(--sombra);
+    transition: box-shadow .16s ease, transform .16s ease;
+  }
+  .tarjeta:hover { box-shadow: var(--sombra-alta); transform: translateY(-2px); }
+  .tarjeta[hidden] { display: none; }
+  /* El riel izquierdo codifica cuan reciente es la publicacion. */
+  .tarjeta.caliente { border-left-color: var(--urgente); }
+  .tarjeta.semana   { border-left-color: var(--accent); }
+
+  .fila-superior { display: flex; align-items: center; gap: 9px; }
+  .cifra-chica {
+    font-family: Piazzolla, Georgia, serif;
+    font-size: 27px; font-weight: 800; line-height: 1;
+    letter-spacing: -.03em; font-variant-numeric: tabular-nums;
+  }
+  .cifra-chica.alto  { color: var(--alto); }
+  .cifra-chica.medio { color: var(--medio); }
+  .cifra-chica.bajo  { color: var(--bajo); }
+
+  .marca {
+    font-size: 9.5px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; padding: 3px 8px; border-radius: 999px;
+  }
+  .marca.nueva { background: var(--accent); color: var(--sobre-acento); }
+  .marca.reciente { background: var(--urgente-suave); color: var(--urgente); }
+
+  .tarjeta h3 { font-size: 15px; font-weight: 600; line-height: 1.36; margin: 0; }
+  .tarjeta h3 a { color: var(--ink); text-decoration: none; }
+  .tarjeta h3 a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  .tarjeta h3 a:focus-visible,
+  .destacada h2 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+
+  .pie-tarjeta {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--muted); margin-top: auto; padding-top: 3px;
+  }
+  .medio { font-weight: 600; color: var(--ink); }
+  .punto { color: var(--faint); }
+  .senal {
+    font-size: 10.5px; padding: 2px 7px; border-radius: 4px;
+    background: var(--sunken); color: var(--muted); font-weight: 500;
+  }
+  .alterno { font-size: 11px; color: var(--faint); text-decoration: none; }
+  .alterno:hover { color: var(--accent); text-decoration: underline; }
+
+  .pie {
+    margin-top: 46px; padding-top: 20px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--faint); line-height: 1.65;
+  }
+  .pie code { background: var(--sunken); padding: 1px 5px; border-radius: 4px; font-size: 11px; }
+
+  @media (max-width: 620px) {
+    .envoltorio { padding: 30px 16px 60px; }
+    .destacada { grid-template-columns: 1fr; gap: 12px; padding: 22px; }
+    .destacada .cifra { font-size: 54px; }
+    .metrica { padding-right: 18px; }
+    .metrica + .metrica { padding-left: 18px; }
+    .grilla { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+    .tarjeta:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="envoltorio">
+  <header class="encabezado">
+    <span class="eyebrow">Buenos Aires</span>
+    <h1>Radar de Talleres y Cursos</h1>
+    <p class="sello">Actualizado {{ actualizado }}</p>
+  </header>
+
+  {% if destacada %}
+  <article class="destacada">
+    <div class="cifra">{{ '%.1f'|format(destacada.score) }}</div>
+    <div>
+      <span class="rotulo">Lo mejor de esta semana &middot; {{ destacada.tema_corto }}</span>
+      <h2><a href="{{ destacada.url }}" target="_blank" rel="noopener noreferrer">{{ destacada.titulo }}</a></h2>
+      <div class="pie-tarjeta">
+        <span class="medio">{{ destacada.fuente }}</span>
+        <span class="punto">&middot;</span>
+        <span>{{ destacada.edad }}</span>
+        {% for m in destacada.motivos[:3] %}<span class="senal">{{ m }}</span>{% endfor %}
+        {% if destacada.opaco %}<span class="punto">&middot;</span><a class="alterno" href="{{ destacada.respaldo }}" target="_blank" rel="noopener noreferrer">buscar la nota</a>{% endif %}
+      </div>
+    </div>
+  </article>
+  {% endif %}
+
+  <div class="metricas">
+    <div class="metrica">
+      <span class="valor">{{ total }}</span>
+      <span class="clave">en seguimiento</span>
+    </div>
+    <div class="metrica">
+      <span class="valor{% if nuevos %} acento{% endif %}">{{ nuevos }}</span>
+      <span class="clave">nuevas hoy</span>
+    </div>
+    <div class="metrica">
+      <span class="valor{% if calientes %} calor{% endif %}">{{ calientes }}</span>
+      <span class="clave">recién publicadas</span>
+    </div>
+    {% for t in temas %}
+    <div class="metrica">
+      <span class="valor">{{ t.total }}</span>
+      <span class="clave">{{ t.corto }}</span>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="filtros">
+    <button class="filtro" id="solo-nuevas" aria-pressed="false" type="button">Solo nuevas</button>
+    {% for t in temas %}
+    <button class="filtro filtro-tema" data-tema="{{ t.clave }}" aria-pressed="true" type="button">{{ t.nombre }}</button>
+    {% endfor %}
+  </div>
+
+  {% for t in temas %}
+  <section class="seccion" data-tema="{{ t.clave }}">
+    <div class="titulo-seccion">
+      <h2>{{ t.nombre }}</h2>
+      <span class="conteo">{{ t.total }} en total{% if t.nuevos %} &middot; {{ t.nuevos }} nueva{{ 's' if t.nuevos != 1 else '' }}{% endif %}</span>
+    </div>
+    <div class="grilla">
+      {% for o in t.ofertas %}
+      <article class="tarjeta {{ o.urgencia }}" data-nuevo="{{ 'si' if o.nuevo else 'no' }}">
+        <div class="fila-superior">
+          <span class="cifra-chica {{ o.nivel }}">{{ '%.1f'|format(o.score) }}</span>
+          {% if o.nuevo %}<span class="marca nueva">nueva</span>{% endif %}
+          {% if o.urgencia == 'caliente' %}<span class="marca reciente">recién</span>{% endif %}
+        </div>
+        <h3><a href="{{ o.url }}" target="_blank" rel="noopener noreferrer">{{ o.titulo }}</a></h3>
+        <div class="pie-tarjeta">
+          <span class="medio">{{ o.fuente }}</span>
+          <span class="punto">&middot;</span>
+          <span>{{ o.edad }}</span>
+          {% for m in o.motivos[:2] %}<span class="senal">{{ m }}</span>{% endfor %}
+          {% if o.opaco %}<span class="punto">&middot;</span><a class="alterno" href="{{ o.respaldo }}" target="_blank" rel="noopener noreferrer">buscar la nota</a>{% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+
+  <footer class="pie">
+    Generado por <code>run.py dashboard</code> y publicado solo en cada corrida de la tarea programada.
+    El puntaje mide qué tan bien encaja con el tema, no la calidad del curso.
+    Las etiquetas de tiempo indican cuándo se <em>publicó</em> la nota, no cuándo cierra la inscripción:
+    esa fecha no la tenemos, así que no la inventamos.
+    Los enlaces marcados <em>buscar la nota</em> vienen de Google News, que cifra la URL real del medio.
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var soloNuevas = document.getElementById('solo-nuevas');
+    var botonesTema = Array.prototype.slice.call(document.querySelectorAll('.filtro-tema'));
+
+    function leer(clave, porDefecto) {
+      try {
+        var v = localStorage.getItem(clave);
+        return v === null ? porDefecto : v;
+      } catch (e) {
+        return porDefecto;
+      }
+    }
+    function guardar(clave, valor) {
+      try { localStorage.setItem(clave, valor); } catch (e) { /* ventana privada */ }
+    }
+
+    soloNuevas.setAttribute('aria-pressed', leer('radar:solo-nuevas', 'false'));
+    botonesTema.forEach(function (b) {
+      b.setAttribute('aria-pressed', leer('radar:tema:' + b.dataset.tema, 'true'));
+    });
+
+    function aplicar() {
+      var nuevas = soloNuevas.getAttribute('aria-pressed') === 'true';
+      botonesTema.forEach(function (b) {
+        var seccion = document.querySelector('.seccion[data-tema="' + b.dataset.tema + '"]');
+        if (!seccion) { return; }
+        var visible = b.getAttribute('aria-pressed') === 'true';
+        var mostradas = 0;
+        seccion.querySelectorAll('.tarjeta').forEach(function (tarjeta) {
+          var ok = !nuevas || tarjeta.dataset.nuevo === 'si';
+          tarjeta.hidden = !ok;
+          if (ok) { mostradas++; }
+        });
+        seccion.hidden = !visible || mostradas === 0;
+      });
+    }
+
+    soloNuevas.addEventListener('click', function () {
+      var v = this.getAttribute('aria-pressed') !== 'true';
+      this.setAttribute('aria-pressed', String(v));
+      guardar('radar:solo-nuevas', String(v));
+      aplicar();
+    });
+    botonesTema.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var v = this.getAttribute('aria-pressed') !== 'true';
+        this.setAttribute('aria-pressed', String(v));
+        guardar('radar:tema:' + this.dataset.tema, String(v));
+        aplicar();
+      });
+    });
+
+    aplicar();
+  })();
+</script>
+</body>
+</html>

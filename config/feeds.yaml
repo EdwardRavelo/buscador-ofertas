@@ -1,0 +1,39 @@
+# Feeds RSS fijos. Todos verificados el 2026-08-30 con el mismo httpx+feedparser
+# que los consume. Agregar una fuente = agregar una entrada aca, sin tocar codigo.
+#
+# `temas` indica a que temas se le ofrece el feed. El filtrado fino lo hace
+# despues el puntuador con las reglas del tema.
+
+feeds:
+  - nombre: gcba-oficial
+    url: https://buenosaires.gob.ar/rss.xml
+    temas: [talleres-lectura-caba, ingles]
+    nota: Feed oficial del Gobierno de la Ciudad. Fuente primaria para CABA.
+
+  - nombre: soybibliotecario
+    url: https://soybibliotecario.blogspot.com/feeds/posts/default?alt=rss
+    temas: [talleres-lectura-caba]
+    nota: Blog especializado en bibliotecas. 25 items por corrida, el que mas trae.
+
+  - nombre: puraciudad
+    url: https://puraciudad.com.ar/feed/
+    temas: [talleres-lectura-caba]
+    nota: Cubre agenda y talleres porteños. Ya aporto un acierto via Google News.
+
+  - nombre: notaalpie
+    url: https://www.notaalpie.com.ar/feed/
+    temas: [talleres-lectura-caba]
+    nota: Cubre aperturas de inscripcion de talleres de la Ciudad.
+
+  - nombre: bairessecreta
+    url: https://bairessecreta.com/feed/
+    temas: [talleres-lectura-caba]
+    nota: Agenda cultural porteña. Ruidoso, el filtro de actividad lo contiene.
+
+# --- Revisar a mano: existen pero NO tienen RSS utilizable (probado 2026-08-30)
+#   villaortuzar.ar          403 al feed
+#   eldestapeweb.com         404 en /rss, /feed, /rss/home.xml
+#   noticiasurbanas.com.ar   200 pero 0 items
+#   iprofesional.com         200 pero 0 items
+#   bcn.gob.ar               200 pero 0 items (Biblioteca del Congreso)
+#   Instagram @bibliotecasba requiere login; es el canal real de la Red de Bibliotecas

@@ -1,0 +1,64 @@
+name: Buscar ofertas
+
+on:
+  # El boton: pestaña Actions -> Buscar ofertas -> Run workflow
+  workflow_dispatch:
+  schedule:
+    # 12:00 UTC = 09:00 en Buenos Aires (UTC-3). Los cron de Actions son siempre UTC.
+    - cron: "0 12 * * *"
+
+# Dos corridas simultaneas se pisarian al escribir ofertas.db.
+concurrency:
+  group: buscar
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Preparar credenciales
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+          SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+        run: |
+          # Ambos archivos estan en .gitignore, nunca llegan a un commit.
+          printf '%s' "$SERVICE_ACCOUNT" > config/service_account.json
+          printf 'GOOGLE_SHEET_ID=%s\n' "$SHEET_ID" > config/.env
+          python -c "import json; json.load(open('config/service_account.json')); print('service account OK')"
+
+      - name: Buscar
+        run: python run.py buscar
+
+      - name: Sincronizar Google Sheets
+        run: python run.py sync
+
+      - name: Generar el sitio
+        run: python run.py dashboard
+
+      - name: Publicar si hubo cambios
+        run: |
+          rm -f config/service_account.json config/.env
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html datos/ofertas.db
+          if git diff --cached --quiet; then
+            echo "Sin novedades: no se publica."
+          else
+            git commit -m "Actualizacion automatica $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git push
+          fi

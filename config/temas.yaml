@@ -1,0 +1,102 @@
+# Un tema = una entrada. Agregar un tema nuevo NO requiere tocar codigo.
+#
+# Campos:
+#   keywords             consultas que se mandan a Google News
+#   requerir             lista de GRUPOS. Dentro del grupo es O, entre grupos es Y.
+#                        Ej: [zona] Y [actividad]. Un solo grupo no alcanza:
+#                        con solo zona pasaba "agenda cultural"; con solo
+#                        actividad pasaban cursos de Madrid.
+#   excluir              si aparece alguno, se descarta
+#   max_antiguedad_dias  descarta lo viejo (Google News mezcla 2018 con 2026)
+#   max_por_dominio      tope por medio, contra content farms
+#   score_minimo         umbral 0-10 para entrar al informe
+
+temas:
+  - nombre: talleres-lectura-caba
+    tipo: [taller]
+    gl: AR
+    hl: es-419
+    keywords:
+      - "talleres gratuitos bibliotecas Buenos Aires inscripción"
+      - "taller de lectura biblioteca porteña inscripción"
+      - "taller escritura literatura CABA gratuito"
+      - "Red de Bibliotecas de la Ciudad talleres"
+    requerir:
+      # grupo 1: zona
+      - ["Buenos Aires", "CABA", "porteñ", "Biblioteca Nacional", "Ciudad", "Red de Bibliotecas"]
+      # grupo 2: que sea realmente un taller o curso con inscripción
+      - ["taller", "talleres", "inscripción", "inscripciones", "cupos", "curso"]
+    excluir:
+      - "Paraná"
+      - "Merlo"
+      - "Mendoza"
+      - "Córdoba"
+      - "Salta"
+      - "La Plata"
+      - "Entre Ríos"
+      - "Rosario"
+      - "Tucumán"
+      - "Colombia"
+      - "México"
+      - "Bogotá"
+    max_antiguedad_dias: 45
+    max_por_dominio: 2
+    score_minimo: 6
+
+  - nombre: cursos-ia
+    tipo: [curso]
+    gl: AR
+    hl: es-419
+    keywords:
+      - "curso gratis inteligencia artificial certificado"
+      - "certificación gratuita IA generativa"
+      - "curso gratuito IA inscripción abierta"
+    requerir:
+      - ["curso", "cursos", "certificación", "capacitación", "formación"]
+      - ["inteligencia artificial", "IA", "ChatGPT", "Claude", "Gemini", "machine learning"]
+    excluir:
+      # Cursos presenciales de otras ciudades: si nombran una ciudad extranjera,
+      # es senal de que no es online y no me sirve.
+      - "masterclass de ventas"
+      - "webinar promocional"
+      - "curso de Excel"
+      - "Madrid"
+      - "Galapagar"
+      - "Morelia"
+      - "Bogotá"
+      - "Segovia"
+      - "Colombia"
+      - "Chile"
+      - "Comunidad de Madrid"
+    excluir_dominios: [".cl", ".mx", ".py", ".pe", ".ve", ".bo", ".ec"]
+    max_antiguedad_dias: 30
+    max_por_dominio: 2
+    score_minimo: 6
+
+  - nombre: ingles
+    tipo: [curso, descuento]
+    gl: AR
+    hl: es-419
+    keywords:
+      - "curso de inglés gratis certificado Argentina"
+      - "curso inglés gratuito inscripción Buenos Aires"
+      - "curso de inglés descuento promoción"
+    requerir:
+      - ["inglés", "idiomas", "bilingüe"]
+      - ["curso", "cursos", "taller", "inscripción", "beca", "capacitación"]
+    excluir:
+      # "El Corte Inglés" es una tienda espanola: matcheaba "inglés" y colaba
+      # ofertas de notebooks.
+      - "Corte Inglés"
+      - "alemán"
+      - "portugués"
+      - "francés"
+      - "italiano"
+      - "Bogotá"
+      - "Segovia"
+      - "Paraguay"
+      - "Madrid"
+    excluir_dominios: [".py", ".co", ".mx", ".cl", ".pe"]
+    max_antiguedad_dias: 60
+    max_por_dominio: 2
+    score_minimo: 6
