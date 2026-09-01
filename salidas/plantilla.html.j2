@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Radar de Talleres y Cursos</title>
-<meta name="description" content="Vigilancia de talleres, cursos y ofertas formativas en Buenos Aires.">
+<title>Radar Porteño</title>
+<meta name="description" content="Talleres, cursos, festivales y teatro gratis en Buenos Aires, vigilados a diario.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>📻</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,6 @@
     --muted:     #56666F;
     --faint:     #83959E;
     --accent:    #0A6A87;
-    --accent-suave: #E2F0F5;
     --sobre-acento: #FFFFFF;
     --urgente:   #A6360F;
     --urgente-suave: #FBEAE3;
@@ -45,7 +44,6 @@
       --muted:     #93A5AF;
       --faint:     #6D808B;
       --accent:    #52B7D6;
-      --accent-suave: #10303C;
       --sobre-acento: #07161C;
       --urgente:   #F09070;
       --urgente-suave: #3A1B10;
@@ -66,7 +64,6 @@
     --muted:     #93A5AF;
     --faint:     #6D808B;
     --accent:    #52B7D6;
-    --accent-suave: #10303C;
     --sobre-acento: #07161C;
     --urgente:   #F09070;
     --urgente-suave: #3A1B10;
@@ -90,7 +87,7 @@
   .envoltorio { max-width: 1080px; margin: 0 auto; padding: 44px 24px 80px; }
 
   /* --- Encabezado --------------------------------------------------------- */
-  .encabezado { display: flex; flex-direction: column; gap: 8px; margin-bottom: 30px; }
+  .encabezado { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
   .eyebrow {
     font-size: 11px; font-weight: 700; letter-spacing: .16em;
     text-transform: uppercase; color: var(--accent);
@@ -99,32 +96,24 @@
     font-family: Piazzolla, Georgia, serif;
     font-optical-sizing: auto;
     font-size: clamp(36px, 6.5vw, 62px);
-    font-weight: 800;
-    letter-spacing: -.025em;
-    line-height: .98;
-    text-wrap: balance;
-    margin: 0;
+    font-weight: 800; letter-spacing: -.025em; line-height: .98;
+    text-wrap: balance; margin: 0;
   }
   .sello { color: var(--faint); font-size: 13px; margin: 0; }
 
   /* --- Destacada: la tesis de la pagina ----------------------------------- */
   .destacada {
-    position: relative;
     display: grid; grid-template-columns: auto 1fr; gap: 26px; align-items: start;
     background: var(--surface);
     border: 1px solid var(--border);
     border-left: 5px solid var(--urgente);
-    border-radius: 14px;
-    padding: 28px 30px;
-    margin-bottom: 14px;
+    border-radius: 14px; padding: 28px 30px; margin-bottom: 14px;
     box-shadow: var(--sombra-alta);
   }
   .destacada .cifra {
     font-family: Piazzolla, Georgia, serif;
-    font-size: 72px; font-weight: 800; line-height: .85;
-    letter-spacing: -.04em;
-    color: var(--urgente);
-    font-variant-numeric: tabular-nums;
+    font-size: 72px; font-weight: 800; line-height: .85; letter-spacing: -.04em;
+    color: var(--urgente); font-variant-numeric: tabular-nums;
   }
   .destacada .rotulo {
     font-size: 10.5px; font-weight: 700; letter-spacing: .14em;
@@ -142,12 +131,12 @@
 
   /* --- Tira de metricas --------------------------------------------------- */
   .metricas {
-    display: flex; flex-wrap: wrap; gap: 0;
+    display: flex; flex-wrap: wrap;
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; padding: 16px 20px; margin-bottom: 26px;
+    border-radius: 12px; padding: 16px 20px; margin-bottom: 22px;
     box-shadow: var(--sombra);
   }
-  .metrica { display: flex; flex-direction: column; gap: 1px; padding: 0 28px 0 0; }
+  .metrica { display: flex; flex-direction: column; padding: 0 28px 0 0; }
   .metrica + .metrica { border-left: 1px solid var(--hairline); padding-left: 28px; }
   .metrica .valor {
     font-family: Piazzolla, Georgia, serif;
@@ -161,50 +150,87 @@
     color: var(--faint); font-weight: 700; margin-top: 4px;
   }
 
-  /* --- Filtros ------------------------------------------------------------ */
-  .filtros { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 34px; }
-  .filtro {
+  /* --- Controles ---------------------------------------------------------- */
+  .controles { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+  .control {
     font: inherit; font-size: 13px; font-weight: 600;
     padding: 7px 15px; border-radius: 999px; cursor: pointer;
     background: var(--surface); color: var(--muted);
     border: 1px solid var(--border);
     transition: background .14s ease, color .14s ease, border-color .14s ease;
   }
-  .filtro:hover { border-color: var(--accent); color: var(--ink); }
-  .filtro[aria-pressed="true"] {
+  .control:hover { border-color: var(--accent); color: var(--ink); }
+  .control[aria-pressed="true"] {
     background: var(--accent); border-color: var(--accent); color: var(--sobre-acento);
   }
-  .filtro:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .control:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  /* --- Secciones y tarjetas ----------------------------------------------- */
-  .seccion { margin-bottom: 44px; }
-  .seccion[hidden] { display: none; }
-  .titulo-seccion {
+  /* --- Familia: el agrupamiento que evita la ensalada --------------------- */
+  .familia { margin-bottom: 42px; }
+  .familia > header {
     display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
-    margin-bottom: 16px;
+    padding-bottom: 10px; margin-bottom: 14px;
+    border-bottom: 2px solid var(--ink);
   }
-  .titulo-seccion h2 {
+  .familia > header h2 {
     font-family: Piazzolla, Georgia, serif;
-    font-size: 25px; font-weight: 800; margin: 0; letter-spacing: -.02em;
+    font-size: 27px; font-weight: 800; margin: 0; letter-spacing: -.022em;
   }
-  .conteo {
+  .resumen-familia {
     font-size: 12px; color: var(--faint); font-weight: 600;
     font-variant-numeric: tabular-nums;
   }
 
-  .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(316px, 1fr)); gap: 14px; }
+  /* --- Tema: acordeon nativo ---------------------------------------------- */
+  .tema {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 11px; margin-bottom: 10px; overflow: hidden;
+    box-shadow: var(--sombra);
+  }
+  .tema[hidden] { display: none; }
+  .tema > summary {
+    display: flex; align-items: center; gap: 11px;
+    padding: 14px 18px; cursor: pointer; list-style: none;
+    user-select: none;
+  }
+  .tema > summary::-webkit-details-marker { display: none; }
+  .tema > summary:hover { background: var(--sunken); }
+  .tema > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 
+  .chevron {
+    flex: none; width: 9px; height: 9px; border-right: 2px solid var(--faint);
+    border-bottom: 2px solid var(--faint); transform: rotate(-45deg);
+    transition: transform .16s ease; margin-left: 2px;
+  }
+  .tema[open] > summary .chevron { transform: rotate(45deg); }
+
+  .nombre-tema { font-weight: 700; font-size: 15.5px; flex: 1; }
+  .cuenta-tema {
+    font-size: 12px; color: var(--faint); font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .tope {
+    font-family: Piazzolla, Georgia, serif;
+    font-size: 19px; font-weight: 800; letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums; margin-left: 4px;
+  }
+  .tope.alto  { color: var(--alto); }
+  .tope.medio { color: var(--medio); }
+  .tope.bajo  { color: var(--bajo); }
+
+  .cuerpo-tema { padding: 4px 18px 18px; }
+  .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+
+  /* --- Tarjetas ----------------------------------------------------------- */
   .tarjeta {
-    display: flex; flex-direction: column; gap: 9px;
-    background: var(--surface);
+    display: flex; flex-direction: column; gap: 8px;
+    background: var(--ground);
     border: 1px solid var(--border);
     border-left: 4px solid var(--border);
-    border-radius: 11px;
-    padding: 17px 19px;
-    box-shadow: var(--sombra);
-    transition: box-shadow .16s ease, transform .16s ease;
+    border-radius: 9px; padding: 15px 17px;
+    transition: border-color .16s ease;
   }
-  .tarjeta:hover { box-shadow: var(--sombra-alta); transform: translateY(-2px); }
+  .tarjeta:hover { border-color: var(--accent); }
   .tarjeta[hidden] { display: none; }
   /* El riel izquierdo codifica cuan reciente es la publicacion. */
   .tarjeta.caliente { border-left-color: var(--urgente); }
@@ -213,7 +239,7 @@
   .fila-superior { display: flex; align-items: center; gap: 9px; }
   .cifra-chica {
     font-family: Piazzolla, Georgia, serif;
-    font-size: 27px; font-weight: 800; line-height: 1;
+    font-size: 25px; font-weight: 800; line-height: 1;
     letter-spacing: -.03em; font-variant-numeric: tabular-nums;
   }
   .cifra-chica.alto  { color: var(--alto); }
@@ -227,7 +253,7 @@
   .marca.nueva { background: var(--accent); color: var(--sobre-acento); }
   .marca.reciente { background: var(--urgente-suave); color: var(--urgente); }
 
-  .tarjeta h3 { font-size: 15px; font-weight: 600; line-height: 1.36; margin: 0; }
+  .tarjeta h3 { font-size: 14.5px; font-weight: 600; line-height: 1.36; margin: 0; }
   .tarjeta h3 a { color: var(--ink); text-decoration: none; }
   .tarjeta h3 a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
   .tarjeta h3 a:focus-visible,
@@ -235,7 +261,7 @@
 
   .pie-tarjeta {
     display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
-    font-size: 12px; color: var(--muted); margin-top: auto; padding-top: 3px;
+    font-size: 11.5px; color: var(--muted); margin-top: auto; padding-top: 2px;
   }
   .medio { font-weight: 600; color: var(--ink); }
   .punto { color: var(--faint); }
@@ -245,6 +271,7 @@
   }
   .alterno { font-size: 11px; color: var(--faint); text-decoration: none; }
   .alterno:hover { color: var(--accent); text-decoration: underline; }
+  .vacio { color: var(--faint); font-size: 13.5px; padding: 6px 2px 10px; }
 
   .pie {
     margin-top: 46px; padding-top: 20px; border-top: 1px solid var(--border);
@@ -259,10 +286,10 @@
     .metrica { padding-right: 18px; }
     .metrica + .metrica { padding-left: 18px; }
     .grilla { grid-template-columns: 1fr; }
+    .cuenta-tema { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
-    .tarjeta:hover { transform: none; }
   }
 </style>
 </head>
@@ -270,8 +297,8 @@
 
 <div class="envoltorio">
   <header class="encabezado">
-    <span class="eyebrow">Buenos Aires</span>
-    <h1>Radar de Talleres y Cursos</h1>
+    <span class="eyebrow">Cultura y formación</span>
+    <h1>Radar Porteño</h1>
     <p class="sello">Actualizado {{ actualizado }}</p>
   </header>
 
@@ -279,7 +306,7 @@
   <article class="destacada">
     <div class="cifra">{{ '%.1f'|format(destacada.score) }}</div>
     <div>
-      <span class="rotulo">Lo mejor de esta semana &middot; {{ destacada.tema_corto }}</span>
+      <span class="rotulo">Lo mejor de esta semana</span>
       <h2><a href="{{ destacada.url }}" target="_blank" rel="noopener noreferrer">{{ destacada.titulo }}</a></h2>
       <div class="pie-tarjeta">
         <span class="medio">{{ destacada.fuente }}</span>
@@ -305,54 +332,73 @@
       <span class="valor{% if calientes %} calor{% endif %}">{{ calientes }}</span>
       <span class="clave">recién publicadas</span>
     </div>
-    {% for t in temas %}
+    {% for f in familias %}
     <div class="metrica">
-      <span class="valor">{{ t.total }}</span>
-      <span class="clave">{{ t.corto }}</span>
+      <span class="valor">{{ f.total }}</span>
+      <span class="clave">{{ f.nombre }}</span>
     </div>
     {% endfor %}
   </div>
 
-  <div class="filtros">
-    <button class="filtro" id="solo-nuevas" aria-pressed="false" type="button">Solo nuevas</button>
-    {% for t in temas %}
-    <button class="filtro filtro-tema" data-tema="{{ t.clave }}" aria-pressed="true" type="button">{{ t.nombre }}</button>
-    {% endfor %}
+  <div class="controles">
+    <button class="control" id="solo-nuevas" aria-pressed="false" type="button">Solo nuevas</button>
+    <button class="control" id="abrir-todo" type="button">Abrir todo</button>
+    <button class="control" id="cerrar-todo" type="button">Cerrar todo</button>
   </div>
 
-  {% for t in temas %}
-  <section class="seccion" data-tema="{{ t.clave }}">
-    <div class="titulo-seccion">
-      <h2>{{ t.nombre }}</h2>
-      <span class="conteo">{{ t.total }} en total{% if t.nuevos %} &middot; {{ t.nuevos }} nueva{{ 's' if t.nuevos != 1 else '' }}{% endif %}</span>
-    </div>
-    <div class="grilla">
-      {% for o in t.ofertas %}
-      <article class="tarjeta {{ o.urgencia }}" data-nuevo="{{ 'si' if o.nuevo else 'no' }}">
-        <div class="fila-superior">
-          <span class="cifra-chica {{ o.nivel }}">{{ '%.1f'|format(o.score) }}</span>
-          {% if o.nuevo %}<span class="marca nueva">nueva</span>{% endif %}
-          {% if o.urgencia == 'caliente' %}<span class="marca reciente">recién</span>{% endif %}
+  {% for f in familias %}
+  <section class="familia" data-familia="{{ f.nombre }}">
+    <header>
+      <h2>{{ f.nombre }}</h2>
+      <span class="resumen-familia">
+        {{ f.total }} en seguimiento{% if f.nuevos %} &middot; {{ f.nuevos }} nueva{{ 's' if f.nuevos != 1 else '' }}{% endif %}
+      </span>
+    </header>
+
+    {% for t in f.temas %}
+    <details class="tema" data-tema="{{ t.clave }}"{% if t.abierto %} open{% endif %}>
+      <summary>
+        <span class="chevron" aria-hidden="true"></span>
+        <span class="nombre-tema">{{ t.nombre }}</span>
+        {% if t.nuevos %}<span class="marca nueva">{{ t.nuevos }} nueva{{ 's' if t.nuevos != 1 else '' }}</span>{% endif %}
+        <span class="cuenta-tema">{{ t.total }}</span>
+        {% if t.mejor %}<span class="tope {{ 'alto' if t.mejor >= 9 else ('medio' if t.mejor >= 8 else 'bajo') }}">{{ '%.1f'|format(t.mejor) }}</span>{% endif %}
+      </summary>
+      <div class="cuerpo-tema">
+        {% if t.ofertas %}
+        <div class="grilla">
+          {% for o in t.ofertas %}
+          <article class="tarjeta {{ o.urgencia }}" data-nuevo="{{ 'si' if o.nuevo else 'no' }}">
+            <div class="fila-superior">
+              <span class="cifra-chica {{ o.nivel }}">{{ '%.1f'|format(o.score) }}</span>
+              {% if o.nuevo %}<span class="marca nueva">nueva</span>{% endif %}
+              {% if o.urgencia == 'caliente' %}<span class="marca reciente">recién</span>{% endif %}
+            </div>
+            <h3><a href="{{ o.url }}" target="_blank" rel="noopener noreferrer">{{ o.titulo }}</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">{{ o.fuente }}</span>
+              <span class="punto">&middot;</span>
+              <span>{{ o.edad }}</span>
+              {% for m in o.motivos[:2] %}<span class="senal">{{ m }}</span>{% endfor %}
+              {% if o.opaco %}<span class="punto">&middot;</span><a class="alterno" href="{{ o.respaldo }}" target="_blank" rel="noopener noreferrer">buscar la nota</a>{% endif %}
+            </div>
+          </article>
+          {% endfor %}
         </div>
-        <h3><a href="{{ o.url }}" target="_blank" rel="noopener noreferrer">{{ o.titulo }}</a></h3>
-        <div class="pie-tarjeta">
-          <span class="medio">{{ o.fuente }}</span>
-          <span class="punto">&middot;</span>
-          <span>{{ o.edad }}</span>
-          {% for m in o.motivos[:2] %}<span class="senal">{{ m }}</span>{% endfor %}
-          {% if o.opaco %}<span class="punto">&middot;</span><a class="alterno" href="{{ o.respaldo }}" target="_blank" rel="noopener noreferrer">buscar la nota</a>{% endif %}
-        </div>
-      </article>
-      {% endfor %}
-    </div>
+        {% else %}
+        <p class="vacio">Todavía nada para este tema. Se revisa en cada corrida.</p>
+        {% endif %}
+      </div>
+    </details>
+    {% endfor %}
   </section>
   {% endfor %}
 
   <footer class="pie">
-    Generado por <code>run.py dashboard</code> y publicado solo en cada corrida de la tarea programada.
-    El puntaje mide qué tan bien encaja con el tema, no la calidad del curso.
-    Las etiquetas de tiempo indican cuándo se <em>publicó</em> la nota, no cuándo cierra la inscripción:
-    esa fecha no la tenemos, así que no la inventamos.
+    Generado por <code>run.py dashboard</code> y publicado por GitHub Actions.
+    El puntaje mide qué tan bien encaja con el tema, no la calidad del curso ni de la obra.
+    Las etiquetas de tiempo indican cuándo se <em>publicó</em> la nota, no cuándo cierra la
+    inscripción: esa fecha no la tenemos, así que no la inventamos.
     Los enlaces marcados <em>buscar la nota</em> vienen de Google News, que cifra la URL real del medio.
   </footer>
 </div>
@@ -360,7 +406,9 @@
 <script>
   (function () {
     var soloNuevas = document.getElementById('solo-nuevas');
-    var botonesTema = Array.prototype.slice.call(document.querySelectorAll('.filtro-tema'));
+    var abrirTodo = document.getElementById('abrir-todo');
+    var cerrarTodo = document.getElementById('cerrar-todo');
+    var temas = Array.prototype.slice.call(document.querySelectorAll('.tema'));
 
     function leer(clave, porDefecto) {
       try {
@@ -374,24 +422,33 @@
       try { localStorage.setItem(clave, valor); } catch (e) { /* ventana privada */ }
     }
 
-    soloNuevas.setAttribute('aria-pressed', leer('radar:solo-nuevas', 'false'));
-    botonesTema.forEach(function (b) {
-      b.setAttribute('aria-pressed', leer('radar:tema:' + b.dataset.tema, 'true'));
+    // Si el usuario ya decidio sobre un tema, su eleccion gana sobre el default
+    // del servidor (abierto solo si trae novedades).
+    temas.forEach(function (t) {
+      var guardado = leer('radar:tema:' + t.dataset.tema, null);
+      if (guardado !== null) { t.open = guardado === 'true'; }
+      t.addEventListener('toggle', function () {
+        guardar('radar:tema:' + t.dataset.tema, String(t.open));
+      });
     });
+
+    soloNuevas.setAttribute('aria-pressed', leer('radar:solo-nuevas', 'false'));
 
     function aplicar() {
       var nuevas = soloNuevas.getAttribute('aria-pressed') === 'true';
-      botonesTema.forEach(function (b) {
-        var seccion = document.querySelector('.seccion[data-tema="' + b.dataset.tema + '"]');
-        if (!seccion) { return; }
-        var visible = b.getAttribute('aria-pressed') === 'true';
+      temas.forEach(function (t) {
         var mostradas = 0;
-        seccion.querySelectorAll('.tarjeta').forEach(function (tarjeta) {
+        t.querySelectorAll('.tarjeta').forEach(function (tarjeta) {
           var ok = !nuevas || tarjeta.dataset.nuevo === 'si';
           tarjeta.hidden = !ok;
           if (ok) { mostradas++; }
         });
-        seccion.hidden = !visible || mostradas === 0;
+        // Con el filtro activo, un tema sin resultados desaparece entero.
+        t.hidden = nuevas && mostradas === 0;
+      });
+      document.querySelectorAll('.familia').forEach(function (fam) {
+        var vivos = fam.querySelectorAll('.tema:not([hidden])').length;
+        fam.hidden = vivos === 0;
       });
     }
 
@@ -399,15 +456,14 @@
       var v = this.getAttribute('aria-pressed') !== 'true';
       this.setAttribute('aria-pressed', String(v));
       guardar('radar:solo-nuevas', String(v));
+      if (v) { temas.forEach(function (t) { t.open = true; }); }
       aplicar();
     });
-    botonesTema.forEach(function (b) {
-      b.addEventListener('click', function () {
-        var v = this.getAttribute('aria-pressed') !== 'true';
-        this.setAttribute('aria-pressed', String(v));
-        guardar('radar:tema:' + this.dataset.tema, String(v));
-        aplicar();
-      });
+    abrirTodo.addEventListener('click', function () {
+      temas.forEach(function (t) { t.open = true; });
+    });
+    cerrarTodo.addEventListener('click', function () {
+      temas.forEach(function (t) { t.open = false; });
     });
 
     aplicar();

@@ -125,10 +125,45 @@ def filtrar_y_ordenar(ofertas: list[Oferta], tema: dict) -> list[Oferta]:
     vivas.sort(key=lambda o: (-o.score, o.antiguedad_dias if o.antiguedad_dias is not None else 1e9))
 
     vistos: Counter[str] = Counter()
-    resultado = []
+    resultado: list[Oferta] = []
     for o in vivas:
         if vistos[o.fuente] >= tope:
+            continue
+        if _es_casi_repetida(o, resultado):
             continue
         vistos[o.fuente] += 1
         resultado.append(o)
     return resultado
+
+
+def _palabras(oferta: Oferta) -> set[str]:
+    """Raices de 5 letras: stemmer de pobre, suficiente para espanol.
+
+    Sin truncar, "inscripcion" e "inscripciones" cuentan como palabras distintas
+    y dos titulares del mismo evento dan solo 0.56 de similitud.
+    """
+    return {p[:5] for p in normalizar(titulo_limpio(oferta.titulo)).split() if len(p) > 3}
+
+
+def _es_casi_repetida(oferta: Oferta, elegidas: list[Oferta], umbral: float = 0.7) -> bool:
+    """Detecta la misma nota publicada dos veces con el titulo cambiado.
+
+    Caso real: villaortuzar.ar publico "Abre la inscripcion a los talleres..." y
+    "Abren las inscripciones a los talleres...". El dedup por hash no las agarra
+    porque compara titulos exactos. Se comparan solo notas del MISMO medio: dos
+    medios distintos cubriendo el mismo evento son dos fuentes utiles.
+    """
+    mias = _palabras(oferta)
+    if not mias:
+        return False
+    for otra in elegidas:
+        if otra.fuente != oferta.fuente:
+            continue
+        suyas = _palabras(otra)
+        if not suyas:
+            continue
+        interseccion = len(mias & suyas)
+        union = len(mias | suyas)
+        if union and interseccion / union >= umbral:
+            return True
+    return False

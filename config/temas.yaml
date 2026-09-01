@@ -1,18 +1,65 @@
 # Un tema = una entrada. Agregar un tema nuevo NO requiere tocar codigo.
 #
 # Campos:
+#   familia              agrupa temas afines en el dashboard. Sin esto la pagina
+#                        mezcla un curso de IA con una obra de teatro en una sola
+#                        lista indistinta.
+#   etiqueta / corto     como se muestra el tema en el sitio. Van en el YAML y no
+#                        en el codigo: agregar un tema tiene que seguir siendo
+#                        editar este archivo y nada mas.
 #   keywords             consultas que se mandan a Google News
 #   requerir             lista de GRUPOS. Dentro del grupo es O, entre grupos es Y.
 #                        Ej: [zona] Y [actividad]. Un solo grupo no alcanza:
 #                        con solo zona pasaba "agenda cultural"; con solo
 #                        actividad pasaban cursos de Madrid.
 #   excluir              si aparece alguno, se descarta
+#   excluir_dominios     por SUFIJO de dominio. Ojo: ".co" como subcadena
+#                        matchearia ".com" y borraria todo.
 #   max_antiguedad_dias  descarta lo viejo (Google News mezcla 2018 con 2026)
 #   max_por_dominio      tope por medio, contra content farms
 #   score_minimo         umbral 0-10 para entrar al informe
 
+# Listas reutilizadas, para no repetirlas en cada tema.
+_zona_caba: &zona_caba
+  - "Buenos Aires"
+  - "CABA"
+  - "porteñ"
+  - "Ciudad"
+  - "Capital Federal"
+
+_fuera_de_zona: &fuera_de_zona
+  # "Buenos Aires" matchea la Ciudad Y la Provincia. Estas entradas separan una de otra.
+  - "Provincia de Buenos Aires"
+  - "Avellaneda"
+  - "Lanús"
+  - "UNLa"
+  - "kilómetros de CABA"
+  - "conurbano"
+  - "Quilmes"
+  - "San Isidro"
+  - "Tigre"
+  - "Paraná"
+  - "Merlo"
+  - "Mendoza"
+  - "Córdoba"
+  - "Salta"
+  - "La Plata"
+  - "Entre Ríos"
+  - "Rosario"
+  - "Tucumán"
+  - "Colombia"
+  - "México"
+  - "Bogotá"
+  - "Chile"
+  - "España"
+  - "Madrid"
+
 temas:
+  # ---------------------------------------------------------------- Cultura
   - nombre: talleres-lectura-caba
+    familia: Cultura porteña
+    etiqueta: "Talleres y lectura"
+    corto: "Talleres"
     tipo: [taller]
     gl: AR
     hl: es-419
@@ -22,28 +69,67 @@ temas:
       - "taller escritura literatura CABA gratuito"
       - "Red de Bibliotecas de la Ciudad talleres"
     requerir:
-      # grupo 1: zona
-      - ["Buenos Aires", "CABA", "porteñ", "Biblioteca Nacional", "Ciudad", "Red de Bibliotecas"]
-      # grupo 2: que sea realmente un taller o curso con inscripción
+      - *zona_caba
       - ["taller", "talleres", "inscripción", "inscripciones", "cupos", "curso"]
-    excluir:
-      - "Paraná"
-      - "Merlo"
-      - "Mendoza"
-      - "Córdoba"
-      - "Salta"
-      - "La Plata"
-      - "Entre Ríos"
-      - "Rosario"
-      - "Tucumán"
-      - "Colombia"
-      - "México"
-      - "Bogotá"
+    excluir: *fuera_de_zona
     max_antiguedad_dias: 45
     max_por_dominio: 2
     score_minimo: 6
 
+  - nombre: festivales-caba
+    familia: Cultura porteña
+    etiqueta: "Festivales"
+    corto: "Festivales"
+    tipo: [festival]
+    gl: AR
+    hl: es-419
+    keywords:
+      - "festival Buenos Aires entrada gratuita"
+      - "festival gratuito CABA programación"
+      - "festival de cine Buenos Aires entrada libre"
+      - "festival de música Buenos Aires gratis"
+      - "festival porteño programación completa"
+    requerir:
+      - *zona_caba
+      - ["festival", "festivales", "ciclo"]
+    excluir: *fuera_de_zona
+    # Un festival que ya pasó no sirve: ventana corta a proposito.
+    max_antiguedad_dias: 21
+    max_por_dominio: 2
+    score_minimo: 7.5
+
+  - nombre: teatro-gratis-caba
+    familia: Cultura porteña
+    etiqueta: "Teatro gratis"
+    corto: "Teatro"
+    tipo: [teatro]
+    gl: AR
+    hl: es-419
+    keywords:
+      - "teatro gratis Buenos Aires función"
+      - "obra de teatro entrada libre CABA"
+      - "teatro gratuito porteño cartelera"
+      - "función gratuita teatro Buenos Aires"
+      - "Complejo Teatral Buenos Aires entrada gratuita"
+      - "Teatro Colón concierto gratuito"
+      - "FIBA Festival Internacional Buenos Aires obras"
+      - "teatro a la gorra Buenos Aires"
+    requerir:
+      - *zona_caba
+      - ["teatro", "obra", "función", "funciones", "escena", "dramaturgia"]
+      # Tercer grupo: que sea realmente gratis. Sin esto entra toda la cartelera
+      # comercial de Corrientes.
+      - ["gratis", "gratuito", "gratuita", "entrada libre", "sin cargo", "a la gorra", "gratuitas", "gratuitos", "libre y gratuita", "sin costo"]
+    excluir: *fuera_de_zona
+    max_antiguedad_dias: 35
+    max_por_dominio: 2
+    score_minimo: 6
+
+  # -------------------------------------------------------------- Formación
   - nombre: cursos-ia
+    familia: Formación
+    etiqueta: "Inteligencia artificial"
+    corto: "IA"
     tipo: [curso]
     gl: AR
     hl: es-419
@@ -55,8 +141,6 @@ temas:
       - ["curso", "cursos", "certificación", "capacitación", "formación"]
       - ["inteligencia artificial", "IA", "ChatGPT", "Claude", "Gemini", "machine learning"]
     excluir:
-      # Cursos presenciales de otras ciudades: si nombran una ciudad extranjera,
-      # es senal de que no es online y no me sirve.
       - "masterclass de ventas"
       - "webinar promocional"
       - "curso de Excel"
@@ -74,6 +158,9 @@ temas:
     score_minimo: 6
 
   - nombre: ingles
+    familia: Formación
+    etiqueta: "Inglés"
+    corto: "Inglés"
     tipo: [curso, descuento]
     gl: AR
     hl: es-419

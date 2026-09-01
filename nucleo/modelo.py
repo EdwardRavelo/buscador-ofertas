@@ -40,13 +40,17 @@ class Oferta:
 
     @property
     def id(self) -> str:
-        """Hash estable.
+        """Hash estable, con alcance POR TEMA.
 
-        Se basa en titulo + medio y NO en la URL: los enlaces de Google News son
-        opacos (news.google.com/rss/articles/CBMi...) y un mismo articulo puede
-        llegar con URLs distintas desde queries distintas.
+        No usa la URL: los enlaces de Google News son opacos
+        (news.google.com/rss/articles/CBMi...) y un mismo articulo llega con
+        URLs distintas desde queries distintas.
+
+        Incluye el tema a proposito. Una nota puede ser relevante para dos temas
+        (la guia del FIBA es festival Y teatro gratis); sin el tema en el hash,
+        el primer tema que corre se la queda y en el segundo nunca aparece.
         """
-        base = f"{normalizar(titulo_limpio(self.titulo))}|{self.fuente}"
+        base = f"{self.tema}|{normalizar(titulo_limpio(self.titulo))}|{self.fuente}"
         return hashlib.sha1(base.encode("utf-8")).hexdigest()
 
     @property

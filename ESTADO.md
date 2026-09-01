@@ -181,6 +181,38 @@ usuario, y correr fuera de ella puede romper el deploy.
 `salidas/telegram.py` está escrito y probado en seco. Para activarlo basta completar
 TELEGRAM_TOKEN y TELEGRAM_CHAT_ID en `config/.env` y agregar `run.py notificar` al .bat.
 
+## Temas y diseno (2026-09-01)
+
+Agregados `festivales-caba` y `teatro-gratis-caba`. Con cinco temas la pagina plana
+era una ensalada, asi que:
+
+- Campo `familia` en temas.yaml: "Cultura porteña" (talleres, festivales, teatro) y
+  "Formación" (IA, ingles). Agrupa lo afin en vez de apilar todo en una lista.
+- Cada tema es un acordeon `<details>` nativo. Abierto solo si trae novedades.
+  Colapsado, los cinco temas entran en una pantalla con su cuenta y mejor puntaje.
+- `etiqueta` y `corto` pasaron del codigo al YAML. Antes agregar un tema obligaba a
+  editar dashboard.py, lo que rompia la promesa de "un tema es solo YAML".
+- Renombrado a "Radar Porteño": el titulo viejo no cubria festivales ni teatro.
+
+### Dos bugs que aparecieron al agregar los temas
+
+1. El hash de dedup era `titulo + medio`, sin el tema. Una nota relevante para dos
+   temas caia solo en el primero que corriera (la guia del FIBA es festival Y teatro).
+   Ahora el hash incluye el tema. Se migraron los ids existentes conservando
+   primera_vez para no marcar todo como nuevo.
+2. Casi-repetidas: villaortuzar publico "Abre la inscripcion..." y "Abren las
+   inscripciones..." de la misma nota. El dedup exacto no las agarra. Se agrego
+   `_es_casi_repetida()` con similitud de Jaccard sobre raices de 5 letras
+   (sin truncar daba 0.56 y no llegaba al umbral de 0.7). Solo compara notas del
+   MISMO medio: dos medios cubriendo el mismo evento son dos fuentes utiles.
+
+### Filtro de zona: Ciudad vs Provincia
+
+"Buenos Aires" matchea la Ciudad Y la Provincia. Festivales traia el Festival de Cine
+de la PROVINCIA, la UNLa (Lanus) y Avellaneda. Se agregaron a `_fuera_de_zona`:
+Provincia de Buenos Aires, Avellaneda, Lanus, UNLa, conurbano, Quilmes, San Isidro,
+Tigre, "kilometros de CABA". Bajo de 22 a 15 resultados.
+
 ## Pendiente para la proxima sesion
 
 1. Telegram: salteado a pedido. `salidas/telegram.py` esta escrito y probado en seco.
