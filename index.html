@@ -101,33 +101,75 @@
   }
   .sello { color: var(--faint); font-size: 13px; margin: 0; }
 
-  /* --- Destacada: la tesis de la pagina ----------------------------------- */
-  .destacada {
+  /* --- Carrusel: lo mejor de la semana, la tesis de la pagina ------------- */
+  .carrusel { margin-bottom: 16px; }
+  .barra-carrusel {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; margin-bottom: 9px;
+  }
+  .rotulo {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--urgente);
+  }
+  .flechas { display: flex; gap: 6px; }
+  .flecha {
+    width: 30px; height: 30px; padding: 0; cursor: pointer;
+    display: grid; place-items: center;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 999px; transition: border-color .14s ease, opacity .14s ease;
+  }
+  .flecha:hover:not(:disabled) { border-color: var(--accent); }
+  .flecha:disabled { opacity: .35; cursor: default; }
+  .flecha:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .punta {
+    width: 7px; height: 7px;
+    border-top: 2px solid var(--muted); border-right: 2px solid var(--muted);
+  }
+  .punta.izq { transform: rotate(-135deg); margin-left: 3px; }
+  .punta.der { transform: rotate(45deg); margin-right: 3px; }
+
+  /* Scroll-snap nativo: sin libreria, y si el JS falla sigue scrolleando. */
+  .pista {
+    display: flex; gap: 14px; overflow-x: auto;
+    scroll-snap-type: x mandatory; scroll-behavior: smooth;
+    scrollbar-width: none; -ms-overflow-style: none;
+    padding-bottom: 2px;
+  }
+  .pista::-webkit-scrollbar { display: none; }
+  .pista:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 14px; }
+
+  .diapositiva {
+    flex: 0 0 100%; scroll-snap-align: start;
     display: grid; grid-template-columns: auto 1fr; gap: 26px; align-items: start;
     background: var(--surface);
     border: 1px solid var(--border);
     border-left: 5px solid var(--urgente);
-    border-radius: 14px; padding: 28px 30px; margin-bottom: 14px;
+    border-radius: 14px; padding: 26px 30px;
     box-shadow: var(--sombra-alta);
   }
-  .destacada .cifra {
+  .diapositiva .cifra {
     font-family: Piazzolla, Georgia, serif;
-    font-size: 72px; font-weight: 800; line-height: .85; letter-spacing: -.04em;
+    font-size: 66px; font-weight: 800; line-height: .85; letter-spacing: -.04em;
     color: var(--urgente); font-variant-numeric: tabular-nums;
   }
-  .destacada .rotulo {
-    font-size: 10.5px; font-weight: 700; letter-spacing: .14em;
-    text-transform: uppercase; color: var(--urgente);
-    display: block; margin-bottom: 10px;
-  }
-  .destacada h2 {
+  .contenido-diapositiva { min-width: 0; }
+  .diapositiva h2 {
     font-family: Piazzolla, Georgia, serif;
-    font-size: clamp(21px, 2.9vw, 30px);
+    font-size: clamp(20px, 2.7vw, 28px);
     font-weight: 600; line-height: 1.2; letter-spacing: -.012em;
     margin: 0 0 12px; text-wrap: balance;
   }
-  .destacada h2 a { color: var(--ink); text-decoration: none; }
-  .destacada h2 a:hover { color: var(--accent); }
+  .diapositiva h2 a { color: var(--ink); text-decoration: none; }
+  .diapositiva h2 a:hover { color: var(--accent); }
+
+  .puntos { display: flex; justify-content: center; gap: 7px; margin-top: 12px; }
+  .punto-nav {
+    width: 7px; height: 7px; padding: 0; border-radius: 999px; cursor: pointer;
+    background: var(--border); border: none;
+    transition: background .14s ease, width .14s ease;
+  }
+  .punto-nav[aria-selected="true"] { background: var(--urgente); width: 20px; }
+  .punto-nav:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
   /* --- Tira de metricas --------------------------------------------------- */
   .metricas {
@@ -257,7 +299,7 @@
   .tarjeta h3 a { color: var(--ink); text-decoration: none; }
   .tarjeta h3 a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
   .tarjeta h3 a:focus-visible,
-  .destacada h2 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+  .diapositiva h2 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
 
   .pie-tarjeta {
     display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
@@ -281,8 +323,8 @@
 
   @media (max-width: 620px) {
     .envoltorio { padding: 30px 16px 60px; }
-    .destacada { grid-template-columns: 1fr; gap: 12px; padding: 22px; }
-    .destacada .cifra { font-size: 54px; }
+    .diapositiva { grid-template-columns: 1fr; gap: 10px; padding: 22px; }
+    .diapositiva .cifra { font-size: 50px; }
     .metrica { padding-right: 18px; }
     .metrica + .metrica { padding-left: 18px; }
     .grilla { grid-template-columns: 1fr; }
@@ -303,20 +345,119 @@
   </header>
 
   
-  <article class="destacada">
-    <div class="cifra">10.0</div>
-    <div>
-      <span class="rotulo">Lo mejor de esta semana</span>
-      <h2><a href="https://soybibliotecario.blogspot.com/2026/08/talleres-gratuitos-en-la-biblioteca.html" target="_blank" rel="noopener noreferrer">Talleres gratuitos en la Biblioteca Nacional: abrió la inscripción para el segundo trimestre de 2026</a></h2>
-      <div class="pie-tarjeta">
-        <span class="medio">soybibliotecario.blogspot.com</span>
-        <span class="punto">&middot;</span>
-        <span>ayer</span>
-        <span class="senal">Biblioteca Nacional</span><span class="senal">taller</span><span class="senal">keywords en titulo (40%)</span>
-        
+  <section class="carrusel" aria-labelledby="titulo-carrusel">
+    <div class="barra-carrusel">
+      <span class="rotulo" id="titulo-carrusel">Lo mejor de esta semana</span>
+      <div class="flechas">
+        <button class="flecha" data-dir="-1" type="button" aria-label="Anterior">
+          <span class="punta izq" aria-hidden="true"></span>
+        </button>
+        <button class="flecha" data-dir="1" type="button" aria-label="Siguiente">
+          <span class="punta der" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
-  </article>
+
+    <div class="pista" tabindex="0" role="group" aria-label="Destacados de la semana">
+      
+      <article class="diapositiva">
+        <div class="cifra">10.0</div>
+        <div class="contenido-diapositiva">
+          <h2><a href="https://soybibliotecario.blogspot.com/2026/08/talleres-gratuitos-en-la-biblioteca.html" target="_blank" rel="noopener noreferrer">Talleres gratuitos en la Biblioteca Nacional: abrió la inscripción para el segundo trimestre de 2026</a></h2>
+          <div class="pie-tarjeta">
+            <span class="medio">soybibliotecario.blogspot.com</span>
+            <span class="punto">&middot;</span>
+            <span>ayer</span>
+            <span class="senal">Biblioteca Nacional</span><span class="senal">taller</span>
+            
+          </div>
+        </div>
+      </article>
+      
+      <article class="diapositiva">
+        <div class="cifra">10.0</div>
+        <div class="contenido-diapositiva">
+          <h2><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxOS29DcVdzTjBCTU15SlkyQU9rdERRNUxJR2lWR0ZsYWZtSXI3U2FBQnZnRDU3MG5UUlB0cDVSTzN0Q1RZVHpXcUtwaEttRlVHMmVna25RTUx1S09jWDlvMjlPTmtHcjFVNUNiTjFiSGxLV3d4cUJ3M2VOTko1LU12MkJMVnhfYUpVMkFBbDVOTnV5UldXYUZ1alpHYw?oc=5" target="_blank" rel="noopener noreferrer">Guía del FIBA 2026: Cómo conseguir entradas gratis y las obras imperdibles nacionales e internaciones del festival de teatro de Buenos Aires - Buenos Aires Secreta</a></h2>
+          <div class="pie-tarjeta">
+            <span class="medio">bairessecreta.com</span>
+            <span class="punto">&middot;</span>
+            <span>hace 6 días</span>
+            <span class="senal">Buenos Aires</span><span class="senal">teatro</span>
+            <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Gu%C3%ADa+del+FIBA+2026%3A+C%C3%B3mo+conseguir+entradas+gratis+y+las+obras+imperdibles+nacionales+e+internaciones+del+festival+de+teatro+de+Buenos+Aires+-+Buenos+Aires+Secreta%22+site%3Abairessecreta.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="diapositiva">
+        <div class="cifra">9.8</div>
+        <div class="contenido-diapositiva">
+          <h2><a href="https://www.notaalpie.com.ar/2026/08/27/ciudad-talleres-red-bibliotecas" target="_blank" rel="noopener noreferrer">La Ciudad abrió la inscripción a los nuevos talleres de la Red de Bibliotecas</a></h2>
+          <div class="pie-tarjeta">
+            <span class="medio">notaalpie.com.ar</span>
+            <span class="punto">&middot;</span>
+            <span>hace 5 días</span>
+            <span class="senal">Ciudad</span><span class="senal">taller</span>
+            
+          </div>
+        </div>
+      </article>
+      
+      <article class="diapositiva">
+        <div class="cifra">9.8</div>
+        <div class="contenido-diapositiva">
+          <h2><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxPMnptcS1KaXZxMEVTZnNUY01vamprcktKOFZ5MjRscUdUSFRMWF9pMnJlLVl4VkwzWHZYVnhIMzhVUXJXQk1Ueks3anJxbWUweGhQWk8zQnFUZlZWM1FfZFhSTmc5OVRkMHp5ektNY2FmQ29jY0ZDeWR6SWZadnY2MDNHM0pXWDRnY21OeDhSclFFSktLUEpKMldqVm1hS2VkYnlLLWpkdTVYNHRMQ1lZLdIBxAFBVV95cUxNYk9MVXY5NVdxQk1WTEpfZFRVc0dBWXo5c05iUHdnR3puWDJHOUE5R2hNSVk1c29XLUlGdEk1c1hqUFR5d1NVWDVPOEl4bTdja3owVk0xRnNYVFozcWRpYW5hamFiWEVuZjQ4MTl1LXdKTW9jbUJvYXM3OUVfX0tqaEJPQmxQUFlFYU9URm1wWFVIendVT2I2NWJTTFNLZE1UZjVtSnM5RjRELWNCRERoMVc2U0hLaVlmUHhQX2dnZDIxdlpJ?oc=5" target="_blank" rel="noopener noreferrer">Cupos limitados: abrió la inscripción a los talleres en las bibliotecas de la Ciudad - El Destape</a></h2>
+          <div class="pie-tarjeta">
+            <span class="medio">eldestapeweb.com</span>
+            <span class="punto">&middot;</span>
+            <span>hace 7 días</span>
+            <span class="senal">Ciudad</span><span class="senal">taller</span>
+            <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cupos+limitados%3A+abri%C3%B3+la+inscripci%C3%B3n+a+los+talleres+en+las+bibliotecas+de+la+Ciudad+-+El+Destape%22+site%3Aeldestapeweb.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="diapositiva">
+        <div class="cifra">9.5</div>
+        <div class="contenido-diapositiva">
+          <h2><a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxNZDFyZTJDb0ZndnR2b3ljSmZtYU5CeDhsMzdnQnBVdW56WDlPUlJOVVRkZUhiZ3FSTXZnaEF0ZlA0dWNUejJzRExTU0x5WFp3RkNrUEJVUF9Sei1mWGc0Ql8yaU45WU9NNDU3X0d5TjlIdFBkZXRfUnRzRzVFeU5uMWptUGdOb2dGeDNQT2FKUzRKZk1FbUJtVVFfM3JQUVBOS3NmVWJIQnpWSWZSdHZVcE9UTC0?oc=5" target="_blank" rel="noopener noreferrer">¿Quieres aprender IA? Claude acaba de publicar 12 cursos gratuitos con certificado incluido - Blogthinkbig.com</a></h2>
+          <div class="pie-tarjeta">
+            <span class="medio">blogthinkbig.com</span>
+            <span class="punto">&middot;</span>
+            <span>hace 4 días</span>
+            <span class="senal">curso</span><span class="senal">IA</span>
+            <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22%C2%BFQuieres+aprender+IA%3F+Claude+acaba+de+publicar+12+cursos+gratuitos+con+certificado+incluido+-+Blogthinkbig.com%22+site%3Ablogthinkbig.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+          </div>
+        </div>
+      </article>
+      
+    </div>
+
+    
+    <div class="puntos" role="tablist" aria-label="Ir a destacado">
+      
+      <button class="punto-nav" type="button" role="tab" data-indice="0"
+              aria-label="Destacado 1 de 5"
+              aria-selected="true"></button>
+      
+      <button class="punto-nav" type="button" role="tab" data-indice="1"
+              aria-label="Destacado 2 de 5"
+              aria-selected="false"></button>
+      
+      <button class="punto-nav" type="button" role="tab" data-indice="2"
+              aria-label="Destacado 3 de 5"
+              aria-selected="false"></button>
+      
+      <button class="punto-nav" type="button" role="tab" data-indice="3"
+              aria-label="Destacado 4 de 5"
+              aria-selected="false"></button>
+      
+      <button class="punto-nav" type="button" role="tab" data-indice="4"
+              aria-label="Destacado 5 de 5"
+              aria-selected="false"></button>
+      
+    </div>
+    
+  </section>
   
 
   <div class="metricas">
@@ -471,22 +612,6 @@
           
           <article class="tarjeta semana" data-nuevo="no">
             <div class="fila-superior">
-              <span class="cifra-chica alto">9.8</span>
-              
-              
-            </div>
-            <h3><a href="https://www.notaalpie.com.ar/2026/08/27/ciudad-talleres-red-bibliotecas" target="_blank" rel="noopener noreferrer">La Ciudad abrió la inscripción a los nuevos talleres de la Red de Bibliotecas</a></h3>
-            <div class="pie-tarjeta">
-              <span class="medio">notaalpie.com.ar</span>
-              <span class="punto">&middot;</span>
-              <span>hace 5 días</span>
-              <span class="senal">Ciudad</span><span class="senal">taller</span>
-              
-            </div>
-          </article>
-          
-          <article class="tarjeta semana" data-nuevo="no">
-            <div class="fila-superior">
               <span class="cifra-chica medio">8.7</span>
               
               
@@ -498,22 +623,6 @@
               <span>hace 6 días</span>
               <span class="senal">porteñ</span><span class="senal">taller</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Borges%2C+Pizarnik%2C+Joyce%2C+Claire+Keegan+y+Roberto+Arlt%3A+las+bibliotecas+porte%C3%B1as+inscriben+en+sus+talleres+-+Clarin.com%22+site%3Aclarin.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
-            </div>
-          </article>
-          
-          <article class="tarjeta semana" data-nuevo="no">
-            <div class="fila-superior">
-              <span class="cifra-chica alto">9.8</span>
-              
-              
-            </div>
-            <h3><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxPMnptcS1KaXZxMEVTZnNUY01vamprcktKOFZ5MjRscUdUSFRMWF9pMnJlLVl4VkwzWHZYVnhIMzhVUXJXQk1Ueks3anJxbWUweGhQWk8zQnFUZlZWM1FfZFhSTmc5OVRkMHp5ektNY2FmQ29jY0ZDeWR6SWZadnY2MDNHM0pXWDRnY21OeDhSclFFSktLUEpKMldqVm1hS2VkYnlLLWpkdTVYNHRMQ1lZLdIBxAFBVV95cUxNYk9MVXY5NVdxQk1WTEpfZFRVc0dBWXo5c05iUHdnR3puWDJHOUE5R2hNSVk1c29XLUlGdEk1c1hqUFR5d1NVWDVPOEl4bTdja3owVk0xRnNYVFozcWRpYW5hamFiWEVuZjQ4MTl1LXdKTW9jbUJvYXM3OUVfX0tqaEJPQmxQUFlFYU9URm1wWFVIendVT2I2NWJTTFNLZE1UZjVtSnM5RjRELWNCRERoMVc2U0hLaVlmUHhQX2dnZDIxdlpJ?oc=5" target="_blank" rel="noopener noreferrer">Cupos limitados: abrió la inscripción a los talleres en las bibliotecas de la Ciudad - El Destape</a></h3>
-            <div class="pie-tarjeta">
-              <span class="medio">eldestapeweb.com</span>
-              <span class="punto">&middot;</span>
-              <span>hace 7 días</span>
-              <span class="senal">Ciudad</span><span class="senal">taller</span>
-              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cupos+limitados%3A+abri%C3%B3+la+inscripci%C3%B3n+a+los+talleres+en+las+bibliotecas+de+la+Ciudad+-+El+Destape%22+site%3Aeldestapeweb.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
@@ -839,22 +948,6 @@
         
         <div class="grilla">
           
-          <article class="tarjeta semana" data-nuevo="si">
-            <div class="fila-superior">
-              <span class="cifra-chica alto">10.0</span>
-              <span class="marca nueva">nueva</span>
-              
-            </div>
-            <h3><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxOS29DcVdzTjBCTU15SlkyQU9rdERRNUxJR2lWR0ZsYWZtSXI3U2FBQnZnRDU3MG5UUlB0cDVSTzN0Q1RZVHpXcUtwaEttRlVHMmVna25RTUx1S09jWDlvMjlPTmtHcjFVNUNiTjFiSGxLV3d4cUJ3M2VOTko1LU12MkJMVnhfYUpVMkFBbDVOTnV5UldXYUZ1alpHYw?oc=5" target="_blank" rel="noopener noreferrer">Guía del FIBA 2026: Cómo conseguir entradas gratis y las obras imperdibles nacionales e internaciones del festival de teatro de Buenos Aires - Buenos Aires Secreta</a></h3>
-            <div class="pie-tarjeta">
-              <span class="medio">bairessecreta.com</span>
-              <span class="punto">&middot;</span>
-              <span>hace 6 días</span>
-              <span class="senal">Buenos Aires</span><span class="senal">teatro</span>
-              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Gu%C3%ADa+del+FIBA+2026%3A+C%C3%B3mo+conseguir+entradas+gratis+y+las+obras+imperdibles+nacionales+e+internaciones+del+festival+de+teatro+de+Buenos+Aires+-+Buenos+Aires+Secreta%22+site%3Abairessecreta.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
-            </div>
-          </article>
-          
           <article class="tarjeta normal" data-nuevo="si">
             <div class="fila-superior">
               <span class="cifra-chica medio">9.0</span>
@@ -930,22 +1023,6 @@
       <div class="cuerpo-tema">
         
         <div class="grilla">
-          
-          <article class="tarjeta semana" data-nuevo="no">
-            <div class="fila-superior">
-              <span class="cifra-chica alto">9.5</span>
-              
-              
-            </div>
-            <h3><a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxNZDFyZTJDb0ZndnR2b3ljSmZtYU5CeDhsMzdnQnBVdW56WDlPUlJOVVRkZUhiZ3FSTXZnaEF0ZlA0dWNUejJzRExTU0x5WFp3RkNrUEJVUF9Sei1mWGc0Ql8yaU45WU9NNDU3X0d5TjlIdFBkZXRfUnRzRzVFeU5uMWptUGdOb2dGeDNQT2FKUzRKZk1FbUJtVVFfM3JQUVBOS3NmVWJIQnpWSWZSdHZVcE9UTC0?oc=5" target="_blank" rel="noopener noreferrer">¿Quieres aprender IA? Claude acaba de publicar 12 cursos gratuitos con certificado incluido - Blogthinkbig.com</a></h3>
-            <div class="pie-tarjeta">
-              <span class="medio">blogthinkbig.com</span>
-              <span class="punto">&middot;</span>
-              <span>hace 4 días</span>
-              <span class="senal">curso</span><span class="senal">IA</span>
-              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22%C2%BFQuieres+aprender+IA%3F+Claude+acaba+de+publicar+12+cursos+gratuitos+con+certificado+incluido+-+Blogthinkbig.com%22+site%3Ablogthinkbig.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
-            </div>
-          </article>
           
           <article class="tarjeta semana" data-nuevo="no">
             <div class="fila-superior">
@@ -1222,6 +1299,63 @@
 </div>
 
 <script>
+  // --- Carrusel de destacados ---------------------------------------------
+  // El scroll-snap lo hace CSS. El JS solo agrega flechas y puntos: si algo
+  // falla aca, la pista se sigue pudiendo arrastrar con el dedo o el trackpad.
+  (function () {
+    var pista = document.querySelector('.pista');
+    if (!pista) { return; }
+
+    var diapositivas = Array.prototype.slice.call(pista.querySelectorAll('.diapositiva'));
+    var flechas = Array.prototype.slice.call(document.querySelectorAll('.flecha'));
+    var puntos = Array.prototype.slice.call(document.querySelectorAll('.punto-nav'));
+    if (diapositivas.length < 2) {
+      flechas.forEach(function (f) { f.disabled = true; });
+      return;
+    }
+
+    function indiceActual() {
+      var ancho = diapositivas[0].offsetWidth + 14; // 14 = gap
+      return Math.round(pista.scrollLeft / ancho);
+    }
+
+    function irA(i) {
+      var limite = Math.max(0, Math.min(i, diapositivas.length - 1));
+      var ancho = diapositivas[0].offsetWidth + 14;
+      pista.scrollTo({ left: limite * ancho, behavior: 'smooth' });
+    }
+
+    function sincronizar() {
+      var i = indiceActual();
+      puntos.forEach(function (p, j) {
+        p.setAttribute('aria-selected', String(j === i));
+      });
+      flechas.forEach(function (f) {
+        var dir = Number(f.dataset.dir);
+        f.disabled = dir < 0 ? i <= 0 : i >= diapositivas.length - 1;
+      });
+    }
+
+    flechas.forEach(function (f) {
+      f.addEventListener('click', function () { irA(indiceActual() + Number(f.dataset.dir)); });
+    });
+    puntos.forEach(function (p) {
+      p.addEventListener('click', function () { irA(Number(p.dataset.indice)); });
+    });
+    pista.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); irA(indiceActual() + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); irA(indiceActual() - 1); }
+    });
+
+    var pendiente;
+    pista.addEventListener('scroll', function () {
+      clearTimeout(pendiente);
+      pendiente = setTimeout(sincronizar, 90);
+    });
+    window.addEventListener('resize', sincronizar);
+    sincronizar();
+  })();
+
   (function () {
     var soloNuevas = document.getElementById('solo-nuevas');
     var abrirTodo = document.getElementById('abrir-todo');

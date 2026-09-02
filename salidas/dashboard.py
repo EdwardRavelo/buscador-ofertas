@@ -105,11 +105,14 @@ def recolectar(con: sqlite3.Connection) -> dict:
         por_tema.setdefault(f["tema"], []).append(oferta)
         todas.append(oferta)
 
-    # La destacada es la tesis de la pagina: lo mejor que ademas es reciente.
+    # El carrusel es la tesis de la pagina: lo mejor de la semana, hasta 5.
+    # Aca SI manda el puntaje: es un destaque, no una agenda.
     candidatas = [o for o in todas if o["dias"] is not None and o["dias"] <= 7]
-    destacada = max(candidatas, key=lambda o: o["score"]) if candidatas else None
+    candidatas.sort(key=lambda o: (-o["score"], o["dias"]))
+    destacadas = candidatas[:5]
+    ids_destacados = {id(o) for o in destacadas}
     for o in todas:
-        o["es_destacada"] = o is destacada
+        o["es_destacada"] = id(o) in ids_destacados
 
     # Agrupar por familia respetando el orden del YAML.
     familias: list[dict] = []
@@ -145,7 +148,7 @@ def recolectar(con: sqlite3.Connection) -> dict:
     ultima = con.execute("SELECT MAX(ultima_vez) AS u FROM ofertas").fetchone()["u"]
     return {
         "familias": familias,
-        "destacada": destacada,
+        "destacadas": destacadas,
         "total": len(filas),
         "nuevos": sum(1 for o in todas if o["nuevo"]),
         "calientes": sum(1 for o in todas if o["urgencia"] == "caliente"),
