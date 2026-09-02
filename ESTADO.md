@@ -264,6 +264,41 @@ Sin purgar, en un ano hay cientos de versiones de un binario cada vez mas grande
 git no comprime bien SQLite entre versiones. El umbral (365d) esta muy por encima de
 cualquier vida_util configurada, asi que nunca borra algo todavia visible.
 
+## Falsos positivos por polisemia (2026-09-01)
+
+Tres clases distintas de ruido, cada una con su arreglo:
+
+1. POLISEMIA. "taller" en espanol tambien es galpon de reparaciones (los talleres
+   del subte) y atelier ("recorridos guiados por talleres y negocios", 9.5).
+   Se agregaron a `excluir`: taller mecanico, talleres del subte, metrodelegados,
+   recorridos guiados, taller de reparacion, talleres ferroviarios.
+
+2. EL FILTRO NUNCA PIDIO EL TEMA REAL. El tema se llama "talleres de LECTURA" pero
+   el grupo requerido era [taller, inscripcion, cupos, curso]: nada sobre leer. Por
+   eso pasaba "Jorge Macri abre el Congreso Federal de Ciudades Inteligentes".
+   Tercer grupo agregado: lectura, escritura, literatura, biblioteca, libro,
+   escritor, poesia, narrativa, cuento, lectores, bibliotecario.
+
+3. GEOGRAFIA POR INSTITUCION. "Escuelas Oficiales de Idiomas" (Espana), "salvadoreno"
+   (Platzi El Salvador) y "UMSNH" (Michoacan) publican desde dominios .com, asi que
+   el filtro de TLD no los agarraba y el titulo no nombra la ciudad.
+
+### Regresion propia que esto destapo
+
+Al crear el anchor compartido `_zona_caba` se habia perdido "Biblioteca Nacional",
+que estaba en el grupo original del tema. Los dos avisos de la Biblioteca Nacional
+(uno de ellos el mejor de todos, 10.0) murieron por "fuera de zona". Se restauro
+como `[*zona_caba, "Biblioteca Nacional", "Biblioteca del Congreso"]`.
+
+Eso obligo a agregar `_aplanar()` en el puntuador: YAML no concatena listas, asi que
+reusar un anchor y sumarle terminos propios produce [[...compartida...], "extra"].
+Sin aplanar, _contiene() recibia una lista donde esperaba un string.
+
+### Reevaluacion de lo ya guardado
+
+Endurecer un filtro no toca lo que ya esta en la base. Se reevaluaron las 48 filas
+contra las reglas nuevas: 9 borradas, 6 repuntuadas. Quedan 41.
+
 ## Pendiente para la proxima sesion
 
 1. Telegram: salteado a pedido. `salidas/telegram.py` esta escrito y probado en seco.

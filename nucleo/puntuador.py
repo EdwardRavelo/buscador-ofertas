@@ -19,6 +19,22 @@ SENALES_FUERTES = [
 DESCARTADA = -99.0
 
 
+def _aplanar(terminos) -> list[str]:
+    """Aplana un nivel de anidamiento.
+
+    YAML no concatena listas, asi que para reusar un anchor y ademas agregar
+    terminos propios queda algo como [[...lista compartida...], "extra1", "extra2"].
+    Sin aplanar, _contiene() recibiria una lista donde espera un string.
+    """
+    planos: list[str] = []
+    for t in terminos or []:
+        if isinstance(t, (list, tuple)):
+            planos.extend(str(x) for x in t)
+        else:
+            planos.append(str(t))
+    return planos
+
+
 def _contiene(texto: str, terminos: list[str]) -> list[str]:
     """Coincidencias con limite de palabra al inicio.
 
@@ -27,7 +43,7 @@ def _contiene(texto: str, terminos: list[str]) -> list[str]:
     "portenas".
     """
     hallados = []
-    for t in terminos:
+    for t in _aplanar(terminos):
         patron = normalizar(t)
         if patron and re.search(rf"\b{re.escape(patron)}", texto):
             hallados.append(t)
@@ -74,7 +90,8 @@ def puntuar(oferta: Oferta, tema: dict) -> Oferta:
         hallados = _contiene(cuerpo, grupo)
         if not hallados:
             oferta.score = DESCARTADA
-            oferta.motivos = [f"le falta: {'/'.join(grupo[:3])}..."]
+            faltantes = _aplanar(grupo)[:3]
+            oferta.motivos = [f"le falta: {'/'.join(faltantes)}..."]
             return oferta
         score += 0.75
         motivos.append(hallados[0])

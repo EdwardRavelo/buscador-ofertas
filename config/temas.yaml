@@ -73,9 +73,24 @@ temas:
       - "taller escritura literatura CABA gratuito"
       - "Red de Bibliotecas de la Ciudad talleres"
     requerir:
-      - *zona_caba
+      # Se suma a la zona compartida: la Biblioteca Nacional y la del Congreso
+      # estan en CABA pero sus anuncios no siempre nombran la ciudad.
+      - [*zona_caba, "Biblioteca Nacional", "Biblioteca del Congreso"]
       - ["taller", "talleres", "inscripción", "inscripciones", "cupos", "curso"]
-    excluir: *fuera_de_zona
+      # Tercer grupo: el tema es talleres de LECTURA, pero el filtro nunca pedia
+      # nada sobre leer. Sin esto pasaba el "Congreso de Ciudades Inteligentes".
+      - ["lectura", "escritura", "literatura", "literario", "biblioteca",
+         "bibliotecas", "libro", "libros", "escritor", "poesía", "narrativa",
+         "cuento", "lectores", "bibliotecario"]
+    excluir:
+      - *fuera_de_zona
+      # "taller" en espanol tambien es galpon de reparaciones y atelier.
+      - "taller mecánico"
+      - "talleres del subte"
+      - "taller de reparación"
+      - "talleres ferroviarios"
+      - "metrodelegados"
+      - "recorridos guiados"
     max_antiguedad_dias: 45
     # Ventana tipica de inscripcion a un taller.
     vida_util_dias: 35
@@ -162,7 +177,11 @@ temas:
       - "Colombia"
       - "Chile"
       - "Comunidad de Madrid"
-    excluir_dominios: [".cl", ".mx", ".py", ".pe", ".ve", ".bo", ".ec"]
+      # mimorelia.com es .com, asi que el filtro de TLD no lo agarra.
+      - "UMSNH"
+      - "Michoacán"
+      - "salvadoreño"
+    excluir_dominios: [".cl", ".mx", ".py", ".pe", ".ve", ".bo", ".ec", ".sv"]
     max_antiguedad_dias: 30
     # Los cursos online gratis no cierran: Google, IBM y Platzi los dejan abiertos.
     vida_util_dias: 150
@@ -195,7 +214,14 @@ temas:
       - "Segovia"
       - "Paraguay"
       - "Madrid"
-    excluir_dominios: [".py", ".co", ".mx", ".cl", ".pe"]
+      # Instituciones extranjeras que el filtro de dominio no agarra: publican
+      # desde un .com y el titulo no nombra la ciudad.
+      - "Escuelas Oficiales de Idiomas"
+      - "salvadoreño"
+      - "El Salvador"
+      - "UMSNH"
+      - "Michoacán"
+    excluir_dominios: [".py", ".co", ".mx", ".cl", ".pe", ".sv", ".ve", ".bo", ".ec"]
     max_antiguedad_dias: 60
     # Mezcla: la inscripcion oficial vence, los cursos online no.
     vida_util_dias: 90
