@@ -72,7 +72,12 @@ def _nivel(score: float) -> str:
 def recolectar(con: sqlite3.Connection) -> dict:
     corte = (datetime.now(timezone.utc) - timedelta(hours=24)).isoformat()
     config = _config_temas()
-    filas = con.execute("SELECT * FROM ofertas ORDER BY tema, score DESC").fetchall()
+    # Se listan de mas reciente a mas viejo. El puntaje se sigue mostrando, pero
+    # ya no decide el orden: para una agenda, lo que llego ultimo importa mas que
+    # lo que puntuo mejor hace tres semanas.
+    filas = con.execute(
+        "SELECT * FROM ofertas ORDER BY tema, fecha_pub IS NULL, fecha_pub DESC"
+    ).fetchall()
 
     por_tema: dict[str, list] = {}
     todas: list[dict] = []
@@ -111,6 +116,8 @@ def recolectar(con: sqlite3.Connection) -> dict:
     for cfg in config:
         clave = cfg["nombre"]
         ofertas = [o for o in por_tema.get(clave, []) if not o["es_destacada"]]
+        # Mas reciente primero; las que no traen fecha van al final.
+        ofertas.sort(key=lambda o: (o["dias"] is None, o["dias"] if o["dias"] is not None else 0))
         nuevos = sum(1 for o in por_tema.get(clave, []) if o["nuevo"])
         tema = {
             "clave": clave,

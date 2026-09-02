@@ -213,6 +213,24 @@ de la PROVINCIA, la UNLa (Lanus) y Avellaneda. Se agregaron a `_fuera_de_zona`:
 Provincia de Buenos Aires, Avellaneda, Lanus, UNLa, conurbano, Quilmes, San Isidro,
 Tigre, "kilometros de CABA". Bajo de 22 a 15 resultados.
 
+## Orden cronologico (2026-09-01)
+
+Las listas van de mas reciente a mas viejo, no por puntaje. El puntaje se sigue
+mostrando en cada tarjeta y en el resumen del acordeon, pero ya no decide el orden:
+para una agenda, lo que llego ultimo importa mas que lo que puntuo mejor hace tres
+semanas.
+
+Separacion deliberada entre seleccionar y mostrar:
+
+- `puntuador.filtrar_y_ordenar()` sigue ordenando por SCORE. De ahi dependen el tope
+  por dominio y el filtro de casi-repetidas: cuando hay que descartar, se conserva la
+  mejor, no la mas nueva.
+- `dashboard.recolectar()` reordena por fecha para mostrar. Las sin fecha van al final.
+
+La destacada sigue siendo la de mayor puntaje de los ultimos 7 dias. Es un unico
+destaque, no una lista: si fuera "la mas reciente" podria ser cualquier cosa mediocre
+publicada hoy.
+
 ## Pendiente para la proxima sesion
 
 1. Telegram: salteado a pedido. `salidas/telegram.py` esta escrito y probado en seco.
