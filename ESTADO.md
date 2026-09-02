@@ -231,6 +231,39 @@ La destacada sigue siendo la de mayor puntaje de los ultimos 7 dias. Es un unico
 destaque, no una lista: si fuera "la mas reciente" podria ser cualquier cosa mediocre
 publicada hoy.
 
+## Vida util y purga (2026-09-01)
+
+Pregunta que disparo esto: hasta cuando sirve un resultado. La respuesta es que no
+hay un numero unico, porque conviven tres relojes distintos:
+
+| Que expira | Temas | Vida real |
+|---|---|---|
+| La inscripcion cierra | Talleres, cursos con cupo | 2-4 semanas |
+| El evento pasa | Festivales, teatro | 1-3 semanas |
+| Nunca cierra | Cursos online de Google, IBM, Platzi | Meses o anos |
+
+Por eso `vida_util_dias` es POR TEMA: festivales 21, teatro 30, talleres 35,
+ingles 90, cursos-ia 150.
+
+### Dos conceptos que estaban fusionados
+
+- `max_antiguedad_dias` decide que ENTRA (filtro de ingesta, en el puntuador).
+- `vida_util_dias` decide que se SIGUE MOSTRANDO (filtro de presentacion, en el
+  dashboard). La fila se queda en SQLite y en Google Sheets; solo sale de la pagina.
+
+El pie del sitio dice cuantas se archivaron, para que no sea silencioso.
+
+### Lapidas: por que no se borra directamente
+
+Borrar una fila rompe el dedup: la proxima corrida la vuelve a descubrir y te la
+anuncia como novedad. `run.py purgar` mueve el hash a la tabla `vistos` (unos 40
+bytes) y recien ahi borra la fila.
+
+Motivo real de la purga: ofertas.db se versiona en git y se commitea en cada corrida.
+Sin purgar, en un ano hay cientos de versiones de un binario cada vez mas grande, y
+git no comprime bien SQLite entre versiones. El umbral (365d) esta muy por encima de
+cualquier vida_util configurada, asi que nunca borra algo todavia visible.
+
 ## Pendiente para la proxima sesion
 
 1. Telegram: salteado a pedido. `salidas/telegram.py` esta escrito y probado en seco.

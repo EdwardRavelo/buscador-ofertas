@@ -47,6 +47,11 @@ jobs:
       - name: Sincronizar Google Sheets
         run: python run.py sync
 
+      - name: Purgar lo muy viejo
+        # Deja solo el hash. Sin esto ofertas.db crece para siempre y cada corrida
+        # commitea una copia entera del binario a git.
+        run: python run.py purgar --dias 365
+
       - name: Generar el sitio
         run: python run.py dashboard
 

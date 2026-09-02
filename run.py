@@ -114,6 +114,13 @@ def cmd_sync(args) -> None:
     con.close()
 
 
+def cmd_purgar(args) -> None:
+    con = almacen.conectar()
+    borradas = almacen.purgar(con, args.dias)
+    con.close()
+    print(f"Purgadas {borradas} ofertas de mas de {args.dias} dias (queda su hash).")
+
+
 def main() -> None:
     p = argparse.ArgumentParser(description="Buscador de ofertas, cursos y talleres")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -130,6 +137,10 @@ def main() -> None:
 
     d = sub.add_parser("dashboard", help="genera dashboard.html")
     d.set_defaults(func=cmd_dashboard)
+
+    g = sub.add_parser("purgar", help="borra ofertas muy viejas dejando su hash")
+    g.add_argument("--dias", type=int, default=365, help="umbral en dias (default 365)")
+    g.set_defaults(func=cmd_purgar)
 
     n = sub.add_parser("notificar", help="manda las novedades por Telegram")
     n.add_argument("--seco", action="store_true", help="mostrar sin enviar ni marcar")

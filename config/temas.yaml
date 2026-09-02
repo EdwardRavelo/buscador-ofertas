@@ -16,6 +16,10 @@
 #   excluir_dominios     por SUFIJO de dominio. Ojo: ".co" como subcadena
 #                        matchearia ".com" y borraria todo.
 #   max_antiguedad_dias  descarta lo viejo (Google News mezcla 2018 con 2026)
+#   vida_util_dias       cuantos dias se SIGUE MOSTRANDO en la pagina. Distinto de
+#                        max_antiguedad_dias, que decide que ENTRA. Un festival
+#                        de hace 21 dias ya paso; un curso online gratis de hace
+#                        4 meses probablemente sigue abierto.
 #   max_por_dominio      tope por medio, contra content farms
 #   score_minimo         umbral 0-10 para entrar al informe
 
@@ -73,6 +77,8 @@ temas:
       - ["taller", "talleres", "inscripción", "inscripciones", "cupos", "curso"]
     excluir: *fuera_de_zona
     max_antiguedad_dias: 45
+    # Ventana tipica de inscripcion a un taller.
+    vida_util_dias: 35
     max_por_dominio: 2
     score_minimo: 6
 
@@ -95,6 +101,8 @@ temas:
     excluir: *fuera_de_zona
     # Un festival que ya pasó no sirve: ventana corta a proposito.
     max_antiguedad_dias: 21
+    # El festival ya paso: mostrarlo despues hace perder tiempo.
+    vida_util_dias: 21
     max_por_dominio: 2
     score_minimo: 7.5
 
@@ -122,6 +130,8 @@ temas:
       - ["gratis", "gratuito", "gratuita", "entrada libre", "sin cargo", "a la gorra", "gratuitas", "gratuitos", "libre y gratuita", "sin costo"]
     excluir: *fuera_de_zona
     max_antiguedad_dias: 35
+    # Las funciones se agotan o termina la temporada.
+    vida_util_dias: 30
     max_por_dominio: 2
     score_minimo: 6
 
@@ -154,6 +164,8 @@ temas:
       - "Comunidad de Madrid"
     excluir_dominios: [".cl", ".mx", ".py", ".pe", ".ve", ".bo", ".ec"]
     max_antiguedad_dias: 30
+    # Los cursos online gratis no cierran: Google, IBM y Platzi los dejan abiertos.
+    vida_util_dias: 150
     max_por_dominio: 2
     score_minimo: 6
 
@@ -185,5 +197,7 @@ temas:
       - "Madrid"
     excluir_dominios: [".py", ".co", ".mx", ".cl", ".pe"]
     max_antiguedad_dias: 60
+    # Mezcla: la inscripcion oficial vence, los cursos online no.
+    vida_util_dias: 90
     max_por_dominio: 2
     score_minimo: 6

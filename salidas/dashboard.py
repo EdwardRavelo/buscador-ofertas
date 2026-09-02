@@ -79,10 +79,21 @@ def recolectar(con: sqlite3.Connection) -> dict:
         "SELECT * FROM ofertas ORDER BY tema, fecha_pub IS NULL, fecha_pub DESC"
     ).fetchall()
 
+    # Cuantos dias se sigue mostrando cada tema. Distinto de max_antiguedad_dias,
+    # que decide que entra. Un festival de hace 21 dias ya paso; un curso online
+    # gratis de hace 4 meses probablemente sigue abierto.
+    vida_util = {c["nombre"]: c.get("vida_util_dias") for c in config}
+
     por_tema: dict[str, list] = {}
     todas: list[dict] = []
+    vencidas = 0
     for f in filas:
         dias = _dias(f["fecha_pub"])
+        limite = vida_util.get(f["tema"])
+        if limite is not None and dias is not None and dias > limite:
+            # Se queda en la base y en Google Sheets; solo sale de la pagina.
+            vencidas += 1
+            continue
         url = f["url_final"] or f["url"]
         oferta = {
             "titulo": f["titulo"],
@@ -149,7 +160,8 @@ def recolectar(con: sqlite3.Connection) -> dict:
     return {
         "familias": familias,
         "destacadas": destacadas,
-        "total": len(filas),
+        "total": len(todas),
+        "vencidas": vencidas,
         "nuevos": sum(1 for o in todas if o["nuevo"]),
         "calientes": sum(1 for o in todas if o["urgencia"] == "caliente"),
         "actualizado": datetime.fromisoformat(ultima).astimezone().strftime("%d/%m/%Y %H:%M")

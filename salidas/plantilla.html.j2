@@ -465,6 +465,8 @@
 
   <footer class="pie">
     Generado por <code>run.py dashboard</code> y publicado por GitHub Actions.
+    {% if vencidas %}Se archivaron <strong>{{ vencidas }}</strong> avisos cuya vigencia probable ya pasó:
+    siguen en la planilla de Google, no en esta página.{% endif %}
     El puntaje mide qué tan bien encaja con el tema, no la calidad del curso ni de la obra.
     Las etiquetas de tiempo indican cuándo se <em>publicó</em> la nota, no cuándo cierra la
     inscripción: esa fecha no la tenemos, así que no la inventamos.
