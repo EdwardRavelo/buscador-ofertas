@@ -37,3 +37,13 @@ feeds:
 #   iprofesional.com         200 pero 0 items
 #   bcn.gob.ar               200 pero 0 items (Biblioteca del Congreso)
 #   Instagram @bibliotecasba requiere login; es el canal real de la Red de Bibliotecas
+#   bbva.com                 /es/ar/feed 404; /es/feed responde 200 con 0 items
+#   iprofesional.com/rss     200 pero 0 items (reconfirmado 2026-09-10)
+#   ambito.com, infobae.com, lanacion.com.ar  ConnectError desde este cliente
+
+# --- Verificados pero sin tema asignado hoy -------------------------------------
+# Quedaron sueltos al eliminar el tema `promos-bancarias` (2026-09-10): las promos
+# ahora salen de la API del banco, no de la prensa. Ambos responden y estan frescos;
+# si alguna vez se quiere prensa sobre tarjetas, se reactivan poniendoles `temas`.
+#   sirchandler.com.ar/feed/   20 items, del dia. El que mejor cubre BBVA.
+#   infoviajera.com/feed/      10 items, del dia. Beneficios de tarjetas y viajes.

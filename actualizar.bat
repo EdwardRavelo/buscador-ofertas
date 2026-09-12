@@ -1,6 +1,11 @@
 @echo off
-REM Corrida diaria del buscador. Lo ejecuta el Programador de tareas de Windows.
-REM Para probarlo a mano: doble clic en este archivo.
+REM Corrida diaria del buscador.
+REM
+REM La tarea programada NO lo llama directo, sino via actualizar-silencioso.vbs,
+REM que lo corre con la ventana oculta. Llamarlo directo abre una consola negra
+REM en primer plano cada manana. Ver ESTADO.md, Fase 5.
+REM
+REM Para probarlo a mano y ver la salida: doble clic en este archivo.
 
 REM UTF-8, si no el log sale con caracteres rotos (ingl?s en vez de ingles).
 chcp 65001 >nul

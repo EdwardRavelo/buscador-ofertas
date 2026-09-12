@@ -15,14 +15,25 @@
   /* Paleta clara completa: papel frio, acento teal, y un solo tono calido
      reservado para lo recien publicado. */
   :root {
-    --ground:    #F5F8F9;
-    --surface:   #FFFFFF;
-    --sunken:    #ECF1F3;
-    --border:    #DBE4E8;
-    --hairline:  #E8EEF1;
-    --ink:       #101820;
-    --muted:     #56666F;
-    --faint:     #83959E;
+    /* Papel de petroleo, no papel blanco. --surface sigue siendo el tono mas
+       claro para que la tarjeta se despegue, pero ninguno de los dos es blanco
+       puro: la pagina entera era glare. --ink tampoco es negro sino petroleo
+       profundo, que sobre este fondo cansa menos. */
+    --ground:    #E3EDEF;
+    --surface:   #F6FAFB;
+    --sunken:    #D5E2E5;
+    --border:    #AFC5CB;
+    --hairline:  #DCE8EA;
+    --ink:       #0C2630;
+    --muted:     #3F5C66;
+    --faint:     #526F78;
+    /* La barra lateral en modo claro es un bloque OSCURO de petroleo. Es lo que
+       le da color a la pagina sin tocar la legibilidad del contenido. */
+    --panel-fondo:  #123039;
+    --panel-ink:    #E6F1F3;
+    --panel-muted:  #A4BFC6;
+    --panel-sunken: #1B414C;
+    --panel-borde:  #27525F;
     --accent:    #0A6A87;
     --sobre-acento: #FFFFFF;
     --urgente:   #A6360F;
@@ -38,11 +49,11 @@
       --ground:    #0B1116;
       --surface:   #131D24;
       --sunken:    #1A252D;
-      --border:    #26343D;
+      --border:    #2B3B45;
       --hairline:  #1D2931;
       --ink:       #E7EEF2;
       --muted:     #93A5AF;
-      --faint:     #6D808B;
+      --faint:     #738691;
       --accent:    #52B7D6;
       --sobre-acento: #07161C;
       --urgente:   #F09070;
@@ -50,6 +61,11 @@
       --alto:      #5FC49F;
       --medio:     #D5A345;
       --bajo:      #93A5AF;
+      --panel-fondo:  transparent;
+      --panel-ink:    #E7EEF2;
+      --panel-muted:  #93A5AF;
+      --panel-sunken: #1A252D;
+      --panel-borde:  #2B3B45;
       --sombra:    0 1px 2px rgba(0,0,0,.35), 0 2px 12px rgba(0,0,0,.25);
       --sombra-alta: 0 2px 6px rgba(0,0,0,.4), 0 12px 34px rgba(0,0,0,.35);
     }
@@ -58,11 +74,11 @@
     --ground:    #0B1116;
     --surface:   #131D24;
     --sunken:    #1A252D;
-    --border:    #26343D;
+    --border:    #2B3B45;
     --hairline:  #1D2931;
     --ink:       #E7EEF2;
     --muted:     #93A5AF;
-    --faint:     #6D808B;
+    --faint:     #738691;
     --accent:    #52B7D6;
     --sobre-acento: #07161C;
     --urgente:   #F09070;
@@ -70,9 +86,22 @@
     --alto:      #5FC49F;
     --medio:     #D5A345;
     --bajo:      #93A5AF;
-    --sombra:    0 1px 2px rgba(0,0,0,.35), 0 2px 12px rgba(0,0,0,.25);
+    --panel-fondo:  transparent;
+      --panel-ink:    #E7EEF2;
+      --panel-muted:  #93A5AF;
+      --panel-sunken: #1A252D;
+      --panel-borde:  #2B3B45;
+      --sombra:    0 1px 2px rgba(0,0,0,.35), 0 2px 12px rgba(0,0,0,.25);
     --sombra-alta: 0 2px 6px rgba(0,0,0,.4), 0 12px 34px rgba(0,0,0,.35);
   }
+
+  /* Que los controles nativos y la barra de scroll acompanen al tema elegido. */
+  :root { color-scheme: light; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { color-scheme: dark; }
+  :root[data-theme="light"] { color-scheme: light; }
 
   * { box-sizing: border-box; }
   body {
@@ -84,10 +113,71 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
-  .envoltorio { max-width: 1080px; margin: 0 auto; padding: 44px 24px 80px; }
+  .envoltorio { max-width: 1560px; margin: 0 auto; padding: 32px 28px 72px; }
+
+  /* --- Armazon de dashboard ------------------------------------------------
+     Barra lateral fija con la navegacion y el contenido a la derecha. Antes era
+     una columna de 1080px centrada: en un monitor ancho, medio viewport era
+     margen y habia que scrollear para cambiar de zona. */
+  .armazon { display: grid; grid-template-columns: 236px minmax(0, 1fr); gap: 34px; }
+  .barra-lateral {
+    position: sticky; top: 28px; align-self: start;
+    display: flex; flex-direction: column; gap: 20px;
+    max-height: calc(100vh - 56px); overflow-y: auto;
+    /* Redefinir los tokens aca hace que TODO lo de adentro se adapte solo, sin
+       una regla por elemento. En modo oscuro los valores coinciden con los
+       globales y el panel se funde con el fondo, como antes. */
+    background: var(--panel-fondo);
+    --ink:    var(--panel-ink);
+    --muted:  var(--panel-muted);
+    --sunken: var(--panel-sunken);
+    --border: var(--panel-borde);
+    color: var(--ink);
+    border-radius: 16px;
+    padding: 22px 16px;
+  }
+  /* El panel claro es oscuro, asi que adentro van los acentos pensados para
+     fondo oscuro. En modo oscuro estas reglas repiten lo que ya vale: no-op. */
+  .barra-lateral [data-acento="teal"]    { --accent: #52B7D6; --sobre-acento: #07161C; --tinte-zona: #12222A; }
+  .barra-lateral [data-acento="ambar"]   { --accent: #E0A94A; --sobre-acento: #201603; --tinte-zona: #241D0F; }
+  .barra-lateral [data-acento="violeta"] { --accent: #A98BE8; --sobre-acento: #1C0F33; --tinte-zona: #1B1730; }
+  .barra-lateral [data-acento="rosa"]    { --accent: #E88BA8; --sobre-acento: #33101C; --tinte-zona: #2A1119; }
+  .barra-lateral .sello { color: var(--panel-muted); }
+  .lienzo { min-width: 0; }  /* sin esto la grilla desborda el grid padre */
 
   /* --- Encabezado --------------------------------------------------------- */
-  .encabezado { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+  .encabezado { display: flex; flex-direction: column; gap: 6px; }
+  /* Barra de herramientas del cuerpo: filtros a la izquierda, interruptor de
+     tema a la derecha. Antes vivian los dos en la barra lateral, que ahora es
+     solo navegacion. */
+  .barra-herramientas {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap; margin-bottom: 22px;
+  }
+  .interruptor-tema {
+    display: inline-flex; align-items: center; gap: 10px; flex: none;
+    padding: 7px 12px 7px 14px; cursor: pointer;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 999px; color: var(--muted);
+    font: 600 12.5px/1 Archivo, system-ui, sans-serif;
+  }
+  .interruptor-tema:hover { color: var(--ink); border-color: var(--accent); }
+  .interruptor-tema:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .riel {
+    position: relative; width: 34px; height: 19px; flex: none;
+    background: var(--sunken); border: 1px solid var(--border);
+    border-radius: 999px; transition: background-color .18s ease;
+  }
+  .perilla {
+    position: absolute; top: 2px; left: 2px; width: 13px; height: 13px;
+    border-radius: 50%; background: var(--faint);
+    transition: transform .18s ease, background-color .18s ease;
+  }
+  .interruptor-tema[aria-checked="true"] .riel { background: var(--accent); border-color: var(--accent); }
+  .interruptor-tema[aria-checked="true"] .perilla {
+    transform: translateX(15px); background: var(--sobre-acento);
+  }
+
   .eyebrow {
     font-size: 11px; font-weight: 700; letter-spacing: .16em;
     text-transform: uppercase; color: var(--accent);
@@ -95,13 +185,68 @@
   .encabezado h1 {
     font-family: Piazzolla, Georgia, serif;
     font-optical-sizing: auto;
-    font-size: clamp(36px, 6.5vw, 62px);
+    /* Mas chico que antes: en la barra lateral compite con el contenido, no lo
+       encabeza. El titular grande era el unico elemento de una pagina angosta. */
+    font-size: clamp(26px, 2.4vw, 34px);
     font-weight: 800; letter-spacing: -.025em; line-height: .98;
     text-wrap: balance; margin: 0;
   }
   .sello { color: var(--faint); font-size: 13px; margin: 0; }
 
   /* --- Carrusel: lo mejor de la semana, la tesis de la pagina ------------- */
+  /* --- Zonas (pestanas) ----------------------------------------------------
+     Cada zona redefine --accent y los tonos que dependen de el. Poner el acento
+     en el contenedor y no en :root hace que TODO lo de adentro (tarjetas, riel
+     de recencia, foco, marcas) cambie de color solo, sin reglas duplicadas. */
+  [data-acento="teal"]  { --accent: #0A6A87; --sobre-acento: #FFFFFF; --tinte-zona: #ECF4F7; }
+  [data-acento="ambar"] { --accent: #8A5A00; --sobre-acento: #FFFFFF; --tinte-zona: #FBF3E4; }
+  [data-acento="violeta"] { --accent: #7C4DDB; --sobre-acento: #FFFFFF; --tinte-zona: #F2EEFB; }
+  [data-acento="rosa"] { --accent: #C2185B; --sobre-acento: #FFFFFF; --tinte-zona: #FBEEF3; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) [data-acento="teal"]  { --accent: #52B7D6; --sobre-acento: #07161C; --tinte-zona: #12222A; }
+    :root:not([data-theme="light"]) [data-acento="ambar"] { --accent: #E0A94A; --sobre-acento: #201603; --tinte-zona: #241D0F; }
+    :root:not([data-theme="light"]) [data-acento="violeta"] { --accent: #A98BE8; --sobre-acento: #1C0F33; --tinte-zona: #1B1730; }
+    :root:not([data-theme="light"]) [data-acento="rosa"] { --accent: #E88BA8; --sobre-acento: #33101C; --tinte-zona: #2A1119; }
+  }
+  :root[data-theme="dark"] [data-acento="teal"]  { --accent: #52B7D6; --sobre-acento: #07161C; --tinte-zona: #12222A; }
+  :root[data-theme="dark"] [data-acento="ambar"] { --accent: #E0A94A; --sobre-acento: #201603; --tinte-zona: #241D0F; }
+  :root[data-theme="dark"] [data-acento="violeta"] { --accent: #A98BE8; --sobre-acento: #1C0F33; --tinte-zona: #1B1730; }
+  :root[data-theme="dark"] [data-acento="rosa"] { --accent: #E88BA8; --sobre-acento: #33101C; --tinte-zona: #2A1119; }
+
+  .pestanas {
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .pestana {
+    display: flex; align-items: center; gap: 9px; width: 100%;
+    padding: 10px 12px; border-radius: 9px;
+    background: none; border: 0; border-left: 2px solid transparent;
+    font: 600 14.5px/1 Archivo, system-ui, sans-serif;
+    color: var(--muted); cursor: pointer; text-align: left;
+    transition: color .15s, background-color .15s, border-color .15s;
+  }
+  .nombre-pestana { flex: 1; }
+  .pestana:hover { color: var(--ink); background: var(--sunken); }
+  .pestana[aria-selected="true"] {
+    color: var(--accent); border-left-color: var(--accent); background: var(--tinte-zona);
+  }
+  .pestana:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 6px 6px 0 0; }
+  .cuenta-pestana {
+    /* --muted y no --faint: sobre --sunken, faint se queda en 4.28:1. */
+    font-size: 11.5px; font-weight: 700; color: var(--muted);
+    background: var(--sunken); padding: 2px 7px; border-radius: 999px;
+  }
+  .pestana[aria-selected="true"] .cuenta-pestana { background: var(--surface); color: var(--accent); }
+  /* Punto de "hay algo nuevo en esta pestana", para no tener que abrirla. */
+  .pip { width: 6px; height: 6px; border-radius: 50%; background: var(--urgente); }
+
+  .zona[hidden] { display: none; }
+  .cabecera-zona { margin-bottom: 14px; }
+  .vacio-zona {
+    color: var(--muted); font-size: 14px; line-height: 1.5;
+    background: var(--tinte-zona); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 22px; margin: 0 0 28px;
+  }
+
   .carrusel { margin-bottom: 16px; }
   .barra-carrusel {
     display: flex; align-items: center; justify-content: space-between;
@@ -136,10 +281,24 @@
     padding-bottom: 2px;
   }
   .pista::-webkit-scrollbar { display: none; }
+
+  /* La clase la pone el JS cuando toma el control. Sin JS la pista conserva el
+     scroll-snap y se arrastra con el dedo o el trackpad, como antes. */
+  .pista.viva {
+    scroll-snap-type: none;   /* el iman del snap pelea con la deriva */
+    scroll-behavior: auto;    /* con smooth, cada scrollLeft se anima y tiembla */
+    cursor: grab;
+  }
+  .pista.viva.arrastrando { cursor: grabbing; user-select: none; }
+  /* El salto del bucle no debe verse como un desplazamiento del riel de color. */
+  .pista.viva .diapositiva { scroll-snap-align: none; }
   .pista:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 14px; }
 
   .diapositiva {
-    flex: 0 0 100%; scroll-snap-align: start;
+    /* Antes ocupaba el 100%: una sola destacada por fila desperdiciaba el ancho
+       y obligaba a usar las flechas para ver algo que entra de una. Ahora se ven
+       dos o tres y el scroll-snap sigue funcionando igual. */
+    flex: 0 0 clamp(300px, 33%, 460px); scroll-snap-align: start;
     display: grid; grid-template-columns: auto 1fr; gap: 26px; align-items: start;
     background: var(--surface);
     border: 1px solid var(--border);
@@ -149,15 +308,20 @@
   }
   .diapositiva .cifra {
     font-family: Piazzolla, Georgia, serif;
-    font-size: 66px; font-weight: 800; line-height: .85; letter-spacing: -.04em;
+    font-size: 44px; font-weight: 800; line-height: .85; letter-spacing: -.04em;
     color: var(--urgente); font-variant-numeric: tabular-nums;
   }
   .contenido-diapositiva { min-width: 0; }
   .diapositiva h2 {
     font-family: Piazzolla, Georgia, serif;
-    font-size: clamp(20px, 2.7vw, 28px);
-    font-weight: 600; line-height: 1.2; letter-spacing: -.012em;
-    margin: 0 0 12px; text-wrap: balance;
+    /* Fijo y no clamp: con tres diapositivas por fila, un titular de prensa
+       largo ocupaba nueve lineas y estiraba el carrusel a media pantalla.
+       Se corta a cuatro lineas; el titulo completo sigue en el `title`. */
+    font-size: 19px;
+    font-weight: 600; line-height: 1.28; letter-spacing: -.012em;
+    margin: 0 0 10px; text-wrap: balance;
+    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .diapositiva h2 a { color: var(--ink); text-decoration: none; }
   .diapositiva h2 a:hover { color: var(--accent); }
@@ -172,14 +336,16 @@
   .punto-nav:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
   /* --- Tira de metricas --------------------------------------------------- */
+  /* Panel de KPIs: una fila de tiles que usa todo el ancho disponible. Con
+     `auto-fit` no quedan huecos cuando una zona tiene menos familias. */
   .metricas {
-    display: flex; flex-wrap: wrap;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+    gap: 0; margin-bottom: 26px;
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; padding: 16px 20px; margin-bottom: 22px;
-    box-shadow: var(--sombra);
+    border-radius: 14px; padding: 18px 4px; box-shadow: var(--sombra);
   }
-  .metrica { display: flex; flex-direction: column; padding: 0 28px 0 0; }
-  .metrica + .metrica { border-left: 1px solid var(--hairline); padding-left: 28px; }
+  .metrica { display: flex; flex-direction: column; padding: 0 20px; min-width: 0; }
+  .metrica + .metrica { border-left: 1px solid var(--hairline); }
   .metrica .valor {
     font-family: Piazzolla, Georgia, serif;
     font-size: 30px; font-weight: 800; line-height: 1;
@@ -193,7 +359,7 @@
   }
 
   /* --- Controles ---------------------------------------------------------- */
-  .controles { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+  .controles { display: flex; flex-wrap: wrap; gap: 8px; }
   .control {
     font: inherit; font-size: 13px; font-weight: 600;
     padding: 7px 15px; border-radius: 999px; cursor: pointer;
@@ -248,7 +414,7 @@
 
   .nombre-tema { font-weight: 700; font-size: 15.5px; flex: 1; }
   .cuenta-tema {
-    font-size: 12px; color: var(--faint); font-weight: 600;
+    font-size: 12px; color: var(--muted); font-weight: 600;
     font-variant-numeric: tabular-nums;
   }
   .tope {
@@ -261,7 +427,7 @@
   .tope.bajo  { color: var(--bajo); }
 
   .cuerpo-tema { padding: 4px 18px 18px; }
-  .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+  .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(272px, 1fr)); gap: 12px; }
 
   /* --- Tarjetas ----------------------------------------------------------- */
   .tarjeta {
@@ -277,6 +443,163 @@
   /* El riel izquierdo codifica cuan reciente es la publicacion. */
   .tarjeta.caliente { border-left-color: var(--urgente); }
   .tarjeta.semana   { border-left-color: var(--accent); }
+
+  /* --- Tarjeta de oferta ---------------------------------------------------
+     Jerarquia: comercio -> beneficio -> letra chica -> vigencia. El puntaje no
+     aparece: en un tema de promos casi no varia (21 tarjetas, 2 valores) y un
+     numero grande que siempre dice lo mismo solo gasta espacio. */
+  .grilla-oferta { grid-template-columns: repeat(auto-fill, minmax(288px, 1fr)); }
+  .tarjeta.promo { padding: 0; overflow: hidden; position: relative; }
+
+  /* --- Volumen: inclinacion y volteo ---------------------------------------
+     Cero dependencias: transformaciones 3D del navegador. La inclinacion la
+     escribe el JS en --rx/--ry; el volteo es una clase. */
+  .tarjeta.promo {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform .16s ease, border-color .14s ease;
+  }
+  /* `.caras` es lo unico que gira. El boton queda afuera, quieto, si no se
+     voltearia con la tarjeta y no habria con que volver. */
+  .caras {
+    position: relative; transform-style: preserve-3d;
+    /* Todas las tarjetas al mismo alto: el dorso va absolute y necesita una
+       caja fija, y de paso se empareja la grilla, que iba de 193 a 242px. */
+    min-height: 248px;
+    transition: transform .55s cubic-bezier(.2, .7, .3, 1);
+  }
+  .tarjeta.volteada .caras { transform: rotateY(180deg); }
+  .cara { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .cara-frente { height: 100%; }
+  .cara-dorso {
+    position: absolute; inset: 0; transform: rotateY(180deg);
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 16px 18px; overflow: auto;
+  }
+  .titulo-dorso {
+    margin: 0; font-size: 14px; font-weight: 700; color: var(--accent);
+    padding-right: 26px;  /* no pasar por debajo del boton */
+  }
+  .letra-chica { margin: 0; display: flex; flex-direction: column; gap: 7px; font-size: 11.5px; }
+  .letra-chica div { display: flex; gap: 8px; align-items: baseline; }
+  .letra-chica dt {
+    flex: none; width: 68px; color: var(--faint); text-transform: uppercase;
+    letter-spacing: .06em; font-size: 9.5px; font-weight: 700; padding-top: 1px;
+  }
+  .letra-chica dd { margin: 0; color: var(--ink); line-height: 1.4; }
+  .enlace-dorso {
+    margin-top: auto; font-size: 11.5px; font-weight: 600;
+    color: var(--accent); text-decoration: none;
+  }
+  .enlace-dorso:hover { text-decoration: underline; }
+
+  .voltear {
+    position: absolute; top: 10px; right: 10px; z-index: 2;
+    width: 22px; height: 22px; padding: 0; cursor: pointer;
+    display: grid; place-items: center; border-radius: 50%;
+    background: var(--sunken); border: 1px solid var(--border);
+    color: var(--muted); font: 700 11px/1 Piazzolla, Georgia, serif;
+    transition: background-color .14s ease, color .14s ease;
+  }
+  .voltear:hover { background: var(--accent); color: var(--sobre-acento); border-color: var(--accent); }
+  .voltear:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .tarjeta.volteada .voltear { background: var(--accent); color: var(--sobre-acento); border-color: var(--accent); }
+  .tarjeta.promo .tapa {
+    display: flex; flex-direction: column; gap: 14px;
+    padding: 16px 18px 15px; color: inherit; height: 100%;
+  }
+  /* Toda la tarjeta voltea al tocarla, asi que el cursor lo tiene que anunciar. */
+  .tarjeta.volteable { cursor: pointer; }
+  .tarjeta.volteable .enlace-dorso { cursor: pointer; }
+  .tarjeta.promo:focus-within { border-color: var(--accent); }
+  .tarjeta.promo .tapa:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; border-radius: 12px; }
+
+  .diapositiva.promo { align-items: center; gap: 18px; }
+  .logo.grande { width: 68px; height: 68px; border-radius: 12px; }
+  .beneficio-destacado {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 9px; margin: 2px 0 8px;
+  }
+  .beneficio-destacado .pct {
+    font: 800 34px/1 Piazzolla, Georgia, serif; color: var(--accent); letter-spacing: -.02em;
+  }
+  .beneficio-destacado .mas { color: var(--faint); font-size: 17px; font-weight: 600; }
+  .beneficio-destacado .cuotas { font-size: 15px; font-weight: 700; color: var(--ink); }
+  .diapositiva.promo h2 { font-size: 19px; margin-bottom: 2px; }
+  .diapositiva.promo { grid-template-columns: 1fr; gap: 12px; }
+  .diapositiva.promo .logo.grande { width: 84px; height: 84px; border-radius: 13px; }
+
+  .encabezado-promo { display: flex; align-items: center; gap: 11px; }
+  .logo {
+    /* 72 y no 48: muchas de estas imagenes no son un logo suelto sino el banner
+       de la promo (311x208, 317x112), y a 48px no se leia que comercio era.
+       `contain` sobre fondo blanco aguanta las dos proporciones. */
+    width: 72px; height: 72px; flex: none; border-radius: 11px; object-fit: contain;
+    background: #FFFFFF; padding: 4px; border: 1px solid var(--hairline);
+  }
+  /* Si la imagen del banco se cae, el JS del onerror marca esto y la tarjeta
+     sigue siendo legible en vez de mostrar un icono roto. */
+  .encabezado-promo.sin-logo .logo { display: none; }
+  .identidad { min-width: 0; flex: 1; }
+  .comercio {
+    font-size: 15px; font-weight: 700; line-height: 1.25; margin: 0;
+    overflow-wrap: anywhere;
+  }
+  .tarjeta.promo:hover .comercio { color: var(--accent); }
+  .plastico {
+    display: block; font-size: 11px; color: var(--faint); margin-top: 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .beneficio {
+    /* align-self evita que la caja se estire a todo el ancho de la tarjeta:
+       un recuadro enorme alrededor de "20%" es aire vacio, no jerarquia. */
+    display: flex; align-self: flex-start; align-items: baseline;
+    flex-wrap: wrap; gap: 8px;
+    padding: 11px 13px; border-radius: 11px;
+    background: var(--tinte-zona); border: 1px solid var(--border);
+  }
+  .beneficio .pct {
+    font: 800 27px/1 Piazzolla, Georgia, serif; color: var(--accent);
+    letter-spacing: -.02em;
+  }
+  .beneficio .mas { color: var(--faint); font-size: 15px; font-weight: 600; }
+  .beneficio .cuotas { font-size: 13.5px; font-weight: 600; color: var(--ink); }
+
+  .pie-promo {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px;
+    margin-top: auto; font-size: 11.5px; color: var(--muted);
+  }
+  .tope {
+    font-weight: 700; color: var(--ink);
+    background: var(--sunken); padding: 2px 8px; border-radius: 999px;
+  }
+  .vigencia { margin-left: auto; font-weight: 600; white-space: nowrap; }
+  .vigencia em { font-style: normal; font-weight: 400; color: var(--faint); }
+  .vigencia.caliente { color: var(--urgente); }
+
+  /* --- LED de "recien agregada" --------------------------------------------
+     Avisa que la oferta entro hace menos de 48 h. Toma el acento de la zona, asi
+     que en Cine es rosa y en Este finde violeta sin una regla por zona.
+     El pulso se apaga solo con prefers-reduced-motion: la regla global de mas
+     abajo mata toda animacion. */
+  .led {
+    width: 8px; height: 8px; border-radius: 50%; flex: none;
+    color: var(--accent); background: currentColor;
+    box-shadow: 0 0 7px currentColor;
+    animation: latido 2.6s ease-in-out infinite;
+  }
+  @keyframes latido {
+    0%, 100% { opacity: 1; box-shadow: 0 0 7px currentColor, 0 0 0 0 currentColor; }
+    55%      { opacity: .65; box-shadow: 0 0 11px currentColor, 0 0 0 4px transparent; }
+  }
+  .diapositiva { position: relative; }
+  .led.en-destacada { position: absolute; top: 14px; right: 14px; }
+
+  /* Lo que solo tiene que existir para un lector de pantalla. El LED es color:
+     sin esto, quien no lo ve no se entera de que la tarjeta es nueva. */
+  .solo-lectores {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
 
   .fila-superior { display: flex; align-items: center; gap: 9px; }
   .cifra-chica {
@@ -323,106 +646,239 @@
 
   @media (max-width: 620px) {
     .envoltorio { padding: 30px 16px 60px; }
-    .diapositiva { grid-template-columns: 1fr; gap: 10px; padding: 22px; }
+    .diapositiva { flex-basis: 86%; grid-template-columns: 1fr; gap: 10px; padding: 22px; }
     .diapositiva .cifra { font-size: 50px; }
     .metrica { padding-right: 18px; }
     .metrica + .metrica { padding-left: 18px; }
     .grilla { grid-template-columns: 1fr; }
     .cuenta-tema { display: none; }
   }
+  /* Este bloque va al FINAL a proposito: comparte especificidad con las reglas de
+     los componentes, asi que si fuera antes lo pisarian y las pestanas se
+     quedarian verticales en pantalla angosta. Ya paso. */
+  @media (max-width: 1020px) {
+    /* La barra vuelve a ser una cabecera normal: una columna lateral de 236px
+       en una pantalla angosta le come el espacio justo al contenido. */
+    .armazon { grid-template-columns: 1fr; gap: 22px; }
+    .barra-lateral {
+      position: static; max-height: none; overflow: visible;
+      background: none; padding: 0; color: inherit;
+      --ink: inherit; --muted: inherit; --sunken: inherit; --border: inherit;
+    }
+    .pestanas { flex-direction: row; border-bottom: 1px solid var(--border); }
+    .pestana {
+      width: auto; border-left: 0; border-bottom: 2px solid transparent;
+      border-radius: 0; padding: 11px 16px;
+    }
+    .pestana[aria-selected="true"] { background: none; border-bottom-color: var(--accent); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
   }
+  @media (max-width: 560px) {
+    .pestana { padding: 10px 12px; font-size: 14px; }
+  }
 </style>
+<script>
+  // Se aplica el tema ANTES de pintar. Si esto viviera con el resto del JS, al
+  // final del body, quien eligio "oscuro" veria un fogonazo blanco en cada carga.
+  (function () {
+    try {
+      var v = localStorage.getItem('radar:tema-visual');
+      if (v === 'dark' || v === 'light') {
+        document.documentElement.setAttribute('data-theme', v);
+      }
+    } catch (e) { /* ventana privada: queda en automatico */ }
+  })();
+</script>
+<noscript>
+  <!-- Sin JS las pestanas no conmutan nada, asi que se ocultan y las zonas
+       quedan apiladas. Es peor que con JS, pero se lee todo.
+       El selector de tema tampoco hace nada, asi que se oculta: el CSS sigue
+       respetando prefers-color-scheme igual. --><style>.tema-visual { display: none; }</style>
+  <style>
+    .pestanas { display: none; }
+    .zona[hidden] { display: block; }
+    .cabecera-zona { border-top: 2px solid var(--accent); padding-top: 14px; }
+  </style>
+</noscript>
 </head>
 <body>
 
 <div class="envoltorio">
+<div class="armazon">
+
+<aside class="barra-lateral">
   <header class="encabezado">
-    <span class="eyebrow">Cultura y formación</span>
     <h1>Radar Porteño</h1>
     <p class="sello">Actualizado {{ actualizado }}</p>
   </header>
 
-  {% if destacadas %}
-  <section class="carrusel" aria-labelledby="titulo-carrusel">
-    <div class="barra-carrusel">
-      <span class="rotulo" id="titulo-carrusel">Lo mejor de esta semana</span>
-      <div class="flechas">
-        <button class="flecha" data-dir="-1" type="button" aria-label="Anterior">
-          <span class="punta izq" aria-hidden="true"></span>
-        </button>
-        <button class="flecha" data-dir="1" type="button" aria-label="Siguiente">
-          <span class="punta der" aria-hidden="true"></span>
-        </button>
-      </div>
-    </div>
-
-    <div class="pista" tabindex="0" role="group" aria-label="Destacados de la semana">
-      {% for d in destacadas %}
-      <article class="diapositiva">
-        <div class="cifra">{{ '%.1f'|format(d.score) }}</div>
-        <div class="contenido-diapositiva">
-          <h2><a href="{{ d.url }}" target="_blank" rel="noopener noreferrer">{{ d.titulo }}</a></h2>
-          <div class="pie-tarjeta">
-            <span class="medio">{{ d.fuente }}</span>
-            <span class="punto">&middot;</span>
-            <span>{{ d.edad }}</span>
-            {% for m in d.motivos[:2] %}<span class="senal">{{ m }}</span>{% endfor %}
-            {% if d.opaco %}<span class="punto">&middot;</span><a class="alterno" href="{{ d.respaldo }}" target="_blank" rel="noopener noreferrer">buscar la nota</a>{% endif %}
-          </div>
-        </div>
-      </article>
-      {% endfor %}
-    </div>
-
-    {% if destacadas|length > 1 %}
-    <div class="puntos" role="tablist" aria-label="Ir a destacado">
-      {% for d in destacadas %}
-      <button class="punto-nav" type="button" role="tab" data-indice="{{ loop.index0 }}"
-              aria-label="Destacado {{ loop.index }} de {{ destacadas|length }}"
-              {% if loop.first %}aria-selected="true"{% else %}aria-selected="false"{% endif %}></button>
-      {% endfor %}
-    </div>
-    {% endif %}
-  </section>
-  {% endif %}
-
-  <div class="metricas">
-    <div class="metrica">
-      <span class="valor">{{ total }}</span>
-      <span class="clave">en seguimiento</span>
-    </div>
-    <div class="metrica">
-      <span class="valor{% if nuevos %} acento{% endif %}">{{ nuevos }}</span>
-      <span class="clave">nuevas hoy</span>
-    </div>
-    <div class="metrica">
-      <span class="valor{% if calientes %} calor{% endif %}">{{ calientes }}</span>
-      <span class="clave">recién publicadas</span>
-    </div>
-    {% for f in familias %}
-    <div class="metrica">
-      <span class="valor">{{ f.total }}</span>
-      <span class="clave">{{ f.nombre }}</span>
-    </div>
+  {# Las pestanas son la separacion principal: la agenda se hojea, la oferta se
+     consulta. Sin JS quedan ocultas y las zonas se ven apiladas (ver noscript). #}
+  <div class="pestanas" role="tablist" aria-label="Zonas del radar">
+    {% for z in zonas %}
+    <button class="pestana" type="button" role="tab"
+            id="pestana-{{ z.clave }}" data-zona="{{ z.clave }}"
+            data-acento="{{ z.acento }}"
+            aria-controls="zona-{{ z.clave }}"
+            aria-selected="{{ 'true' if loop.first else 'false' }}"
+            tabindex="{{ '0' if loop.first else '-1' }}">
+      <span class="nombre-pestana">{{ z.nombre }}</span>
+      <span class="cuenta-pestana">{{ z.total }}</span>
+      {% if z.nuevos %}<span class="pip" aria-label="{{ z.nuevos }} nuevas"></span>{% endif %}
+    </button>
     {% endfor %}
   </div>
 
-  <div class="controles">
-    <button class="control" id="solo-nuevas" aria-pressed="false" type="button">Solo nuevas</button>
-    <button class="control" id="abrir-todo" type="button">Abrir todo</button>
-    <button class="control" id="cerrar-todo" type="button">Cerrar todo</button>
+</aside>
+
+<main class="lienzo">
+  <div class="barra-herramientas">
+    <div class="controles">
+      <button class="control" id="solo-nuevas" aria-pressed="false" type="button">Solo nuevas</button>
+      <button class="control" id="abrir-todo" type="button">Abrir todo</button>
+      <button class="control" id="cerrar-todo" type="button">Cerrar todo</button>
+    </div>
+
+    {# role="switch" y no un grupo de botones: es binario. El estado inicial sale
+       de lo guardado; si nunca se eligio, del sistema. #}
+    <button type="button" class="interruptor-tema" role="switch" aria-checked="false">
+      <span class="etiqueta-tema">Modo oscuro</span>
+      <span class="riel" aria-hidden="true"><span class="perilla"></span></span>
+    </button>
   </div>
 
-  {% for f in familias %}
+  {% for z in zonas %}
+  <section class="zona" id="zona-{{ z.clave }}" data-zona="{{ z.clave }}"
+           data-acento="{{ z.acento }}" role="tabpanel"
+           aria-labelledby="pestana-{{ z.clave }}"
+           {% if not loop.first %}hidden{% endif %}>
+
+    <div class="cabecera-zona">
+      <span class="eyebrow">{{ z.eyebrow }}</span>
+    </div>
+
+    {% if z.destacadas %}
+    <section class="carrusel" aria-labelledby="titulo-carrusel-{{ z.clave }}">
+      <div class="barra-carrusel">
+        <span class="rotulo" id="titulo-carrusel-{{ z.clave }}">Lo mejor de esta semana</span>
+        <div class="flechas">
+          <button class="flecha" data-dir="-1" type="button" aria-label="Anterior">
+            <span class="punta izq" aria-hidden="true"></span>
+          </button>
+          <button class="flecha" data-dir="1" type="button" aria-label="Siguiente">
+            <span class="punta der" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="pista" tabindex="0" role="group" aria-label="Destacados de {{ z.nombre }}">
+        {% for d in z.destacadas %}
+        {% if z.tarjeta == 'oferta' %}
+        {# En Ofertas el destaque tambien muestra el beneficio, no el puntaje:
+           si la tarjeta de abajo aprendio a hablar, el destaque no puede seguir
+           diciendo "7.5" y el nombre del comercio. #}
+        <article class="diapositiva promo">
+          {% if d.extra.imagen %}
+          <img class="logo grande" src="{{ d.extra.imagen }}" alt=""
+               loading="lazy" decoding="async" referrerpolicy="no-referrer"
+               onerror="this.remove()">
+          {% endif %}
+          <div class="contenido-diapositiva">
+            <h2><a href="{{ d.url }}" target="_blank" rel="noopener noreferrer">{{ d.extra.comercio or d.titulo }}</a></h2>
+            <div class="beneficio-destacado">
+              {% if d.extra.descuento %}<span class="pct">{{ d.extra.descuento }}</span>{% endif %}
+              {% if d.extra.cuotas %}
+                {% if d.extra.descuento %}<span class="mas" aria-hidden="true">+</span>{% endif %}
+                <span class="cuotas">{{ d.extra.cuotas }} cuotas{% if d.extra.sin_interes %} sin interés{% endif %}</span>
+              {% elif not d.extra.descuento and d.extra.beneficio %}
+                <span class="cuotas">{{ d.extra.beneficio }}</span>
+              {% endif %}
+            </div>
+            <div class="pie-tarjeta">
+              {% if d.extra.tope %}<span class="tope">Tope {{ d.extra.tope }}</span>{% endif %}
+              {% if d.extra.tarjeta %}<span>{{ d.extra.tarjeta }}</span>{% endif %}
+              <span class="vigencia {{ d.urgencia }}">{% if d.hasta %}vence {{ d.hasta }}{% else %}{{ d.edad }}{% endif %}</span>
+            </div>
+          </div>
+        </article>
+        {% else %}
+        <article class="diapositiva">
+          {% if d.nuevo %}<span class="led en-destacada" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>{% endif %}
+          <div class="cifra">{{ '%.1f'|format(d.score) }}</div>
+          <div class="contenido-diapositiva">
+            <h2><a href="{{ d.url }}" target="_blank" rel="noopener noreferrer" title="{{ d.titulo }}">{{ d.titulo }}</a></h2>
+            <div class="pie-tarjeta">
+              <span class="medio">{{ d.fuente }}</span>
+              <span class="punto">&middot;</span>
+              <span>{{ d.edad }}</span>
+              {% if d.opaco %}<span class="punto">&middot;</span><a class="alterno" href="{{ d.respaldo }}" target="_blank" rel="noopener noreferrer">buscar la nota</a>{% endif %}
+            </div>
+          </div>
+        </article>
+        {% endif %}
+        {% endfor %}
+      </div>
+
+      {% if z.destacadas|length > 1 %}
+      <div class="puntos" role="tablist" aria-label="Ir a destacado">
+        {% for d in z.destacadas %}
+        <button class="punto-nav" type="button" role="tab" data-indice="{{ loop.index0 }}"
+                aria-label="Destacado {{ loop.index }} de {{ z.destacadas|length }}"
+                {% if loop.first %}aria-selected="true"{% else %}aria-selected="false"{% endif %}></button>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </section>
+    {% endif %}
+
+    <div class="metricas">
+      <div class="metrica">
+        <span class="valor">{{ z.total }}</span>
+        <span class="clave">en seguimiento</span>
+      </div>
+      <div class="metrica">
+        <span class="valor{% if z.nuevos %} acento{% endif %}">{{ z.nuevos }}</span>
+        <span class="clave">nuevas (48 h)</span>
+      </div>
+      {# En una zona de ofertas "recien publicadas" no le importa a nadie y casi
+         siempre da 0: lo que apura es lo que se termina. #}
+      {% if z.tarjeta == 'oferta' %}
+      <div class="metrica">
+        <span class="valor{% if z.vencen_pronto %} calor{% endif %}">{{ z.vencen_pronto }}</span>
+        <span class="clave">vencen en 7 días</span>
+      </div>
+      {% else %}
+      <div class="metrica">
+        <span class="valor{% if z.calientes %} calor{% endif %}">{{ z.calientes }}</span>
+        <span class="clave">recién publicadas</span>
+      </div>
+      {% endif %}
+      {% if z.familias|length > 1 %}
+      {% for f in z.familias %}
+      <div class="metrica">
+        <span class="valor">{{ f.total }}</span>
+        <span class="clave">{{ f.nombre }}</span>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+
+    {% if z.total == 0 %}
+    <p class="vacio-zona">{{ z.vacia }}</p>
+    {% endif %}
+
+  {% for f in z.familias %}
   <section class="familia" data-familia="{{ f.nombre }}">
+    {# Con una sola familia, el titulo repetiria el eyebrow de la zona y el
+       resumen repetiria los KPIs de arriba. Solo se muestra si agrupa. #}
+    {% if z.familias|length > 1 %}
     <header>
       <h2>{{ f.nombre }}</h2>
-      <span class="resumen-familia">
-        {{ f.total }} en seguimiento{% if f.nuevos %} &middot; {{ f.nuevos }} nueva{{ 's' if f.nuevos != 1 else '' }}{% endif %}
-      </span>
     </header>
+    {% endif %}
 
     {% for t in f.temas %}
     <details class="tema" data-tema="{{ t.clave }}"{% if t.abierto %} open{% endif %}>
@@ -430,17 +886,100 @@
         <span class="chevron" aria-hidden="true"></span>
         <span class="nombre-tema">{{ t.nombre }}</span>
         {% if t.nuevos %}<span class="marca nueva">{{ t.nuevos }} nueva{{ 's' if t.nuevos != 1 else '' }}</span>{% endif %}
-        <span class="cuenta-tema">{{ t.total }}</span>
+        {# Si todas son nuevas, la marca de al lado ya dice el numero. #}
+        {% if t.nuevos != t.total %}<span class="cuenta-tema">{{ t.total }}</span>{% endif %}
         {% if t.mejor %}<span class="tope {{ 'alto' if t.mejor >= 9 else ('medio' if t.mejor >= 8 else 'bajo') }}">{{ '%.1f'|format(t.mejor) }}</span>{% endif %}
       </summary>
       <div class="cuerpo-tema">
         {% if t.ofertas %}
-        <div class="grilla">
+        <div class="grilla {{ 'grilla-oferta' if z.tarjeta == 'oferta' else '' }}">
           {% for o in t.ofertas %}
+          {% if z.tarjeta == 'oferta' %}
+          {#
+            TARJETA DE OFERTA. La jerarquia es: que comercio, que beneficio, con
+            que tarjeta y hasta cuando. El puntaje pasa a marca discreta porque no
+            distingue: en este tema hay 21 tarjetas con dos valores de score.
+          #}
+          <article class="tarjeta promo volteable {{ o.urgencia }}" data-nuevo="{{ 'si' if o.nuevo else 'no' }}">
+            {# El boton vive FUERA de `.caras`: si estuviera adentro, se voltearia
+               con la tarjeta y no habria con que volver. #}
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-{{ t.clave }}-{{ loop.index }}"
+                    aria-label="Ver la letra chica de {{ o.extra.comercio or o.titulo }}">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            {# Contenedor y no <a>: el frente voltea al tocarlo, asi que no puede
+               ser ademas un enlace. El enlace al banco vive en el dorso. #}
+            <div class="tapa">
+              <div class="encabezado-promo">
+                {% if o.extra.imagen %}
+                <img class="logo" src="{{ o.extra.imagen }}" alt=""
+                     loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                     onerror="this.closest('.encabezado-promo').classList.add('sin-logo')">
+                {% endif %}
+                <div class="identidad">
+                  <h3 class="comercio">{{ o.extra.comercio or o.titulo }}</h3>
+                  {% if o.extra.tarjeta %}<span class="plastico">{{ o.extra.tarjeta }}</span>{% endif %}
+                </div>
+                {% if o.nuevo %}<span class="marca nueva">nueva</span>{% endif %}
+              </div>
+
+              {% if o.extra.descuento or o.extra.cuotas or o.extra.beneficio %}
+              <div class="beneficio">
+                {% if o.extra.descuento %}<span class="pct">{{ o.extra.descuento }}</span>{% endif %}
+                {% if o.extra.cuotas %}
+                  {% if o.extra.descuento %}<span class="mas" aria-hidden="true">+</span>{% endif %}
+                  <span class="cuotas">{{ o.extra.cuotas }} cuotas{% if o.extra.sin_interes %} sin interés{% endif %}</span>
+                {% elif not o.extra.descuento and o.extra.beneficio %}
+                  <span class="cuotas">{{ o.extra.beneficio }}</span>
+                {% endif %}
+              </div>
+              {% endif %}
+
+              <div class="pie-promo">
+                {% if o.extra.tope %}<span class="tope">Tope {{ o.extra.tope }}</span>{% endif %}
+                {% if o.extra.dias_limitados %}<span class="senal">solo {{ o.extra.dias_limitados }} día{{ 's' if o.extra.dias_limitados != 1 else '' }} por semana</span>{% endif %}
+                <span class="vigencia {{ o.urgencia }}">
+                  {% if o.hasta %}vence {{ o.hasta }}{% else %}{{ o.edad }}{% endif %}
+                  {% if o.vence_en is not none and o.vence_en <= 14 %}<em>· {{ o.edad }}</em>{% endif %}
+                </span>
+              </div>
+            </div>
+            </div>
+
+            {# Dorso: lo que no entra adelante. La linea de la tarjeta va cortada
+               con puntos suspensivos en 20 de 35 casos, y la fecha de inicio no
+               se muestra en ningun lado. #}
+            <div class="cara cara-dorso" id="dorso-{{ t.clave }}-{{ loop.index }}" aria-hidden="true">
+              <h4 class="titulo-dorso">{{ o.extra.comercio or o.titulo }}</h4>
+              <dl class="letra-chica">
+                {% if o.desde and o.hasta %}
+                <div><dt>Vigencia</dt><dd>{{ o.desde }} al {{ o.hasta }}</dd></div>
+                {% endif %}
+                {% if o.extra.tarjeta %}
+                <div><dt>Aplica con</dt><dd>{{ o.extra.tarjeta }}</dd></div>
+                {% endif %}
+                {% if o.extra.tope %}
+                <div><dt>Tope</dt><dd>{{ o.extra.tope }}</dd></div>
+                {% endif %}
+                {% if o.extra.dias_limitados %}
+                <div><dt>Días</dt><dd>solo {{ o.extra.dias_limitados }} por semana; el banco no publica cuáles</dd></div>
+                {% endif %}
+                <div><dt>Encaje</dt><dd>{{ '%.1f'|format(o.score) }}{% if o.motivos %} · {{ o.motivos|join(', ') }}{% endif %}</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="{{ o.url }}" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en {{ o.fuente }}</a>
+            </div>
+            </div>
+          </article>
+          {% else %}
           <article class="tarjeta {{ o.urgencia }}" data-nuevo="{{ 'si' if o.nuevo else 'no' }}">
             <div class="fila-superior">
+              {# El LED reemplaza a la etiqueta "nueva": avisa lo mismo sin
+                 ocupar una linea de texto en cada tarjeta recien agregada. #}
+              {% if o.nuevo %}<span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>{% endif %}
               <span class="cifra-chica {{ o.nivel }}">{{ '%.1f'|format(o.score) }}</span>
-              {% if o.nuevo %}<span class="marca nueva">nueva</span>{% endif %}
               {% if o.urgencia == 'caliente' %}<span class="marca reciente">recién</span>{% endif %}
             </div>
             <h3><a href="{{ o.url }}" target="_blank" rel="noopener noreferrer">{{ o.titulo }}</a></h3>
@@ -448,12 +987,16 @@
               <span class="medio">{{ o.fuente }}</span>
               <span class="punto">&middot;</span>
               <span>{{ o.edad }}</span>
-              {% for m in o.motivos[:2] %}<span class="senal">{{ m }}</span>{% endfor %}
               {% if o.opaco %}<span class="punto">&middot;</span><a class="alterno" href="{{ o.respaldo }}" target="_blank" rel="noopener noreferrer">buscar la nota</a>{% endif %}
             </div>
           </article>
+          {% endif %}
           {% endfor %}
         </div>
+        {% elif t.total %}
+        {# Tiene ofertas pero todas subieron al carrusel de la zona. Decir
+           "todavía nada" seria mentir: el resumen de arriba dice que hay. #}
+        <p class="vacio">Lo de este tema está en los destacados, arriba.</p>
         {% else %}
         <p class="vacio">Todavía nada para este tema. Se revisa en cada corrida.</p>
         {% endif %}
@@ -463,74 +1006,394 @@
   </section>
   {% endfor %}
 
+  </section>
+  {% endfor %}
+
+  {# El pie eran cinco frases de explicacion. Se dejan las dos que cambian como
+     leer la pagina; el resto (que lo genera run.py, que lo publica Actions) le
+     importaba al que lo escribio, no al que lo lee. #}
   <footer class="pie">
-    Generado por <code>run.py dashboard</code> y publicado por GitHub Actions.
-    {% if vencidas %}Se archivaron <strong>{{ vencidas }}</strong> avisos cuya vigencia probable ya pasó:
-    siguen en la planilla de Google, no en esta página.{% endif %}
-    El puntaje mide qué tan bien encaja con el tema, no la calidad del curso ni de la obra.
-    Las etiquetas de tiempo indican cuándo se <em>publicó</em> la nota, no cuándo cierra la
-    inscripción: esa fecha no la tenemos, así que no la inventamos.
-    Los enlaces marcados <em>buscar la nota</em> vienen de Google News, que cifra la URL real del medio.
+    El puntaje mide qué tan bien encaja con el tema, no la calidad de lo que ofrece.
+    <em>hace N días</em> es cuándo se publicó la nota, no cuándo cierra la inscripción;
+    <em>vence</em> sí es una fecha real que declara la fuente.
+    {% if vencidas %}<br>Se archivaron {{ vencidas }} avisos vencidos.{% endif %}
   </footer>
+</main>
+
+</div>
 </div>
 
 <script>
-  // --- Carrusel de destacados ---------------------------------------------
-  // El scroll-snap lo hace CSS. El JS solo agrega flechas y puntos: si algo
-  // falla aca, la pista se sigue pudiendo arrastrar con el dedo o el trackpad.
+  // --- Interruptor de tema --------------------------------------------------
+  // Binario: claro u oscuro. El <head> ya aplico lo guardado para no parpadear;
+  // aca solo se refleja el estado y se atiende el clic.
+  //
+  // Quien nunca lo toco sigue al sistema: no hay valor guardado y el CSS resuelve
+  // con prefers-color-scheme. El interruptor muestra el tema EFECTIVO, no el
+  // guardado, para que no diga "claro" mientras la pantalla esta oscura.
   (function () {
-    var pista = document.querySelector('.pista');
+    var boton = document.querySelector('.interruptor-tema');
+    if (!boton) { return; }
+    var sistemaOscuro = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function guardado() {
+      try { return localStorage.getItem('radar:tema-visual'); }
+      catch (e) { return null; }
+    }
+
+    function efectivo() {
+      var v = guardado();
+      if (v === 'dark' || v === 'light') { return v; }
+      return sistemaOscuro.matches ? 'dark' : 'light';
+    }
+
+    function reflejar() {
+      boton.setAttribute('aria-checked', String(efectivo() === 'dark'));
+    }
+
+    boton.addEventListener('click', function () {
+      var nuevo = efectivo() === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', nuevo);
+      try { localStorage.setItem('radar:tema-visual', nuevo); } catch (e) { /* ventana privada */ }
+      reflejar();
+    });
+
+    // Si nunca se eligio a mano, seguir al sistema cuando cambia.
+    if (sistemaOscuro.addEventListener) {
+      sistemaOscuro.addEventListener('change', function () {
+        if (!guardado()) { reflejar(); }
+      });
+    }
+
+    reflejar();
+  })();
+
+  // --- Pestanas de zona ----------------------------------------------------
+  // Separan la agenda de las ofertas. Sin JS las zonas quedan apiladas y
+  // visibles (ver el <noscript> del head): la pagina sigue siendo legible.
+  (function () {
+    var pestanas = Array.prototype.slice.call(document.querySelectorAll('.pestana'));
+    if (pestanas.length < 2) { return; }
+
+    function panel(p) { return document.getElementById(p.getAttribute('aria-controls')); }
+
+    function activar(elegida, mover) {
+      pestanas.forEach(function (p) {
+        var es = p === elegida;
+        p.setAttribute('aria-selected', String(es));
+        p.tabIndex = es ? 0 : -1;
+        var z = panel(p);
+        if (z) { z.hidden = !es; }
+      });
+      try { localStorage.setItem('radar:zona', elegida.dataset.zona); } catch (e) { /* ventana privada */ }
+      if (mover) { elegida.focus(); }
+      // Las pistas ocultas miden 0: al mostrarse hay que recalcular flechas.
+      window.dispatchEvent(new Event('resize'));
+    }
+
+    pestanas.forEach(function (p, i) {
+      p.addEventListener('click', function () { activar(p, false); });
+      p.addEventListener('keydown', function (e) {
+        var paso = e.key === 'ArrowRight' ? 1 : (e.key === 'ArrowLeft' ? -1 : 0);
+        if (!paso) { return; }
+        e.preventDefault();
+        activar(pestanas[(i + paso + pestanas.length) % pestanas.length], true);
+      });
+    });
+
+    // Se recuerda la ultima zona mirada: si entras todos los dias a ver las
+    // promos, no tenes que volver a elegir la pestana cada vez.
+    var guardada = null;
+    try { guardada = localStorage.getItem('radar:zona'); } catch (e) { /* ventana privada */ }
+    var inicial = pestanas.filter(function (p) { return p.dataset.zona === guardada; })[0];
+    activar(inicial || pestanas[0], false);
+  })();
+
+  // --- Volumen de las tarjetas ---------------------------------------------
+  // Inclinacion al pasar el mouse y volteo para leer la letra chica. Todo con
+  // transformaciones 3D del navegador: cero dependencias, cero KB.
+  (function () {
+    var quieto = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var conMouse = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+    // --- Volteo --------------------------------------------------------------
+    // Un listener delegado y no uno por tarjeta: hay 35 y se regeneran en cada
+    // corrida.
+    function voltear(tarjeta) {
+      var boton = tarjeta.querySelector('.voltear');
+      if (!boton) { return; }
+
+      var volteada = !tarjeta.classList.contains('volteada');
+      tarjeta.classList.toggle('volteada', volteada);
+      boton.setAttribute('aria-expanded', String(volteada));
+
+      // La cara que no se ve no debe ser leible ni tabulable: si no, el
+      // tabulador cae en enlaces invisibles.
+      var frente = tarjeta.querySelector('.cara-frente');
+      var dorso = tarjeta.querySelector('.cara-dorso');
+      if (frente) {
+        frente.setAttribute('aria-hidden', String(volteada));
+        Array.prototype.slice.call(frente.querySelectorAll('a')).forEach(function (a) {
+          a.tabIndex = volteada ? -1 : 0;
+        });
+      }
+      if (dorso) {
+        dorso.setAttribute('aria-hidden', String(!volteada));
+        Array.prototype.slice.call(dorso.querySelectorAll('a')).forEach(function (a) {
+          a.tabIndex = volteada ? 0 : -1;
+        });
+      }
+      // Mientras esta volteada no se inclina: sumar la inclinacion al giro de
+      // 180 grados da un efecto mareado y ademas invierte los ejes.
+      if (volteada) { tarjeta.style.removeProperty('--rx'); tarjeta.style.removeProperty('--ry'); }
+    }
+
+    // Toda la tarjeta voltea, no solo el boton. El boton sigue existiendo porque
+    // es el control accesible: un <article> no se puede enfocar ni anunciar como
+    // "mostrar la letra chica", y el clic en la superficie es solo para el mouse.
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest) { return; }
+      var tarjeta = e.target.closest('.tarjeta.volteable');
+      if (!tarjeta) { return; }
+      // Un enlace adentro hace lo suyo: en el dorso esta "Ver en el banco".
+      if (e.target.closest('a')) { return; }
+      // Si estaba seleccionando texto, soltar no tiene que voltear la tarjeta.
+      var sel = window.getSelection();
+      if (sel && String(sel).trim().length > 2 && tarjeta.contains(sel.anchorNode)) { return; }
+      voltear(tarjeta);
+    });
+
+    // Escape cierra la tarjeta volteada que tenga el foco adentro.
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') { return; }
+      var abierta = document.querySelector('.tarjeta.volteada');
+      if (!abierta || !abierta.contains(document.activeElement)) { return; }
+      var boton = abierta.querySelector('.voltear');
+      voltear(abierta);
+      if (boton) { boton.focus(); }
+    });
+
+    // --- Inclinacion ---------------------------------------------------------
+    // Solo con mouse fino y sin "menos movimiento": en tactil no hay hover, y
+    // quien pidio quietud no quiere que la pagina se mueva bajo el cursor.
+    if (!conMouse.matches || quieto.matches) { return; }
+
+    var GRADOS = 5;  // suficiente para que se note, poco para que no maree
+
+    document.addEventListener('pointermove', function (e) {
+      if (e.pointerType !== 'mouse') { return; }
+      var tarjeta = e.target.closest ? e.target.closest('.tarjeta.promo') : null;
+      if (!tarjeta || tarjeta.classList.contains('volteada')) { return; }
+      var caja = tarjeta.getBoundingClientRect();
+      if (!caja.width || !caja.height) { return; }
+      // -0.5 a 0.5 desde el centro de la tarjeta.
+      var px = (e.clientX - caja.left) / caja.width - 0.5;
+      var py = (e.clientY - caja.top) / caja.height - 0.5;
+      // rotateX se invierte: mover el mouse hacia abajo tiene que hundir el
+      // borde de abajo, no levantarlo.
+      tarjeta.style.setProperty('--ry', (px * GRADOS).toFixed(2) + 'deg');
+      tarjeta.style.setProperty('--rx', (-py * GRADOS).toFixed(2) + 'deg');
+    }, { passive: true });
+
+    document.addEventListener('pointerout', function (e) {
+      var tarjeta = e.target.closest ? e.target.closest('.tarjeta.promo') : null;
+      if (!tarjeta || tarjeta.contains(e.relatedTarget)) { return; }
+      tarjeta.style.removeProperty('--rx');
+      tarjeta.style.removeProperty('--ry');
+    });
+  })();
+
+  // --- Carrusel de destacados ----------------------------------------------
+  // Infinito, a la deriva y arrastrable. Tres cosas que no se llevan bien entre
+  // si, y por eso viven en un unico requestAnimationFrame por carrusel:
+  //
+  //   INFINITO   se clonan las diapositivas una vez. Cuando el scroll pasa el
+  //              ancho de un ciclo se le resta ese ancho sin animacion: el salto
+  //              es invisible porque lo que queda a la vista es identico.
+  //   DERIVA     se avanza scrollLeft por milisegundo transcurrido, no por
+  //              frame, asi la velocidad no depende de los Hz del monitor.
+  //   ARRASTRE   pointer events. Mientras el mouse o el dedo estan abajo, manda
+  //              el usuario y la deriva se suspende.
+  //
+  // El scroll-snap y el scroll-behavior del CSS se APAGAN aca (clase `viva`):
+  // con snap la deriva pelea contra el iman, y con behavior:smooth cada
+  // asignacion de scrollLeft se anima y el bucle se vuelve un temblor.
+  // Sin JS no corre nada de esto y la pista se sigue arrastrando con snap.
+  Array.prototype.slice.call(document.querySelectorAll('.carrusel')).forEach(function (carrusel) {
+    var pista = carrusel.querySelector('.pista');
     if (!pista) { return; }
 
-    var diapositivas = Array.prototype.slice.call(pista.querySelectorAll('.diapositiva'));
-    var flechas = Array.prototype.slice.call(document.querySelectorAll('.flecha'));
-    var puntos = Array.prototype.slice.call(document.querySelectorAll('.punto-nav'));
-    if (diapositivas.length < 2) {
+    var originales = Array.prototype.slice.call(pista.querySelectorAll('.diapositiva'));
+    var flechas = Array.prototype.slice.call(carrusel.querySelectorAll('.flecha'));
+    var puntos = Array.prototype.slice.call(carrusel.querySelectorAll('.punto-nav'));
+
+    if (originales.length < 2) {
       flechas.forEach(function (f) { f.disabled = true; });
       return;
     }
 
-    function indiceActual() {
-      var ancho = diapositivas[0].offsetWidth + 14; // 14 = gap
-      return Math.round(pista.scrollLeft / ancho);
+    // --- Clones para el bucle ------------------------------------------------
+    // aria-hidden y tabindex -1: para un lector de pantalla y para el tabulador
+    // el carrusel sigue teniendo cinco destacadas, no diez.
+    originales.forEach(function (d) {
+      var clon = d.cloneNode(true);
+      clon.setAttribute('aria-hidden', 'true');
+      clon.classList.add('clon');
+      Array.prototype.slice.call(clon.querySelectorAll('a')).forEach(function (a) {
+        a.tabIndex = -1;
+      });
+      pista.appendChild(clon);
+    });
+    var clones = Array.prototype.slice.call(pista.querySelectorAll('.clon'));
+    pista.classList.add('viva');
+
+    var VELOCIDAD = 0.022;   // px por milisegundo (~22 px/s): lectura, no ruido
+    var UMBRAL_ARRASTRE = 4; // px que distinguen un clic de un arrastre
+
+    var pausado = false, arrastrando = false, hubo_arrastre = false;
+    var objetivo = null;     // destino de flechas y puntos; null = deriva libre
+    var inicioX = 0, inicioScroll = 0, ultimo = null;
+
+    function anchoCiclo() {
+      // Medido, no calculado: incluye el gap real entre diapositivas.
+      return clones[0].offsetLeft - originales[0].offsetLeft;
     }
 
-    function irA(i) {
-      var limite = Math.max(0, Math.min(i, diapositivas.length - 1));
-      var ancho = diapositivas[0].offsetWidth + 14;
-      pista.scrollTo({ left: limite * ancho, behavior: 'smooth' });
+    function anchoPaso() {
+      return originales[0].offsetWidth + 14; // 14 = gap del CSS
     }
 
-    function sincronizar() {
-      var i = indiceActual();
+    function normalizar() {
+      var ciclo = anchoCiclo();
+      if (ciclo <= 0) { return; }
+      if (pista.scrollLeft >= ciclo) {
+        pista.scrollLeft -= ciclo;
+        if (objetivo !== null) { objetivo -= ciclo; }
+      } else if (pista.scrollLeft < 0) {
+        pista.scrollLeft += ciclo;
+        if (objetivo !== null) { objetivo += ciclo; }
+      }
+    }
+
+    function sincronizarPuntos() {
+      var paso = anchoPaso();
+      if (paso <= 0) { return; }
+      var i = Math.round(pista.scrollLeft / paso) % originales.length;
+      if (i < 0) { i += originales.length; }
       puntos.forEach(function (p, j) {
         p.setAttribute('aria-selected', String(j === i));
       });
-      flechas.forEach(function (f) {
-        var dir = Number(f.dataset.dir);
-        f.disabled = dir < 0 ? i <= 0 : i >= diapositivas.length - 1;
-      });
     }
 
-    flechas.forEach(function (f) {
-      f.addEventListener('click', function () { irA(indiceActual() + Number(f.dataset.dir)); });
-    });
-    puntos.forEach(function (p) {
-      p.addEventListener('click', function () { irA(Number(p.dataset.indice)); });
-    });
-    pista.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') { e.preventDefault(); irA(indiceActual() + 1); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); irA(indiceActual() - 1); }
+    function marco(ahora) {
+      if (ultimo === null) { ultimo = ahora; }
+      var dt = Math.min(ahora - ultimo, 50); // una pestana en segundo plano
+      ultimo = ahora;                        // devuelve saltos enormes
+
+      // offsetParent nulo = la zona esta oculta: no tiene ancho y medir da 0.
+      if (pista.offsetParent !== null && !arrastrando) {
+        if (objetivo !== null) {
+          var resta = objetivo - pista.scrollLeft;
+          if (Math.abs(resta) < 1) {
+            pista.scrollLeft = objetivo;
+            objetivo = null;
+          } else {
+            pista.scrollLeft += resta * 0.18; // easing simple
+          }
+          normalizar();
+        } else if (!pausado) {
+          pista.scrollLeft += VELOCIDAD * dt;
+          normalizar();
+        }
+        sincronizarPuntos();
+      }
+      requestAnimationFrame(marco);
+    }
+
+    // --- Pausa ---------------------------------------------------------------
+    // Con el mouse encima o con el foco adentro: si alguien esta leyendo una
+    // destacada o tabulando sus enlaces, moverla es hostil.
+    carrusel.addEventListener('mouseenter', function () { pausado = true; });
+    carrusel.addEventListener('mouseleave', function () { pausado = false; });
+    carrusel.addEventListener('focusin', function () { pausado = true; });
+    carrusel.addEventListener('focusout', function () { pausado = false; });
+
+    // --- Arrastre ------------------------------------------------------------
+    pista.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) { return; }
+      arrastrando = true;
+      hubo_arrastre = false;
+      inicioX = e.clientX;
+      inicioScroll = pista.scrollLeft;
+      objetivo = null;
+      pista.classList.add('arrastrando');
+      try { pista.setPointerCapture(e.pointerId); } catch (err) { /* da igual */ }
     });
 
-    var pendiente;
-    pista.addEventListener('scroll', function () {
-      clearTimeout(pendiente);
-      pendiente = setTimeout(sincronizar, 90);
+    pista.addEventListener('pointermove', function (e) {
+      if (!arrastrando) { return; }
+      var corrido = e.clientX - inicioX;
+      if (Math.abs(corrido) > UMBRAL_ARRASTRE) { hubo_arrastre = true; }
+      pista.scrollLeft = inicioScroll - corrido;
+      normalizar();
     });
-    window.addEventListener('resize', sincronizar);
-    sincronizar();
-  })();
+
+    function soltar(e) {
+      if (!arrastrando) { return; }
+      arrastrando = false;
+      pista.classList.remove('arrastrando');
+      try { pista.releasePointerCapture(e.pointerId); } catch (err) { /* da igual */ }
+    }
+    pista.addEventListener('pointerup', soltar);
+    pista.addEventListener('pointercancel', soltar);
+
+    // Sin esto, arrastrar y soltar encima de un titulo abre la nota.
+    pista.addEventListener('click', function (e) {
+      if (hubo_arrastre) { e.preventDefault(); e.stopPropagation(); }
+      hubo_arrastre = false;
+    }, true);
+
+    // Chrome deja "agarrar" una imagen y arrastrarla fuera; rompe el gesto.
+    pista.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+    // --- Flechas, puntos y teclado -------------------------------------------
+    function irRelativo(pasos) {
+      var base = objetivo === null ? pista.scrollLeft : objetivo;
+      objetivo = base + pasos * anchoPaso();
+    }
+    flechas.forEach(function (f) {
+      f.disabled = false; // con bucle infinito no hay extremos
+      f.addEventListener('click', function () { irRelativo(Number(f.dataset.dir)); });
+    });
+    puntos.forEach(function (p) {
+      p.addEventListener('click', function () {
+        var destino = Number(p.dataset.indice) * anchoPaso();
+        var ciclo = anchoCiclo();
+        // Se va al equivalente mas cercano, no al del primer ciclo: si no, al
+        // tocar el punto 1 estando sobre los clones, el carrusel retrocede entero.
+        while (destino - pista.scrollLeft > ciclo / 2) { destino -= ciclo; }
+        while (pista.scrollLeft - destino > ciclo / 2) { destino += ciclo; }
+        objetivo = destino;
+      });
+    });
+    pista.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); irRelativo(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); irRelativo(-1); }
+    });
+
+    window.addEventListener('resize', function () { normalizar(); sincronizarPuntos(); });
+
+    // Quien pidio menos movimiento no recibe un carrusel que se mueve solo. El
+    // arrastre y las flechas siguen andando.
+    var quieto = window.matchMedia('(prefers-reduced-motion: reduce)');
+    pausado = quieto.matches;
+    if (quieto.addEventListener) {
+      quieto.addEventListener('change', function (ev) { pausado = ev.matches; });
+    }
+
+    sincronizarPuntos();
+    requestAnimationFrame(marco);
+  });
 
   (function () {
     var soloNuevas = document.getElementById('solo-nuevas');
@@ -578,23 +1441,72 @@
         var vivos = fam.querySelectorAll('.tema:not([hidden])').length;
         fam.hidden = vivos === 0;
       });
+      // La zona NO se oculta aunque quede sin temas: si desapareciera, la
+      // pestana activa mostraria una pagina en blanco sin explicar por que.
+      document.querySelectorAll('.zona').forEach(function (z) {
+        var aviso = z.querySelector('.filtrada');
+        var vacia = z.querySelectorAll('.familia:not([hidden])').length === 0;
+        if (!aviso && vacia && nuevas) {
+          aviso = document.createElement('p');
+          aviso.className = 'vacio-zona filtrada';
+          aviso.textContent = 'Nada nuevo hoy en esta zona. Apagá "Solo nuevas" para ver todo.';
+          z.appendChild(aviso);
+        }
+        if (aviso) { aviso.hidden = !(vacia && nuevas); }
+      });
+    }
+
+    // Los tres botones actuan sobre la ZONA QUE SE ESTA VIENDO. Antes abrir y
+    // cerrar tocaban los ocho temas de las tres zonas: trabajo invisible, y el
+    // estado del boton no podia significar nada porque mezclaba zonas.
+    function temasALaVista() {
+      return temas.filter(function (t) {
+        return !t.hidden && t.offsetParent !== null;
+      });
+    }
+
+    // "Abrir todo" y "Cerrar todo" no mostraban ningun cambio al tocarlos: eran
+    // los unicos controles sin estado visible. Ahora reflejan como esta la zona,
+    // y se actualizan tambien cuando se abre o cierra un acordeon a mano.
+    function reflejarControles() {
+      var vista = temasALaVista();
+      var hay = vista.length > 0;
+      abrirTodo.setAttribute('aria-pressed',
+        String(hay && vista.every(function (t) { return t.open; })));
+      cerrarTodo.setAttribute('aria-pressed',
+        String(hay && vista.every(function (t) { return !t.open; })));
     }
 
     soloNuevas.addEventListener('click', function () {
       var v = this.getAttribute('aria-pressed') !== 'true';
       this.setAttribute('aria-pressed', String(v));
       guardar('radar:solo-nuevas', String(v));
-      if (v) { temas.forEach(function (t) { t.open = true; }); }
+      if (v) { temasALaVista().forEach(function (t) { t.open = true; }); }
       aplicar();
+      reflejarControles();
     });
     abrirTodo.addEventListener('click', function () {
-      temas.forEach(function (t) { t.open = true; });
+      temasALaVista().forEach(function (t) { t.open = true; });
+      reflejarControles();
     });
     cerrarTodo.addEventListener('click', function () {
-      temas.forEach(function (t) { t.open = false; });
+      temasALaVista().forEach(function (t) { t.open = false; });
+      reflejarControles();
+    });
+
+    // Abrir un acordeon a mano tiene que apagar "Cerrar todo", y viceversa.
+    temas.forEach(function (t) {
+      t.addEventListener('toggle', reflejarControles);
+    });
+    // Al cambiar de pestana la zona a la vista es otra, con otro estado.
+    document.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('.pestana')) {
+        setTimeout(reflejarControles, 0);
+      }
     });
 
     aplicar();
+    reflejarControles();
   })();
 </script>
 </body>

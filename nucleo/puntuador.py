@@ -70,14 +70,31 @@ def puntuar(oferta: Oferta, tema: dict) -> Oferta:
     motivos: list[str] = []
     score = 5.0
 
+    # --- Vigencia declarada. Cuando la fuente dice hasta cuando vale (la API de
+    # un banco lo dice; una nota de prensa no), esa fecha manda y el filtro de
+    # antiguedad no corre: una promo que arranco hace nueve meses y vence manana
+    # sigue sirviendo hoy, y `max_antiguedad_dias` la mataria sin motivo.
+    restan = oferta.dias_para_vencer
+    if restan is not None:
+        if restan < 0:
+            oferta.score = DESCARTADA
+            oferta.motivos = [f"vencida hace {-restan:.0f}d"]
+            return oferta
+        motivos.append("vence en %.0fd" % restan if restan >= 1 else "vence hoy")
+        # Lo que esta por vencer sube: es lo que hay que aprovechar ya.
+        if restan <= 3:
+            score += 1.0
+        elif restan <= 10:
+            score += 0.5
+
     # --- Correccion 2: recencia. Google News mezcla 2018 con 2026.
     limite = tema.get("max_antiguedad_dias")
     edad = oferta.antiguedad_dias
-    if limite and edad is not None and edad > limite:
+    if restan is None and limite and edad is not None and edad > limite:
         oferta.score = DESCARTADA
         oferta.motivos = [f"viejo ({edad:.0f}d > {limite}d)"]
         return oferta
-    if edad is not None:
+    if restan is None and edad is not None:
         if edad <= 7:
             score += 1.5
             motivos.append("reciente (<7d)")
@@ -124,6 +141,15 @@ def puntuar(oferta: Oferta, tema: dict) -> Oferta:
         score += min(1.5, 0.5 * len(senales))
         motivos.append(f"senal: {', '.join(senales[:3])}")
 
+    # Senales propias del tema: suman sin ser obligatorias. Para cuando interesa
+    # todo un rubro pero algo en particular va primero (el banco donde tenes la
+    # cuenta entre todas las promos bancarias). Si fuera `requerir`, el tema se
+    # quedaria sin resultados los dias que ese banco no publica nada.
+    propias = _contiene(cuerpo, tema.get("senales") or [])
+    if propias:
+        score += min(2.0, 1.0 * len(propias))
+        motivos.append(f"clave: {', '.join(propias[:3])}")
+
     oferta.score = max(0.0, min(10.0, score))
     oferta.motivos = motivos
     return oferta
@@ -136,6 +162,20 @@ def filtrar_y_ordenar(ofertas: list[Oferta], tema: dict) -> list[Oferta]:
     """
     minimo = tema.get("score_minimo", 6)
     tope = tema.get("max_por_dominio", 2)
+    # El filtro de casi-repetidas asume titulares de PRENSA, donde dos textos casi
+    # iguales del mismo medio son la misma nota. En un CATALOGO es al reves: los
+    # titulos son formularios ("X 20% y 6 cuotas") y lo unico que los distingue es
+    # el nombre del comercio, que suele ser corto y lo pierde el stemmer.
+    # Medido: colapsaba "Top Sport 20% y 6 cuotas" con "Sport 78 6 cuotas".
+    agrupar = tema.get("agrupar_casi_repetidas", True)
+    # Distinto de `_es_casi_repetida`, que solo compara notas del MISMO medio.
+    # Aca se descarta el mismo titulo EXACTO venga de donde venga: las agendas de
+    # fin de semana se sindican y la nota de Clarin aparecia tres veces, con
+    # fmalpina.com.ar y todobasquet.com.ar republicandola palabra por palabra.
+    # Sigue sin tocarse el caso de dos medios cubriendo el mismo evento con
+    # titulos distintos, que son dos fuentes utiles.
+    unico_titulo = tema.get("unico_por_titulo", False)
+    titulos_vistos: set[str] = set()
 
     vivas = [o for o in ofertas if o.score >= minimo]
     # Mayor score primero; a igual score, lo mas nuevo. Sin fecha va al final.
@@ -146,8 +186,13 @@ def filtrar_y_ordenar(ofertas: list[Oferta], tema: dict) -> list[Oferta]:
     for o in vivas:
         if vistos[o.fuente] >= tope:
             continue
-        if _es_casi_repetida(o, resultado):
+        if agrupar and _es_casi_repetida(o, resultado):
             continue
+        if unico_titulo:
+            clave = normalizar(titulo_limpio(o.titulo))
+            if clave in titulos_vistos:
+                continue
+            titulos_vistos.add(clave)
         vistos[o.fuente] += 1
         resultado.append(o)
     return resultado

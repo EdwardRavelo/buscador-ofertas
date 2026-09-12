@@ -14,10 +14,16 @@ from nucleo.almacen import marcar_notificadas, sin_notificar
 RUTA_ENV = Path(__file__).resolve().parent.parent / "config" / ".env"
 API = "https://api.telegram.org/bot{token}/sendMessage"
 
+# Deuda conocida: esto duplica `etiqueta` de config/temas.yaml. Un tema nuevo que
+# no figure aca sale con su clave cruda. Telegram esta apagado, asi que no se
+# migro todavia; si se enciende, leer las etiquetas del YAML como hace el dashboard.
 ETIQUETAS = {
     "talleres-lectura-caba": "Talleres y lectura en CABA",
+    "festivales-caba": "Festivales",
+    "teatro-gratis-caba": "Teatro gratis",
     "cursos-ia": "Cursos de IA",
     "ingles": "Ingles",
+    "promos-bancarias": "Promos bancarias",
 }
 
 

@@ -1,19 +1,21 @@
 # Buscador de ofertas, cursos y talleres
 
-Vigila talleres, cursos y ofertas formativas en Buenos Aires y publica los hallazgos
-en un sitio estático.
+Vigila talleres, cursos, festivales, teatro gratis y promociones bancarias, y publica
+los hallazgos en un sitio estático. La página tiene dos pestañas: **Agenda** (cultura y
+formación) y **Ofertas** (descuentos).
 
 **Sitio:** https://edwardravelo.github.io/buscador-ofertas/
 
 ## Cómo funciona
 
-1. `fuentes/` consulta Google News RSS y feeds propios declarados en `config/feeds.yaml`
+1. `fuentes/` consulta Google News RSS, feeds propios (`config/feeds.yaml`) y la API
+   pública de beneficios de BBVA, que además declara hasta cuándo vale cada promo
 2. `nucleo/puntuador.py` filtra por zona, actividad, recencia y tope por dominio
 3. `nucleo/almacen.py` deduplica en SQLite (hash de título + medio)
 4. `nucleo/sheets.py` sincroniza a Google Sheets, una pestaña por tema
 5. `salidas/dashboard.py` genera el `index.html` que sirve GitHub Pages
 
-Agregar un tema o una fuente es editar YAML. No requiere tocar código.
+Agregar un tema, una zona o una fuente es editar YAML. No requiere tocar código.
 
 ## Buscar ahora
 

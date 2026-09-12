@@ -1,6 +1,7 @@
 """Persistencia local en SQLite. Es la fuente de verdad del dedup."""
 from __future__ import annotations
 
+import json
 import sqlite3
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -23,6 +24,8 @@ CREATE TABLE IF NOT EXISTS ofertas (
     score         REAL NOT NULL,
     motivos       TEXT,
     fecha_pub     TEXT,
+    vence         TEXT,
+    extra         TEXT,
     primera_vez   TEXT NOT NULL,
     ultima_vez    TEXT NOT NULL,
     notificado    INTEGER NOT NULL DEFAULT 0,
@@ -42,11 +45,29 @@ CREATE TABLE IF NOT EXISTS vistos (
 """
 
 
+# Columnas agregadas despues de la primera version. CREATE TABLE IF NOT EXISTS no
+# las agrega a una base que ya existe, y ofertas.db se versiona en git: hay bases
+# vivas con el esquema viejo.
+_COLUMNAS_NUEVAS = {
+    "vence": "TEXT",
+    "extra": "TEXT",  # JSON con los datos estructurados de la fuente
+}
+
+
+def _migrar(con: sqlite3.Connection) -> None:
+    tiene = {f["name"] for f in con.execute("PRAGMA table_info(ofertas)").fetchall()}
+    for nombre, tipo in _COLUMNAS_NUEVAS.items():
+        if nombre not in tiene:
+            con.execute(f"ALTER TABLE ofertas ADD COLUMN {nombre} {tipo}")
+    con.commit()
+
+
 def conectar(ruta: Path = RUTA_DB) -> sqlite3.Connection:
     ruta.parent.mkdir(parents=True, exist_ok=True)
     con = sqlite3.connect(ruta)
     con.row_factory = sqlite3.Row
     con.executescript(_ESQUEMA)
+    _migrar(con)
     return con
 
 
@@ -58,8 +79,16 @@ def guardar(con: sqlite3.Connection, ofertas: list[Oferta]) -> tuple[int, int]:
     for o in ofertas:
         fila = con.execute("SELECT id FROM ofertas WHERE id = ?", (o.id,)).fetchone()
         if fila:
-            # Ya la vimos: solo actualizamos la marca de tiempo. No se re-notifica.
-            con.execute("UPDATE ofertas SET ultima_vez = ? WHERE id = ?", (ahora, o.id))
+            # Ya la vimos: se refresca la marca de tiempo y la vigencia (el banco
+            # extiende promos: si `vence` quedara congelado, una promo prorrogada
+            # desapareceria de la pagina el dia que decia la version vieja).
+            # `extra` tambien se refresca: el banco cambia topes y tarjetas sin
+            # cambiar el titulo de la promo.
+            con.execute(
+                "UPDATE ofertas SET ultima_vez = ?, vence = ?, extra = ? WHERE id = ?",
+                (ahora, o.vence.isoformat() if o.vence else None,
+                 json.dumps(o.extra, ensure_ascii=False) if o.extra else None, o.id),
+            )
             repetidas += 1
             continue
         if con.execute("SELECT 1 FROM vistos WHERE id = ?", (o.id,)).fetchone():
@@ -68,12 +97,15 @@ def guardar(con: sqlite3.Connection, ofertas: list[Oferta]) -> tuple[int, int]:
             continue
         con.execute(
             """INSERT INTO ofertas (id, titulo, url, url_final, fuente, tema, origen,
-                                    snippet, precio, score, motivos, fecha_pub,
-                                    primera_vez, ultima_vez)
-               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                                    snippet, precio, score, motivos, fecha_pub, vence,
+                                    extra, primera_vez, ultima_vez)
+               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
             (o.id, o.titulo, o.url, o.url_final, o.fuente, o.tema, o.origen,
              o.snippet, o.precio, o.score, " | ".join(o.motivos),
-             o.fecha_pub.isoformat() if o.fecha_pub else None, ahora, ahora),
+             o.fecha_pub.isoformat() if o.fecha_pub else None,
+             o.vence.isoformat() if o.vence else None,
+             json.dumps(o.extra, ensure_ascii=False) if o.extra else None,
+             ahora, ahora),
         )
         nuevas += 1
 

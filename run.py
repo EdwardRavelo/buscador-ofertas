@@ -16,8 +16,9 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from fuentes import REGISTRO
+from fuentes import POR_DEFECTO, REGISTRO
 from nucleo import almacen
+from nucleo.calendario import caducidad, es_dia_de_ingesta
 from nucleo.puntuador import filtrar_y_ordenar, puntuar
 from nucleo.urls import es_google_news, resolver_google_news
 
@@ -43,8 +44,12 @@ def cmd_buscar(args) -> None:
     with httpx.Client(headers=CABECERAS, follow_redirects=True) as cliente:
         for tema in temas:
             print(f"\n=== {tema['nombre']} ===")
+            if not es_dia_de_ingesta(tema):
+                # Agenda del finde publicada un lunes = el finde que ya paso.
+                print("  (hoy no corresponde buscar para este tema)")
+                continue
             crudas = []
-            for nombre_fuente in tema.get("fuentes", list(REGISTRO)):
+            for nombre_fuente in tema.get("fuentes", POR_DEFECTO):
                 buscar = REGISTRO.get(nombre_fuente)
                 if not buscar:
                     print(f"    ! fuente desconocida: {nombre_fuente}")
@@ -55,6 +60,15 @@ def cmd_buscar(args) -> None:
             unicas = {o.id: o for o in crudas}
             elegidas = filtrar_y_ordenar([puntuar(o, tema) for o in unicas.values()], tema)
             print(f"  {len(crudas)} crudas -> {len(unicas)} unicas -> {len(elegidas)} pasan el filtro")
+
+            # Caducidad por calendario: la agenda del finde vence el LUNES, no a
+            # los N dias de publicada. Se recalcula en cada corrida, asi una nota
+            # que vuelve a aparecer el sabado mueve su vencimiento al lunes que
+            # corresponde en vez de quedar clavada en el de la semana pasada.
+            vence = caducidad(tema)
+            if vence is not None:
+                for o in elegidas:
+                    o.vence = vence
 
             if args.resolver:
                 for o in elegidas:

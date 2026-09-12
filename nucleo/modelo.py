@@ -33,8 +33,17 @@ class Oferta:
     origen: str = "google_news"  # plugin que la trajo
     snippet: str = ""
     fecha_pub: datetime | None = None
+    # Cuando la fuente sabe hasta cuando vale la oferta (la API del banco lo dice;
+    # una nota de prensa no). Si esta, manda sobre todo reloj rodante: una promo
+    # que arranco hace nueve meses y vence manana sigue sirviendo hoy.
+    vence: datetime | None = None
     url_final: str | None = None
     precio: float | None = None
+    # Datos estructurados propios de la fuente, tal cual los declara: tope de
+    # reintegro, cuotas, logo del comercio. Es un dict libre a proposito: no vale
+    # la pena una columna por campo de una sola fuente, y la plantilla usa solo
+    # las claves que conoce. Se guarda como JSON en la columna `extra`.
+    extra: dict = field(default_factory=dict)
     score: float = 0.0
     motivos: list[str] = field(default_factory=list)
 
@@ -52,6 +61,13 @@ class Oferta:
         """
         base = f"{self.tema}|{normalizar(titulo_limpio(self.titulo))}|{self.fuente}"
         return hashlib.sha1(base.encode("utf-8")).hexdigest()
+
+    @property
+    def dias_para_vencer(self) -> float | None:
+        """Dias hasta que la oferta deje de valer. Negativo = ya vencio."""
+        if self.vence is None:
+            return None
+        return (self.vence - datetime.now(self.vence.tzinfo)).total_seconds() / 86400
 
     @property
     def antiguedad_dias(self) -> float | None:

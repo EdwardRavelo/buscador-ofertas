@@ -1,9 +1,27 @@
 # Un tema = una entrada. Agregar un tema nuevo NO requiere tocar codigo.
 #
+# Jerarquia de la pagina: ZONA > familia > tema.
+#   zona     es una pestana. Separa dos cosas que se leen distinto: la agenda se
+#            hojea ("que hay para hacer"), la oferta se consulta ("que descuento
+#            hay hoy"). Mezcladas en una sola lista, la oferta bancaria de hoy
+#            queda enterrada entre talleres de hace tres semanas.
+#   familia  agrupa temas afines dentro de una zona.
+#   tema     una entrada de `temas:`, un acordeon en la pagina.
+#
 # Campos:
+#   zona                 nombre de la zona. Debe coincidir con una de `zonas:`.
+#                        Si falta o no existe, el tema cae en la primera zona.
 #   familia              agrupa temas afines en el dashboard. Sin esto la pagina
 #                        mezcla un curso de IA con una obra de teatro en una sola
 #                        lista indistinta.
+#   ingesta: finde       solo busca de jueves a domingo. Una agenda del finde
+#                        publicada un lunes habla del finde que YA PASO.
+#   caduca: finde        lo que traiga vence el LUNES 00:00, no a los N dias de
+#                        publicado. Es el tercer reloj del proyecto: por
+#                        calendario, no rodante. Ver nucleo/calendario.py.
+#   senales              terminos propios del tema que SUMAN puntaje (hasta +2.0)
+#                        sin ser obligatorios. Para "me interesa todo el rubro,
+#                        pero esto en particular va primero".
 #   etiqueta / corto     como se muestra el tema en el sitio. Van en el YAML y no
 #                        en el codigo: agregar un tema tiene que seguir siendo
 #                        editar este archivo y nada mas.
@@ -22,6 +40,35 @@
 #                        4 meses probablemente sigue abierto.
 #   max_por_dominio      tope por medio, contra content farms
 #   score_minimo         umbral 0-10 para entrar al informe
+
+# Las zonas son las pestanas de arriba, en este orden.
+#   acento  identidad visual de la zona. Solo hay dos definidas en la plantilla:
+#           `teal` y `ambar`. Una zona nueva con otro acento SI requiere tocar el
+#           CSS; es el unico pedazo de esto que no se resuelve en YAML.
+zonas:
+  - nombre: Este finde
+    eyebrow: "Viernes a domingo en la Ciudad"
+    acento: violeta
+    tarjeta: agenda
+    vacia: "Todavia no hay agenda del finde. Los medios la publican entre jueves y viernes; el lunes esto se vacia solo."
+
+  - nombre: Cine
+    eyebrow: "Ciclos y muestras en la Ciudad"
+    acento: rosa
+    tarjeta: agenda
+    vacia: "Todavia no hay ciclos nuevos. Se revisa en cada corrida."
+
+  - nombre: Agenda
+    eyebrow: "Cultura y formacion"
+    acento: teal
+    tarjeta: agenda
+    vacia: "Todavia nada en la agenda. Se revisa en cada corrida."
+
+  - nombre: Ofertas
+    eyebrow: "Descuentos y promociones"
+    acento: ambar
+    tarjeta: oferta
+    vacia: "Todavia no hay promos vigentes. Duran pocos dias: se renueva a diario."
 
 # Listas reutilizadas, para no repetirlas en cada tema.
 _zona_caba: &zona_caba
@@ -59,8 +106,136 @@ _fuera_de_zona: &fuera_de_zona
   - "Madrid"
 
 temas:
+  # --------------------------------------------------------------------- Cine
+  - nombre: cine-caba
+    zona: Cine
+    familia: Ciclos y muestras
+    etiqueta: "Ciclos de cine"
+    corto: "Cine"
+    tipo: [evento]
+    gl: AR
+    hl: es-419
+    # Sondeado el 2026-09-12. Hay senal real de CABA: la retrospectiva de Frank
+    # Borzage en la Sala Lugones, el Malba, OFFNI Cine Fest en la Casa del
+    # Bicentenario, el festival de la UBA, el Museo del Cine. El ruido dominante
+    # NO es tematico sino geografico: el FICPBA de La Plata aparecia en casi
+    # todas las consultas, mas Cordoba, San Luis, Villa Gesell y Lujan.
+    keywords:
+      - "ciclo de cine Buenos Aires"
+      - "ciclo de cine gratuito CABA funciones"
+      - "Sala Lugones ciclo retrospectiva"
+      - "MALBA cine ciclo funciones Buenos Aires"
+      - "cine club Buenos Aires ciclo proyecciones"
+      - "muestra de cine Buenos Aires entrada gratuita"
+    requerir:
+      # Salas y espacios porteños que no siempre nombran la ciudad.
+      - [*zona_caba, "Sala Lugones", "Malba", "Museo del Cine", "Gaumont",
+         "Casa del Bicentenario", "Cine Cosmos", "Lorca", "Belgrano Multiplex",
+         "Cineclub", "Cine Club"]
+      # Que sea CICLO y no la cartelera comercial de la semana. Es el pedido:
+      # "todos los ciclos", no todos los estrenos.
+      - ["ciclo", "ciclos", "retrospectiva", "retrospectivas", "muestra",
+         "muestras", "festival", "cineclub", "cine club", "programacion",
+         "proyeccion", "proyecciones", "funciones", "temporada"]
+      # Y que sea de cine.
+      - ["cine", "pelicula", "peliculas", "film", "films", "filmoteca",
+         "cortometraje", "cortometrajes", "largometraje", "documental"]
+    excluir:
+      - *fuera_de_zona
+      # El festival de la PROVINCIA copaba el sondeo.
+      - "FICPBA"
+      - "FICBA"
+      - "bonaerense"
+      - "San Luis"
+      - "Villa Gesell"
+      - "Lujan"
+      - "Mar del Plata"
+      - "Museo MAR"
+      # Cartelera comercial y taquilla: no son ciclos.
+      - "taquilla"
+      - "estreno mundial"
+      - "box office"
+      - "Netflix"
+      - "streaming"
+      - "plataforma"
+      # Politica audiovisual, no un ciclo.
+      - "ley audiovisual"
+      - "fomento al cine"
+    excluir_dominios: [".es", ".mx", ".cl", ".co", ".pe", ".uy", ".py"]
+    max_antiguedad_dias: 30
+    # Un ciclo dura semanas: vive mas que un festival suelto.
+    vida_util_dias: 45
+    # Mas alto que el 2 habitual: el tope existe contra content farms, pero aca
+    # los medios que mas publican son especializados en cine (escribiendocine,
+    # otroscines). Con 2 se perdia la retrospectiva de Frank Borzage en la Sala
+    # Lugones, que era el mejor item del sondeo.
+    max_por_dominio: 4
+    score_minimo: 6.5
+    # Las agendas de cine tambien se sindican entre medios chicos.
+    unico_por_titulo: true
+
+  # --------------------------------------------------------------- Este finde
+  - nombre: finde-caba
+    zona: Este finde
+    familia: Agenda del finde
+    etiqueta: "Musica, teatro y arte"
+    corto: "Finde"
+    tipo: [evento]
+    gl: AR
+    hl: es-419
+    # Sondeado el 2026-09-12 (sabado): los medios publican la agenda del finde
+    # entre jueves y viernes. Clarin, iProfesional, Pagina 12, argentina.gob.ar y
+    # bairessecreta tenian nota fresca. El ruido es provincial, no tematico.
+    keywords:
+      - "que hacer este fin de semana Buenos Aires"
+      - "agenda cultural fin de semana Buenos Aires"
+      - "planes fin de semana CABA recitales teatro"
+      - "shows y recitales este fin de semana Buenos Aires"
+      - "agenda porteña fin de semana muestras arte"
+    requerir:
+      - *zona_caba
+      # Que sea del fin de semana y no de cualquier dia.
+      - ["fin de semana", "finde", "sabado", "domingo", "viernes", "este finde"]
+      # Y que sea una expresion artistica, no cualquier plan.
+      - ["cultural", "cultura", "agenda", "planes", "musica", "recital",
+         "recitales", "show", "shows", "concierto", "teatro", "obra", "arte",
+         "muestra", "muestras", "exposicion", "festival", "feria", "danza",
+         "cine", "milonga", "tango", "peña"]
+    excluir:
+      - *fuera_de_zona
+      # Localidades que aparecieron en el sondeo con agenda propia.
+      - "Rauch"
+      - "Haedo"
+      - "Castelar"
+      - "zona norte"
+      - "bonaerense"
+      - "bonaerenses"
+      - "Escapada"
+      - "escapadas"
+      # "en la Provincia" sin nombrar el partido: el anchor _fuera_de_zona pide
+      # "Provincia de Buenos Aires" completo y esto se le escapaba.
+      - "en la Provincia"
+      - "la Provincia"
+      # No son expresiones artisticas aunque la nota diga "fin de semana".
+      - "cortes y desvios"
+      - "autopista"
+      - "brunch"
+      - "pronostico"
+      - "clima"
+    excluir_dominios: [".py", ".uy", ".mx", ".cl", ".co", ".pe", ".es"]
+    # Solo lo muy fresco: una agenda de hace una semana es la del finde pasado.
+    max_antiguedad_dias: 4
+    # Sin vida_util_dias: `caduca: finde` pone la fecha exacta y esa manda.
+    ingesta: finde
+    caduca: finde
+    # Las agendas del finde se sindican palabra por palabra entre medios.
+    unico_por_titulo: true
+    max_por_dominio: 2
+    score_minimo: 6.5
+
   # ---------------------------------------------------------------- Cultura
   - nombre: talleres-lectura-caba
+    zona: Agenda
     familia: Cultura porteña
     etiqueta: "Talleres y lectura"
     corto: "Talleres"
@@ -98,6 +273,7 @@ temas:
     score_minimo: 6
 
   - nombre: festivales-caba
+    zona: Agenda
     familia: Cultura porteña
     etiqueta: "Festivales"
     corto: "Festivales"
@@ -116,12 +292,15 @@ temas:
     excluir: *fuera_de_zona
     # Un festival que ya pasó no sirve: ventana corta a proposito.
     max_antiguedad_dias: 21
-    # El festival ya paso: mostrarlo despues hace perder tiempo.
-    vida_util_dias: 21
+    # El festival ya paso: mostrarlo despues hace perder tiempo. Mas corta que la
+    # ventana de ingesta a proposito: entra el anuncio previo, pero a los 10 dias
+    # de publicado lo mas probable es que el festival ya haya sucedido.
+    vida_util_dias: 10
     max_por_dominio: 2
     score_minimo: 7.5
 
   - nombre: teatro-gratis-caba
+    zona: Agenda
     familia: Cultura porteña
     etiqueta: "Teatro gratis"
     corto: "Teatro"
@@ -152,6 +331,7 @@ temas:
 
   # -------------------------------------------------------------- Formación
   - nombre: cursos-ia
+    zona: Agenda
     familia: Formación
     etiqueta: "Inteligencia artificial"
     corto: "IA"
@@ -189,6 +369,7 @@ temas:
     score_minimo: 6
 
   - nombre: ingles
+    zona: Agenda
     familia: Formación
     etiqueta: "Inglés"
     corto: "Inglés"
@@ -227,3 +408,68 @@ temas:
     vida_util_dias: 90
     max_por_dominio: 2
     score_minimo: 6
+
+  # ---------------------------------------------------------------- Ofertas
+  - nombre: bbva
+    zona: Ofertas
+    familia: Bancos y tarjetas
+    etiqueta: "BBVA / Banco Frances"
+    corto: "BBVA"
+    tipo: [descuento]
+    # Sin `keywords`: esta fuente no busca, lee el catalogo entero del banco.
+    # `fuentes` limita el tema a la API de BBVA. Sin esta linea correrian TODAS
+    # las fuentes registradas y entrarian notas de prensa por la ventana.
+    fuentes: [bbva]
+    # Solo la primera pagina: las 20 que el banco destaca hoy. El catalogo entero
+    # son 926 promos y volcarlas en un acordeon no es una pagina, es un volcadero.
+    # Los temas de compra puntual SI leen todo, porque filtran por comercio.
+    bbva_paginas: 1
+    # Sin `requerir`: la fuente ya es el banco. Pedir "BBVA" en el titulo tiraria
+    # "Rapanui 20%", que es una promo de BBVA aunque no lo nombre.
+    senales:
+      # Lo que el usuario mas busca dentro del rubro.
+      - "cuotas sin interes"
+      - "cuotas"
+      - "2x1"
+    # No se declaran ventanas de tiempo A PROPOSITO. La fuente trae `fechaHasta`
+    # real, y cuando hay vigencia declarada el puntuador ignora la antiguedad y
+    # el dashboard ignora vida_util_dias. Poner numeros aca solo confundiria.
+    max_por_dominio: 99
+    score_minimo: 5
+
+  # --- Compras puntuales: se agregan y se borran segun lo que haga falta -------
+  - nombre: pelota-futbol
+    zona: Ofertas
+    familia: Lo que estoy buscando
+    etiqueta: "Pelota de futbol"
+    corto: "Pelota"
+    tipo: [descuento]
+    fuentes: [bbva]
+    # OJO con que es esto: NO busca el precio de una pelota. Busca promos del
+    # banco EN COMERCIOS donde se compra una. El banco publica "Nike 6 cuotas",
+    # no "pelota 20% off", asi que el filtro va por comercio y rubro.
+    # Para el precio del producto existe /buscar-oferta, que lee MercadoLibre
+    # desde el Chrome del usuario (al servidor le devuelve 403).
+    # Lee el catalogo COMPLETO (47 paginas): las 22 promos de comercios deportivos
+    # estan todas fuera de la primera. Con `bbva_paginas: 1` aparecia solo Nike.
+    requerir:
+      # Donde se compra una pelota. Verificado contra las 926 promos vigentes.
+      - ["Nike", "Adidas", "Puma", "Dexter", "Stock Center", "Open Sports",
+         "Moov", "Topper", "Umbro", "Reebok", "New Balance", "Under Armour",
+         "Asics", "Sport", "Sports", "Deporte", "Deportes", "Deportivo",
+         "Futbol", "Pelota", "Run &", "Running", "Bike",
+         # Va pegado en "A'S Mundodeporte" y el puntuador ancla el inicio de
+         # palabra, asi que "Deporte" solo no lo agarra.
+         "Mundodeporte"]
+      # Y que efectivamente tenga cuotas o descuento, que es lo que se pidio.
+      - ["cuotas", "cuotas sin interes", "descuento", "descuentos", "reintegro",
+         "off", "2x1", "ahorro"]
+    senales:
+      - "cuotas sin interes"
+    # Un catalogo no tiene notas repetidas: cada comercio es una promo distinta
+    # aunque el titulo sea calcado. Sin esto se perdian Top Sport, Sport 78 y
+    # Under Armour por parecerse entre si.
+    agrupar_casi_repetidas: false
+    # Sin ventanas de tiempo: la fuente declara `fechaHasta` y esa manda.
+    max_por_dominio: 99
+    score_minimo: 5
