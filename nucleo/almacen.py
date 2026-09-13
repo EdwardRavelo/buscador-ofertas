@@ -125,6 +125,29 @@ def marcar_notificadas(con: sqlite3.Connection, ids: list[str]) -> None:
     con.commit()
 
 
+def limpiar_vencidas(con: sqlite3.Connection, temas: list[str]) -> int:
+    """Borra de verdad lo que ya vencio en los temas que se piden.
+
+    Distinto de `purgar`, que es por antiguedad y deja lapida. Aca se trata de
+    temas EFIMEROS (la zona "Ahora"): un pedido de ayer no es historia que
+    valga la pena recordar, y dejar lapida seria peor, porque impediria que la
+    misma promo vuelva a entrar en el pedido de manana.
+
+    Sin esto las filas no se ven en la pagina --el dashboard las oculta por
+    vencidas-- pero se acumulan en la base para siempre.
+    """
+    if not temas:
+        return 0
+    ahora = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    marcas = ",".join("?" for _ in temas)
+    borradas = con.execute(
+        f"DELETE FROM ofertas WHERE tema IN ({marcas}) AND vence IS NOT NULL AND vence < ?",
+        (*temas, ahora),
+    ).rowcount
+    con.commit()
+    return borradas
+
+
 def purgar(con: sqlite3.Connection, dias: int = 365) -> int:
     """Borra ofertas muy viejas dejando su hash como lapida.
 

@@ -41,6 +41,15 @@ def cmd_buscar(args) -> None:
     con = None if args.seco else almacen.conectar()
     total_nuevas = 0
 
+    # Los temas efimeros se vacian solos al vencer. La corrida diaria es el
+    # momento natural para hacerlo: si no, las filas siguen en la base para
+    # siempre, invisibles pero acumulandose.
+    if con is not None:
+        efimeros = [t["nombre"] for t in cargar_temas(None) if t.get("caduca") == "hoy"]
+        borradas = almacen.limpiar_vencidas(con, efimeros)
+        if borradas:
+            print(f"Limpieza: {borradas} filas vencidas de {', '.join(efimeros)}")
+
     with httpx.Client(headers=CABECERAS, follow_redirects=True) as cliente:
         for tema in temas:
             print(f"\n=== {tema['nombre']} ===")
@@ -178,6 +187,15 @@ def cmd_ahora(args) -> None:
                 sobreviven.append(o)
         elegidas = sobreviven
         print(f"  cruzado con el listado del lugar: {antes} -> {len(elegidas)}")
+        if antes and not elegidas:
+            # Cero despues de cruzar casi nunca significa "no hay promos": casi
+            # siempre significa que esa pagina arma su lista de locales con
+            # JavaScript y lo que se descargo no tiene los nombres. Pasa con
+            # altopalermo.com.ar: 228 KB de HTML y ni una marca en el texto.
+            print(f"  ! La pagina tiene {len(texto)} caracteres de texto y ningun")
+            print("    comercio coincidio. Probablemente arme su listado con")
+            print("    JavaScript. Corre el mismo pedido SIN --en, o busca otra")
+            print("    direccion del lugar que liste los locales en el HTML.")
 
     vence = fin_del_dia()
     for o in elegidas:
@@ -205,7 +223,7 @@ def cmd_ahora(args) -> None:
     # Un pedido REEMPLAZA al anterior: la zona muestra lo que pediste recien, no
     # el historial de todos los paseos. Los ids van a `vistos` para que el dedup
     # no los trate como novedad si vuelven a aparecer en otro tema.
-    viejos = con.execute("SELECT id FROM ofertas WHERE tema = 'ahora'").fetchall()
+    viejos = con.execute("SELECT id FROM ofertas WHERE tema = 'ahora'").fetchall()  # noqa
     con.executemany("DELETE FROM ofertas WHERE id = ?", [(f["id"],) for f in viejos])
     con.commit()
     nuevas, repetidas = almacen.guardar(con, elegidas)

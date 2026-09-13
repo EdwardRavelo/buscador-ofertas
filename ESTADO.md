@@ -1144,6 +1144,51 @@ en el navegador del usuario, con su sesion: 12 menciones de "mayo", ninguna de
 otro mes, el 13 de septiembre. No es un problema de acceso: la fuente esta
 desactualizada. Las promos vigentes de MP viven en la app.
 
+## La zona Ahora se limpia sola, y se puede disparar desde el navegador (2026-09-13)
+
+### Limpieza de fin de dia
+
+Antes las filas vencidas se OCULTABAN (el dashboard las cuenta como vencidas)
+pero quedaban en la base para siempre. Ahora `almacen.limpiar_vencidas()` las
+borra, y la corrida diaria la llama para todos los temas con `caduca: hoy`.
+
+Distinta de `purgar()`, que es por antiguedad y deja lapida. Aca NO se deja
+lapida a proposito: un pedido de ayer no es historia que valga la pena recordar,
+y la lapida impediria que la misma promo vuelva a entrar en el pedido de manana.
+
+Probado sobre una copia de la base: con vencimiento futuro borra 0; pasada la
+medianoche borra las 25; los otros 124 registros quedan intactos; no se crea
+ninguna lapida.
+
+### Disparar un pedido desde el navegador
+
+`.github/workflows/ahora.yml`, nuevo y SEPARADO del diario para no tocar lo que
+ya funciona. Es un `workflow_dispatch` con formulario: lugar, url, rubros,
+marcas y un tilde para "solo cuotas". Se lanza desde la pestana Actions, tambien
+desde el celular.
+
+Comparte `concurrency: buscar` con la corrida diaria: las dos escriben
+ofertas.db y no pueden pisarse.
+
+Los valores del formulario van por VARIABLE DE ENTORNO, no interpolados en la
+linea de comandos: un texto con comillas no rompe el comando ni permite colar
+nada.
+
+LA PAGINA PUBLICADA NO PUEDE HACER ESTO. Es HTML estatico en GitHub Pages: no
+hay servidor que ejecute nada. Un formulario en la pagina no tendria a quien
+preguntarle. El workflow ES ese servidor.
+
+### `--en` depende de como este hecho el sitio del lugar
+
+| Lugar | Resultado |
+|---|---|
+| Alto Avellaneda | Publica sus marcas en el HTML: 99 promos -> 25 |
+| Alto Palermo | 228 KB de HTML, 3.855 caracteres de texto, CERO marcas: arma el listado con JavaScript |
+
+Cuando el cruce deja 0 el comando ahora lo avisa y sugiere correr sin `--en`, en
+vez de devolver una lista vacia en silencio. Cero despues de cruzar casi nunca
+significa "no hay promos".
+
 ## Pendiente para la proxima sesion
 
 1. Telegram: salteado a pedido. `salidas/telegram.py` esta escrito y probado en seco.

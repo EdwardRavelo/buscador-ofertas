@@ -1,0 +1,89 @@
+name: Pedido "Ahora"
+
+# Se dispara A MANO desde el navegador: pestaña Actions -> Pedido "Ahora" ->
+# Run workflow. GitHub arma un formulario con los campos de abajo, asi que se
+# puede lanzar una busqueda nueva desde cualquier lado, incluido el celular,
+# sin abrir la notebook.
+#
+# La pagina publicada NO puede hacer esto por si sola: es HTML estatico en
+# GitHub Pages, sin servidor que ejecute nada. Este workflow es el servidor.
+on:
+  workflow_dispatch:
+    inputs:
+      lugar:
+        description: 'Lugar (solo etiqueta). Ej: Alto Palermo'
+        required: true
+        default: 'Alto Palermo'
+      url:
+        description: 'Web del lugar: deja solo los comercios que figuren ahi'
+        required: false
+        default: 'https://www.altopalermo.com.ar/'
+      rubros:
+        description: 'Rubros separados por coma, o el atajo "shopping"'
+        required: false
+        default: 'shopping'
+      marcas:
+        description: 'Marcas puntuales separadas por coma (opcional)'
+        required: false
+        default: ''
+      cuotas:
+        description: 'Solo promos con cuotas'
+        type: boolean
+        default: true
+
+# Comparte grupo con la corrida diaria: las dos escriben ofertas.db y no pueden
+# pisarse.
+concurrency:
+  group: buscar
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  pedido:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Buscar
+        env:
+          LUGAR: ${{ inputs.lugar }}
+          URL: ${{ inputs.url }}
+          RUBROS: ${{ inputs.rubros }}
+          MARCAS: ${{ inputs.marcas }}
+        run: |
+          # Los valores van por variable de entorno y no interpolados en la
+          # linea: asi un texto con comillas no rompe el comando ni permite
+          # colar nada raro.
+          args=(ahora --lugar "$LUGAR")
+          [ -n "$URL" ]    && args+=(--en "$URL")
+          [ -n "$RUBROS" ] && args+=(--rubros "$RUBROS")
+          [ -n "$MARCAS" ] && args+=(--marcas "$MARCAS")
+          ${{ inputs.cuotas && 'args+=(--cuotas)' || 'true' }}
+          python run.py "${args[@]}"
+
+      - name: Generar el sitio
+        run: python run.py dashboard
+
+      - name: Publicar
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html datos/ofertas.db
+          if git diff --cached --quiet; then
+            echo "Sin cambios."
+          else
+            git commit -m "Pedido Ahora: ${{ inputs.lugar }}"
+            git push
+          fi

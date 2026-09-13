@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Radar Porteño — Guía del proyecto</title>
+<style>
+  /* ---------------------------------------------------------------------
+     Hoja de estilos pensada para IMPRIMIR. Chrome la convierte a PDF con
+     --headless --print-to-pdf. Por eso hay reglas @page y saltos de pagina
+     explicitos, y por eso los colores son sobrios: en papel, un fondo oscuro
+     se come el toner y cansa la vista.
+     --------------------------------------------------------------------- */
+  @page { size: A4; margin: 20mm 18mm; }
+
+  :root {
+    --tinta:    #10242C;
+    --suave:    #4A626C;
+    --tenue:    #7A929B;
+    --acento:   #0A6A87;
+    --acento2:  #8A5A00;
+    --linea:    #C8D5DC;
+    --papel:    #F4F8F9;
+    --aviso:    #A6360F;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0; color: var(--tinta); background: #fff;
+    font: 10.5pt/1.62 Georgia, "Times New Roman", serif;
+    hyphens: auto;
+  }
+  .hoja { max-width: 178mm; margin: 0 auto; padding: 10mm 0 16mm; }
+
+  h1, h2, h3, h4 { font-family: "Segoe UI", Arial, sans-serif; line-height: 1.22; }
+  h2 {
+    font-size: 17pt; margin: 0 0 4mm; padding-bottom: 2mm;
+    border-bottom: 2px solid var(--acento); color: var(--acento);
+  }
+  h3 { font-size: 12.5pt; margin: 7mm 0 2mm; color: var(--tinta); }
+  h4 { font-size: 11pt; margin: 5mm 0 1.5mm; color: var(--suave); }
+  p { margin: 0 0 3mm; text-align: justify; }
+  ul, ol { margin: 0 0 3mm; padding-left: 6mm; }
+  li { margin-bottom: 1.6mm; }
+  code {
+    font-family: Consolas, "Courier New", monospace; font-size: 9.2pt;
+    background: var(--papel); padding: 0.4mm 1.2mm; border-radius: 1mm;
+    border: 1px solid var(--linea);
+  }
+  pre {
+    font-family: Consolas, "Courier New", monospace; font-size: 8.6pt;
+    line-height: 1.45; background: var(--papel); border: 1px solid var(--linea);
+    border-left: 3px solid var(--acento); border-radius: 1.5mm;
+    padding: 3mm 4mm; overflow: visible; white-space: pre-wrap;
+    margin: 0 0 4mm; page-break-inside: avoid;
+  }
+  pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+
+  table { width: 100%; border-collapse: collapse; margin: 0 0 4mm; font-size: 9.4pt; }
+  th, td { text-align: left; padding: 1.8mm 2.5mm; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  th { background: var(--papel); font-family: "Segoe UI", Arial, sans-serif; font-size: 8.6pt;
+       text-transform: uppercase; letter-spacing: .04em; color: var(--suave); }
+
+  .caja {
+    border: 1px solid var(--linea); border-left: 4px solid var(--acento);
+    background: var(--papel); border-radius: 2mm; padding: 3.5mm 4mm;
+    margin: 0 0 4mm; page-break-inside: avoid;
+  }
+  .caja h4 { margin: 0 0 1.5mm; color: var(--acento);
+             font-size: 9pt; text-transform: uppercase; letter-spacing: .06em; }
+  .caja p:last-child, .caja ul:last-child { margin-bottom: 0; }
+  .caja.ojo { border-left-color: var(--aviso); }
+  .caja.ojo h4 { color: var(--aviso); }
+  .caja.taller { border-left-color: var(--acento2); }
+  .caja.taller h4 { color: var(--acento2); }
+
+  /* ---- Portada ---- */
+  .portada { height: 245mm; display: flex; flex-direction: column; justify-content: center;
+             page-break-after: always; }
+  .portada .sello { font-family: "Segoe UI", Arial, sans-serif; font-size: 9pt;
+                    letter-spacing: .22em; text-transform: uppercase; color: var(--acento); }
+  .portada h1 { font-size: 34pt; margin: 3mm 0 2mm; letter-spacing: -.02em; }
+  .portada .bajada { font-size: 13pt; color: var(--suave); margin: 0 0 10mm; max-width: 130mm; }
+  .portada .meta { font-size: 9.5pt; color: var(--tenue); border-top: 1px solid var(--linea); padding-top: 4mm; }
+
+  /* ---- Indice ---- */
+  .indice { page-break-after: always; }
+  .indice ol { list-style: none; padding: 0; counter-reset: cap; font-family: "Segoe UI", Arial, sans-serif; }
+  .indice li { counter-increment: cap; font-size: 10.5pt; padding: 1.8mm 0;
+               border-bottom: 1px dotted var(--linea); }
+  .indice li::before { content: counter(cap) ". "; color: var(--acento); font-weight: 700; }
+  .indice small { display: block; color: var(--tenue); font-size: 8.8pt; margin-left: 5mm; }
+
+  section { page-break-before: always; }
+  section.primera { page-break-before: avoid; }
+
+  .pie-nota { font-size: 8.8pt; color: var(--tenue); font-style: italic; }
+  .glosario dt { font-family: "Segoe UI", Arial, sans-serif; font-weight: 700;
+                 font-size: 10pt; margin-top: 3mm; color: var(--acento); }
+  .glosario dd { margin: 0.6mm 0 0; }
+</style>
+</head>
+<body>
+<div class="hoja">
+
+<!-- ══════════════════════════ PORTADA ══════════════════════════ -->
+<div class="portada">
+  <div class="sello">Guía del proyecto · versión del 13 de septiembre de 2026</div>
+  <h1>Radar Porteño</h1>
+  <p class="bajada">Cómo funciona, por dentro, un vigilante automático de talleres,
+     cursos, ciclos de cine y promociones bancarias en Buenos Aires.</p>
+  <div class="meta">
+    Escrita para leerse sin conocimientos previos de programación.<br>
+    Cada concepto técnico se explica la primera vez que aparece.
+  </div>
+</div>
+
+<!-- ══════════════════════════ ÍNDICE ══════════════════════════ -->
+<div class="indice">
+  <h2>Qué vas a encontrar acá</h2>
+  <ol>
+    <li>Qué hace el proyecto y qué problema resuelve
+      <small>La idea de fondo, en una página</small></li>
+    <li>El viaje de un dato, de punta a punta
+      <small>El recorrido completo: de una noticia en internet a una tarjeta en pantalla</small></li>
+    <li>Las fuentes: de dónde sale la información
+      <small>RSS, APIs, y por qué hay tres tipos distintos</small></li>
+    <li>El modelo: cómo se representa una oferta
+      <small>La ficha común, y el truco del "hash" para no repetir</small></li>
+    <li>El puntuador: cómo se separa el trigo de la paja
+      <small>Reglas, no inteligencia artificial, y por qué</small></li>
+    <li>El almacén: la memoria del proyecto
+      <small>SQLite, lápidas y migraciones</small></li>
+    <li>Los cuatro relojes de la vigencia
+      <small>La parte más original del diseño</small></li>
+    <li>La configuración: por qué casi todo es un archivo de texto
+      <small>La promesa central y su única excepción</small></li>
+    <li>La salida: cómo nace la página
+      <small>Plantillas, zonas, tarjetas y color</small></li>
+    <li>La automatización: quién aprieta el botón
+      <small>La tarea de Windows y el robot de GitHub</small></li>
+    <li>Errores que enseñaron algo
+      <small>Los tropiezos reales y qué dejaron</small></li>
+    <li>Glosario y cómo seguir
+      <small>Vocabulario y primeros pasos para tocarlo vos</small></li>
+  </ol>
+</div>
+
+<!-- ══════════════════════════ 1 ══════════════════════════ -->
+<section class="primera">
+  <h2>1. Qué hace el proyecto y qué problema resuelve</h2>
+
+  <p>Imaginá que querés enterarte de tres cosas: cuándo abren las inscripciones a
+  los talleres gratuitos de las bibliotecas porteñas, qué ciclos de cine hay este
+  mes, y qué promociones con cuotas sin interés tiene tu banco. Hoy eso significa
+  revisar a mano una docena de sitios, todos los días, y acordarte de cuáles ya
+  miraste.</p>
+
+  <p><strong>Radar Porteño hace eso por vos, todos los días, y te deja el resultado
+  en una sola página web.</strong> No inventa información: sale a buscarla a fuentes
+  públicas, descarta lo que no sirve, recuerda lo que ya te mostró, y arma una
+  página ordenada.</p>
+
+  <h3>Las tres promesas del diseño</h3>
+
+  <p>Todo el proyecto está construido alrededor de tres ideas. Si entendés estas
+  tres, entendés el resto.</p>
+
+  <div class="caja">
+    <h4>Primera: no repetir</h4>
+    <p>Si una nota ya te la mostró ayer, no te la vuelve a anunciar como novedad
+    hoy. Suena obvio, pero es la parte más difícil: la misma noticia llega desde
+    cinco búsquedas distintas, con cinco direcciones web distintas.</p>
+  </div>
+
+  <div class="caja">
+    <h4>Segunda: no mentir</h4>
+    <p>Si el proyecto no sabe algo, no lo inventa. Nunca dice "cierra pronto" si
+    no conoce la fecha de cierre. Cuando sí la conoce —porque la fuente la
+    declara— lo dice con la fecha exacta. Esa distinción atraviesa todo el
+    código.</p>
+  </div>
+
+  <div class="caja">
+    <h4>Tercera: agregar un tema nuevo no debe requerir programar</h4>
+    <p>Querer vigilar "ciclos de cine" en vez de "talleres de lectura" tiene que
+    ser escribir unas líneas en un archivo de texto, no tocar el programa. Cada
+    vez que esa promesa se rompió, se arregló el programa, no el archivo.</p>
+  </div>
+
+  <h3>Qué vigila hoy</h3>
+
+  <table>
+    <tr><th>Zona</th><th>Qué junta</th><th>Cómo se actualiza</th></tr>
+    <tr><td><strong>Ahora</strong></td><td>Un pedido puntual: "voy a tal shopping, mostrame promos con cuotas"</td><td>A mano, cuando lo pedís</td></tr>
+    <tr><td><strong>Este finde</strong></td><td>Agenda cultural del viernes al domingo</td><td>De jueves a domingo</td></tr>
+    <tr><td><strong>Cine</strong></td><td>Ciclos, retrospectivas y muestras en la Ciudad</td><td>Todos los días</td></tr>
+    <tr><td><strong>Agenda</strong></td><td>Talleres, festivales, teatro gratis, cursos de IA e inglés</td><td>Todos los días</td></tr>
+    <tr><td><strong>Ofertas</strong></td><td>Promociones del banco y búsquedas de compra</td><td>Todos los días</td></tr>
+  </table>
+
+  <p class="pie-nota">El resultado se publica como una página estática en GitHub
+  Pages: un sitio web que no necesita servidor propio ni base de datos en línea,
+  porque es un único archivo HTML que se regenera y se sube.</p>
+</section>
+
+<!-- ══════════════════════════ 2 ══════════════════════════ -->
+<section>
+  <h2>2. El viaje de un dato, de punta a punta</h2>
+
+  <p>Antes de ver las piezas por separado, conviene seguir a un dato en su
+  recorrido completo. Tomemos una noticia real: <em>"La Sala Lugones presenta una
+  retrospectiva de Frank Borzage con doce películas"</em>.</p>
+
+<pre>   INTERNET                 FUENTES              PUNTUADOR            ALMACÉN            SALIDA
+   ─────────               ─────────            ───────────          ─────────          ────────
+
+   Google News   ──┐
+   Feeds RSS     ──┼──►  se traen y se   ──►   se puntúan   ──►   se guardan   ──►   se arma
+   API del banco ──┘     vuelven fichas        y se filtran        sin repetir        la página
+                         iguales entre sí
+
+                         fuentes/              nucleo/             nucleo/            salidas/
+                         *.py                  puntuador.py        almacen.py         dashboard.py</pre>
+
+  <h3>Paso a paso</h3>
+
+  <ol>
+    <li><strong>Se pregunta a las fuentes.</strong> El programa manda seis búsquedas
+    distintas a Google News ("ciclo de cine Buenos Aires", "Sala Lugones ciclo
+    retrospectiva", etc.) y recibe unos 360 resultados en bruto.</li>
+
+    <li><strong>Todo se convierte en la misma ficha.</strong> Venga de donde venga,
+    cada resultado se transforma en un objeto <code>Oferta</code>: título, medio,
+    fecha, enlace. Esto es clave: de acá en adelante, al resto del programa no le
+    importa si vino de Google News o de una API bancaria.</li>
+
+    <li><strong>Se descartan los repetidos de esta misma corrida.</strong> Las seis
+    búsquedas devuelven la misma nota varias veces. De 360 quedan 334.</li>
+
+    <li><strong>Se puntúa cada una.</strong> Se le asigna un número del 0 al 10 según
+    qué tan bien encaja con el tema, y se anotan los motivos. Las que no cumplen
+    los requisitos se marcan con un puntaje imposible (−99) y quedan afuera. De
+    334 sobreviven 9.</li>
+
+    <li><strong>Se guardan en la base.</strong> Acá actúa la memoria de largo plazo:
+    si la nota ya estaba, no se vuelve a anunciar; solo se actualiza la fecha en
+    que se la vio por última vez.</li>
+
+    <li><strong>Se arma la página.</strong> Un programa lee la base, decide qué
+    todavía sirve mostrar, lo agrupa en zonas y familias, y escribe un archivo
+    <code>index.html</code>.</li>
+  </ol>
+
+  <div class="caja taller">
+    <h4>Por qué importa el paso 2</h4>
+    <p>Convertir todo a una ficha común se llama <em>normalizar</em>. Es lo que
+    permite que agregar una fuente nueva —mañana, la API de otro banco— no
+    obligue a tocar el puntuador, ni el almacén, ni la página. Cada pieza habla
+    un solo idioma con la siguiente.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════ 3 ══════════════════════════ -->
+<section>
+  <h2>3. Las fuentes: de dónde sale la información</h2>
+
+  <p>Una "fuente" es un pedacito de programa que sabe hablar con un sitio y
+  devolver fichas. Hay tres, y son de dos naturalezas distintas.</p>
+
+  <h3>3.1 Qué es un RSS</h3>
+
+  <p>Un <strong>RSS</strong> es una versión de un sitio web pensada para que la lean
+  programas, no personas. En vez de colores y botones, es una lista ordenada:
+  título, fecha, enlace, resumen. Casi todos los diarios y blogs publican uno.</p>
+
+  <p>Google News tiene un RSS de búsqueda: le pasás palabras y te devuelve noticias
+  recientes de todos los medios que indexó, sin pedir registro ni clave. Eso es
+  <code>fuentes/google_news.py</code>, y es la fuente más productiva del proyecto.</p>
+
+  <p><code>fuentes/rss.py</code> hace lo mismo pero con feeds elegidos a mano, listados
+  en <code>config/feeds.yaml</code>: el sitio del Gobierno de la Ciudad, un blog
+  especializado en bibliotecas, agendas culturales porteñas.</p>
+
+  <h3>3.2 Qué es una API</h3>
+
+  <p>Una <strong>API</strong> es una puerta que un sitio abre para que otros programas
+  le pidan datos directamente, en un formato estructurado. La diferencia con el
+  RSS es que no son noticias <em>sobre</em> algo: son los datos mismos.</p>
+
+  <p>El caso más interesante del proyecto es <code>fuentes/bbva.py</code>. La historia
+  vale la pena porque muestra cómo se investiga una fuente:</p>
+
+  <ol>
+    <li>Al principio se buscaban promociones bancarias en los diarios. Se midió:
+    de 424 noticias, la más reciente que nombraba al banco tenía <strong>43 días</strong>.
+    La prensa no cubre las promos semanales.</li>
+    <li>Se fue a la página de beneficios del banco. Está hecha con JavaScript: el
+    HTML llega casi vacío y el contenido aparece después.</li>
+    <li>Se abrió esa página en el navegador y se listaron todos los pedidos de red
+    que hizo. Ahí apareció una dirección de la forma
+    <code>go.bbva.com.ar/willgo/fgo/API/v3/communications</code>.</li>
+    <li>Se probó esa dirección desde el programa, sin navegador. <strong>Responde.</strong>
+    Devuelve las promociones en formato estructurado, sin necesidad de iniciar sesión.</li>
+  </ol>
+
+  <p>Esa API da algo que ninguna noticia da: <strong>la fecha exacta hasta la que vale
+  cada promoción</strong>, el tope de reintegro y con qué tarjeta aplica.</p>
+
+  <div class="caja ojo">
+    <h4>Un error que costó 280 pedidos por corrida</h4>
+    <p>Cuando se agregó la fuente del banco, los temas que no declaraban qué
+    fuentes usar empezaron a correr <em>todas</em>, incluida la del banco. Cada tema
+    de prensa se bajaba las 47 páginas del catálogo bancario para descartarlas
+    después. Se notó porque los temas pasaron de ~300 a ~1200 resultados en bruto.</p>
+    <p>El arreglo distingue dos clases de fuente: las de <em>búsqueda</em> (reciben
+    palabras y devuelven algo acotado) y las de <em>catálogo</em> (devuelven todo lo
+    que tienen). Las de catálogo solo corren si un tema las pide por nombre.</p>
+  </div>
+
+  <h3>3.3 El contrato</h3>
+
+  <p>Las tres fuentes cumplen la misma regla, y es lo único que el resto del
+  programa sabe de ellas:</p>
+
+<pre>buscar(tema, cliente)  ->  lista de Ofertas</pre>
+
+  <p>Agregar una fuente nueva es escribir un archivo que cumpla esa firma y
+  anotarlo en un registro. Nada más.</p>
+</section>
+
+<!-- ══════════════════════════ 4 ══════════════════════════ -->
+<section>
+  <h2>4. El modelo: cómo se representa una oferta</h2>
+
+  <p>En <code>nucleo/modelo.py</code> vive la ficha común. En Python se usa una
+  <em>dataclass</em>, que es simplemente una forma corta de describir "un objeto que
+  tiene estos campos":</p>
+
+<pre>class Oferta:
+    titulo      # "La Sala Lugones presenta una retrospectiva..."
+    url         # el enlace
+    fuente      # "escribiendocine.com"  (el medio)
+    tema        # "cine-caba"
+    fecha_pub   # cuándo se publicó
+    vence       # hasta cuándo vale, SI la fuente lo declara
+    score       # el puntaje 0-10
+    motivos     # por qué pasó el filtro
+    extra       # datos propios de la fuente (tope, cuotas, logo...)</pre>
+
+  <h3>El truco del hash</h3>
+
+  <p>Acá está una de las decisiones más finas del proyecto. Para saber si una
+  oferta "ya la vimos", hace falta una identidad estable. Lo natural sería usar
+  el enlace, pero <strong>no funciona</strong>: Google News entrega direcciones cifradas
+  como <code>news.google.com/rss/articles/CBMi...</code>, y la misma nota llega con
+  direcciones distintas desde búsquedas distintas.</p>
+
+  <p>La solución es fabricar una huella digital a partir del contenido:</p>
+
+<pre>identidad = huella( tema + "|" + título normalizado + "|" + medio )</pre>
+
+  <div class="caja taller">
+    <h4>Concepto: qué es una "huella" (hash)</h4>
+    <p>Una función de hash toma un texto de cualquier largo y devuelve siempre la
+    misma cadena corta de letras y números. Dos textos iguales dan la misma
+    huella; dos distintos, casi con certeza, huellas distintas. Sirve para
+    comparar sin guardar el texto completo.</p>
+  </div>
+
+  <p>"Título normalizado" significa: en minúsculas, sin tildes, sin puntuación, y
+  sin el sufijo " - Nombre del medio" que Google News agrega al final.</p>
+
+  <h4>Por qué el tema forma parte de la identidad</h4>
+
+  <p>Una misma nota puede ser relevante para dos temas a la vez: la guía del
+  festival FIBA es a la vez "festival" y "teatro gratis". Si el tema no formara
+  parte de la huella, el primer tema que corriera se la quedaría y en el segundo
+  no aparecería nunca. Esto se descubrió en uso real, no en el diseño.</p>
+</section>
+
+<!-- ══════════════════════════ 5 ══════════════════════════ -->
+<section>
+  <h2>5. El puntuador: cómo se separa el trigo de la paja</h2>
+
+  <p>De cada 400 resultados en bruto, sobreviven entre 3 y 25. El encargado de esa
+  poda es <code>nucleo/puntuador.py</code>, y funciona con <strong>reglas escritas a
+  mano</strong>, no con inteligencia artificial.</p>
+
+  <div class="caja">
+    <h4>Por qué reglas y no IA</h4>
+    <p>Tres razones: cuesta cero (no hay que pagar por consulta), es
+    <em>determinista</em> —con la misma entrada da siempre la misma salida, así que
+    se puede depurar—, y sobre todo es <strong>explicable</strong>: cada oferta guarda por
+    qué pasó el filtro. Cuando algo entra mal, se ve exactamente qué regla falló.</p>
+  </div>
+
+  <h3>5.1 Los requisitos: un Y de OES</h3>
+
+  <p>La regla principal se llama <code>requerir</code> y es una lista de grupos.
+  <strong>Dentro de cada grupo alcanza con que aparezca uno</strong> de los términos; pero
+  <strong>todos los grupos tienen que cumplirse</strong>. Para el tema de talleres:</p>
+
+<pre>requerir:
+  - [Buenos Aires, CABA, porteñ, Biblioteca Nacional]   ← grupo 1: la zona
+  - [taller, talleres, inscripción, cupos, curso]       ← grupo 2: la actividad
+  - [lectura, escritura, literatura, biblioteca, libro] ← grupo 3: el tema real</pre>
+
+  <p>Un solo grupo no alcanzaba, y se aprendió probando: filtrando solo por zona
+  pasaba cualquier "agenda cultural"; filtrando solo por actividad pasaban cursos
+  de Madrid. Y el tercer grupo se agregó porque el tema se llama "talleres de
+  <em>lectura</em>" pero el filtro no pedía nada sobre leer: entraba el "Congreso
+  Federal de Ciudades Inteligentes".</p>
+
+  <h3>5.2 Las otras reglas</h3>
+
+  <table>
+    <tr><th>Regla</th><th>Qué hace</th><th>Por qué existe</th></tr>
+    <tr><td><code>excluir</code></td><td>Si aparece el término, se descarta</td><td>"Taller" también es galpón de reparaciones: taller mecánico, talleres del subte</td></tr>
+    <tr><td><code>excluir_dominios</code></td><td>Descarta por terminación del sitio</td><td>Medios de otros países publicando sus propias ofertas</td></tr>
+    <tr><td><code>senales</code></td><td>Suma puntos sin ser obligatorio</td><td>"Me interesa todo el rubro, pero esto va primero"</td></tr>
+    <tr><td><code>max_por_dominio</code></td><td>Tope de resultados por medio</td><td>Un sitio de baja calidad aportó 5 de 25 resultados</td></tr>
+    <tr><td><code>unico_por_titulo</code></td><td>Un mismo título, una sola vez</td><td>Las agendas se copian palabra por palabra entre medios</td></tr>
+  </table>
+
+  <h3>5.3 Las casi-repetidas</h3>
+
+  <p>Hay un caso sutil: el mismo sitio publica "Abre la inscripción a los talleres"
+  y "Abren las inscripciones a los talleres". Son la misma nota, pero el título
+  cambió, así que la huella no las junta.</p>
+
+  <p>Para esto se compara <em>cuánto se parecen</em> dos títulos. Se toman las palabras
+  de más de tres letras, se recortan a sus primeras cinco letras
+  (así "inscripción" e "inscripciones" cuentan igual) y se mide qué proporción
+  comparten. Si supera el 70%, se descarta la segunda.</p>
+
+  <div class="caja ojo">
+    <h4>La misma regla, aplicada mal, escondía ofertas</h4>
+    <p>Ese filtro fue pensado para <em>titulares de prensa</em>. Aplicado al catálogo
+    de un banco, donde los títulos son formularios —"Dexter 20% y 6 cuotas",
+    "Top Sport 20% y 6 cuotas"—, colapsaba comercios distintos: ambos se reducían
+    a {sport, cuota}. Se perdían 3 de 21 promociones.</p>
+    <p>Hoy es una opción que se apaga por tema. La lección: una regla correcta
+    puede ser dañina en un contexto para el que no fue pensada.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════ 6 ══════════════════════════ -->
+<section>
+  <h2>6. El almacén: la memoria del proyecto</h2>
+
+  <p>Todo lo que sobrevive al filtro se guarda en <strong>SQLite</strong>, que es una base
+  de datos que vive en un solo archivo (<code>datos/ofertas.db</code>), sin servidor ni
+  instalación. Para un proyecto de una sola persona es exactamente lo que hace falta.</p>
+
+  <h3>6.1 Por qué la base se versiona junto al código</h3>
+
+  <p>Normalmente una base de datos no se guarda junto al programa. Acá sí, y a
+  propósito: el robot que corre todos los días en la nube arranca de cero cada
+  vez. Sin la base, cada corrida "descubriría" lo mismo otra vez y te lo
+  anunciaría como novedad todos los días.</p>
+
+  <h3>6.2 Las lápidas</h3>
+
+  <p>Esa decisión trae un problema: el archivo crece para siempre, y cada corrida
+  guarda una copia entera. Por eso existe la <em>purga</em>: lo más viejo que un año
+  se borra... pero no del todo.</p>
+
+  <p>Antes de borrar una fila, su huella se copia a una tabla que se llama
+  <code>vistos</code>. Ocupa unos 40 bytes. Si esa oferta vuelve a aparecer, el programa
+  sabe que ya la mostró y no la anuncia. Esas huellas sueltas son las
+  <strong>lápidas</strong>: queda la marca de que algo existió, sin el cuerpo.</p>
+
+  <div class="caja taller">
+    <h4>Concepto: qué es una migración</h4>
+    <p>Cuando el programa necesita guardar un dato nuevo —por ejemplo, la fecha de
+    vencimiento— hay que agregarle una columna a la base. Pero las bases que ya
+    existen no la tienen. Una <em>migración</em> es el código que detecta esa
+    diferencia y la corrige sola al abrir la base.</p>
+    <p>En este proyecto se llama <code>_migrar()</code> y es la razón por la que, al
+    integrar la base del robot —que tenía el formato viejo—, las columnas nuevas
+    aparecieron sin que nadie hiciera nada.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════ 7 ══════════════════════════ -->
+<section>
+  <h2>7. Los cuatro relojes de la vigencia</h2>
+
+  <p>Esta es la parte más original del diseño, y vale la pena entenderla despacio.
+  La pregunta es simple: <strong>¿hasta cuándo sirve mostrar algo?</strong> La respuesta
+  resultó ser que no hay una sola, sino cuatro, y cada una nació de un problema real.</p>
+
+  <h3>Reloj 1 — Qué entra</h3>
+  <p><code>max_antiguedad_dias</code>. Google News mezcla notas de 2018 con las de hoy.
+  Este número decide qué tan vieja puede ser una nota para siquiera considerarla.
+  Es un filtro de <em>entrada</em>.</p>
+
+  <h3>Reloj 2 — Qué se sigue mostrando</h3>
+  <p><code>vida_util_dias</code>. Distinto del anterior: una nota puede haber entrado
+  hace tres semanas y seguir siendo útil, o no. Un festival de hace 21 días ya
+  pasó; un curso online gratuito de hace cuatro meses probablemente sigue abierto.
+  Es un filtro de <em>presentación</em>: la fila se queda en la base, solo sale de la
+  página.</p>
+
+  <table>
+    <tr><th>Tema</th><th>Entra hasta</th><th>Se muestra</th><th>Por qué</th></tr>
+    <tr><td>Festivales</td><td>21 días</td><td>10 días</td><td>El evento ya pasó</td></tr>
+    <tr><td>Teatro gratis</td><td>35 días</td><td>30 días</td><td>Se agota o termina la temporada</td></tr>
+    <tr><td>Talleres</td><td>45 días</td><td>35 días</td><td>Ventana típica de inscripción</td></tr>
+    <tr><td>Cursos de IA</td><td>30 días</td><td>150 días</td><td>Los cursos online no cierran</td></tr>
+  </table>
+
+  <h3>Reloj 3 — La fecha que declara la fuente</h3>
+  <p>Cuando el dato viene de la API del banco, no hay que estimar nada: la
+  promoción dice que vale hasta el 27 de octubre. Ese valor se guarda en el campo
+  <code>vence</code> y <strong>manda sobre los dos relojes anteriores</strong>.</p>
+
+  <p>Sin esto, una promoción que arrancó hace 283 días pero vence en 19 sería
+  descartada por vieja, estando perfectamente vigente.</p>
+
+  <h3>Reloj 4 — El calendario</h3>
+  <p>La agenda del fin de semana no caduca "a los N días de publicada": caduca
+  <strong>el lunes</strong>, se haya publicado el jueves o el domingo. Eso no lo puede
+  expresar ningún reloj que cuente días hacia adelante.</p>
+
+  <p>Por eso existe <code>nucleo/calendario.py</code>, que calcula el próximo lunes a
+  las 00:00 de Buenos Aires. Y algo más sutil: ese tema <strong>solo busca de jueves a
+  domingo</strong>. Una agenda publicada un lunes habla del fin de semana que ya pasó;
+  si entrara, sobreviviría hasta el lunes siguiente y la zona mostraría una semana
+  entera de información vencida.</p>
+
+  <div class="caja">
+    <h4>La jerarquía, en una línea</h4>
+    <p>Si la fuente declara una fecha, esa manda. Si no, mandan los dos relojes
+    rodantes. Y si el tema caduca por calendario, esa fecha se calcula en cada
+    corrida y se guarda como si la fuente la hubiera declarado.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════ 8 ══════════════════════════ -->
+<section>
+  <h2>8. La configuración: por qué casi todo es un archivo de texto</h2>
+
+  <p>El archivo <code>config/temas.yaml</code> es el centro de gravedad del proyecto.
+  <strong>YAML</strong> es un formato para escribir configuraciones de forma legible: nombre,
+  dos puntos, valor; la sangría indica qué está adentro de qué.</p>
+
+  <p>Un tema completo se ve así (abreviado):</p>
+
+<pre>- nombre: cine-caba
+  zona: Cine                      # en qué pestaña aparece
+  familia: Ciclos y muestras      # cómo se agrupa dentro de la pestaña
+  etiqueta: "Ciclos de cine"      # cómo se lee en pantalla
+  keywords:                       # qué se le pregunta a Google News
+    - "ciclo de cine Buenos Aires"
+    - "Sala Lugones ciclo retrospectiva"
+  requerir: [...]                 # los grupos obligatorios
+  excluir: [...]                  # lo que descarta
+  max_antiguedad_dias: 30
+  vida_util_dias: 45
+  score_minimo: 6.5</pre>
+
+  <p>Fijate que ahí conviven dos cosas muy distintas: <em>qué buscar</em> (keywords,
+  requerir) y <em>cómo mostrarlo</em> (zona, familia, etiqueta). Están juntas a
+  propósito. Cuando la etiqueta vivía en el código, agregar un tema obligaba a
+  editar dos archivos, y eso rompía la tercera promesa.</p>
+
+  <div class="caja ojo">
+    <h4>La única excepción reconocida</h4>
+    <p>Los colores de acento de cada zona (teal, ámbar, violeta, rosa, verde) están
+    definidos en la hoja de estilos. Agregar una zona con un color nuevo <em>sí</em>
+    obliga a tocar el CSS. Está documentado como excepción en vez de fingir que no
+    existe.</p>
+  </div>
+
+  <h3>Un detalle de YAML que causó un error real</h3>
+
+  <p>YAML permite reutilizar una lista con un "ancla": se define una vez y se
+  referencia desde varios temas. Pero <strong>no concatena</strong>: si reusás una lista y
+  además querés agregarle términos propios, el resultado es una lista que contiene
+  otra lista adentro.</p>
+
+  <p>Cuando se creó el ancla de zona compartida, se perdió sin querer el término
+  "Biblioteca Nacional", que estaba en el grupo original. Los dos avisos de la
+  Biblioteca Nacional —uno de ellos el mejor puntuado de todos, con 10.0— murieron
+  filtrados por "fuera de zona". Hoy el programa aplana esas listas anidadas antes
+  de usarlas.</p>
+</section>
+
+<!-- ══════════════════════════ 9 ══════════════════════════ -->
+<section>
+  <h2>9. La salida: cómo nace la página</h2>
+
+  <h3>9.1 Qué es una plantilla</h3>
+
+  <p>La página no se escribe a mano ni se arma pegando texto. Se usa una
+  <strong>plantilla</strong>: un archivo HTML normal con huecos y pequeñas instrucciones.
+  La herramienta se llama Jinja2:</p>
+
+<pre>&lt;h3&gt;{{ oferta.titulo }}&lt;/h3&gt;
+
+{% for o in tema.ofertas %}
+   ... acá se repite una tarjeta por cada oferta ...
+{% endfor %}
+
+{% if o.nuevo %}&lt;span class="led"&gt;&lt;/span&gt;{% endif %}</pre>
+
+  <p>Las llaves dobles insertan un valor; las llaves con porcentaje son lógica:
+  repetir, o mostrar solo si se cumple algo. El programa
+  <code>salidas/dashboard.py</code> prepara los datos y la plantilla decide cómo se ven.</p>
+
+  <h3>9.2 Tres niveles: zona, familia, tema</h3>
+
+<pre>ZONA "Ofertas"              ← una pestaña en el panel izquierdo
+ └── FAMILIA "Bancos y tarjetas"   ← un subtítulo
+      ├── TEMA "BBVA"              ← un acordeón desplegable
+      └── TEMA "Pelota de fútbol"</pre>
+
+  <p>La separación en zonas nació de un problema concreto: una agenda cultural y
+  una promoción bancaria <em>se leen distinto</em>. La agenda se hojea ("qué hay para
+  hacer"); la oferta se consulta ("qué descuento tengo hoy"). Mezcladas en una
+  lista, la promoción de hoy queda enterrada entre talleres de hace tres semanas.</p>
+
+  <h3>9.3 Dos tipos de tarjeta</h3>
+
+  <p>Por la misma razón hay dos diseños de tarjeta. En Agenda importa el puntaje,
+  el medio y la antigüedad. En Ofertas importa el comercio, el beneficio, el tope
+  y hasta cuándo vale.</p>
+
+  <p>Esto no fue una decisión estética sino una medición: en el tema de ofertas
+  había <strong>21 tarjetas con solo dos valores de puntaje distintos</strong>. Un número
+  grande que siempre dice lo mismo gasta espacio. En cambio, datos que decidían la
+  compra —el tope de reintegro, qué tarjeta aplica— estaban guardados pero no se
+  mostraban en ningún lado.</p>
+
+  <h3>9.4 El color, y por qué está medido</h3>
+
+  <p>Los colores no están escritos uno por uno en cada elemento, sino declarados
+  una vez como <em>variables</em> y usados por nombre. Eso permite que cambiar una
+  variable cambie toda la página, y que cada zona redefina su acento sin duplicar
+  reglas.</p>
+
+  <div class="caja taller">
+    <h4>Concepto: contraste y por qué se mide</h4>
+    <p>El contraste entre un texto y su fondo se expresa como una proporción: 1:1
+    es invisible, 21:1 es negro sobre blanco. La norma internacional de
+    accesibilidad (WCAG) pide al menos <strong>4.5:1</strong> para texto normal.</p>
+    <p>En este proyecto se midió con un script, y aparecieron fallas reales que a
+    ojo no se notaban: un gris que se usaba en "Tarjetas de crédito BBVA" y
+    "buscar la nota" daba 3.11:1. Se corrigió moviendo solo la luminosidad, para
+    no cambiar el tono de la paleta. Hoy se miden 37 pares en cada modo.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════ 10 ══════════════════════════ -->
+<section>
+  <h2>10. La automatización: quién aprieta el botón</h2>
+
+  <p>El proyecto se ejecuta solo, por dos caminos paralelos.</p>
+
+  <h3>10.1 La tarea programada de Windows</h3>
+
+  <p>Todos los días a las 9:00, Windows ejecuta un archivo <code>.bat</code> que corre las
+  cuatro etapas —buscar, sincronizar con Google Sheets, generar la página,
+  publicar— y deja un registro en un archivo de texto.</p>
+
+  <p>Un detalle chico pero real: antes, esa tarea abría una consola negra en
+  primer plano cada mañana. Ahora la llama a través de un pequeño archivo
+  intermedio que la ejecuta con la ventana oculta.</p>
+
+  <div class="caja">
+    <h4>Por qué no se resolvió de la forma obvia</h4>
+    <p>Windows ofrece una opción "ejecutar aunque el usuario no haya iniciado
+    sesión", que también oculta la ventana. No se usó: la publicación necesita una
+    credencial de Git que está guardada en la sesión del usuario, y fuera de esa
+    sesión el paso final fallaría. La solución fácil habría roto algo silenciosamente.</p>
+  </div>
+
+  <h3>10.2 El robot de GitHub</h3>
+
+  <p>En paralelo, un servicio de GitHub llamado <em>Actions</em> corre lo mismo todos
+  los días a las 12:00 UTC (9 de la mañana en Buenos Aires), en una computadora
+  prestada en la nube. Sirve para que el proyecto siga funcionando aunque tu
+  máquina esté apagada.</p>
+
+  <h3>10.3 Las credenciales</h3>
+
+  <p>Las claves —la cuenta de servicio de Google, el identificador de la planilla—
+  <strong>nunca</strong> se guardan junto al código. En la nube viven en un cofre de GitHub
+  llamado <em>secrets</em>; el robot las escribe en disco al empezar y las borra antes
+  de publicar. En tu máquina viven en archivos que están explícitamente excluidos.</p>
+
+  <p class="pie-nota">Verificado al hacer el último commit: esas claves nunca
+  estuvieron en el historial del repositorio.</p>
+</section>
+
+<!-- ══════════════════════════ 11 ══════════════════════════ -->
+<section>
+  <h2>11. Errores que enseñaron algo</h2>
+
+  <p>Esta sección existe porque las decisiones buenas casi siempre vienen de un
+  error concreto, y entender el error explica la decisión mejor que cualquier
+  justificación abstracta.</p>
+
+  <h3>El enlace que no se puede resolver</h3>
+  <p>Google News cifra las direcciones reales de los medios. Se intentó
+  descifrarlas y falla prácticamente siempre. En vez de fingir que funciona, el
+  proyecto hace dos cosas: no depende de esos enlaces para identificar ofertas —de
+  ahí el hash por título y medio— y ofrece un enlace de respaldo que busca el
+  título exacto en Google, que siempre funciona.</p>
+
+  <h3>La misma búsqueda, mucho ruido geográfico</h3>
+  <p>El ruido casi nunca fue temático sino <em>geográfico</em>. "Buenos Aires" nombra a
+  la Ciudad y a la Provincia. Los festivales traían el festival de cine de la
+  Provincia, la universidad de Lanús, Avellaneda. Para cine, el festival de La
+  Plata aparecía en casi todas las búsquedas. La lista de exclusiones creció
+  midiendo, no imaginando.</p>
+
+  <h3>Cuando un filtro se endurece, lo ya guardado no cambia</h3>
+  <p>Mejorar las reglas no toca lo que ya está en la base. Después de cada cambio
+  hay que decidir si vale la pena reevaluar lo guardado. Una vez se reevaluaron 48
+  filas: 9 se borraron y 6 cambiaron de puntaje.</p>
+
+  <h3>Medir sobre algo invisible da cero</h3>
+  <p>Durante una revisión, se midió la posición de un elemento y daba 0. La
+  conclusión fue que estaba roto. No lo estaba: la medición había caído sobre una
+  zona oculta, y en ese caso el navegador devuelve ceros para todo. La lección
+  quedó anotada: medir siempre partiendo de lo que está visible.</p>
+
+  <h3>Un carácter invisible que rompía una búsqueda</h3>
+  <p>Al escribir código desde la terminal, ciertas secuencias como <code>\b</code> se
+  convertían silenciosamente en caracteres de control invisibles. El programa
+  quedaba válido, la búsqueda nunca encontraba nada, y ni siquiera se veía al
+  inspeccionar el archivo. Pasó tres veces antes de identificarse.</p>
+</section>
+
+<!-- ══════════════════════════ 12 ══════════════════════════ -->
+<section>
+  <h2>12. Glosario y cómo seguir</h2>
+
+  <dl class="glosario">
+    <dt>API</dt>
+    <dd>Puerta que un sitio abre para que otros programas le pidan datos en
+    formato estructurado, sin pasar por la página web.</dd>
+
+    <dt>Dataclass</dt>
+    <dd>En Python, una forma corta de definir un objeto que solo agrupa campos.</dd>
+
+    <dt>Dedup (deduplicación)</dt>
+    <dd>Detectar y descartar lo que ya se tiene, para no repetirlo.</dd>
+
+    <dt>Hash (huella)</dt>
+    <dd>Cadena corta calculada a partir de un texto. El mismo texto da siempre la
+    misma huella.</dd>
+
+    <dt>Jinja2</dt>
+    <dd>Herramienta que rellena plantillas: un HTML con huecos y lógica simple.</dd>
+
+    <dt>JSON</dt>
+    <dd>Formato de texto para intercambiar datos entre programas. Es lo que
+    devuelven casi todas las APIs.</dd>
+
+    <dt>Normalizar</dt>
+    <dd>Llevar textos distintos a una forma común para poder compararlos:
+    minúsculas, sin tildes, sin puntuación.</dd>
+
+    <dt>RSS</dt>
+    <dd>Versión de un sitio pensada para programas: una lista de títulos, fechas y
+    enlaces.</dd>
+
+    <dt>SQLite</dt>
+    <dd>Base de datos que vive en un solo archivo, sin servidor.</dd>
+
+    <dt>WCAG</dt>
+    <dd>Norma internacional de accesibilidad web. De ahí sale el mínimo de 4.5:1
+    de contraste para texto.</dd>
+
+    <dt>YAML</dt>
+    <dd>Formato de configuración legible por personas, donde la sangría indica
+    jerarquía.</dd>
+  </dl>
+
+  <h3>Los comandos que vas a usar</h3>
+
+<pre>run.py buscar              busca en todos los temas y guarda
+run.py buscar -t cine-caba corre un solo tema
+run.py buscar --seco       busca y muestra, SIN escribir en la base
+run.py dashboard           regenera la página
+run.py ahora ...           pedido puntual para la zona "Ahora"
+run.py listar              muestra lo guardado
+run.py purgar --dias 365   borra lo muy viejo dejando su lápida</pre>
+
+  <div class="caja taller">
+    <h4>El comando más útil para aprender</h4>
+    <p><code>run.py buscar -t &lt;tema&gt; --seco</code> es la mejor forma de entender el
+    proyecto tocándolo. Busca de verdad, imprime cada resultado con su puntaje y
+    sus motivos, y <strong>no escribe nada</strong>. Podés cambiar una regla en el YAML,
+    correrlo, y ver al instante qué entra y qué sale.</p>
+  </div>
+
+  <h3>Tres cosas que podrías hacer vos</h3>
+
+  <ol>
+    <li><strong>Agregar un tema.</strong> Copiá un bloque de <code>config/temas.yaml</code>,
+    cambiale el nombre, las keywords y los requisitos. Corré con <code>--seco</code>
+    hasta que los resultados te gusten.</li>
+    <li><strong>Ajustar un filtro existente.</strong> Si algo se cuela, agregá el término a
+    <code>excluir</code>. Si falta algo bueno, mirá con <code>--seco</code> por qué se descartó:
+    el programa imprime el motivo.</li>
+    <li><strong>Sumar una fuente RSS.</strong> Buscá el feed de un sitio (probá agregarle
+    <code>/feed</code> o <code>/rss</code> a la dirección), verificá que devuelva algo, y
+    anotalo en <code>config/feeds.yaml</code>.</li>
+  </ol>
+
+  <h3>Lo que quedó pendiente</h3>
+
+  <ul>
+    <li><strong>Mercado Pago.</strong> Su sitio público de promociones muestra contenido de
+    mayo. No es un problema de acceso: la fuente está desactualizada. Las promos
+    vigentes viven dentro de la aplicación.</li>
+    <li><strong>El aviso por Telegram.</strong> Está escrito y probado, pero apagado. Se
+    enciende completando dos claves.</li>
+    <li><strong>Un radar de verdad.</strong> El sitio se llama Radar Porteño y nunca mostró
+    un radar. Un gráfico polar donde cada oferta es un punto —el ángulo según la
+    familia, la distancia al centro según la urgencia— usaría datos que hoy solo
+    viven en tarjetas.</li>
+  </ul>
+
+  <p class="pie-nota" style="margin-top:8mm">Fin de la guía. Está escrita sobre el
+  estado del proyecto al 13 de septiembre de 2026; los números concretos (cuántas
+  ofertas, cuántas páginas de catálogo) cambian con cada corrida, pero las ideas
+  no.</p>
+</section>
+
+</div>
+</body>
+</html>

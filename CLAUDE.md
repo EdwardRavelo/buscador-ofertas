@@ -201,6 +201,9 @@ la excepción: ahí vuelve a mandar el score, porque es un destaque, no una agen
 - **La misma oferta puede vivir en dos temas** (el hash incluye el tema, a proposito).
   Dentro de una zona eso son dos tarjetas iguales: las destacadas se deduplican por
   (titulo, fuente). Ojo al agregar cualquier vista de nivel zona.
+- **Los temas con `caduca: hoy` se borran de verdad** en la corrida diaria
+  (`limpiar_vencidas`), sin lapida: si la dejaran, la misma promo no podria volver a
+  entrar en el pedido siguiente. `purgar()` es otra cosa: por antiguedad y CON lapida.
 - **Borrar un tema del YAML no borra sus filas.** Quedan en SQLite y en Sheets. El
   dashboard las ignora por `temas_validos` (si no, la zona mostraría un total mayor que
   la suma de sus familias); se cuentan aparte como `huerfanas`.
