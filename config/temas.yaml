@@ -46,6 +46,12 @@
 #           `teal` y `ambar`. Una zona nueva con otro acento SI requiere tocar el
 #           CSS; es el unico pedazo de esto que no se resuelve en YAML.
 zonas:
+  - nombre: Ahora
+    eyebrow: "Un pedido para este momento"
+    acento: verde
+    tarjeta: oferta
+    vacia: "Sin pedido activo. Se llena con `run.py ahora` y se vacia sola a la medianoche."
+
   - nombre: Este finde
     eyebrow: "Viernes a domingo en la Ciudad"
     acento: violeta
@@ -106,6 +112,24 @@ _fuera_de_zona: &fuera_de_zona
   - "Madrid"
 
 temas:
+  # -------------------------------------------------------------------- Ahora
+  - nombre: ahora
+    zona: Ahora
+    familia: Lo que pediste
+    etiqueta: "Pedido del momento"
+    corto: "Ahora"
+    tipo: [descuento]
+    fuentes: [bbva]
+    # No lo toca la corrida diaria: se llena a mano con `run.py ahora`, que le
+    # pasa rubros y marcas segun lo que se pida en el momento.
+    ingesta: manual
+    # Vence a las 23:59. Un paseo de ayer no le sirve a nadie.
+    caduca: hoy
+    # Sin `requerir` fijo: el comando lo arma con lo que se pide.
+    agrupar_casi_repetidas: false
+    max_por_dominio: 99
+    score_minimo: 5
+
   # --------------------------------------------------------------------- Cine
   - nombre: cine-caba
     zona: Cine

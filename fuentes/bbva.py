@@ -20,7 +20,13 @@ promos; con todas, 926. La diferencia no es cosmetica: las 22 promos de comercio
 deportivos (Dexter, Open Sports, Stock Center...) estan TODAS fuera de la primera
 pagina.
 
-Un tema puede pedir solo las destacadas con `bbva_paginas: 1` en config/temas.yaml.
+Un tema puede pedir solo las destacadas con `bbva_paginas: 1` en config/temas.yaml,
+y acotar por rubro con `bbva_rubros: [184]`. Los ids salen de
+go.bbva.com.ar/willgo/fgo/API/v3/rubros/filtro; los que importan hoy:
+
+    13 Viajes   3 Gastronomia   4 Entretenimiento   170 Moda   173 Hogar y Deco
+    192 Electro y Tecnologia    184 Deportes   8 Belleza   175 Jugueterias
+    195 Regalos  27 Shopping
 """
 from __future__ import annotations
 
@@ -146,12 +152,18 @@ POR_PAGINA = 20
 def _paginas(tema: dict, cliente: httpx.Client) -> list[dict]:
     """Recorre el catalogo entero. `bbva_paginas` lo acota a las destacadas."""
     tope = tema.get("bbva_paginas") or MAX_PAGINAS
+    # `rubros` acota del lado del servidor: Deportes (184) devuelve 11 promos en
+    # vez de 934. Sin esto hay que bajar el catalogo entero para tirar el 99%.
+    rubros = tema.get("bbva_rubros")
     items: list[dict] = []
     vistos: set[str] = set()
 
     for pagina in range(min(tope, MAX_PAGINAS)):
+        params = {"pager": pagina}
+        if rubros:
+            params["rubros"] = ",".join(str(r) for r in rubros)
         try:
-            r = cliente.get(API, params={"pager": pagina}, headers=CABECERAS, timeout=25.0)
+            r = cliente.get(API, params=params, headers=CABECERAS, timeout=25.0)
             r.raise_for_status()
             lote = r.json().get("data") or []
         except (httpx.HTTPError, ValueError) as e:

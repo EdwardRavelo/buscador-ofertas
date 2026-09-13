@@ -1035,6 +1035,115 @@ OFERTAS quedo afuera a proposito: se pidieron las otras tres zonas, y ahi la
 tarjeta de promo ya trae su marca "NUEVA". Si se quiere unificar, es usar el mismo
 `.led` en la plantilla de oferta.
 
+## Luz que sigue al cursor (2026-09-12)
+
+Se eligio la opcion mas contenida de tres: la luz vive DENTRO de la tarjeta bajo
+el mouse, no sobre la pagina. Se descartaron:
+
+- LINTERNA sobre toda la pagina (oscurecer el resto): peleaba con el contraste
+  recien auditado y hace peor el escaneo de un tablero denso.
+- HALO ambiental detras del contenido: lindo pero no señala nada.
+
+Como funciona: un `radial-gradient` en `::before` cuyo centro escribe el JS en
+`--luz-x` / `--luz-y`. Toma `var(--accent)`, asi que enciende rosa en Cine,
+violeta en Este finde y teal en Agenda sin una regla por zona.
+
+Detalles:
+- REUSA el `pointermove` que ya movia la inclinacion 3D. Un solo listener
+  delegado hace las dos cosas: la luz en cualquier tarjeta o destacada, la
+  inclinacion solo en las de oferta.
+- `color-mix(in srgb, var(--accent) 22%, transparent)` para sacar la version
+  translucida del acento. Va declarado DOS veces: la primera con un gris neutro
+  como respaldo para navegadores sin color-mix, que se quedan con una luz sin
+  color en vez de sin luz.
+- `isolation: isolate` en la tarjeta y `z-index: 1` en los hijos, EXCEPTO el
+  boton de voltear: es absolute con su propio z-index y darle position relative
+  lo sacaria de la esquina.
+- Sigue apagado con `prefers-reduced-motion` y en tactil, por el mismo guard que
+  ya cubria la inclinacion.
+
+Verificado en claro y en oscuro. Nota de metodo: el `:hover` matchea pero la
+TRANSICION no corre en la pestaña de la extension (segundo plano), asi que
+`opacity` se lee 0 para siempre; hay que inyectar `transition: none` para medir
+el estado final. Mismo sintoma que con el volteo y el carrusel.
+
+### La luz tambien a escala de pagina (2026-09-12)
+
+Pedido despues: que la luz sea sobre TODO, no solo sobre las tarjetas. Se agrego
+`.luz-ambiente`, una capa `position: fixed` que cubre el viewport con un halo de
+720px centrado en el cursor.
+
+Quedaron las DOS luces, en capas distintas: la ambiental da atmosfera y la de la
+tarjeta señala que estas apuntando. Si alguna sobra, son independientes.
+
+- `z-index: 0` con `.envoltorio` en 1 y `pointer-events: none`. Verificado con
+  `elementFromPoint`: la capa no intercepta un solo clic.
+- El acento lo cambia el JS al cambiar de pestana (`capa.dataset.acento`), asi
+  que el halo es violeta en Este finde, rosa en Cine, teal en Agenda y ambar en
+  Ofertas. Verificado en las cuatro.
+- Alfa 12%, mas baja que el 22% de la tarjeta: a escala de pantalla completa
+  cualquier cosa mas fuerte convierte el tablero en una lampara.
+- Se escribe una vez por frame con requestAnimationFrame. Repintar un degradado
+  de pantalla completa en cada pointermove es caro; guardar la ultima posicion y
+  pintar en el frame siguiente sale gratis.
+- Mismo respaldo sin `color-mix()` que la luz de la tarjeta.
+
+### La luz por tarjeta se saco (2026-09-12)
+
+Daba problemas al pasar el mouse por encima. Queda asi:
+- FONDO: `.luz-ambiente`, el halo de pantalla completa que sigue al cursor.
+- TARJETAS: solo el hover de siempre (el borde toma el acento de la zona) y la
+  inclinacion 3D en las de oferta. Nada de `::before` ni de `--luz-x`.
+
+Se saco tambien el `isolation: isolate` y el `z-index` en los hijos, que existian
+solo para que el contenido quedara por encima de esa luz.
+
+NOTA DE METODO, porque me equivoque: al diagnosticar medi el LED del carrusel con
+`document.querySelector('.diapositiva')`, que devuelve el PRIMERO DEL DOM, y ese
+esta en la zona oculta. Un elemento con display:none devuelve ceros en
+`getBoundingClientRect`, asi que conclui que el LED estaba roto cuando no lo
+estaba. Medido en la zona visible da 15/15, correcto. Para medir geometria hay que
+partir de `.zona:not([hidden])`, siempre.
+
+## Zona "Ahora": pedidos para el momento (2026-09-13)
+
+Quinta zona, acento VERDE (claro #1B7A43, oscuro #5FD08A; medidos como el resto).
+Es distinta a todas: no la llena la corrida diaria sino un comando, y vence a las
+23:59 del mismo dia.
+
+    run.py ahora --rubros shopping --cuotas --lugar "Alto Avellaneda"                  --en "https://www.altoavellaneda.com.ar/"
+
+Piezas nuevas:
+- `ingesta: manual` -> `es_dia_de_ingesta()` devuelve False siempre, asi la tarea
+  diaria no lo toca.
+- `caduca: hoy` -> `fin_del_dia()` en calendario.py.
+- `bbva_rubros` en la fuente: la API acepta `rubros`, y eso acota DEL LADO DEL
+  SERVIDOR (Deportes son 11 promos, no 934).
+- Cada pedido REEMPLAZA al anterior: la zona muestra lo que pediste recien, no el
+  historial de paseos.
+
+### El cruce con el lugar es lo que lo hace util
+
+Sin el, "voy al shopping" devolvia **99 promos**, con ruido obvio: Boca Juniors
+Plateas, tiendas solo-web, "Crocs -mdq-" (Mar del Plata). Con `--en URL` quedan
+**25**, todas de locales que estan en ese shopping.
+
+El cruce va AL REVES de lo intuitivo: en vez de parsear la lista de locales de la
+pagina del shopping (nombres de varias palabras, sin marcado util), se toma el
+`comercio` que ya trae cada promo de BBVA y se lo busca en el texto de esa pagina.
+No hay que adivinar donde termina un nombre y empieza el otro. Se exige limite de
+palabra y 4 letras minimo: "Ver", "Cat", "Exit" y "Grid" son comercios reales y
+aparecen dentro de otras palabras.
+
+### Mercado Pago: no se pudo, y no es por no poder leerlo
+
+Se pidio BBVA **y Mercado Pago**. MP quedo afuera con evidencia: su sitio publico
+de promociones (`promociones.mercadopago.com.ar`, al que redirige
+`mercadopago.com.ar/promociones`) sigue mostrando el **Hot Sale de mayo**. Medido
+en el navegador del usuario, con su sesion: 12 menciones de "mayo", ninguna de
+otro mes, el 13 de septiembre. No es un problema de acceso: la fuente esta
+desactualizada. Las promos vigentes de MP viven en la app.
+
 ## Pendiente para la proxima sesion
 
 1. Telegram: salteado a pedido. `salidas/telegram.py` esta escrito y probado en seco.

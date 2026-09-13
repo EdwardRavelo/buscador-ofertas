@@ -113,7 +113,22 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
-  .envoltorio { max-width: 1560px; margin: 0 auto; padding: 32px 28px 72px; }
+  .envoltorio { max-width: 1560px; margin: 0 auto; padding: 32px 28px 72px;
+                position: relative; z-index: 1; }
+
+  /* --- Luz ambiental ------------------------------------------------------
+     La misma idea que la luz de la tarjeta, pero a escala de pagina: un halo
+     grande que sigue al cursor por detras de todo. Se ve en los margenes y
+     entre las tarjetas, que tienen fondo propio y la tapan.
+     Alfa baja (12%) a proposito: subirla convierte el tablero en una lampara y
+     arruina el contraste que esta medido. */
+  .luz-ambiente {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(720px circle at var(--luz-pag-x, 50%) var(--luz-pag-y, 0%),
+                rgba(130, 150, 160, .10), transparent 68%);
+    background: radial-gradient(720px circle at var(--luz-pag-x, 50%) var(--luz-pag-y, 0%),
+                color-mix(in srgb, var(--accent) 12%, transparent), transparent 68%);
+  }
 
   /* --- Armazon de dashboard ------------------------------------------------
      Barra lateral fija con la navegacion y el contenido a la derecha. Antes era
@@ -142,6 +157,7 @@
   .barra-lateral [data-acento="ambar"]   { --accent: #E0A94A; --sobre-acento: #201603; --tinte-zona: #241D0F; }
   .barra-lateral [data-acento="violeta"] { --accent: #A98BE8; --sobre-acento: #1C0F33; --tinte-zona: #1B1730; }
   .barra-lateral [data-acento="rosa"]    { --accent: #E88BA8; --sobre-acento: #33101C; --tinte-zona: #2A1119; }
+  .barra-lateral [data-acento="verde"]   { --accent: #5FD08A; --sobre-acento: #07200F; --tinte-zona: #0F241A; }
   .barra-lateral .sello { color: var(--panel-muted); }
   .lienzo { min-width: 0; }  /* sin esto la grilla desborda el grid padre */
 
@@ -202,16 +218,19 @@
   [data-acento="ambar"] { --accent: #8A5A00; --sobre-acento: #FFFFFF; --tinte-zona: #FBF3E4; }
   [data-acento="violeta"] { --accent: #7C4DDB; --sobre-acento: #FFFFFF; --tinte-zona: #F2EEFB; }
   [data-acento="rosa"] { --accent: #C2185B; --sobre-acento: #FFFFFF; --tinte-zona: #FBEEF3; }
+  [data-acento="verde"] { --accent: #1B7A43; --sobre-acento: #FFFFFF; --tinte-zona: #EAF6EE; }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) [data-acento="teal"]  { --accent: #52B7D6; --sobre-acento: #07161C; --tinte-zona: #12222A; }
     :root:not([data-theme="light"]) [data-acento="ambar"] { --accent: #E0A94A; --sobre-acento: #201603; --tinte-zona: #241D0F; }
     :root:not([data-theme="light"]) [data-acento="violeta"] { --accent: #A98BE8; --sobre-acento: #1C0F33; --tinte-zona: #1B1730; }
     :root:not([data-theme="light"]) [data-acento="rosa"] { --accent: #E88BA8; --sobre-acento: #33101C; --tinte-zona: #2A1119; }
+    :root:not([data-theme="light"]) [data-acento="verde"] { --accent: #5FD08A; --sobre-acento: #07200F; --tinte-zona: #0F241A; }
   }
   :root[data-theme="dark"] [data-acento="teal"]  { --accent: #52B7D6; --sobre-acento: #07161C; --tinte-zona: #12222A; }
   :root[data-theme="dark"] [data-acento="ambar"] { --accent: #E0A94A; --sobre-acento: #201603; --tinte-zona: #241D0F; }
   :root[data-theme="dark"] [data-acento="violeta"] { --accent: #A98BE8; --sobre-acento: #1C0F33; --tinte-zona: #1B1730; }
   :root[data-theme="dark"] [data-acento="rosa"] { --accent: #E88BA8; --sobre-acento: #33101C; --tinte-zona: #2A1119; }
+  :root[data-theme="dark"] [data-acento="verde"] { --accent: #5FD08A; --sobre-acento: #07200F; --tinte-zona: #0F241A; }
 
   .pestanas {
     display: flex; flex-direction: column; gap: 3px;
@@ -439,6 +458,12 @@
     transition: border-color .16s ease;
   }
   .tarjeta:hover { border-color: var(--accent); }
+
+  /* La luz que seguia al cursor DENTRO de la tarjeta se saco a pedido: daba
+     problemas al pasar por encima. En las tarjetas queda el hover de siempre
+     (el borde toma el acento) y la inclinacion 3D en las de oferta; la luz vive
+     solo en el fondo, en `.luz-ambiente`. */
+  .diapositiva { position: relative; }
   .tarjeta[hidden] { display: none; }
   /* El riel izquierdo codifica cuan reciente es la publicacion. */
   .tarjeta.caliente { border-left-color: var(--urgente); }
@@ -706,6 +731,10 @@
 </head>
 <body>
 
+{# Capa de luz ambiental. Va DETRAS de todo y no recibe eventos: es atmosfera,
+   no interfaz. El acento lo cambia el JS al cambiar de pestana. #}
+<div class="luz-ambiente" data-acento="{{ zonas[0].acento if zonas else 'teal' }}" aria-hidden="true"></div>
+
 <div class="envoltorio">
 <div class="armazon">
 
@@ -967,6 +996,9 @@
                 {% if o.extra.dias_limitados %}
                 <div><dt>Días</dt><dd>solo {{ o.extra.dias_limitados }} por semana; el banco no publica cuáles</dd></div>
                 {% endif %}
+                {% if o.extra.contexto %}
+                <div><dt>Pedido</dt><dd>{{ o.extra.contexto }}</dd></div>
+                {% endif %}
                 <div><dt>Encaje</dt><dd>{{ '%.1f'|format(o.score) }}{% if o.motivos %} · {{ o.motivos|join(', ') }}{% endif %}</dd></div>
               </dl>
               <a class="enlace-dorso" href="{{ o.url }}" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en {{ o.fuente }}</a>
@@ -1085,6 +1117,9 @@
         var z = panel(p);
         if (z) { z.hidden = !es; }
       });
+      // La luz ambiental toma el color de la zona que se esta viendo.
+      var capa = document.querySelector('.luz-ambiente');
+      if (capa && elegida.dataset.acento) { capa.dataset.acento = elegida.dataset.acento; }
       try { localStorage.setItem('radar:zona', elegida.dataset.zona); } catch (e) { /* ventana privada */ }
       if (mover) { elegida.focus(); }
       // Las pistas ocultas miden 0: al mostrarse hay que recalcular flechas.
@@ -1180,23 +1215,47 @@
 
     var GRADOS = 5;  // suficiente para que se note, poco para que no maree
 
+    // --- Luz ambiental -------------------------------------------------------
+    // Repintar un degradado de pantalla completa en CADA pointermove es caro:
+    // se guarda la ultima posicion y se escribe una sola vez por frame.
+    (function () {
+      var capa = document.querySelector('.luz-ambiente');
+      if (!capa) { return; }
+      var x = 0, y = 0, pendiente = false;
+
+      function pintar() {
+        pendiente = false;
+        capa.style.setProperty('--luz-pag-x', x.toFixed(1) + '%');
+        capa.style.setProperty('--luz-pag-y', y.toFixed(1) + '%');
+      }
+
+      window.addEventListener('pointermove', function (e) {
+        if (e.pointerType !== 'mouse') { return; }
+        x = (e.clientX / window.innerWidth) * 100;
+        y = (e.clientY / window.innerHeight) * 100;
+        if (!pendiente) { pendiente = true; requestAnimationFrame(pintar); }
+      }, { passive: true });
+    })();
+
+    // Solo la inclinacion de las tarjetas de oferta. La luz por tarjeta se
+    // saco: ahora la unica luz es la ambiental, de fondo.
     document.addEventListener('pointermove', function (e) {
-      if (e.pointerType !== 'mouse') { return; }
-      var tarjeta = e.target.closest ? e.target.closest('.tarjeta.promo') : null;
+      if (e.pointerType !== 'mouse' || !e.target.closest) { return; }
+      var tarjeta = e.target.closest('.tarjeta.promo');
       if (!tarjeta || tarjeta.classList.contains('volteada')) { return; }
       var caja = tarjeta.getBoundingClientRect();
       if (!caja.width || !caja.height) { return; }
-      // -0.5 a 0.5 desde el centro de la tarjeta.
-      var px = (e.clientX - caja.left) / caja.width - 0.5;
-      var py = (e.clientY - caja.top) / caja.height - 0.5;
+      var lx = (e.clientX - caja.left) / caja.width;
+      var ly = (e.clientY - caja.top) / caja.height;
       // rotateX se invierte: mover el mouse hacia abajo tiene que hundir el
       // borde de abajo, no levantarlo.
-      tarjeta.style.setProperty('--ry', (px * GRADOS).toFixed(2) + 'deg');
-      tarjeta.style.setProperty('--rx', (-py * GRADOS).toFixed(2) + 'deg');
+      tarjeta.style.setProperty('--ry', ((lx - 0.5) * GRADOS).toFixed(2) + 'deg');
+      tarjeta.style.setProperty('--rx', (-(ly - 0.5) * GRADOS).toFixed(2) + 'deg');
     }, { passive: true });
 
     document.addEventListener('pointerout', function (e) {
-      var tarjeta = e.target.closest ? e.target.closest('.tarjeta.promo') : null;
+      if (!e.target.closest) { return; }
+      var tarjeta = e.target.closest('.tarjeta.promo');
       if (!tarjeta || tarjeta.contains(e.relatedTarget)) { return; }
       tarjeta.style.removeProperty('--rx');
       tarjeta.style.removeProperty('--ry');

@@ -159,6 +159,13 @@ la excepción: ahí vuelve a mandar el score, porque es un destaque, no una agen
 - **El carrusel apaga `scroll-snap-type` y `scroll-behavior` via `.pista.viva`.** Con
   snap la deriva pelea contra el iman; con `behavior: smooth` cada `scrollLeft = x` se
   anima y el bucle infinito tiembla. No devolverlos sin sacar la deriva.
+- **NUNCA escribir escapes de barra invertida con un heredoc de Bash.** Los convierte
+  en caracteres de control invisibles: `` -> 0x01, `` -> 0x08 (backspace), `` ->
+  0x07. El codigo queda sintacticamente valido, la regex nunca matchea y grep no muestra
+  nada raro. Ya paso tres veces. Para contenido con backslashes: la herramienta Write.
+- **Para medir geometria, partir de `.zona:not([hidden])`.** `querySelector('.tarjeta')`
+  devuelve la primera del DOM, que suele estar en una zona oculta, y ahi
+  `getBoundingClientRect` da todo ceros. Ya me llevo a un diagnostico falso.
 - **rAF no corre en la pestana de la extension** (`visibilityState: hidden`, 0 ticks).
   Para probar animaciones, disparar PointerEvents sinteticos o medir la logica aparte.
 - **El bloque `@media (max-width: 1020px)` va al FINAL del `<style>`.** Comparte

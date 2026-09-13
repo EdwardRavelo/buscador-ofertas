@@ -43,14 +43,32 @@ def es_dia_de_ingesta(tema: dict, ahora: datetime | None = None) -> bool:
     de informacion vencida. De jueves a domingo es cuando los medios publican la
     agenda del finde que viene.
     """
+    if tema.get("ingesta") == "manual":
+        # Temas que solo se llenan a pedido (`run.py ahora`). La corrida diaria
+        # no tiene que tocarlos.
+        return False
     if tema.get("ingesta") != "finde":
         return True
     dia = (ahora or datetime.now(ARGENTINA)).astimezone(ARGENTINA).weekday()
     return JUEVES <= dia <= DOMINGO
 
 
+def fin_del_dia(ahora: datetime | None = None) -> datetime:
+    """Hoy a las 23:59 de Buenos Aires.
+
+    Lo que se pide "para ahora" (una salida, un shopping) no sirve manana: la
+    zona se vacia sola al cambiar el dia en vez de quedar mostrando el paseo de
+    ayer.
+    """
+    ahora = (ahora or datetime.now(ARGENTINA)).astimezone(ARGENTINA)
+    return ahora.replace(hour=23, minute=59, second=0, microsecond=0)
+
+
 def caducidad(tema: dict, ahora: datetime | None = None) -> datetime | None:
     """Cuando vence lo que traiga este tema, o None si no caduca por calendario."""
-    if tema.get("caduca") == "finde":
+    cuando = tema.get("caduca")
+    if cuando == "finde":
         return fin_del_finde(ahora)
+    if cuando == "hoy":
+        return fin_del_dia(ahora)
     return None
