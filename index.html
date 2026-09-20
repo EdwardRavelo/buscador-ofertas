@@ -6,7 +6,20 @@
 <title>Radar Porteño</title>
 <meta name="description" content="Talleres, cursos, festivales y teatro gratis en Buenos Aires, vigilados a diario.">
 <meta name="robots" content="noindex">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>📻</text></svg>">
+<!-- Favicon: un PPI de radar nautico, dibujado a mano en vez del emoji de radio
+     que estaba antes. Va como data URI (cero pedidos, cero archivos que
+     desplegar) y por eso el SVG usa comillas simples y %23 en vez de # : el
+     numeral cortaria la URI en un fragmento.
+     Decisiones que se tomaron mirandolo a 16px, que es donde vive un favicon:
+       - Solo UN anillo de alcance. Con dos y la cruz completa, a 16px era una
+         mancha oscura sin forma.
+       - El aro exterior va en el teal del sitio y grueso: es lo unico que da
+         silueta de radar cuando el icono mide 16 pixeles.
+       - La estela de 90 grados queda DETRAS del haz, no adelante: un radar
+         nautico barre en sentido horario.
+       - El eco ambar (el acento de Ofertas) es lo que salva la legibilidad a
+         16px; sin el, el icono es un disco oscuro. -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%230A2430'/><circle cx='16' cy='16' r='14.2' fill='none' stroke='%2352B7D6' stroke-width='2.2'/><circle cx='16' cy='16' r='8.4' fill='none' stroke='%2352B7D6' stroke-width='1.1' opacity='.45'/><path d='M16 16 L2.9 16 A13.1 13.1 0 0 1 16 2.9 Z' fill='%2352B7D6' opacity='.5'/><path d='M16 16 L16 2.9' stroke='%23BFF0FB' stroke-width='2.4' stroke-linecap='round'/><circle cx='10.2' cy='10.6' r='2.9' fill='%23E0A94A'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Piazzolla:opsz,wght@8..30,400;8..30,600;8..30,800&display=swap">
@@ -740,7 +753,7 @@
 <aside class="barra-lateral">
   <header class="encabezado">
     <h1>Radar Porteño</h1>
-    <p class="sello">Actualizado 20/09/2026 15:43</p>
+    <p class="sello">Actualizado 20/09/2026 20:08</p>
   </header>
 
   
@@ -764,8 +777,8 @@
             aria-selected="false"
             tabindex="-1">
       <span class="nombre-pestana">Este finde</span>
-      <span class="cuenta-pestana">7</span>
-      <span class="pip" aria-label="6 nuevas"></span>
+      <span class="cuenta-pestana">8</span>
+      <span class="pip" aria-label="5 nuevas"></span>
     </button>
     
     <button class="pestana" type="button" role="tab"
@@ -775,8 +788,8 @@
             aria-selected="false"
             tabindex="-1">
       <span class="nombre-pestana">Cine</span>
-      <span class="cuenta-pestana">15</span>
-      <span class="pip" aria-label="5 nuevas"></span>
+      <span class="cuenta-pestana">16</span>
+      <span class="pip" aria-label="4 nuevas"></span>
     </button>
     
     <button class="pestana" type="button" role="tab"
@@ -786,8 +799,8 @@
             aria-selected="false"
             tabindex="-1">
       <span class="nombre-pestana">Agenda</span>
-      <span class="cuenta-pestana">53</span>
-      <span class="pip" aria-label="4 nuevas"></span>
+      <span class="cuenta-pestana">55</span>
+      <span class="pip" aria-label="2 nuevas"></span>
     </button>
     
     <button class="pestana" type="button" role="tab"
@@ -797,8 +810,8 @@
             aria-selected="false"
             tabindex="-1">
       <span class="nombre-pestana">Ofertas</span>
-      <span class="cuenta-pestana">43</span>
-      
+      <span class="cuenta-pestana">57</span>
+      <span class="pip" aria-label="14 nuevas"></span>
     </button>
     
   </div>
@@ -912,6 +925,22 @@
           <span class="led en-destacada" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
           <div class="cifra">10.0</div>
           <div class="contenido-diapositiva">
+            <h2><a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE9IdWkxS0lUa044dDA4YzZSaG4yV3JCTmZCdWZ5V1FYelBEOHdZVXlkaFdTTFZWWFBJdDk4YUZ2dzBfNVNYaDNXV0Z2OHNwWVlycVlfdml5MXlLLVU?oc=5" target="_blank" rel="noopener noreferrer" title="Qué hacer en Buenos Aires este fin de semana, más de XX planes para disfrutar del viernes 18 al domingo 20 de septiembre, con recitales, teatro, cine, streaming, muestras y gratis - Impacto Castex">Qué hacer en Buenos Aires este fin de semana, más de XX planes para disfrutar del viernes 18 al domingo 20 de septiembre, con recitales, teatro, cine, streaming, muestras y gratis - Impacto Castex</a></h2>
+            <div class="pie-tarjeta">
+              <span class="medio">impactocastex.com.ar</span>
+              <span class="punto">&middot;</span>
+              <span>vence mañana</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Qu%C3%A9+hacer+en+Buenos+Aires+este+fin+de+semana%2C+m%C3%A1s+de+XX+planes+para+disfrutar+del+viernes+18+al+domingo+20+de+septiembre%2C+con+recitales%2C+teatro%2C+cine%2C+streaming%2C+muestras+y+gratis+-+Impacto+Castex%22+site%3Aimpactocastex.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </div>
+        </article>
+        
+        
+        
+        <article class="diapositiva">
+          
+          <div class="cifra">10.0</div>
+          <div class="contenido-diapositiva">
             <h2><a href="https://news.google.com/rss/articles/CBMiwwJBVV95cUxPOFlKcWhSNW4ydXNNV0FOdFZBODdMSW82T3hPYlpmYzh3Slp6aG54OTBkQVdoejBXNWswTUpETmp5cGNiSm40QkZ6RXNMNXZ4M0RkVHgyUy1SRER6Um8xUGhxTmtaZ1ZlX2J1RGwzNHRyRElGcGJyQlNJTU5HdnJCVElva0lxdlBRQy1VOFBqaEVhb0VSVmZUMzhabGtzdDV3N1RNQjhrMkxhQlplUmJzV1ZPWXoweGw3NEVkRUhzWE9XTElfSGkzOWptcnlNdmllSFFwZGxudjd6cXJUSVQzdUI5UkExREtJUG1hdUJGMnMydXh3T0NNc0NNeGtZMjAtUkdKMHFuWDVxenU1dURtX01tckM1ZzR0WnMzWDdpcXB2NFRhVWYwdlNHeHVRNEVfXzBRdjRTcHoyQmZJOHlmd3E2QQ?oc=5" target="_blank" rel="noopener noreferrer" title="Qué hacer en Buenos Aires este fin de semana, más de XX planes para disfrutar del viernes 18 al domingo 20 de septiembre, con recitales, teatro, cine, streaming, muestras y gratis - FM Universo 97.3">Qué hacer en Buenos Aires este fin de semana, más de XX planes para disfrutar del viernes 18 al domingo 20 de septiembre, con recitales, teatro, cine, streaming, muestras y gratis - FM Universo 97.3</a></h2>
             <div class="pie-tarjeta">
               <span class="medio">universoturadio.com.ar</span>
@@ -961,15 +990,19 @@
       <div class="puntos" role="tablist" aria-label="Ir a destacado">
         
         <button class="punto-nav" type="button" role="tab" data-indice="0"
-                aria-label="Destacado 1 de 3"
+                aria-label="Destacado 1 de 4"
                 aria-selected="true"></button>
         
         <button class="punto-nav" type="button" role="tab" data-indice="1"
-                aria-label="Destacado 2 de 3"
+                aria-label="Destacado 2 de 4"
                 aria-selected="false"></button>
         
         <button class="punto-nav" type="button" role="tab" data-indice="2"
-                aria-label="Destacado 3 de 3"
+                aria-label="Destacado 3 de 4"
+                aria-selected="false"></button>
+        
+        <button class="punto-nav" type="button" role="tab" data-indice="3"
+                aria-label="Destacado 4 de 4"
                 aria-selected="false"></button>
         
       </div>
@@ -979,17 +1012,17 @@
 
     <div class="metricas">
       <div class="metrica">
-        <span class="valor">7</span>
+        <span class="valor">8</span>
         <span class="clave">en seguimiento</span>
       </div>
       <div class="metrica">
-        <span class="valor acento">6</span>
+        <span class="valor acento">5</span>
         <span class="clave">nuevas (48 h)</span>
       </div>
       
       
       <div class="metrica">
-        <span class="valor calor">7</span>
+        <span class="valor calor">8</span>
         <span class="clave">recién publicadas</span>
       </div>
       
@@ -1008,9 +1041,9 @@
       <summary>
         <span class="chevron" aria-hidden="true"></span>
         <span class="nombre-tema">Musica, teatro y arte</span>
-        <span class="marca nueva">6 nuevas</span>
+        <span class="marca nueva">5 nuevas</span>
         
-        <span class="cuenta-tema">7</span>
+        <span class="cuenta-tema">8</span>
         <span class="tope alto">10.0</span>
       </summary>
       <div class="cuerpo-tema">
@@ -1018,10 +1051,10 @@
         <div class="grilla ">
           
           
-          <article class="tarjeta caliente" data-nuevo="si">
+          <article class="tarjeta caliente" data-nuevo="no">
             <div class="fila-superior">
               
-              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              
               <span class="cifra-chica alto">9.3</span>
               <span class="marca reciente">recién</span>
             </div>
@@ -1126,7 +1159,7 @@
         
         
         <article class="diapositiva">
-          <span class="led en-destacada" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+          
           <div class="cifra">9.6</div>
           <div class="contenido-diapositiva">
             <h2><a href="https://news.google.com/rss/articles/CBMihAJBVV95cUxQbVdZU2dPLXZUUUQ0TjVodzJ5eGc1SlgtVEZIWTg3TVJvQXpjSE96aTVfa2toM25FWFY0ZEE2N19yUmVETlEtc0JhY0Y4WjZiY1pmOUZrRUg4NWZnZW9LMmctcXFJUDJEMVVyZ0lTZ3ZGdHFxS2tZUFYyNFhnQ2RPSmJzc0c0OGppbThJZTNramVVcF9pLWdxWGdFTFBMMzkyeGtlVktxdkJjUEpQVS1zNm1GdEpEdDJRTWJMeUlReFVxMnRrMTgwaERKZVpZSGxXbW14UHd4Y2NKN09rZ3YxZUdWTC1KaUt2UkdDRmF4ZEJTUFJVNm1TYy1LN1FobEk3dHJuNdIBhAJBVV95cUxQbVdZU2dPLXZUUUQ0TjVodzJ5eGc1SlgtVEZIWTg3TVJvQXpjSE96aTVfa2toM25FWFY0ZEE2N19yUmVETlEtc0JhY0Y4WjZiY1pmOUZrRUg4NWZnZW9LMmctcXFJUDJEMVVyZ0lTZ3ZGdHFxS2tZUFYyNFhnQ2RPSmJzc0c0OGppbThJZTNramVVcF9pLWdxWGdFTFBMMzkyeGtlVktxdkJjUEpQVS1zNm1GdEpEdDJRTWJMeUlReFVxMnRrMTgwaERKZVpZSGxXbW14UHd4Y2NKN09rZ3YxZUdWTC1KaUt2UkdDRmF4ZEJTUFJVNm1TYy1LN1FobEk3dHJuNQ?oc=5" target="_blank" rel="noopener noreferrer" title="El festival de cine de la UBA anuncia su edición más ambiciosa: homenajes, becas y nuevas sedes en Buenos Aires - Infobae">El festival de cine de la UBA anuncia su edición más ambiciosa: homenajes, becas y nuevas sedes en Buenos Aires - Infobae</a></h2>
@@ -1149,7 +1182,7 @@
             <div class="pie-tarjeta">
               <span class="medio">cemba.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>ayer</span>
+              <span>hace 2 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Festival+de+cine+de+la+UBA+gratis+en+Balvanera%3A+el+Cine+Cosmos+con+proyecciones+internacionales+-+Diario+CEMBA%22+site%3Acemba.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -1161,11 +1194,27 @@
           <span class="led en-destacada" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
           <div class="cifra">9.1</div>
           <div class="contenido-diapositiva">
+            <h2><a href="https://news.google.com/rss/articles/CBMi6wFBVV95cUxPYlFySUVaREF2UVlHZFJHNU0zb0hRTEg2REpyNURqTE9XbGtlejRNZ1daVlVPUVJPRGR1b2oxR1JiX3J4UmFzQXFBY3EtZU0ySDZIam84TUktVkhxWXVDV2ZMWHFUc2o0ODkxMkJqeWtlUlBXUHZhRVlVTmhhN0RGYzdxUnF0YktnamRwZFhIZ01RZW45T1JMdTRNX1hyZTBDdktZRnlBTmx6UXgzSVhGb2UzeC1JeTQ2QVBJZEhoZTA0WHNmdWEtX090SGRtT2w0ci1Bd3c4Q3dELXoxVHB1bnhhWndrZUE1TEdB0gGGAkFVX3lxTE5ZTmQweGgxbU5WWFBUMVJ2ZVFTVzBLX3dsXzlsc2RCdXZ0bnZ4WDEzZWQyS2FDNmFJOFBNX3RUUkFOUlE5QlJUd1RIdWRhd3pZYTB2YWtqc1h6eUZaUEx1YWxXbFBDVmNPelRUSjFqM2FlSUwxQ2ZnVG9QV2wyanNvQ0tOaWYtNXdHMVFqMm9WSjFYUGJvSFFISGVFS0d5NGNJaU9aRW5QTTRFT0dTc0JnNkFnOS1ucl91VDNPV19RcUJzLTJVSC1OeW81VTRNV3RIMWF2ZkRaanVrX0hCZndzMW8tXzVrSnpKb180c2pzLXFqZ291c0dHSnpDdXZNTlVfeVNMMUE?oc=5" target="_blank" rel="noopener noreferrer" title="El Festival de Cine Alemán trae a Buenos Aires trece sorprendentes películas para ver hasta el 23 de septiembre - Infobae">El Festival de Cine Alemán trae a Buenos Aires trece sorprendentes películas para ver hasta el 23 de septiembre - Infobae</a></h2>
+            <div class="pie-tarjeta">
+              <span class="medio">infobae.com</span>
+              <span class="punto">&middot;</span>
+              <span>hace 3 días</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+Festival+de+Cine+Alem%C3%A1n+trae+a+Buenos+Aires+trece+sorprendentes+pel%C3%ADculas+para+ver+hasta+el+23+de+septiembre+-+Infobae%22+site%3Ainfobae.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </div>
+        </article>
+        
+        
+        
+        <article class="diapositiva">
+          
+          <div class="cifra">9.1</div>
+          <div class="contenido-diapositiva">
             <h2><a href="https://news.google.com/rss/articles/CBMi7AFBVV95cUxNZ0pvd1lnMkVrWGw3ZWNDdEdJLS0wRVlvWVo0bjl4QzI3SHJTbTdHWWh6X01GeThYMW0tNHB6OWVJU0JKUFE3R2tqQ0NHQ0gtRUZSTWVkb3NRRzJVN282VW1KdDZRM2FGSWRtd05KNHJndjM4ak90ZXJ1eVRTLUN6N3A0V0VxaDA2VFlGTWd3YUh6dVpIRXYwY3pQNTFCaDU3UnVmUG85aTZBeFNHT1JxcEZWVFVJLVc5R2RDVkRhN2xYZElDelJTS2lpd21PZy0ySnlIRnlPVm81S2IzRUR4RnRmQzJlZDI4bzJOeNIB8gFBVV95cUxONTV2ZlRlLWR4RnVPcEhUWUxVbTllTDNDWHZJR3RETVlYWkdxcEplOERIWV9HWDhLZVdFUHMta2JEZ1VXSi1LZ2Z1SWRRLUQzN2ZQRkNsSWdzeHA5ZVVRVURmNmh2MjlKblFnZk5HNDI5NGN2dzd3WGJZcS1wTzNUOWJsM3E2U2g4MEhwdEYxTDUtQzBlVENkbTV6RjNYZjB0QS00NldCbUlJdjR4YnlUWFlJcy10Y3VJYjBwMzRoSzJfOGJ2V0pxLWJtWkNMX0ZpVWdtMjRlX2R5cTVsV0pDWUR1YnptQzc0NFhZNGw5dzJOZw?oc=5" target="_blank" rel="noopener noreferrer" title="El Festival de Cine Alemán 2026 llega a Buenos Aires: fechas, películas e invitados de su 26º edición - EscribiendoCine">El Festival de Cine Alemán 2026 llega a Buenos Aires: fechas, películas e invitados de su 26º edición - EscribiendoCine</a></h2>
             <div class="pie-tarjeta">
               <span class="medio">escribiendocine.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 3 días</span>
+              <span>hace 4 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+Festival+de+Cine+Alem%C3%A1n+2026+llega+a+Buenos+Aires%3A+fechas%2C+pel%C3%ADculas+e+invitados+de+su+26%C2%BA+edici%C3%B3n+-+EscribiendoCine%22+site%3Aescribiendocine.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -1178,15 +1227,19 @@
       <div class="puntos" role="tablist" aria-label="Ir a destacado">
         
         <button class="punto-nav" type="button" role="tab" data-indice="0"
-                aria-label="Destacado 1 de 3"
+                aria-label="Destacado 1 de 4"
                 aria-selected="true"></button>
         
         <button class="punto-nav" type="button" role="tab" data-indice="1"
-                aria-label="Destacado 2 de 3"
+                aria-label="Destacado 2 de 4"
                 aria-selected="false"></button>
         
         <button class="punto-nav" type="button" role="tab" data-indice="2"
-                aria-label="Destacado 3 de 3"
+                aria-label="Destacado 3 de 4"
+                aria-selected="false"></button>
+        
+        <button class="punto-nav" type="button" role="tab" data-indice="3"
+                aria-label="Destacado 4 de 4"
                 aria-selected="false"></button>
         
       </div>
@@ -1196,11 +1249,11 @@
 
     <div class="metricas">
       <div class="metrica">
-        <span class="valor">15</span>
+        <span class="valor">16</span>
         <span class="clave">en seguimiento</span>
       </div>
       <div class="metrica">
-        <span class="valor acento">5</span>
+        <span class="valor acento">4</span>
         <span class="clave">nuevas (48 h)</span>
       </div>
       
@@ -1225,9 +1278,9 @@
       <summary>
         <span class="chevron" aria-hidden="true"></span>
         <span class="nombre-tema">Ciclos de cine</span>
-        <span class="marca nueva">5 nuevas</span>
+        <span class="marca nueva">4 nuevas</span>
         
-        <span class="cuenta-tema">15</span>
+        <span class="cuenta-tema">16</span>
         <span class="tope alto">9.6</span>
       </summary>
       <div class="cuerpo-tema">
@@ -1246,7 +1299,7 @@
             <div class="pie-tarjeta">
               <span class="medio">escribiendocine.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 9 días</span>
+              <span>hace 10 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22OFFNI+Cine+Fest+2026+presenta+su+programaci%C3%B3n+en+la+Casa+del+Bicentenario+-+EscribiendoCine%22+site%3Aescribiendocine.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1264,7 +1317,7 @@
             <div class="pie-tarjeta">
               <span class="medio">escribiendocine.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 14 días</span>
+              <span>hace 15 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Banff+Mountain+Film+Festival+2026+llega+a+Buenos+Aires%3A+fechas%2C+programaci%C3%B3n+y+entradas+-+EscribiendoCine%22+site%3Aescribiendocine.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1282,7 +1335,7 @@
             <div class="pie-tarjeta">
               <span class="medio">lavozdetandil.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 15 días</span>
+              <span>hace 16 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cartelera+de+pel%C3%ADculas+en+Sala+INCAA%2C+con+funciones+gratuitas+del+Festival+Internacional+de+Cine+de+Buenos+Aires+-+La+Voz+de+Tandil%22+site%3Alavozdetandil.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1487,14 +1540,14 @@
         
         
         <article class="diapositiva">
-          <span class="led en-destacada" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+          
           <div class="cifra">9.7</div>
           <div class="contenido-diapositiva">
             <h2><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE85ZW9KNEdiR1VOSHFiOUt1QzBsb1g1UW90MjFBcU5DWHJCMWFxcjRpenBFN0pCWWJ4dFd0WVdYV296TVRYTUFubDlJUG5KQzFoRVNaZHAybGFBWkFWbzNaMGZKUWV2Zi1CRHR3VG01eno?oc=5" target="_blank" rel="noopener noreferrer" title="Agenda cultural: teatro, música, FIBA y actividades gratuitas para disfrutar en Buenos Aires - Nota al Pie">Agenda cultural: teatro, música, FIBA y actividades gratuitas para disfrutar en Buenos Aires - Nota al Pie</a></h2>
             <div class="pie-tarjeta">
               <span class="medio">notaalpie.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 5 días</span>
+              <span>hace 6 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Agenda+cultural%3A+teatro%2C+m%C3%BAsica%2C+FIBA+y+actividades+gratuitas+para+disfrutar+en+Buenos+Aires+-+Nota+al+Pie%22+site%3Anotaalpie.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -1535,6 +1588,22 @@
         
         
         <article class="diapositiva">
+          <span class="led en-destacada" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+          <div class="cifra">9.5</div>
+          <div class="contenido-diapositiva">
+            <h2><a href="https://news.google.com/rss/articles/CBMifEFVX3lxTE0wZFJZeWEzZkZRQzhHM1lCR21jV0U0RU1raUZGeUJOOUs3enJ2b0wycVBWZzd3WWdyX0E5VUQ2ZEl4ZWEyNFdickRtamozT0JZcHM5WWtSWlVCcmVKOG5PTlNkMzBNanJVV0tfN0x0QmVFdmNTc3B3NVhXMlQ?oc=5" target="_blank" rel="noopener noreferrer" title="Solo este domingo: el Teatro Colón transmite gratis el gran cierre de su ballet inspirado en Borges, con música de Santaolalla y voz de Ricardo Darín - Buenos Aires Secreta">Solo este domingo: el Teatro Colón transmite gratis el gran cierre de su ballet inspirado en Borges, con música de Santaolalla y voz de Ricardo Darín - Buenos Aires Secreta</a></h2>
+            <div class="pie-tarjeta">
+              <span class="medio">bairessecreta.com</span>
+              <span class="punto">&middot;</span>
+              <span>hace 2 días</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Solo+este+domingo%3A+el+Teatro+Col%C3%B3n+transmite+gratis+el+gran+cierre+de+su+ballet+inspirado+en+Borges%2C+con+m%C3%BAsica+de+Santaolalla+y+voz+de+Ricardo+Dar%C3%ADn+-+Buenos+Aires+Secreta%22+site%3Abairessecreta.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </div>
+        </article>
+        
+        
+        
+        <article class="diapositiva">
           
           <div class="cifra">9.4</div>
           <div class="contenido-diapositiva">
@@ -1544,22 +1613,6 @@
               <span class="punto">&middot;</span>
               <span>hace 5 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+Servicio+de+Idiomas+de+la+ULL+inicia+el+nuevo+curso+con+nuevas+formaciones%2C+descuentos+y+actividades+gratuitas+-+Fundaci%C3%B3n+General+ULL%22+site%3Afg.ull.es" target="_blank" rel="noopener noreferrer">buscar la nota</a>
-            </div>
-          </div>
-        </article>
-        
-        
-        
-        <article class="diapositiva">
-          <span class="led en-destacada" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
-          <div class="cifra">9.1</div>
-          <div class="contenido-diapositiva">
-            <h2><a href="https://news.google.com/rss/articles/CBMihAJBVV95cUxQbVdZU2dPLXZUUUQ0TjVodzJ5eGc1SlgtVEZIWTg3TVJvQXpjSE96aTVfa2toM25FWFY0ZEE2N19yUmVETlEtc0JhY0Y4WjZiY1pmOUZrRUg4NWZnZW9LMmctcXFJUDJEMVVyZ0lTZ3ZGdHFxS2tZUFYyNFhnQ2RPSmJzc0c0OGppbThJZTNramVVcF9pLWdxWGdFTFBMMzkyeGtlVktxdkJjUEpQVS1zNm1GdEpEdDJRTWJMeUlReFVxMnRrMTgwaERKZVpZSGxXbW14UHd4Y2NKN09rZ3YxZUdWTC1KaUt2UkdDRmF4ZEJTUFJVNm1TYy1LN1FobEk3dHJuNdIBhAJBVV95cUxQbVdZU2dPLXZUUUQ0TjVodzJ5eGc1SlgtVEZIWTg3TVJvQXpjSE96aTVfa2toM25FWFY0ZEE2N19yUmVETlEtc0JhY0Y4WjZiY1pmOUZrRUg4NWZnZW9LMmctcXFJUDJEMVVyZ0lTZ3ZGdHFxS2tZUFYyNFhnQ2RPSmJzc0c0OGppbThJZTNramVVcF9pLWdxWGdFTFBMMzkyeGtlVktxdkJjUEpQVS1zNm1GdEpEdDJRTWJMeUlReFVxMnRrMTgwaERKZVpZSGxXbW14UHd4Y2NKN09rZ3YxZUdWTC1KaUt2UkdDRmF4ZEJTUFJVNm1TYy1LN1FobEk3dHJuNQ?oc=5" target="_blank" rel="noopener noreferrer" title="El festival de cine de la UBA anuncia su edición más ambiciosa: homenajes, becas y nuevas sedes en Buenos Aires - Infobae">El festival de cine de la UBA anuncia su edición más ambiciosa: homenajes, becas y nuevas sedes en Buenos Aires - Infobae</a></h2>
-            <div class="pie-tarjeta">
-              <span class="medio">infobae.com</span>
-              <span class="punto">&middot;</span>
-              <span>hace 3 días</span>
-              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+festival+de+cine+de+la+UBA+anuncia+su+edici%C3%B3n+m%C3%A1s+ambiciosa%3A+homenajes%2C+becas+y+nuevas+sedes+en+Buenos+Aires+-+Infobae%22+site%3Ainfobae.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
         </article>
@@ -1597,11 +1650,11 @@
 
     <div class="metricas">
       <div class="metrica">
-        <span class="valor">53</span>
+        <span class="valor">55</span>
         <span class="clave">en seguimiento</span>
       </div>
       <div class="metrica">
-        <span class="valor acento">4</span>
+        <span class="valor acento">2</span>
         <span class="clave">nuevas (48 h)</span>
       </div>
       
@@ -1614,12 +1667,12 @@
       
       
       <div class="metrica">
-        <span class="valor">20</span>
+        <span class="valor">21</span>
         <span class="clave">Cultura porteña</span>
       </div>
       
       <div class="metrica">
-        <span class="valor">33</span>
+        <span class="valor">34</span>
         <span class="clave">Formación</span>
       </div>
       
@@ -1663,7 +1716,7 @@
             <div class="pie-tarjeta">
               <span class="medio">soybibliotecario.blogspot.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 19 días</span>
+              <span>hace 20 días</span>
               
             </div>
           </article>
@@ -1681,7 +1734,7 @@
             <div class="pie-tarjeta">
               <span class="medio">villaortuzar.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 21 días</span>
+              <span>hace 22 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Abren+las+inscripciones+a+los+talleres+trimestrales+gratuitos+de+la+Biblioteca+Nacional+-+villaortuzar.ar%22+site%3Avillaortuzar.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1699,7 +1752,7 @@
             <div class="pie-tarjeta">
               <span class="medio">soybibliotecario.blogspot.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 23 días</span>
+              <span>hace 24 días</span>
               
             </div>
           </article>
@@ -1753,7 +1806,7 @@
             <div class="pie-tarjeta">
               <span class="medio">impactocastex.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 24 días</span>
+              <span>hace 25 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Borges%2C+Pizarnik%2C+Joyce%2C+Claire+Keegan+y+Roberto+Arlt%3A+las+bibliotecas+porte%C3%B1as+inscriben+en+sus+talleres+-+Impacto+Castex%22+site%3Aimpactocastex.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1771,7 +1824,7 @@
             <div class="pie-tarjeta">
               <span class="medio">clarin.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 24 días</span>
+              <span>hace 25 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Borges%2C+Pizarnik%2C+Joyce%2C+Claire+Keegan+y+Roberto+Arlt%3A+las+bibliotecas+porte%C3%B1as+inscriben+en+sus+talleres+-+Clarin.com%22+site%3Aclarin.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1789,7 +1842,7 @@
             <div class="pie-tarjeta">
               <span class="medio">eldestapeweb.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 25 días</span>
+              <span>hace 26 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cupos+limitados%3A+abri%C3%B3+la+inscripci%C3%B3n+a+los+talleres+en+las+bibliotecas+de+la+Ciudad+-+El+Destape%22+site%3Aeldestapeweb.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1836,11 +1889,11 @@
       </div>
     </details>
     
-    <details class="tema" data-tema="festivales-caba" open>
+    <details class="tema" data-tema="festivales-caba">
       <summary>
         <span class="chevron" aria-hidden="true"></span>
         <span class="nombre-tema">Festivales</span>
-        <span class="marca nueva">2 nuevas</span>
+        
         
         <span class="cuenta-tema">3</span>
         <span class="tope alto">9.1</span>
@@ -1850,19 +1903,37 @@
         <div class="grilla ">
           
           
-          <article class="tarjeta caliente" data-nuevo="si">
+          <article class="tarjeta semana" data-nuevo="no">
             <div class="fila-superior">
               
-              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              
               <span class="cifra-chica medio">8.6</span>
-              <span class="marca reciente">recién</span>
+              
             </div>
             <h3><a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxNVmxEM3B0Vm1xZ2NwdG5UemlwcUl1WmFZVV9aQ1ViVEJESThJY0tsRDhJQXBEYlY1UXlObHV0a3Q0Tk83LTY0bHhicmpPNXFIbFhVU1RjV2tBblVXd01RYXR5TEhYMWM3MjdmQk9UZnlfYWhBQW93WHpJUWZNRmp2NUU5amRFckVoN0Fic2NncTY2b3hDTkRsVVBGSEFpekNYSks3dkJKVEozcDdz?oc=5" target="_blank" rel="noopener noreferrer">En Buenos Aires. Se viene la cuarta edición del Festival Internacional de Cine de la UBA - La Voz del Interior</a></h3>
             <div class="pie-tarjeta">
               <span class="medio">lavoz.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 2 días</span>
+              <span>hace 3 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22En+Buenos+Aires.+Se+viene+la+cuarta+edici%C3%B3n+del+Festival+Internacional+de+Cine+de+la+UBA+-+La+Voz+del+Interior%22+site%3Alavoz.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </article>
+          
+          
+          
+          <article class="tarjeta semana" data-nuevo="no">
+            <div class="fila-superior">
+              
+              
+              <span class="cifra-chica alto">9.1</span>
+              
+            </div>
+            <h3><a href="https://news.google.com/rss/articles/CBMihAJBVV95cUxQbVdZU2dPLXZUUUQ0TjVodzJ5eGc1SlgtVEZIWTg3TVJvQXpjSE96aTVfa2toM25FWFY0ZEE2N19yUmVETlEtc0JhY0Y4WjZiY1pmOUZrRUg4NWZnZW9LMmctcXFJUDJEMVVyZ0lTZ3ZGdHFxS2tZUFYyNFhnQ2RPSmJzc0c0OGppbThJZTNramVVcF9pLWdxWGdFTFBMMzkyeGtlVktxdkJjUEpQVS1zNm1GdEpEdDJRTWJMeUlReFVxMnRrMTgwaERKZVpZSGxXbW14UHd4Y2NKN09rZ3YxZUdWTC1KaUt2UkdDRmF4ZEJTUFJVNm1TYy1LN1FobEk3dHJuNdIBhAJBVV95cUxQbVdZU2dPLXZUUUQ0TjVodzJ5eGc1SlgtVEZIWTg3TVJvQXpjSE96aTVfa2toM25FWFY0ZEE2N19yUmVETlEtc0JhY0Y4WjZiY1pmOUZrRUg4NWZnZW9LMmctcXFJUDJEMVVyZ0lTZ3ZGdHFxS2tZUFYyNFhnQ2RPSmJzc0c0OGppbThJZTNramVVcF9pLWdxWGdFTFBMMzkyeGtlVktxdkJjUEpQVS1zNm1GdEpEdDJRTWJMeUlReFVxMnRrMTgwaERKZVpZSGxXbW14UHd4Y2NKN09rZ3YxZUdWTC1KaUt2UkdDRmF4ZEJTUFJVNm1TYy1LN1FobEk3dHJuNQ?oc=5" target="_blank" rel="noopener noreferrer">El festival de cine de la UBA anuncia su edición más ambiciosa: homenajes, becas y nuevas sedes en Buenos Aires - Infobae</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">infobae.com</span>
+              <span class="punto">&middot;</span>
+              <span>hace 3 días</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+festival+de+cine+de+la+UBA+anuncia+su+edici%C3%B3n+m%C3%A1s+ambiciosa%3A+homenajes%2C+becas+y+nuevas+sedes+en+Buenos+Aires+-+Infobae%22+site%3Ainfobae.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
@@ -1879,7 +1950,7 @@
             <div class="pie-tarjeta">
               <span class="medio">bairessecreta.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 9 días</span>
+              <span>hace 10 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Llega+el+Festival+de+la+Luna+al+Barrio+Chino%3A+d%C3%B3nde+probar+el+legendario+%22pastel+de+la+luna%22+y+ver+la+Danza+del+Drag%C3%B3n+-+Buenos+Aires+Secreta%22+site%3Abairessecreta.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1896,7 +1967,7 @@
         <span class="nombre-tema">Teatro gratis</span>
         <span class="marca nueva">1 nueva</span>
         
-        <span class="cuenta-tema">7</span>
+        <span class="cuenta-tema">8</span>
         <span class="tope alto">10.0</span>
       </summary>
       <div class="cuerpo-tema">
@@ -1915,7 +1986,7 @@
             <div class="pie-tarjeta">
               <span class="medio">lavozdetandil.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 15 días</span>
+              <span>hace 16 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cartelera+de+pel%C3%ADculas+en+Sala+INCAA%2C+con+funciones+gratuitas+del+Festival+Internacional+de+Cine+de+Buenos+Aires+-+La+Voz+de+Tandil%22+site%3Alavozdetandil.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2034,7 +2105,7 @@
             <div class="pie-tarjeta">
               <span class="medio">elperiodicoextremadura.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 6 días</span>
+              <span>hace 7 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cursos+gratis+de+IA+y+ciberseguridad+en+la+UEx%3A+qui%C3%A9n+puede+acceder+y+c%C3%B3mo+obtener+la+certificaci%C3%B3n+internacional+-+El+Peri%C3%B3dico+Extremadura%22+site%3Aelperiodicoextremadura.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2052,7 +2123,7 @@
             <div class="pie-tarjeta">
               <span class="medio">qpasa.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 9 días</span>
+              <span>hace 10 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Meta+lanz%C3%B3+cursos+gratuitos+de+programaci%C3%B3n+e+inteligencia+artificial+-+qpasa.com%22+site%3Aqpasa.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2088,7 +2159,7 @@
             <div class="pie-tarjeta">
               <span class="medio">teleantioquia.co</span>
               <span class="punto">&middot;</span>
-              <span>hace 11 días</span>
+              <span>hace 12 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cursos+gratis+de+IA%2C+datos+y+liderazgo+con+certificado%3A+requisitos+y+c%C3%B3mo+inscribirse+por+12+meses+-+teleantioquia.co%22+site%3Ateleantioquia.co" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2124,7 +2195,7 @@
             <div class="pie-tarjeta">
               <span class="medio">iproup.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 12 días</span>
+              <span>hace 13 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Santander+lanz%C3%B3+cursos+gratis+de+IA+con+certificado+oficial+de+Coursera+-+iProUP%22+site%3Aiproup.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2232,7 +2303,7 @@
             <div class="pie-tarjeta">
               <span class="medio">blogthinkbig.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 23 días</span>
+              <span>hace 24 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%2212+cursos+gratis+para+dominar+Claude%2C+ChatGPT+y+Gemini+como+nadie+-+Blogthinkbig.com%22+site%3Ablogthinkbig.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2250,7 +2321,7 @@
             <div class="pie-tarjeta">
               <span class="medio">qpasa.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 24 días</span>
+              <span>hace 25 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22IBM+ofrece+curso+gratis+de+inteligencia+artificial+para+toda+Latinoam%C3%A9rica+-+qpasa.com%22+site%3Aqpasa.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2286,7 +2357,7 @@
             <div class="pie-tarjeta">
               <span class="medio">valoraanalitik.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 27 días</span>
+              <span>hace 28 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Platzi+ofrece+cursos+gratis+con+certificado+en+programaci%C3%B3n%2C+inteligencia+artificial+e+ingl%C3%A9s%3A+estos+son+los+-+Valora+Analitik%22+site%3Avaloraanalitik.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2411,12 +2482,30 @@
         <span class="nombre-tema">Inglés</span>
         
         
-        <span class="cuenta-tema">11</span>
+        <span class="cuenta-tema">12</span>
         <span class="tope alto">9.4</span>
       </summary>
       <div class="cuerpo-tema">
         
         <div class="grilla ">
+          
+          
+          <article class="tarjeta semana" data-nuevo="no">
+            <div class="fila-superior">
+              
+              
+              <span class="cifra-chica medio">8.2</span>
+              
+            </div>
+            <h3><a href="https://news.google.com/rss/articles/CBMi3AFBVV95cUxPeFNic0cwZHZaSUhiR2pTSnN2SXFLQXNFeUtZb0xhRGgzcF9nTElLU0lFNV9uMFBIUEVyRXN4XzdaVmtSLU5VcTBsTmVIV2Y2QUVwOFoybHRrMmh6ZnVzUUVTZTBQSVFPLURXcUUxWERwVF9hRVBZVHRRQnFwSVJzSkxXdXBnN3BlbWVYSndOS01IUDdlcDNTU2dPbjlLXzZXaUlfNGxrWU5PdWJMbDVtaWxnUFUxeHViOHRZdGtvMmFqS0xEdFRHbTZRWkhTMHB4NE01ajdPaTZrOEky?oc=5" target="_blank" rel="noopener noreferrer">La Escuela Oficial de Idiomas de Ronda saca su oferta a la calle para informar sobre el nuevo curso escolar - charrytv.com</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">charrytv.com</span>
+              <span class="punto">&middot;</span>
+              <span>hace 4 días</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22La+Escuela+Oficial+de+Idiomas+de+Ronda+saca+su+oferta+a+la+calle+para+informar+sobre+el+nuevo+curso+escolar+-+charrytv.com%22+site%3Acharrytv.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </article>
+          
           
           
           <article class="tarjeta normal" data-nuevo="no">
@@ -2466,7 +2555,7 @@
             <div class="pie-tarjeta">
               <span class="medio">eldoce.tv</span>
               <span class="punto">&middot;</span>
-              <span>hace 17 días</span>
+              <span>hace 18 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Aprendizaje+de+idiomas+gratis+en+C%C3%B3rdoba%3A+abren+las+inscripciones+para+seis+cursos+virtuales+-+eldoce%22+site%3Aeldoce.tv" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2484,7 +2573,7 @@
             <div class="pie-tarjeta">
               <span class="medio">lavoz.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 25 días</span>
+              <span>hace 26 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Atenci%C3%B3n.+C%C3%B3rdoba+Joven+y+la+UPC+abren+cursos+de+idiomas+gratuitos%3A+c%C3%B3mo+anotarse+-+La+Voz+del+Interior%22+site%3Alavoz.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2502,7 +2591,7 @@
             <div class="pie-tarjeta">
               <span class="medio">es-us.noticias.yahoo.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 27 días</span>
+              <span>hace 28 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Platzi+ofrece+cursos+gratis+con+certificado+en+programaci%C3%B3n%2C+inteligencia+artificial+e+ingl%C3%A9s%3A+estos+son+los+requisitos+-+Yahoo%22+site%3Aes-us.noticias.yahoo.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2637,6 +2726,58 @@
         
         <article class="diapositiva promo">
           
+          <img class="logo grande" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/23395_meli_317x112.png" alt=""
+               loading="lazy" decoding="async" referrerpolicy="no-referrer"
+               onerror="this.remove()">
+          
+          <div class="contenido-diapositiva">
+            <h2><a href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer">Mercado Libre</a></h2>
+            <div class="beneficio-destacado">
+              
+              
+                
+                <span class="cuotas">6 cuotas</span>
+              
+            </div>
+            <div class="pie-tarjeta">
+              
+              <span>Tarjetas de crédito BBVA</span>
+              <span class="vigencia semana">vence 30/09</span>
+            </div>
+          </div>
+        </article>
+        
+        
+        
+        
+        <article class="diapositiva promo">
+          
+          <img class="logo grande" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/23395_meli_317x112.png" alt=""
+               loading="lazy" decoding="async" referrerpolicy="no-referrer"
+               onerror="this.remove()">
+          
+          <div class="contenido-diapositiva">
+            <h2><a href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer">Mercado Libre</a></h2>
+            <div class="beneficio-destacado">
+              
+              
+                
+                <span class="cuotas">3 cuotas</span>
+              
+            </div>
+            <div class="pie-tarjeta">
+              
+              <span>Tarjetas de crédito BBVA</span>
+              <span class="vigencia semana">vence 30/09</span>
+            </div>
+          </div>
+        </article>
+        
+        
+        
+        
+        <article class="diapositiva promo">
+          
           <img class="logo grande" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/beneficio/86707_wine_317x112.png" alt=""
                loading="lazy" decoding="async" referrerpolicy="no-referrer"
                onerror="this.remove()">
@@ -2707,58 +2848,6 @@
         </article>
         
         
-        
-        
-        <article class="diapositiva promo">
-          
-          <img class="logo grande" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/5403_parfumerie_320x320.png" alt=""
-               loading="lazy" decoding="async" referrerpolicy="no-referrer"
-               onerror="this.remove()">
-          
-          <div class="contenido-diapositiva">
-            <h2><a href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer">Parfumerie</a></h2>
-            <div class="beneficio-destacado">
-              <span class="pct">20%</span>
-              
-                <span class="mas" aria-hidden="true">+</span>
-                <span class="cuotas">9 cuotas</span>
-              
-            </div>
-            <div class="pie-tarjeta">
-              <span class="tope">Tope $30.000</span>
-              <span>Tarjetas de crédito BBVA</span>
-              <span class="vigencia caliente">vence 20/09</span>
-            </div>
-          </div>
-        </article>
-        
-        
-        
-        
-        <article class="diapositiva promo">
-          
-          <img class="logo grande" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/9286_juleriaque_311x208.png" alt=""
-               loading="lazy" decoding="async" referrerpolicy="no-referrer"
-               onerror="this.remove()">
-          
-          <div class="contenido-diapositiva">
-            <h2><a href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer">Juleriaque</a></h2>
-            <div class="beneficio-destacado">
-              <span class="pct">20%</span>
-              
-                <span class="mas" aria-hidden="true">+</span>
-                <span class="cuotas">9 cuotas</span>
-              
-            </div>
-            <div class="pie-tarjeta">
-              <span class="tope">Tope $30.000</span>
-              <span>Tarjetas de crédito BBVA</span>
-              <span class="vigencia caliente">vence 20/09</span>
-            </div>
-          </div>
-        </article>
-        
-        
       </div>
 
       
@@ -2791,11 +2880,11 @@
 
     <div class="metricas">
       <div class="metrica">
-        <span class="valor">43</span>
+        <span class="valor">57</span>
         <span class="clave">en seguimiento</span>
       </div>
       <div class="metrica">
-        <span class="valor">0</span>
+        <span class="valor acento">14</span>
         <span class="clave">nuevas (48 h)</span>
       </div>
       
@@ -2813,7 +2902,7 @@
       </div>
       
       <div class="metrica">
-        <span class="valor">21</span>
+        <span class="valor">35</span>
         <span class="clave">Lo que estoy buscando</span>
       </div>
       
@@ -2847,10 +2936,150 @@
           
           
           
-          <article class="tarjeta promo volteable semana" data-nuevo="no">
+          <article class="tarjeta promo volteable caliente" data-nuevo="no">
             
             <button class="voltear" type="button"
                     aria-expanded="false" aria-controls="dorso-bbva-1"
+                    aria-label="Ver la letra chica de Parfumerie">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            
+            <div class="tapa">
+              <div class="encabezado-promo">
+                
+                <img class="logo" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/5403_parfumerie_320x320.png" alt=""
+                     loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                     onerror="this.closest('.encabezado-promo').classList.add('sin-logo')">
+                
+                <div class="identidad">
+                  <h3 class="comercio">Parfumerie</h3>
+                  <span class="plastico">Tarjetas de crédito BBVA</span>
+                </div>
+                
+              </div>
+
+              
+              <div class="beneficio">
+                <span class="pct">20%</span>
+                
+                  <span class="mas" aria-hidden="true">+</span>
+                  <span class="cuotas">9 cuotas</span>
+                
+              </div>
+              
+
+              <div class="pie-promo">
+                <span class="tope">Tope $30.000</span>
+                
+                <span class="vigencia caliente">
+                  vence 20/09
+                  <em>· último día</em>
+                </span>
+              </div>
+            </div>
+            </div>
+
+            
+            <div class="cara cara-dorso" id="dorso-bbva-1" aria-hidden="true">
+              <h4 class="titulo-dorso">Parfumerie</h4>
+              <dl class="letra-chica">
+                
+                <div><dt>Vigencia</dt><dd>14/09 al 20/09</dd></div>
+                
+                
+                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
+                
+                
+                <div><dt>Tope</dt><dd>$30.000</dd></div>
+                
+                
+                
+                <div><dt>Encaje</dt><dd>7.0 · senal: promocion, clave: cuotas</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
+            </div>
+            </div>
+          </article>
+          
+          
+          
+          
+          <article class="tarjeta promo volteable caliente" data-nuevo="no">
+            
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-bbva-2"
+                    aria-label="Ver la letra chica de Juleriaque">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            
+            <div class="tapa">
+              <div class="encabezado-promo">
+                
+                <img class="logo" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/9286_juleriaque_311x208.png" alt=""
+                     loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                     onerror="this.closest('.encabezado-promo').classList.add('sin-logo')">
+                
+                <div class="identidad">
+                  <h3 class="comercio">Juleriaque</h3>
+                  <span class="plastico">Tarjetas de crédito BBVA</span>
+                </div>
+                
+              </div>
+
+              
+              <div class="beneficio">
+                <span class="pct">20%</span>
+                
+                  <span class="mas" aria-hidden="true">+</span>
+                  <span class="cuotas">9 cuotas</span>
+                
+              </div>
+              
+
+              <div class="pie-promo">
+                <span class="tope">Tope $30.000</span>
+                
+                <span class="vigencia caliente">
+                  vence 20/09
+                  <em>· último día</em>
+                </span>
+              </div>
+            </div>
+            </div>
+
+            
+            <div class="cara cara-dorso" id="dorso-bbva-2" aria-hidden="true">
+              <h4 class="titulo-dorso">Juleriaque</h4>
+              <dl class="letra-chica">
+                
+                <div><dt>Vigencia</dt><dd>14/09 al 20/09</dd></div>
+                
+                
+                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
+                
+                
+                <div><dt>Tope</dt><dd>$30.000</dd></div>
+                
+                
+                
+                <div><dt>Encaje</dt><dd>7.0 · senal: promocion, clave: cuotas</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
+            </div>
+            </div>
+          </article>
+          
+          
+          
+          
+          <article class="tarjeta promo volteable semana" data-nuevo="no">
+            
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-bbva-3"
                     aria-label="Ver la letra chica de Nutrican">
               <span aria-hidden="true">i</span>
             </button>
@@ -2890,7 +3119,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-1" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-3" aria-hidden="true">
               <h4 class="titulo-dorso">Nutrican</h4>
               <dl class="letra-chica">
                 
@@ -2919,7 +3148,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-2"
+                    aria-expanded="false" aria-controls="dorso-bbva-4"
                     aria-label="Ver la letra chica de Coto NFC">
               <span aria-hidden="true">i</span>
             </button>
@@ -2954,7 +3183,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-2" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-4" aria-hidden="true">
               <h4 class="titulo-dorso">Coto NFC</h4>
               <dl class="letra-chica">
                 
@@ -2979,7 +3208,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-3"
+                    aria-expanded="false" aria-controls="dorso-bbva-5"
                     aria-label="Ver la letra chica de Las Margaritas">
               <span aria-hidden="true">i</span>
             </button>
@@ -3019,7 +3248,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-3" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-5" aria-hidden="true">
               <h4 class="titulo-dorso">Las Margaritas</h4>
               <dl class="letra-chica">
                 
@@ -3048,7 +3277,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-4"
+                    aria-expanded="false" aria-controls="dorso-bbva-6"
                     aria-label="Ver la letra chica de Nike">
               <span aria-hidden="true">i</span>
             </button>
@@ -3091,7 +3320,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-4" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-6" aria-hidden="true">
               <h4 class="titulo-dorso">Nike</h4>
               <dl class="letra-chica">
                 
@@ -3116,7 +3345,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-5"
+                    aria-expanded="false" aria-controls="dorso-bbva-7"
                     aria-label="Ver la letra chica de Nika Sushi">
               <span aria-hidden="true">i</span>
             </button>
@@ -3156,7 +3385,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-5" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-7" aria-hidden="true">
               <h4 class="titulo-dorso">Nika Sushi</h4>
               <dl class="letra-chica">
                 
@@ -3183,7 +3412,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-6"
+                    aria-expanded="false" aria-controls="dorso-bbva-8"
                     aria-label="Ver la letra chica de Rapanui">
               <span aria-hidden="true">i</span>
             </button>
@@ -3223,7 +3452,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-6" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-8" aria-hidden="true">
               <h4 class="titulo-dorso">Rapanui</h4>
               <dl class="letra-chica">
                 
@@ -3250,7 +3479,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-7"
+                    aria-expanded="false" aria-controls="dorso-bbva-9"
                     aria-label="Ver la letra chica de Luccianos">
               <span aria-hidden="true">i</span>
             </button>
@@ -3290,7 +3519,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-7" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-9" aria-hidden="true">
               <h4 class="titulo-dorso">Luccianos</h4>
               <dl class="letra-chica">
                 
@@ -3317,7 +3546,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-8"
+                    aria-expanded="false" aria-controls="dorso-bbva-10"
                     aria-label="Ver la letra chica de Tinta">
               <span aria-hidden="true">i</span>
             </button>
@@ -3357,7 +3586,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-8" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-10" aria-hidden="true">
               <h4 class="titulo-dorso">Tinta</h4>
               <dl class="letra-chica">
                 
@@ -3384,7 +3613,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-9"
+                    aria-expanded="false" aria-controls="dorso-bbva-11"
                     aria-label="Ver la letra chica de Paru">
               <span aria-hidden="true">i</span>
             </button>
@@ -3424,7 +3653,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-9" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-11" aria-hidden="true">
               <h4 class="titulo-dorso">Paru</h4>
               <dl class="letra-chica">
                 
@@ -3451,7 +3680,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-10"
+                    aria-expanded="false" aria-controls="dorso-bbva-12"
                     aria-label="Ver la letra chica de Mare By Fran">
               <span aria-hidden="true">i</span>
             </button>
@@ -3491,7 +3720,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-10" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-12" aria-hidden="true">
               <h4 class="titulo-dorso">Mare By Fran</h4>
               <dl class="letra-chica">
                 
@@ -3518,7 +3747,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-11"
+                    aria-expanded="false" aria-controls="dorso-bbva-13"
                     aria-label="Ver la letra chica de Bath & Body Works">
               <span aria-hidden="true">i</span>
             </button>
@@ -3561,7 +3790,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-11" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-13" aria-hidden="true">
               <h4 class="titulo-dorso">Bath & Body Works</h4>
               <dl class="letra-chica">
                 
@@ -3586,7 +3815,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-12"
+                    aria-expanded="false" aria-controls="dorso-bbva-14"
                     aria-label="Ver la letra chica de Victoria´s Secret">
               <span aria-hidden="true">i</span>
             </button>
@@ -3629,7 +3858,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-12" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-14" aria-hidden="true">
               <h4 class="titulo-dorso">Victoria´s Secret</h4>
               <dl class="letra-chica">
                 
@@ -3654,7 +3883,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-13"
+                    aria-expanded="false" aria-controls="dorso-bbva-15"
                     aria-label="Ver la letra chica de Supermercados Vea QR Modo">
               <span aria-hidden="true">i</span>
             </button>
@@ -3689,7 +3918,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-13" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-15" aria-hidden="true">
               <h4 class="titulo-dorso">Supermercados Vea QR Modo</h4>
               <dl class="letra-chica">
                 
@@ -3716,7 +3945,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-14"
+                    aria-expanded="false" aria-controls="dorso-bbva-16"
                     aria-label="Ver la letra chica de Supermercados Toledo QR Modo">
               <span aria-hidden="true">i</span>
             </button>
@@ -3756,7 +3985,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-14" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-16" aria-hidden="true">
               <h4 class="titulo-dorso">Supermercados Toledo QR Modo</h4>
               <dl class="letra-chica">
                 
@@ -3781,7 +4010,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-15"
+                    aria-expanded="false" aria-controls="dorso-bbva-17"
                     aria-label="Ver la letra chica de Jumbo QR Modo">
               <span aria-hidden="true">i</span>
             </button>
@@ -3821,7 +4050,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-15" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-17" aria-hidden="true">
               <h4 class="titulo-dorso">Jumbo QR Modo</h4>
               <dl class="letra-chica">
                 
@@ -3848,7 +4077,7 @@
           <article class="tarjeta promo volteable normal" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-16"
+                    aria-expanded="false" aria-controls="dorso-bbva-18"
                     aria-label="Ver la letra chica de Bonvivir">
               <span aria-hidden="true">i</span>
             </button>
@@ -3888,7 +4117,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-16" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-18" aria-hidden="true">
               <h4 class="titulo-dorso">Bonvivir</h4>
               <dl class="letra-chica">
                 
@@ -3913,7 +4142,7 @@
           <article class="tarjeta promo volteable normal" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-17"
+                    aria-expanded="false" aria-controls="dorso-bbva-19"
                     aria-label="Ver la letra chica de Cabify">
               <span aria-hidden="true">i</span>
             </button>
@@ -3949,7 +4178,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-17" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-19" aria-hidden="true">
               <h4 class="titulo-dorso">Cabify</h4>
               <dl class="letra-chica">
                 
@@ -5493,6 +5722,840 @@
                 
                 
                 <div><dt>Encaje</dt><dd>8.0 · Sport, cuotas, senal: promocion, clave: cuotas sin interes</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
+            </div>
+            </div>
+          </article>
+          
+          
+        </div>
+        
+      </div>
+    </details>
+    
+    <details class="tema" data-tema="kindle" open>
+      <summary>
+        <span class="chevron" aria-hidden="true"></span>
+        <span class="nombre-tema">Kindle / e-reader</span>
+        <span class="marca nueva">14 nuevas</span>
+        
+        
+        <span class="tope medio">8.5</span>
+      </summary>
+      <div class="cuerpo-tema">
+        
+        <div class="grilla grilla-oferta">
+          
+          
+          
+          <article class="tarjeta promo volteable normal" data-nuevo="si">
+            
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-kindle-1"
+                    aria-label="Ver la letra chica de Musimundo">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            
+            <div class="tapa">
+              <div class="encabezado-promo">
+                
+                <img class="logo" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/29235_musimundo_320x320.png" alt=""
+                     loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                     onerror="this.closest('.encabezado-promo').classList.add('sin-logo')">
+                
+                <div class="identidad">
+                  <h3 class="comercio">Musimundo</h3>
+                  <span class="plastico">Tarjetas de crédito BBVA</span>
+                </div>
+                <span class="marca nueva">nueva</span>
+              </div>
+
+              
+              <div class="beneficio">
+                
+                
+                  
+                  <span class="cuotas">12 cuotas</span>
+                
+              </div>
+              
+
+              <div class="pie-promo">
+                
+                
+                <span class="vigencia normal">
+                  vence 31/10
+                  
+                </span>
+              </div>
+            </div>
+            </div>
+
+            
+            <div class="cara cara-dorso" id="dorso-kindle-1" aria-hidden="true">
+              <h4 class="titulo-dorso">Musimundo</h4>
+              <dl class="letra-chica">
+                
+                <div><dt>Vigencia</dt><dd>01/09 al 31/10</dd></div>
+                
+                
+                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
+                
+                
+                
+                
+                <div><dt>Encaje</dt><dd>7.0 · Musimundo, cuotas, senal: promocion</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
+            </div>
+            </div>
+          </article>
+          
+          
+          
+          
+          <article class="tarjeta promo volteable normal" data-nuevo="si">
+            
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-kindle-2"
+                    aria-label="Ver la letra chica de Megatone.Net">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            
+            <div class="tapa">
+              <div class="encabezado-promo">
+                
+                <img class="logo" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/30936_megatone_317x112-13.png" alt=""
+                     loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                     onerror="this.closest('.encabezado-promo').classList.add('sin-logo')">
+                
+                <div class="identidad">
+                  <h3 class="comercio">Megatone.Net</h3>
+                  <span class="plastico">Tarjetas de crédito BBVA</span>
+                </div>
+                <span class="marca nueva">nueva</span>
+              </div>
+
+              
+              <div class="beneficio">
+                
+                
+                  
+                  <span class="cuotas">12 cuotas</span>
+                
+              </div>
+              
+
+              <div class="pie-promo">
+                
+                
+                <span class="vigencia normal">
+                  vence 31/10
+                  
+                </span>
+              </div>
+            </div>
+            </div>
+
+            
+            <div class="cara cara-dorso" id="dorso-kindle-2" aria-hidden="true">
+              <h4 class="titulo-dorso">Megatone.Net</h4>
+              <dl class="letra-chica">
+                
+                <div><dt>Vigencia</dt><dd>01/09 al 31/10</dd></div>
+                
+                
+                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
+                
+                
+                
+                
+                <div><dt>Encaje</dt><dd>7.0 · Megatone, cuotas, senal: promocion</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
+            </div>
+            </div>
+          </article>
+          
+          
+          
+          
+          <article class="tarjeta promo volteable normal" data-nuevo="si">
+            
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-kindle-3"
+                    aria-label="Ver la letra chica de Smartlife">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            
+            <div class="tapa">
+              <div class="encabezado-promo">
+                
+                <img class="logo" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/32671_smartlife.png" alt=""
+                     loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                     onerror="this.closest('.encabezado-promo').classList.add('sin-logo')">
+                
+                <div class="identidad">
+                  <h3 class="comercio">Smartlife</h3>
+                  <span class="plastico">Tarjetas de crédito BBVA</span>
+                </div>
+                <span class="marca nueva">nueva</span>
+              </div>
+
+              
+              <div class="beneficio">
+                
+                
+                  
+                  <span class="cuotas">12 cuotas</span>
+                
+              </div>
+              
+
+              <div class="pie-promo">
+                
+                
+                <span class="vigencia normal">
+                  vence 31/10
+                  
+                </span>
+              </div>
+            </div>
+            </div>
+
+            
+            <div class="cara cara-dorso" id="dorso-kindle-3" aria-hidden="true">
+              <h4 class="titulo-dorso">Smartlife</h4>
+              <dl class="letra-chica">
+                
+                <div><dt>Vigencia</dt><dd>01/09 al 31/10</dd></div>
+                
+                
+                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
+                
+                
+                
+                
+                <div><dt>Encaje</dt><dd>7.0 · Smartlife, cuotas, senal: promocion</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
+            </div>
+            </div>
+          </article>
+          
+          
+          
+          
+          <article class="tarjeta promo volteable normal" data-nuevo="si">
+            
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-kindle-4"
+                    aria-label="Ver la letra chica de Bidcom">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            
+            <div class="tapa">
+              <div class="encabezado-promo">
+                
+                <img class="logo" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/33113_bidcom.png" alt=""
+                     loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                     onerror="this.closest('.encabezado-promo').classList.add('sin-logo')">
+                
+                <div class="identidad">
+                  <h3 class="comercio">Bidcom</h3>
+                  <span class="plastico">Tarjetas de crédito BBVA</span>
+                </div>
+                <span class="marca nueva">nueva</span>
+              </div>
+
+              
+              <div class="beneficio">
+                
+                
+                  
+                  <span class="cuotas">12 cuotas</span>
+                
+              </div>
+              
+
+              <div class="pie-promo">
+                
+                
+                <span class="vigencia normal">
+                  vence 31/10
+                  
+                </span>
+              </div>
+            </div>
+            </div>
+
+            
+            <div class="cara cara-dorso" id="dorso-kindle-4" aria-hidden="true">
+              <h4 class="titulo-dorso">Bidcom</h4>
+              <dl class="letra-chica">
+                
+                <div><dt>Vigencia</dt><dd>01/09 al 31/10</dd></div>
+                
+                
+                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
+                
+                
+                
+                
+                <div><dt>Encaje</dt><dd>7.0 · Bidcom, cuotas, senal: promocion</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
+            </div>
+            </div>
+          </article>
+          
+          
+          
+          
+          <article class="tarjeta promo volteable normal" data-nuevo="si">
+            
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-kindle-5"
+                    aria-label="Ver la letra chica de Naldo">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            
+            <div class="tapa">
+              <div class="encabezado-promo">
+                
+                <img class="logo" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/33479_naldo_320x320.png" alt=""
+                     loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                     onerror="this.closest('.encabezado-promo').classList.add('sin-logo')">
+                
+                <div class="identidad">
+                  <h3 class="comercio">Naldo</h3>
+                  <span class="plastico">Tarjetas de crédito BBVA</span>
+                </div>
+                <span class="marca nueva">nueva</span>
+              </div>
+
+              
+              <div class="beneficio">
+                
+                
+                  
+                  <span class="cuotas">12 cuotas</span>
+                
+              </div>
+              
+
+              <div class="pie-promo">
+                
+                
+                <span class="vigencia normal">
+                  vence 31/10
+                  
+                </span>
+              </div>
+            </div>
+            </div>
+
+            
+            <div class="cara cara-dorso" id="dorso-kindle-5" aria-hidden="true">
+              <h4 class="titulo-dorso">Naldo</h4>
+              <dl class="letra-chica">
+                
+                <div><dt>Vigencia</dt><dd>01/09 al 31/10</dd></div>
+                
+                
+                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
+                
+                
+                
+                
+                <div><dt>Encaje</dt><dd>7.0 · Naldo, cuotas, senal: promocion</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
+            </div>
+            </div>
+          </article>
+          
+          
+          
+          
+          <article class="tarjeta promo volteable normal" data-nuevo="si">
+            
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-kindle-6"
+                    aria-label="Ver la letra chica de Cetrogar">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            
+            <div class="tapa">
+              <div class="encabezado-promo">
+                
+                <img class="logo" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/33454_cetrogar_320x320.png" alt=""
+                     loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                     onerror="this.closest('.encabezado-promo').classList.add('sin-logo')">
+                
+                <div class="identidad">
+                  <h3 class="comercio">Cetrogar</h3>
+                  <span class="plastico">Tarjetas de crédito BBVA</span>
+                </div>
+                <span class="marca nueva">nueva</span>
+              </div>
+
+              
+              <div class="beneficio">
+                
+                
+                  
+                  <span class="cuotas">12 cuotas</span>
+                
+              </div>
+              
+
+              <div class="pie-promo">
+                
+                
+                <span class="vigencia normal">
+                  vence 31/10
+                  
+                </span>
+              </div>
+            </div>
+            </div>
+
+            
+            <div class="cara cara-dorso" id="dorso-kindle-6" aria-hidden="true">
+              <h4 class="titulo-dorso">Cetrogar</h4>
+              <dl class="letra-chica">
+                
+                <div><dt>Vigencia</dt><dd>01/09 al 31/10</dd></div>
+                
+                
+                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
+                
+                
+                
+                
+                <div><dt>Encaje</dt><dd>7.0 · Cetrogar, cuotas, senal: promocion</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
+            </div>
+            </div>
+          </article>
+          
+          
+          
+          
+          <article class="tarjeta promo volteable normal" data-nuevo="si">
+            
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-kindle-7"
+                    aria-label="Ver la letra chica de Coppel">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            
+            <div class="tapa">
+              <div class="encabezado-promo">
+                
+                <img class="logo" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/23826_coppel_317x112.png" alt=""
+                     loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                     onerror="this.closest('.encabezado-promo').classList.add('sin-logo')">
+                
+                <div class="identidad">
+                  <h3 class="comercio">Coppel</h3>
+                  <span class="plastico">Tarjetas de crédito BBVA</span>
+                </div>
+                <span class="marca nueva">nueva</span>
+              </div>
+
+              
+              <div class="beneficio">
+                
+                
+                  
+                  <span class="cuotas">12 cuotas</span>
+                
+              </div>
+              
+
+              <div class="pie-promo">
+                
+                
+                <span class="vigencia normal">
+                  vence 31/10
+                  
+                </span>
+              </div>
+            </div>
+            </div>
+
+            
+            <div class="cara cara-dorso" id="dorso-kindle-7" aria-hidden="true">
+              <h4 class="titulo-dorso">Coppel</h4>
+              <dl class="letra-chica">
+                
+                <div><dt>Vigencia</dt><dd>01/09 al 31/10</dd></div>
+                
+                
+                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
+                
+                
+                
+                
+                <div><dt>Encaje</dt><dd>7.0 · Coppel, cuotas, senal: promocion</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
+            </div>
+            </div>
+          </article>
+          
+          
+          
+          
+          <article class="tarjeta promo volteable normal" data-nuevo="si">
+            
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-kindle-8"
+                    aria-label="Ver la letra chica de Ipoint">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            
+            <div class="tapa">
+              <div class="encabezado-promo">
+                
+                <img class="logo" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/24099_ipoint_320x320.png" alt=""
+                     loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                     onerror="this.closest('.encabezado-promo').classList.add('sin-logo')">
+                
+                <div class="identidad">
+                  <h3 class="comercio">Ipoint</h3>
+                  <span class="plastico">Tarjetas de crédito BBVA</span>
+                </div>
+                <span class="marca nueva">nueva</span>
+              </div>
+
+              
+              <div class="beneficio">
+                
+                
+                  
+                  <span class="cuotas">12 cuotas</span>
+                
+              </div>
+              
+
+              <div class="pie-promo">
+                
+                
+                <span class="vigencia normal">
+                  vence 31/10
+                  
+                </span>
+              </div>
+            </div>
+            </div>
+
+            
+            <div class="cara cara-dorso" id="dorso-kindle-8" aria-hidden="true">
+              <h4 class="titulo-dorso">Ipoint</h4>
+              <dl class="letra-chica">
+                
+                <div><dt>Vigencia</dt><dd>01/09 al 31/10</dd></div>
+                
+                
+                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
+                
+                
+                
+                
+                <div><dt>Encaje</dt><dd>7.0 · Ipoint, cuotas, senal: promocion</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
+            </div>
+            </div>
+          </article>
+          
+          
+          
+          
+          <article class="tarjeta promo volteable normal" data-nuevo="si">
+            
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-kindle-9"
+                    aria-label="Ver la letra chica de Fravega">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            
+            <div class="tapa">
+              <div class="encabezado-promo">
+                
+                <img class="logo" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/17820_fravega_320x320.png" alt=""
+                     loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                     onerror="this.closest('.encabezado-promo').classList.add('sin-logo')">
+                
+                <div class="identidad">
+                  <h3 class="comercio">Fravega</h3>
+                  <span class="plastico">Tarjetas de crédito BBVA</span>
+                </div>
+                <span class="marca nueva">nueva</span>
+              </div>
+
+              
+              <div class="beneficio">
+                
+                
+                  
+                  <span class="cuotas">12 cuotas</span>
+                
+              </div>
+              
+
+              <div class="pie-promo">
+                
+                
+                <span class="vigencia normal">
+                  vence 31/10
+                  
+                </span>
+              </div>
+            </div>
+            </div>
+
+            
+            <div class="cara cara-dorso" id="dorso-kindle-9" aria-hidden="true">
+              <h4 class="titulo-dorso">Fravega</h4>
+              <dl class="letra-chica">
+                
+                <div><dt>Vigencia</dt><dd>01/09 al 31/10</dd></div>
+                
+                
+                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
+                
+                
+                
+                
+                <div><dt>Encaje</dt><dd>7.0 · Fravega, cuotas, senal: promocion</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
+            </div>
+            </div>
+          </article>
+          
+          
+          
+          
+          <article class="tarjeta promo volteable normal" data-nuevo="si">
+            
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-kindle-10"
+                    aria-label="Ver la letra chica de On City">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            
+            <div class="tapa">
+              <div class="encabezado-promo">
+                
+                <img class="logo" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/20208_oncity_320x320.png" alt=""
+                     loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                     onerror="this.closest('.encabezado-promo').classList.add('sin-logo')">
+                
+                <div class="identidad">
+                  <h3 class="comercio">On City</h3>
+                  <span class="plastico">Tarjetas de crédito BBVA</span>
+                </div>
+                <span class="marca nueva">nueva</span>
+              </div>
+
+              
+              <div class="beneficio">
+                
+                
+                  
+                  <span class="cuotas">12 cuotas</span>
+                
+              </div>
+              
+
+              <div class="pie-promo">
+                
+                
+                <span class="vigencia normal">
+                  vence 31/10
+                  
+                </span>
+              </div>
+            </div>
+            </div>
+
+            
+            <div class="cara cara-dorso" id="dorso-kindle-10" aria-hidden="true">
+              <h4 class="titulo-dorso">On City</h4>
+              <dl class="letra-chica">
+                
+                <div><dt>Vigencia</dt><dd>01/09 al 31/10</dd></div>
+                
+                
+                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
+                
+                
+                
+                
+                <div><dt>Encaje</dt><dd>7.0 · On City, cuotas, senal: promocion</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
+            </div>
+            </div>
+          </article>
+          
+          
+          
+          
+          <article class="tarjeta promo volteable normal" data-nuevo="si">
+            
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-kindle-11"
+                    aria-label="Ver la letra chica de Multipoint">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            
+            <div class="tapa">
+              <div class="encabezado-promo">
+                
+                <img class="logo" src="https://go.bbva.com.ar/fgo/sites/default/files/imagen/comercio/30290_multipoint_317x112.png" alt=""
+                     loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                     onerror="this.closest('.encabezado-promo').classList.add('sin-logo')">
+                
+                <div class="identidad">
+                  <h3 class="comercio">Multipoint</h3>
+                  <span class="plastico">Tarjetas de crédito BBVA</span>
+                </div>
+                <span class="marca nueva">nueva</span>
+              </div>
+
+              
+              <div class="beneficio">
+                
+                
+                  
+                  <span class="cuotas">12 cuotas</span>
+                
+              </div>
+              
+
+              <div class="pie-promo">
+                
+                
+                <span class="vigencia normal">
+                  vence 31/10
+                  
+                </span>
+              </div>
+            </div>
+            </div>
+
+            
+            <div class="cara cara-dorso" id="dorso-kindle-11" aria-hidden="true">
+              <h4 class="titulo-dorso">Multipoint</h4>
+              <dl class="letra-chica">
+                
+                <div><dt>Vigencia</dt><dd>01/09 al 31/10</dd></div>
+                
+                
+                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
+                
+                
+                
+                
+                <div><dt>Encaje</dt><dd>7.0 · Multipoint, cuotas, senal: promocion</dd></div>
+              </dl>
+              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
+            </div>
+            </div>
+          </article>
+          
+          
+          
+          
+          <article class="tarjeta promo volteable normal" data-nuevo="si">
+            
+            <button class="voltear" type="button"
+                    aria-expanded="false" aria-controls="dorso-kindle-12"
+                    aria-label="Ver la letra chica de Rc Online Store">
+              <span aria-hidden="true">i</span>
+            </button>
+            <div class="caras">
+            <div class="cara cara-frente">
+            
+            <div class="tapa">
+              <div class="encabezado-promo">
+                
+                <div class="identidad">
+                  <h3 class="comercio">Rc Online Store</h3>
+                  <span class="plastico">Tarjetas de crédito BBVA</span>
+                </div>
+                <span class="marca nueva">nueva</span>
+              </div>
+
+              
+              <div class="beneficio">
+                <span class="pct">30%</span>
+                
+                  <span class="mas" aria-hidden="true">+</span>
+                  <span class="cuotas">6 cuotas sin interés</span>
+                
+              </div>
+              
+
+              <div class="pie-promo">
+                <span class="tope">Tope $18.000</span>
+                <span class="senal">solo 1 día por semana</span>
+                <span class="vigencia normal">
+                  vence 31/12
+                  
+                </span>
+              </div>
+            </div>
+            </div>
+
+            
+            <div class="cara cara-dorso" id="dorso-kindle-12" aria-hidden="true">
+              <h4 class="titulo-dorso">Rc Online Store</h4>
+              <dl class="letra-chica">
+                
+                <div><dt>Vigencia</dt><dd>16/09 al 31/12</dd></div>
+                
+                
+                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
+                
+                
+                <div><dt>Tope</dt><dd>$18.000</dd></div>
+                
+                
+                <div><dt>Días</dt><dd>solo 1 por semana; el banco no publica cuáles</dd></div>
+                
+                
+                <div><dt>Encaje</dt><dd>8.0 · Rc Online Store, cuotas, senal: promocion, clave: cuotas sin interes</dd></div>
               </dl>
               <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
             </div>
