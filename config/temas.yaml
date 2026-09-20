@@ -497,3 +497,48 @@ temas:
     # Sin ventanas de tiempo: la fuente declara `fechaHasta` y esa manda.
     max_por_dominio: 99
     score_minimo: 5
+
+  - nombre: kindle
+    zona: Ofertas
+    familia: Lo que estoy buscando
+    etiqueta: "Kindle / e-reader"
+    corto: "Kindle"
+    tipo: [descuento]
+    fuentes: [bbva]
+    # Igual que `pelota-futbol`: NO busca el precio de un Kindle, busca promos
+    # del banco EN COMERCIOS donde se compra uno. El banco publica "Mercado
+    # Libre 6 cuotas", nunca "Kindle 20% off". Para el precio del aparato esta
+    # /buscar-oferta, que lee MercadoLibre desde el Chrome del usuario.
+    #
+    # Lee el catalogo COMPLETO (sin `bbva_paginas`): "Mercado Libre 6 cuotas" y
+    # "Mercado Libre 3 cuotas" no estan en la primera pagina, y son las dos
+    # promos que mas importan aca.
+    requerir:
+      # Donde se compra un Kindle en Argentina. Verificado el 2026-09-20 contra
+      # las 969 promos vigentes de BBVA.
+      #   - Mercado Libre es EL canal: el Kindle entra importado y se vende ahi.
+      #     Es ademas la respuesta al pedido de "cuotas con Mercado Pago": la
+      #     promo del banco aplica pagando en Mercado Libre / Mercado Pago.
+      #   - Fravega verificado aparte: su buscador devuelve Kindle en catalogo.
+      #   - El resto son las cadenas de electro y tecnologia con catalogo
+      #     ancho. No verificado comercio por comercio: si alguna mete ruido,
+      #     sacarla de esta lista y listo.
+      #   Quedaron AFUERA a proposito las de linea blanca (Universo Electrogar,
+      #   Elite Hogar Digital, Maxihogar): venden heladeras, no e-readers.
+      - ["Mercado Libre", "Mercado Pago", "Fravega", "Frávega", "Musimundo",
+         "Megatone", "On City", "Cetrogar", "Naldo", "Coppel", "Bidcom",
+         "Ipoint", "Multipoint", "Smartlife", "Rc Online Store", "Garbarino"]
+      # Y que financie o descuente, que es lo que se pidio.
+      - ["cuotas", "cuotas sin interes", "descuento", "descuentos", "reintegro",
+         "off", "2x1", "ahorro"]
+    senales:
+      # Sin interes primero, y Mercado Libre por encima de la cadena de electro:
+      # es donde el Kindle existe de verdad.
+      - "cuotas sin interes"
+      - "Mercado Libre"
+    # Un catalogo no tiene notas repetidas: "Fravega 12 cuotas" y "Naldo 12
+    # cuotas" son promos distintas con el titulo calcado.
+    agrupar_casi_repetidas: false
+    # Sin ventanas de tiempo: la fuente declara `fechaHasta` y esa manda.
+    max_por_dominio: 99
+    score_minimo: 5

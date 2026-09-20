@@ -1189,6 +1189,82 @@ Cuando el cruce deja 0 el comando ahora lo avisa y sugiere correr sin `--en`, en
 vez de devolver una lista vacia en silencio. Cero despues de cruzar casi nunca
 significa "no hay promos".
 
+## Tema `kindle` en "Lo que estoy buscando" (2026-09-20)
+
+Pedido: "kindle baratas y con cuotas con BBVA o Mercado Pago". Se resolvio solo
+en YAML, como manda el diseno. Segundo tema de la familia, despues de
+`pelota-futbol`, y con la misma logica: el banco publica **comercios**, no
+productos, asi que el filtro va por donde se compra un Kindle.
+
+    requerir: [comercios donde hay e-readers] Y [cuotas / descuento]
+    senales:  "cuotas sin interes", "Mercado Libre"
+
+Medido el 2026-09-20 sobre las 969 promos vigentes de BBVA: **14 pasan**.
+Encabezan `Mercado Libre 6 cuotas` y `Mercado Libre 3 cuotas` (8.5), que son las
+dos que importan de verdad: en Argentina el Kindle entra importado y se vende en
+Mercado Libre. Ninguna esta en la primera pagina del catalogo, asi que el tema
+lee las 47 paginas (sin `bbva_paginas`), igual que `pelota-futbol`.
+
+De las cadenas se dejaron AFUERA las de linea blanca (Universo Electrogar, Elite
+Hogar Digital, Maxihogar): venden heladeras, no e-readers. Con ellas eran 17
+tarjetas y tres eran ruido. Fravega se verifico aparte: su buscador devuelve
+Kindle en catalogo (110 coincidencias). El resto de las cadenas de electro y
+tecnologia quedan por plausibles, no verificadas una por una.
+
+### Lo que este tema NO hace
+
+No mira el **precio** del Kindle. Es la misma linea que `pelota-futbol`: promos
+de financiacion, no comparador de precios. Para el precio esta `/buscar-oferta`,
+que lee MercadoLibre desde el Chrome del usuario (al servidor le da 403).
+
+### Mercado Pago: tercera medicion, mismo resultado
+
+Se volvio a probar el 2026-09-20, porque el pedido lo nombraba explicitamente:
+
+| Ruta | Resultado |
+|---|---|
+| promociones.mercadopago.com.ar | 200, 12 promos, TODAS "valido del 11 al 17 de mayo" |
+| /feed/ (es WordPress) | 200 pero 0 items |
+| /wp-json/wp/v2/posts | 200 con `[]`; las promos son un CPT que no expone REST |
+| AJAX de Search & Filter Pro (`sfid=9745`) | 200, devuelve el formulario; los resultados vienen vacios |
+| api.mercadolibre.com/sites/MLA/search | 403: pide token desde 2023 |
+
+Cuatro meses despues de la primera medicion sigue congelado en el Hot Sale de
+mayo. La parte del pedido que si se cubre: la promo de BBVA **"Mercado Libre N
+cuotas"** aplica pagando en Mercado Libre / Mercado Pago, que era el caso de uso
+real. Lo que falta son las promos propias de MP, que viven en la app.
+
+## Favicon: un radar nautico en vez del emoji de radio (2026-09-20)
+
+El sitio se llama Radar Porteno y el favicon era el emoji de una radio a
+transistores. Ahora es un PPI de radar dibujado a mano: aro, un anillo de
+alcance, estela de barrido y un eco.
+
+Sigue siendo un data URI en la plantilla, no un archivo: cero pedidos de red y
+nada que desplegar aparte. Por eso los colores van con `%23` y no con `#`, que
+cortaria la URI en un fragmento, y el SVG usa comillas simples porque vive
+adentro de un atributo con comillas dobles. Son 538 caracteres.
+
+### Se diseno mirandolo a 16px, no a 160
+
+El primer intento tenia dos anillos de alcance, cruz completa y una estela
+tenue. A 160px era precioso y a 16px una mancha oscura sin forma. Lo que
+sobrevivio:
+
+| Decision | Por que |
+|---|---|
+| Un solo anillo de alcance | Con dos, a 16px se empastan entre si |
+| Sin cruz completa | El haz ya hace de marca de proa; la cruz solo sumaba ruido |
+| Aro exterior grueso y en teal | Es lo unico que da silueta de radar a 16px |
+| Fondo #0A2430, no casi negro | Con el fondo mas oscuro no se despegaba nada |
+| Eco en ambar (el acento de Ofertas) | Sin ese punto calido el icono es un disco oscuro |
+
+La estela de 90 grados va DETRAS del haz, no adelante: un radar nautico barre en
+sentido horario. En la primera version quedaba al reves y se leia como si girara
+al contrario.
+
+Verificado en Chrome: el navegador decodifica la URI (`naturalWidth` 150).
+
 ## Pendiente para la proxima sesion
 
 1. Telegram: salteado a pedido. `salidas/telegram.py` esta escrito y probado en seco.
@@ -1199,7 +1275,10 @@ significa "no hay promos".
 3. Agregar temas nuevos editando `config/temas.yaml`. No requiere tocar codigo.
 3b. SUBTEMAS DE OFERTAS: ya hay dos (`bbva` y `promos-bancarias`) en la familia
    "Bancos y tarjetas". Para otro rubro conviene una familia nueva.
-3c. Mercado Pago: falta encontrar su endpoint real de promociones (ver arriba).
+3c. Mercado Pago: falta encontrar su endpoint real de promociones. Medido tres
+   veces (10 y 13 de septiembre, 20 de septiembre): el sitio publico sigue en el
+   Hot Sale de mayo y el WordPress no expone las promos por REST. Probablemente
+   haya que mirar el trafico de la app.
 4. Si alguna vez se quiere el sitio PRIVADO: Cloudflare Pages con Access lo hace gratis.
    Hoy el repo es publico; tiene `<meta name="robots" content="noindex">` pero eso es una
    convencion para buscadores, no una proteccion de acceso.
