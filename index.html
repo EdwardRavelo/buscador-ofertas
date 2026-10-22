@@ -753,7 +753,7 @@
 <aside class="barra-lateral">
   <header class="encabezado">
     <h1>Radar Porteño</h1>
-    <p class="sello">Actualizado 21/10/2026 16:53</p>
+    <p class="sello">Actualizado 22/10/2026 16:52</p>
   </header>
 
   
@@ -777,8 +777,8 @@
             aria-selected="false"
             tabindex="-1">
       <span class="nombre-pestana">Este finde</span>
-      <span class="cuenta-pestana">0</span>
-      
+      <span class="cuenta-pestana">1</span>
+      <span class="pip" aria-label="1 nuevas"></span>
     </button>
     
     <button class="pestana" type="button" role="tab"
@@ -789,7 +789,7 @@
             tabindex="-1">
       <span class="nombre-pestana">Cine</span>
       <span class="cuenta-pestana">18</span>
-      <span class="pip" aria-label="1 nuevas"></span>
+      <span class="pip" aria-label="2 nuevas"></span>
     </button>
     
     <button class="pestana" type="button" role="tab"
@@ -799,8 +799,8 @@
             aria-selected="false"
             tabindex="-1">
       <span class="nombre-pestana">Agenda</span>
-      <span class="cuenta-pestana">81</span>
-      <span class="pip" aria-label="10 nuevas"></span>
+      <span class="cuenta-pestana">83</span>
+      <span class="pip" aria-label="7 nuevas"></span>
     </button>
     
     <button class="pestana" type="button" role="tab"
@@ -811,7 +811,7 @@
             tabindex="-1">
       <span class="nombre-pestana">Ofertas</span>
       <span class="cuenta-pestana">67</span>
-      <span class="pip" aria-label="1 nuevas"></span>
+      
     </button>
     
   </div>
@@ -905,14 +905,50 @@
     </div>
 
     
+    <section class="carrusel" aria-labelledby="titulo-carrusel-este-finde">
+      <div class="barra-carrusel">
+        <span class="rotulo" id="titulo-carrusel-este-finde">Lo mejor de esta semana</span>
+        <div class="flechas">
+          <button class="flecha" data-dir="-1" type="button" aria-label="Anterior">
+            <span class="punta izq" aria-hidden="true"></span>
+          </button>
+          <button class="flecha" data-dir="1" type="button" aria-label="Siguiente">
+            <span class="punta der" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="pista" tabindex="0" role="group" aria-label="Destacados de Este finde">
+        
+        
+        <article class="diapositiva">
+          <span class="led en-destacada" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+          <div class="cifra">9.3</div>
+          <div class="contenido-diapositiva">
+            <h2><a href="https://news.google.com/rss/articles/CBMi9gFBVV95cUxQSU5SZ2pvZlBHajlCRElqUFlrRlhqbi14VUNBSU5fd3Z2WTVaeS0xcnJuc1FJMHVBR3prMkpXUzBxc2U4UUxRa3NoWlI3R3FqamM5YmxpV0wwM1VRTEt3dFJ4a2hpT01Sd3l2X3JrQ3FFTFJLdFB6OGQ0dUlFX3FQSTNicEdMTUNrMmQxR2dxYmdsQVJ6MkNQR2loYWhoVk5qX0gwSTRSemNYTFJwazYybjYyMmd3ZzI2RmNlRHlEc0ZKMzVUWkV5dnVoLUdLQ1hrUDVTbGNFZ2FZSDctWnhJU3VKWURvR19PQklZMTNvdWw2MnRNSUE?oc=5" target="_blank" rel="noopener noreferrer" title="Del cumpleaños de Charly García a un festival gastronómico en el Jardín Japonés: qué hacer en Buenos Aires este finde - Meteored Argentina">Del cumpleaños de Charly García a un festival gastronómico en el Jardín Japonés: qué hacer en Buenos Aires este finde - Meteored Argentina</a></h2>
+            <div class="pie-tarjeta">
+              <span class="medio">meteored.com.ar</span>
+              <span class="punto">&middot;</span>
+              <span>vence en 4 días</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Del+cumplea%C3%B1os+de+Charly+Garc%C3%ADa+a+un+festival+gastron%C3%B3mico+en+el+Jard%C3%ADn+Japon%C3%A9s%3A+qu%C3%A9+hacer+en+Buenos+Aires+este+finde+-+Meteored+Argentina%22+site%3Ameteored.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </div>
+        </article>
+        
+        
+      </div>
+
+      
+    </section>
+    
 
     <div class="metricas">
       <div class="metrica">
-        <span class="valor">0</span>
+        <span class="valor">1</span>
         <span class="clave">en seguimiento</span>
       </div>
       <div class="metrica">
-        <span class="valor">0</span>
+        <span class="valor acento">1</span>
         <span class="clave">nuevas (48 h)</span>
       </div>
       
@@ -926,8 +962,6 @@
     </div>
 
     
-    <p class="vacio-zona">Todavia no hay agenda del finde. Los medios la publican entre jueves y viernes; el lunes esto se vacia solo.</p>
-    
 
   
   <section class="familia" data-familia="Agenda del finde">
@@ -935,18 +969,19 @@
     
 
     
-    <details class="tema" data-tema="finde-caba">
+    <details class="tema" data-tema="finde-caba" open>
       <summary>
         <span class="chevron" aria-hidden="true"></span>
         <span class="nombre-tema">Musica, teatro y arte</span>
+        <span class="marca nueva">1 nueva</span>
         
         
-        
-        
+        <span class="tope alto">9.3</span>
       </summary>
       <div class="cuerpo-tema">
         
-        <p class="vacio">Todavía nada para este tema. Se revisa en cada corrida.</p>
+        
+        <p class="vacio">Lo de este tema está en los destacados, arriba.</p>
         
       </div>
     </details>
@@ -990,7 +1025,7 @@
             <div class="pie-tarjeta">
               <span class="medio">escribiendocine.com</span>
               <span class="punto">&middot;</span>
-              <span>hoy</span>
+              <span>ayer</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Festival+Infinito+Super+8+2026%3A+cine+y+talleres+gratuitos+en+Buenos+Aires+-+EscribiendoCine%22+site%3Aescribiendocine.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -999,47 +1034,15 @@
         
         
         <article class="diapositiva">
-          
-          <div class="cifra">9.8</div>
+          <span class="led en-destacada" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+          <div class="cifra">9.2</div>
           <div class="contenido-diapositiva">
-            <h2><a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxNanpYTUQxcDczUVEzckJ4NzNhR2NxM1V1RzR6VUlHdjdDeEFCaDN1TGlWQVBiQms0YU94dVdfQUw0Y0cwMlVNbTB0aHVWZnY5MWVlOVZQLXV4N2ZvcUZveC1SM3ZsQ3dmcE9Cd0VubUctTkNDeEhwd2taSzNvNEljbC1TUHQtRk1oRDZzSzlfV0RIaGR4VldNODRVSDl0ckk3TWVUR2pxTFdnNEhXbm5selRPWEstbnplTXc?oc=5" target="_blank" rel="noopener noreferrer" title="Exclusivo para jubilados: cómo acceder a un ciclo de cine gratis en la Ciudad de Buenos Aires - El Destape">Exclusivo para jubilados: cómo acceder a un ciclo de cine gratis en la Ciudad de Buenos Aires - El Destape</a></h2>
+            <h2><a href="https://news.google.com/rss/articles/CBMiiwJBVV95cUxQX3NuUDlLVzdZM2dUNUhnaWg3NXBGTklMNm8wc2RaSjFLX1RFY3drSDR5d0tQQlpiOUFqbmhhOTVabDdNQVVkV3BoTGhuUHEzVGRjMzN4eFllNlFfQkhhWE5TWUpPeUt1M1J0a0h5R3JoLTZQdm1qZ0FJZ3dwNTV4MGpkYWpfc0lHUGkxRy1MYWljRnMybVlQOE52czhiNU5tdExsSG5rajNadDk3N3ZtLWk2b0o4N01PbDVoWEFIdUViWEVVYlc2NjQtMnU0eExXY0pUeExycWFfU290TVBWSUJpQXZaNmRPMkp0cW03S21KanZVc3R4WFZZamItalh3Q1BiLWxaUUxUV3c?oc=5" target="_blank" rel="noopener noreferrer" title="El Ciclo de Cine Armenio de UGAB Buenos Aires volverá a proyectar “Monsieur Aznavour” tras convocar a más de 120 espectadores en su primera función - Diario Armenia">El Ciclo de Cine Armenio de UGAB Buenos Aires volverá a proyectar “Monsieur Aznavour” tras convocar a más de 120 espectadores en su primera función - Diario Armenia</a></h2>
             <div class="pie-tarjeta">
-              <span class="medio">eldestapeweb.com</span>
+              <span class="medio">diarioarmenia.org.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 7 días</span>
-              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Exclusivo+para+jubilados%3A+c%C3%B3mo+acceder+a+un+ciclo+de+cine+gratis+en+la+Ciudad+de+Buenos+Aires+-+El+Destape%22+site%3Aeldestapeweb.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
-            </div>
-          </div>
-        </article>
-        
-        
-        
-        <article class="diapositiva">
-          
-          <div class="cifra">9.1</div>
-          <div class="contenido-diapositiva">
-            <h2><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOdFRQSU5NQVN2NTBjSWVXWE9ON1JNc2IwXzNYWGRrMHpQRUxoMzRLWnZvb2FFaWIzU01tMGszNy1CUjVLOXh5aFNlc004Q2ZWWm1oaVVuMDM3N3hlc2YtdmNmbVVmZlhRWVM4eFRzTUczTDdiOUN4b1BrWWlzVG9ZUFJB?oc=5" target="_blank" rel="noopener noreferrer" title="21° Festival de Cine inusual de Buenos Aires. | - Cine y Teatro Argentino">21° Festival de Cine inusual de Buenos Aires. | - Cine y Teatro Argentino</a></h2>
-            <div class="pie-tarjeta">
-              <span class="medio">cineargentinohoy.com.ar</span>
-              <span class="punto">&middot;</span>
-              <span>hace 7 días</span>
-              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%2221%C2%B0+Festival+de+Cine+inusual+de+Buenos+Aires.+%7C+-+Cine+y+Teatro+Argentino%22+site%3Acineargentinohoy.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
-            </div>
-          </div>
-        </article>
-        
-        
-        
-        <article class="diapositiva">
-          
-          <div class="cifra">9.1</div>
-          <div class="contenido-diapositiva">
-            <h2><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxQY0ZWS1NmeHBMYnFSUDJfTjI2SkVWTzFSRUxKYlRNaW1YYWxhZ2FSTmJhT3FlbWhGUV9pVW5CREJVYnFmcXdXMzdqN3RhLV9VV05ST1ZUM0lTRGdzMXVQb0tzRUFKSmlseVZMYTNYYjlQVHlIVUlUa1RUdE5tWEo0T2I3bnEyX3A1dkV6a1AwSVUybnp0UG00RWhSMDgyeEFtelpUSA?oc=5" target="_blank" rel="noopener noreferrer" title="Balvanera forma parte del Festival de Cine Inusual de Buenos Aires - Revista el Abasto">Balvanera forma parte del Festival de Cine Inusual de Buenos Aires - Revista el Abasto</a></h2>
-            <div class="pie-tarjeta">
-              <span class="medio">revistaelabasto.com.ar</span>
-              <span class="punto">&middot;</span>
-              <span>hace 7 días</span>
-              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Balvanera+forma+parte+del+Festival+de+Cine+Inusual+de+Buenos+Aires+-+Revista+el+Abasto%22+site%3Arevistaelabasto.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+              <span>hoy</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+Ciclo+de+Cine+Armenio+de+UGAB+Buenos+Aires+volver%C3%A1+a+proyectar+%E2%80%9CMonsieur+Aznavour%E2%80%9D+tras+convocar+a+m%C3%A1s+de+120+espectadores+en+su+primera+funci%C3%B3n+-+Diario+Armenia%22+site%3Adiarioarmenia.org.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
         </article>
@@ -1051,19 +1054,11 @@
       <div class="puntos" role="tablist" aria-label="Ir a destacado">
         
         <button class="punto-nav" type="button" role="tab" data-indice="0"
-                aria-label="Destacado 1 de 4"
+                aria-label="Destacado 1 de 2"
                 aria-selected="true"></button>
         
         <button class="punto-nav" type="button" role="tab" data-indice="1"
-                aria-label="Destacado 2 de 4"
-                aria-selected="false"></button>
-        
-        <button class="punto-nav" type="button" role="tab" data-indice="2"
-                aria-label="Destacado 3 de 4"
-                aria-selected="false"></button>
-        
-        <button class="punto-nav" type="button" role="tab" data-indice="3"
-                aria-label="Destacado 4 de 4"
+                aria-label="Destacado 2 de 2"
                 aria-selected="false"></button>
         
       </div>
@@ -1077,13 +1072,13 @@
         <span class="clave">en seguimiento</span>
       </div>
       <div class="metrica">
-        <span class="valor acento">1</span>
+        <span class="valor acento">2</span>
         <span class="clave">nuevas (48 h)</span>
       </div>
       
       
       <div class="metrica">
-        <span class="valor calor">1</span>
+        <span class="valor calor">2</span>
         <span class="clave">recién publicadas</span>
       </div>
       
@@ -1102,7 +1097,7 @@
       <summary>
         <span class="chevron" aria-hidden="true"></span>
         <span class="nombre-tema">Ciclos de cine</span>
-        <span class="marca nueva">1 nueva</span>
+        <span class="marca nueva">2 nuevas</span>
         
         <span class="cuenta-tema">18</span>
         <span class="tope alto">9.8</span>
@@ -1116,6 +1111,60 @@
             <div class="fila-superior">
               
               
+              <span class="cifra-chica alto">9.1</span>
+              
+            </div>
+            <h3><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOdFRQSU5NQVN2NTBjSWVXWE9ON1JNc2IwXzNYWGRrMHpQRUxoMzRLWnZvb2FFaWIzU01tMGszNy1CUjVLOXh5aFNlc004Q2ZWWm1oaVVuMDM3N3hlc2YtdmNmbVVmZlhRWVM4eFRzTUczTDdiOUN4b1BrWWlzVG9ZUFJB?oc=5" target="_blank" rel="noopener noreferrer">21° Festival de Cine inusual de Buenos Aires. | - Cine y Teatro Argentino</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">cineargentinohoy.com.ar</span>
+              <span class="punto">&middot;</span>
+              <span>hace 8 días</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%2221%C2%B0+Festival+de+Cine+inusual+de+Buenos+Aires.+%7C+-+Cine+y+Teatro+Argentino%22+site%3Acineargentinohoy.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </article>
+          
+          
+          
+          <article class="tarjeta normal" data-nuevo="no">
+            <div class="fila-superior">
+              
+              
+              <span class="cifra-chica alto">9.1</span>
+              
+            </div>
+            <h3><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxQY0ZWS1NmeHBMYnFSUDJfTjI2SkVWTzFSRUxKYlRNaW1YYWxhZ2FSTmJhT3FlbWhGUV9pVW5CREJVYnFmcXdXMzdqN3RhLV9VV05ST1ZUM0lTRGdzMXVQb0tzRUFKSmlseVZMYTNYYjlQVHlIVUlUa1RUdE5tWEo0T2I3bnEyX3A1dkV6a1AwSVUybnp0UG00RWhSMDgyeEFtelpUSA?oc=5" target="_blank" rel="noopener noreferrer">Balvanera forma parte del Festival de Cine Inusual de Buenos Aires - Revista el Abasto</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">revistaelabasto.com.ar</span>
+              <span class="punto">&middot;</span>
+              <span>hace 8 días</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Balvanera+forma+parte+del+Festival+de+Cine+Inusual+de+Buenos+Aires+-+Revista+el+Abasto%22+site%3Arevistaelabasto.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </article>
+          
+          
+          
+          <article class="tarjeta normal" data-nuevo="no">
+            <div class="fila-superior">
+              
+              
+              <span class="cifra-chica alto">9.8</span>
+              
+            </div>
+            <h3><a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxNanpYTUQxcDczUVEzckJ4NzNhR2NxM1V1RzR6VUlHdjdDeEFCaDN1TGlWQVBiQms0YU94dVdfQUw0Y0cwMlVNbTB0aHVWZnY5MWVlOVZQLXV4N2ZvcUZveC1SM3ZsQ3dmcE9Cd0VubUctTkNDeEhwd2taSzNvNEljbC1TUHQtRk1oRDZzSzlfV0RIaGR4VldNODRVSDl0ckk3TWVUR2pxTFdnNEhXbm5selRPWEstbnplTXc?oc=5" target="_blank" rel="noopener noreferrer">Exclusivo para jubilados: cómo acceder a un ciclo de cine gratis en la Ciudad de Buenos Aires - El Destape</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">eldestapeweb.com</span>
+              <span class="punto">&middot;</span>
+              <span>hace 8 días</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Exclusivo+para+jubilados%3A+c%C3%B3mo+acceder+a+un+ciclo+de+cine+gratis+en+la+Ciudad+de+Buenos+Aires+-+El+Destape%22+site%3Aeldestapeweb.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </article>
+          
+          
+          
+          <article class="tarjeta normal" data-nuevo="no">
+            <div class="fila-superior">
+              
+              
               <span class="cifra-chica alto">9.8</span>
               
             </div>
@@ -1123,7 +1172,7 @@
             <div class="pie-tarjeta">
               <span class="medio">radiobuenosaires.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 10 días</span>
+              <span>hace 11 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Llega+el+OFFNI+Cine+Fest+2026%3A+el+festival+de+cine+an%C3%B3malo%2C+ciencia+ficci%C3%B3n+y+terror+con+entrada+gratuita+en+CABA+-+AM+1350+Radio+Buenos+Aires%22+site%3Aradiobuenosaires.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1141,7 +1190,7 @@
             <div class="pie-tarjeta">
               <span class="medio">escribiendocine.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 13 días</span>
+              <span>hace 14 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Festival+de+Cine+Inusual+de+Buenos+Aires+2026%3A+pel%C3%ADculas%2C+sedes+y+programaci%C3%B3n+de+la+21.%C2%AA+edici%C3%B3n+-+EscribiendoCine%22+site%3Aescribiendocine.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1159,7 +1208,7 @@
             <div class="pie-tarjeta">
               <span class="medio">otroscines.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 14 días</span>
+              <span>hace 15 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+Romerazo+%28Manuel+Romero%29%2C+Festival+Asterisco%2C+Cineclub+Nocturna+y+estrenos+argentinos%2C+en+el+MALBA+-+Otros+Cines%22+site%3Aotroscines.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1177,7 +1226,7 @@
             <div class="pie-tarjeta">
               <span class="medio">infobae.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 15 días</span>
+              <span>hace 16 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cortometrajes+generados+por+IA%2C+un+Gran+Premio+y+un+viaje+a+Cannes%3A+as%C3%AD+llega+el+World+AI+Film+Festival+a+Buenos+Aires+por+primera+vez+-+Infobae%22+site%3Ainfobae.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1195,7 +1244,7 @@
             <div class="pie-tarjeta">
               <span class="medio">diarioelnorte.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 18 días</span>
+              <span>hace 19 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22%E2%80%9CDecepciones+del+alma%E2%80%9D+fue+seleccionada+para+la+competencia+oficial+del+Festival+de+Cine+Inusual+de+Buenos+Aires+-+Diario+El+Norte+-+San+Nicol%C3%A1s%22+site%3Adiarioelnorte.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1213,7 +1262,7 @@
             <div class="pie-tarjeta">
               <span class="medio">infobae.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 19 días</span>
+              <span>hace 20 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+World+AI+Film+Festival+debutar%C3%A1+en+Buenos+Aires+el+30+de+octubre+-+Infobae%22+site%3Ainfobae.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1231,7 +1280,7 @@
             <div class="pie-tarjeta">
               <span class="medio">diariodemocracia.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 29 días</span>
+              <span>hace 1 mes</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Christian+Roig+estrena+%E2%80%9CCero%E2%80%9D+en+el+Cine+Club+Jorge+Newbery+-+Diario+Democracia%22+site%3Adiariodemocracia.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1249,7 +1298,7 @@
             <div class="pie-tarjeta">
               <span class="medio">escribiendocine.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 29 días</span>
+              <span>hace 1 mes</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Festival+Audiovisual+Bariloche+2026%3A+97+producciones+convierten+a+la+ciudad+en+capital+del+cine+latinoamericano+-+EscribiendoCine%22+site%3Aescribiendocine.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1345,24 +1394,6 @@
           </article>
           
           
-          
-          <article class="tarjeta normal" data-nuevo="no">
-            <div class="fila-superior">
-              
-              
-              <span class="cifra-chica alto">9.1</span>
-              
-            </div>
-            <h3><a href="https://news.google.com/rss/articles/CBMi2wFBVV95cUxOdk1fZW1xVVRMVWUtZ1Q5WF9lMk03SXlxdS1JTk5LcjBGU0RBaFV4Qmh4VGU2MDlsMWJ5TWlIZU1Tc2treVF3S19DT0tSVllOVk1iaWxpLTlfWjhybTlFTm1USGlOTGk4T29uSHlDcmQ1ajBuY3Y2c3YydVFUNG93TkEwZ0JnYmdDRFY0TV9yLWF6SWVyTHRVa3drQTRpM1pZVlR2UTl2dWFXSy1VTzBFbDl3MUxKSmVNc2NkM2xBMTlGcHJZRVAxUWtXWDRjeWh2cXRCVzlQY09zdEXSAeABQVVfeXFMUDJhOHdpY1B2QWJ6ckZ0aXNrcXhrYU52eEpnUGhLLVhVLWdvcGRWUHl1SnFPRk9qSEl4SkxsLWtwMXBJUFlfQ2hWYnY0LWxqaEtVbjZqLWZIM0NsSGh6Z25rQXMtY1hhM1Jwd3B4Ul93UlNpc0Z6Slc4TnppMUxXSTZLTk5jVTNwb1czX1lYSmU3VUMzODEwV0NXa0VPbkhxdVczQ0JTZXBCSVpLanJEMHotZW5SR05zczU4WGJOY0gyQk5kUUdzRWwyazJ3cS14dk04el9fYk83RnhlYzh5aEo?oc=5" target="_blank" rel="noopener noreferrer">Banff Mountain Film Festival 2026 llega a Buenos Aires: fechas, programación y entradas - EscribiendoCine</a></h3>
-            <div class="pie-tarjeta">
-              <span class="medio">escribiendocine.com</span>
-              <span class="punto">&middot;</span>
-              <span>hace 1 mes</span>
-              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Banff+Mountain+Film+Festival+2026+llega+a+Buenos+Aires%3A+fechas%2C+programaci%C3%B3n+y+entradas+-+EscribiendoCine%22+site%3Aescribiendocine.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
-            </div>
-          </article>
-          
-          
         </div>
         
       </div>
@@ -1400,14 +1431,14 @@
         
         
         <article class="diapositiva">
-          <span class="led en-destacada" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+          
           <div class="cifra">9.5</div>
           <div class="contenido-diapositiva">
             <h2><a href="https://soybibliotecario.blogspot.com/2026/10/feria-del-libro-antiguo-de-buenos-aires.html" target="_blank" rel="noopener noreferrer" title="Feria del Libro Antiguo de Buenos Aires: fechas, horarios y actividades de la 19ª edición">Feria del Libro Antiguo de Buenos Aires: fechas, horarios y actividades de la 19ª edición</a></h2>
             <div class="pie-tarjeta">
               <span class="medio">soybibliotecario.blogspot.com</span>
               <span class="punto">&middot;</span>
-              <span>ayer</span>
+              <span>hace 2 días</span>
               
             </div>
           </div>
@@ -1423,7 +1454,7 @@
             <div class="pie-tarjeta">
               <span class="medio">elmarplatense.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 3 días</span>
+              <span>hace 4 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Abren+la+inscripci%C3%B3n+a+cursos+gratuitos+de+inteligencia+artificial+en+Mar+del+Plata+-+El+Marplatense%22+site%3Aelmarplatense.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -1439,7 +1470,7 @@
             <div class="pie-tarjeta">
               <span class="medio">0223.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 5 días</span>
+              <span>hace 6 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22PotencIA+Mar+del+Plata%3A+abrieron+la+inscripci%C3%B3n+a+una+nueva+edici%C3%B3n+de+los+cursos+gratuitos+de+inteligencia+artificial+-+0223.com.ar%22+site%3A0223.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -1455,7 +1486,7 @@
             <div class="pie-tarjeta">
               <span class="medio">0223.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hoy</span>
+              <span>ayer</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22%C3%9Altimas+horas+para+inscribirse+a+PotencIA+Mar+del+Plata%2C+los+cursos+gratuitos+de+inteligencia+artificial+-+0223.com.ar%22+site%3A0223.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -1471,7 +1502,7 @@
             <div class="pie-tarjeta">
               <span class="medio">infobae.com</span>
               <span class="punto">&middot;</span>
-              <span>hoy</span>
+              <span>ayer</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cursos+gratuitos+de+inteligencia+artificial+y+ciberseguridad+tienen+nuevo+plazo%3A+hasta+el+30+de+octubre+se+puede+inscribir+-+Infobae%22+site%3Ainfobae.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -1510,11 +1541,11 @@
 
     <div class="metricas">
       <div class="metrica">
-        <span class="valor">81</span>
+        <span class="valor">83</span>
         <span class="clave">en seguimiento</span>
       </div>
       <div class="metrica">
-        <span class="valor acento">10</span>
+        <span class="valor acento">7</span>
         <span class="clave">nuevas (48 h)</span>
       </div>
       
@@ -1532,7 +1563,7 @@
       </div>
       
       <div class="metrica">
-        <span class="valor">68</span>
+        <span class="valor">70</span>
         <span class="clave">Formación</span>
       </div>
       
@@ -1551,13 +1582,13 @@
     
 
     
-    <details class="tema" data-tema="talleres-lectura-caba" open>
+    <details class="tema" data-tema="talleres-lectura-caba">
       <summary>
         <span class="chevron" aria-hidden="true"></span>
         <span class="nombre-tema">Talleres y lectura</span>
-        <span class="marca nueva">1 nueva</span>
         
         
+        <span class="cuenta-tema">1</span>
         <span class="tope alto">9.5</span>
       </summary>
       <div class="cuerpo-tema">
@@ -1572,7 +1603,7 @@
       <summary>
         <span class="chevron" aria-hidden="true"></span>
         <span class="nombre-tema">Festivales</span>
-        <span class="marca nueva">5 nuevas</span>
+        <span class="marca nueva">2 nuevas</span>
         
         <span class="cuenta-tema">11</span>
         <span class="tope alto">9.2</span>
@@ -1586,6 +1617,24 @@
             <div class="fila-superior">
               
               <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              <span class="cifra-chica alto">9.1</span>
+              <span class="marca reciente">recién</span>
+            </div>
+            <h3><a href="https://news.google.com/rss/articles/CBMi7AFBVV95cUxOM2RWdjRsOTJrOWQ2QXhMNzVUTldRbzFiNXl5dVF4WXNFOVpDU3oxYjhfMnNzdDRfR2dmdmhjMVJ0UVN4R3J5RXhuemVpUF9rclE0LWpjY01xLUFjNEtScV9Tby11SjR0X1pyTDNzZW1jelh6d25UNGNpbGtZeVMzSklqUjE2dElrTnhoOVBDbzNjdzlBMDd0THJabGpjaE9xMG9SUzNrQzlKb0xBaWJMVEhVNnRpaTRTOVdWa3Zrd3VVMnE5V2ZKTkgyWnBFUHdyT0xEay1CUWJ0RTVPMkVueVo0MGMwVWxwdFBfZ9IB8gFBVV95cUxOVmVPU0o4XzFuQVNZb0s5RTVYWTVQejVJbFhXVTZpV3lIWDQtV3RtLV9UT01QLWJ4cGF5TzRoQUw3emkxM2xlby01SUJyaHNBMDdZc2Y5dWhFa0RINTVMOE5qMUFpazI0RmYyZjZYUXd5cjlSQi1sS1dmZGwwZnAzWk5iRFhuVHNFYTVlMmlseGFrcEdNX1ZoZXc2dFByelZSRnVLdVRJWHpnSkV1MFBBNFdmbnhkN2hoYmNTUTlQSmFUMGVEU2FjMzhSaW4zLVQyeTJmclNoUkU3d0JfMm8yRmNGMVRTRnU2ZGpSbm42T0t4Zw?oc=5" target="_blank" rel="noopener noreferrer">CABA tendrá un festival dedicado a la cultura coreana con entrada gratuita - Perfil</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">perfil.com</span>
+              <span class="punto">&middot;</span>
+              <span>hoy</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22CABA+tendr%C3%A1+un+festival+dedicado+a+la+cultura+coreana+con+entrada+gratuita+-+Perfil%22+site%3Aperfil.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </article>
+          
+          
+          
+          <article class="tarjeta caliente" data-nuevo="si">
+            <div class="fila-superior">
+              
+              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
               <span class="cifra-chica alto">9.2</span>
               <span class="marca reciente">recién</span>
             </div>
@@ -1593,17 +1642,17 @@
             <div class="pie-tarjeta">
               <span class="medio">escribiendocine.com</span>
               <span class="punto">&middot;</span>
-              <span>hoy</span>
+              <span>ayer</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Festival+Infinito+Super+8+2026%3A+cine+y+talleres+gratuitos+en+Buenos+Aires+-+EscribiendoCine%22+site%3Aescribiendocine.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
           
           
-          <article class="tarjeta caliente" data-nuevo="si">
+          <article class="tarjeta caliente" data-nuevo="no">
             <div class="fila-superior">
               
-              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              
               <span class="cifra-chica alto">9.1</span>
               <span class="marca reciente">recién</span>
             </div>
@@ -1611,17 +1660,17 @@
             <div class="pie-tarjeta">
               <span class="medio">forodebaires.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>ayer</span>
+              <span>hace 2 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+furor+por+Corea+llega+a+las+calles+de+Buenos+Aires%3A+un+festival+gratuito+reunir%C3%A1+gastronom%C3%ADa%2C+K-pop+y+m%C3%A1s+de+50+stands+-+Foro+de+Baires%22+site%3Aforodebaires.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
           
           
-          <article class="tarjeta caliente" data-nuevo="si">
+          <article class="tarjeta caliente" data-nuevo="no">
             <div class="fila-superior">
               
-              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              
               <span class="cifra-chica alto">9.1</span>
               <span class="marca reciente">recién</span>
             </div>
@@ -1629,35 +1678,35 @@
             <div class="pie-tarjeta">
               <span class="medio">haceinstantes.com</span>
               <span class="punto">&middot;</span>
-              <span>ayer</span>
+              <span>hace 2 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Yoga+con+cachorros%2C+desfiles+y+adopci%C3%B3n+de+mascotas%3A+llega+un+festival+gratuito+a+Buenos+Aires+-+Haceinstantes%22+site%3Ahaceinstantes.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
           
           
-          <article class="tarjeta caliente" data-nuevo="si">
+          <article class="tarjeta semana" data-nuevo="no">
             <div class="fila-superior">
               
-              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              
               <span class="cifra-chica alto">9.1</span>
-              <span class="marca reciente">recién</span>
+              
             </div>
             <h3><a href="https://news.google.com/rss/articles/CBMi8wFBVV95cUxPcDFjQU9tOUlhMXJtZHZCeFJrX1FGelpFRVpPaTRERnNRNXk5aEk2ampLTkRWREpjRzZBNlZYS1h3VFhhamZoYm5JUTdWWEJUNGpCaXI0YzViMVkwdlEzYmVFN01ieF9LYTVLWWxfb3FSMDYwQXZCRXpRa1VsRTk2Ny15MDkteUhDOGo2a2E1QnVnY2VfeXZCYlMtRGg4MkVOb2pXc3Q3NVRoMVVYTC1qU3ZFUnptRzh2ajkyT2FSS0RoQ3BOMWlMcUxHRFhObmZwdjRmMXRnN1RJT1kwNW52aE1KM1JITGNzVG8xNm1zaUJzdUHSAfgBQVVfeXFMUDA1dzdMZFpnODdhdHdNTTd2Y3ZQV3kyeVNNR3QwdHNBbUpuQ2tyakNGRDRyREk5U0x6cFpUeWgwNEEtbFdrUXJ6dC1tMW8tczU2NjQydmxZbVBCVk1EQTNrNXF6VmRyQVFBaGVjSmdRV2d1eENQRG5HejJXZDNqdXJQT1BpaEhpVEJPcVlrS0MyVkI0YTVZQ0ZpaWU1bFVWeXJrTGE3bzRqejZuZzg3RUd5dnhsWmg0S0x2WWdhSlZuaVR5Vy0xeGRScldkRE9taWhwenZKS1RTMEU2RlQ1dnBISkJVNE9QcUZyWGdXbmszUTZ0Szc4SEU?oc=5" target="_blank" rel="noopener noreferrer">Mascotear 2026: Buenos Aires tendrá un festival gratuito para disfrutar con las mascotas - Perfil</a></h3>
             <div class="pie-tarjeta">
               <span class="medio">perfil.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 2 días</span>
+              <span>hace 3 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Mascotear+2026%3A+Buenos+Aires+tendr%C3%A1+un+festival+gratuito+para+disfrutar+con+las+mascotas+-+Perfil%22+site%3Aperfil.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
           
           
-          <article class="tarjeta semana" data-nuevo="si">
+          <article class="tarjeta semana" data-nuevo="no">
             <div class="fila-superior">
               
-              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              
               <span class="cifra-chica medio">8.9</span>
               
             </div>
@@ -1665,7 +1714,7 @@
             <div class="pie-tarjeta">
               <span class="medio">canal26.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 5 días</span>
+              <span>hace 6 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Mart%C3%ADn+Cirio+y+Bandana+har%C3%A1n+un+stream+juntos+en+un+festival+gratuito+de+CABA+este+fin+de+semana+-+Canal26%22+site%3Acanal26.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1683,7 +1732,7 @@
             <div class="pie-tarjeta">
               <span class="medio">infobae.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 5 días</span>
+              <span>hace 6 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+Festival+Borges+vuelve+con+charlas+internacionales%2C+tango+y+una+caminata+por+Buenos+Aires+-+Infobae%22+site%3Ainfobae.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1701,7 +1750,7 @@
             <div class="pie-tarjeta">
               <span class="medio">noticias.mitelefe.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 6 días</span>
+              <span>hace 7 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+Festival+de+Fado+regresa+a+Buenos+Aires+con+dos+grandes+voces+de+Portugal+con+entrada+gratuita+-+Telefe+Noticias%22+site%3Anoticias.mitelefe.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1719,7 +1768,7 @@
             <div class="pie-tarjeta">
               <span class="medio">bairessecreta.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 6 días</span>
+              <span>hace 7 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Comida+coreana%2C+shows+en+vivo+y+hasta+stands+de+K-Beauty+en+Haku+Fest%2C+el+primer+festival+coreano+de+Buenos+Aires+%C2%A1Entrada+gratuita%21+-+Buenos+Aires+Secreta%22+site%3Abairessecreta.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1737,14 +1786,14 @@
             <div class="pie-tarjeta">
               <span class="medio">eldestapeweb.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 6 días</span>
+              <span>hace 7 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Tras+BTS+en+Buenos+Aires%3A+llega+un+festival+gratis+de+cultura+coreana+con+m%C3%BAsica+y+gastronom%C3%ADa+-+El+Destape%22+site%3Aeldestapeweb.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
           
           
-          <article class="tarjeta semana" data-nuevo="no">
+          <article class="tarjeta normal" data-nuevo="no">
             <div class="fila-superior">
               
               
@@ -1755,26 +1804,8 @@
             <div class="pie-tarjeta">
               <span class="medio">cineargentinohoy.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 7 días</span>
+              <span>hace 8 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%2221%C2%B0+Festival+de+Cine+inusual+de+Buenos+Aires.+%7C+-+Cine+y+Teatro+Argentino%22+site%3Acineargentinohoy.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
-            </div>
-          </article>
-          
-          
-          
-          <article class="tarjeta normal" data-nuevo="no">
-            <div class="fila-superior">
-              
-              
-              <span class="cifra-chica alto">9.2</span>
-              
-            </div>
-            <h3><a href="https://news.google.com/rss/articles/CBMi4AFBVV95cUxPd3ZBTzZRNF9hM0IxdlRidFhPYktqNnhrb2NtYnRQM0hQcTVwZUNfZGtYMzRNbVJqZlBhalgwMnAxU3YxV1RoUThmNWtYZnpTdm9RQzhITFc0Rk5sdWdVSVQxTzBKdlZfeEUtNlRLaUMwdk9ZRVMxbDNfQVU4cjBpVHVWSHdzVzNtMVNPLVRicE9DVlZwUEtxNGExUW1jUVItSXVJN3JJY2JFZGRsSUhtQjhhdHZGZGtuWGFUOHZGb0lJaG9qeWxieVRDSXpHOUQyV0tfbkdKWFBRZWhpb3VtYQ?oc=5" target="_blank" rel="noopener noreferrer">Llega el OFFNI Cine Fest 2026: el festival de cine anómalo, ciencia ficción y terror con entrada gratuita en CABA - AM 1350 Radio Buenos Aires</a></h3>
-            <div class="pie-tarjeta">
-              <span class="medio">radiobuenosaires.com.ar</span>
-              <span class="punto">&middot;</span>
-              <span>hace 10 días</span>
-              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Llega+el+OFFNI+Cine+Fest+2026%3A+el+festival+de+cine+an%C3%B3malo%2C+ciencia+ficci%C3%B3n+y+terror+con+entrada+gratuita+en+CABA+-+AM+1350+Radio+Buenos+Aires%22+site%3Aradiobuenosaires.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
@@ -1809,7 +1840,7 @@
             <div class="pie-tarjeta">
               <span class="medio">noticiasd.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 16 días</span>
+              <span>hace 17 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Obras+de+teatro+casi+gratis+en+CABA%3A+c%C3%B3mo+conseguir+entradas+con+hasta+90%25+de+descuento+durante+octubre+-+noticiasd.com%22+site%3Anoticiasd.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1835,9 +1866,9 @@
       <summary>
         <span class="chevron" aria-hidden="true"></span>
         <span class="nombre-tema">Inteligencia artificial</span>
-        <span class="marca nueva">3 nuevas</span>
+        <span class="marca nueva">4 nuevas</span>
         
-        <span class="cuenta-tema">50</span>
+        <span class="cuenta-tema">52</span>
         <span class="tope alto">9.9</span>
       </summary>
       <div class="cuerpo-tema">
@@ -1856,7 +1887,7 @@
             <div class="pie-tarjeta">
               <span class="medio">pasqualepillitteri.it</span>
               <span class="punto">&middot;</span>
-              <span>hace 3 días</span>
+              <span>hace 4 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cursos+de+IA+de+Microsoft+gratis+y+certificaciones%2C+la+gu%C3%ADa+de+Learn+-+Pasquale+Pillitteri%22+site%3Apasqualepillitteri.it" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1874,8 +1905,26 @@
             <div class="pie-tarjeta">
               <span class="medio">mi8.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 5 días</span>
+              <span>hace 6 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cheppi+impulsa+nuevos+cursos+gratuitos+de+inteligencia+artificial%3A+c%C3%B3mo+anotarse+-+Canal+8+Mar+del+Plata%22+site%3Ami8.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </article>
+          
+          
+          
+          <article class="tarjeta semana" data-nuevo="si">
+            <div class="fila-superior">
+              
+              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              <span class="cifra-chica alto">9.2</span>
+              
+            </div>
+            <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxONEhBYzh2WTkzcnVfYlBGMWhXbHlyRWVvV3U1OGRuWWRvN0N1TF94RHRlT1ctcmJnQXdFWm9uUmNzQ3FIMHpxOUxEOWpXTk1McmhjT1o3X19XWmhkbGE2M3FYMHVMZ3oxSG4ySDUzd0o3cWVQbDZtVWRsZzFmS1daeXJZSG1TbXZIczFBVDdhcUxVbDFLbVJMMldKdVdZa1d0?oc=5" target="_blank" rel="noopener noreferrer">Cheppi impulsa nuevos cursos gratuitos de inteligencia artificial: cómo anotarse - Mi 8 - Mar del Plata</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">mi8.com.ar</span>
+              <span class="punto">&middot;</span>
+              <span>hace 6 días</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cheppi+impulsa+nuevos+cursos+gratuitos+de+inteligencia+artificial%3A+c%C3%B3mo+anotarse+-+Mi+8+-+Mar+del+Plata%22+site%3Ami8.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
@@ -1892,14 +1941,32 @@
             <div class="pie-tarjeta">
               <span class="medio">aljarafeymas.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 5 días</span>
+              <span>hace 6 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Aznalc%C3%A1zar+ofrece+un+curso+gratuito+de+inteligencia+artificial+aplicada+al+sector+agroindustrial+-+Aljarafe+y+m%C3%A1s%22+site%3Aaljarafeymas.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
           
           
-          <article class="tarjeta semana" data-nuevo="no">
+          <article class="tarjeta semana" data-nuevo="si">
+            <div class="fila-superior">
+              
+              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              <span class="cifra-chica medio">8.3</span>
+              
+            </div>
+            <h3><a href="https://news.google.com/rss/articles/CBMigwJBVV95cUxNT1hyVWlBU0c4ZDRHZTE3QmRWcXdhVXlvY2NFSkJWVktEVklqbTc5MXRWZkdfM2xmLVBhZnpZYl96RDlhcWJJRWhETmlnSWZvbHVnaUMtZ0Z2NTNLM0prUS15RzhEYWdRREtWbEJEUHBmTzYtdlU5UXhvRlljaDhfbm5jaEJtems1eXJ6UGl5R2pEaXFnOHlzVXZKMEhQd2JLM1F4WjZibENjdW1CYXBmbkd1cXlpei1mazdBZ25udXlzaUR2ZEprR2JxUmhCaGltUUc4OExLVFJ2d3BmMFNINTA0WnJfX1RYM3l6U0FBQmlSZmp5QVRzN3BNYmVJTzgxMVBZ0gGIAkFVX3lxTE13OEtGVXpya0s1ZmVxSklMSkVhWkk0Y1cwZDR2cVBHNnk1ZF9lWmttYXFQajlmbzJlRWxnaTZMX2I5Q1BiWE05MkYyMElkeXFRdEJsVWZMT0UyMU1OQTlaWlN3c0x1cTBiV01wUmxyRnVkQnIwUThHRE1famN0NWVlRTJLaVZEd1NNMzV4Z0tNd053YU5qQXBvaDM2WDFMV2huaF81OU5BS0dFUi1ia19vYm9XZFRvaEdJMW8wbU0ybGVuR1JnNjQ4MUNpelFXMUJhajJ2WXlMdkVqd1FiMk8wOVY2Z2RKR0xNUDNqbFk1S3pyVGMxa0xENDNDMVNVUDhwS3pOckduNQ?oc=5" target="_blank" rel="noopener noreferrer">Fórmate gratis en IA Generativa con certificación de IBM gracias a Fundae: una de las habilidades más demandadas del mercado laboral - Noticias Trabajo</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">noticiastrabajo.es</span>
+              <span class="punto">&middot;</span>
+              <span>hace 7 días</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22F%C3%B3rmate+gratis+en+IA+Generativa+con+certificaci%C3%B3n+de+IBM+gracias+a+Fundae%3A+una+de+las+habilidades+m%C3%A1s+demandadas+del+mercado+laboral+-+Noticias+Trabajo%22+site%3Anoticiastrabajo.es" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </article>
+          
+          
+          
+          <article class="tarjeta normal" data-nuevo="no">
             <div class="fila-superior">
               
               
@@ -1910,7 +1977,7 @@
             <div class="pie-tarjeta">
               <span class="medio">qpasa.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 7 días</span>
+              <span>hace 8 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Microsoft+ofrece+gratis+un+curso+de+inteligencia+artificial+de+12+semanas+para+principiantes+-+QPASA%22+site%3Aqpasa.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1928,7 +1995,7 @@
             <div class="pie-tarjeta">
               <span class="medio">qpasa.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 9 días</span>
+              <span>hace 10 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22IBM+y+el+SEPE+lanzaron+7+cursos+gratis+de+IA+en+espa%C3%B1ol+-+QPASA%22+site%3Aqpasa.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1946,7 +2013,7 @@
             <div class="pie-tarjeta">
               <span class="medio">qpasa.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 9 días</span>
+              <span>hace 10 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22La+UNESCO+lanz%C3%B3+un+curso+gratis+de+inteligencia+artificial+con+certificado+-+QPASA%22+site%3Aqpasa.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1964,7 +2031,7 @@
             <div class="pie-tarjeta">
               <span class="medio">diariodeibiza.es</span>
               <span class="punto">&middot;</span>
-              <span>hace 13 días</span>
+              <span>hace 14 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cursos+gratis+en+Ibiza+de+ingl%C3%A9s%2C+inteligencia+artificial+y+creaci%C3%B3n+de+contenido%3A+52+plazas+y+matr%C3%ADcula+abierta+en+Santa+Eul%C3%A0ria+-+Diario+de+Ibiza%22+site%3Adiariodeibiza.es" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1982,7 +2049,7 @@
             <div class="pie-tarjeta">
               <span class="medio">infobae.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 15 días</span>
+              <span>hace 16 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Ministerio+TIC+ofertar%C3%A1+m%C3%A1s+de+32.000+cupos+gratuitos+hasta+el+13+de+octubre+para+cursos+de+inteligencia+artificial%2C+datos+y+ciberseguridad+-+Infobae%22+site%3Ainfobae.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2000,7 +2067,7 @@
             <div class="pie-tarjeta">
               <span class="medio">elperiodicoextremadura.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 18 días</span>
+              <span>hace 19 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Ocho+cursos+gratis+para+desempleados+de+45+a+60+a%C3%B1os+en+C%C3%A1ceres%3A+de+celador+e+IA+a+mantenimiento+y+crochet+-+El+Peri%C3%B3dico+Extremadura%22+site%3Aelperiodicoextremadura.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2018,7 +2085,7 @@
             <div class="pie-tarjeta">
               <span class="medio">diariodelsur.com.co</span>
               <span class="punto">&middot;</span>
-              <span>hace 20 días</span>
+              <span>hace 21 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cursos+de+inteligencia+artificial+GRATIS+en+Nvidia%3B+duran+hasta+8+horas+y+entregan+certificado+-+Diario+del+Sur+-+Noticias+de+hoy%22+site%3Adiariodelsur.com.co" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2036,7 +2103,7 @@
             <div class="pie-tarjeta">
               <span class="medio">diariodelsur.com.co</span>
               <span class="punto">&middot;</span>
-              <span>hace 20 días</span>
+              <span>hace 21 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cursos+de+inteligencia+artificial+GRATIS+en+Nvidia%3B+duran+hasta+8+horas+y+entregan+certificado+-+diariodelsur.com.co%22+site%3Adiariodelsur.com.co" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2054,7 +2121,7 @@
             <div class="pie-tarjeta">
               <span class="medio">hsbnoticias.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 20 días</span>
+              <span>hace 21 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cursos+de+inteligencia+artificial+GRATIS+en+Nvidia%3B+duran+hasta+8+horas+y+entregan+certificado+-+hsb+noticias%22+site%3Ahsbnoticias.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2072,7 +2139,7 @@
             <div class="pie-tarjeta">
               <span class="medio">diariodelcauca.com.co</span>
               <span class="punto">&middot;</span>
-              <span>hace 20 días</span>
+              <span>hace 21 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cursos+de+inteligencia+artificial+GRATIS+en+Nvidia%3B+duran+hasta+8+horas+y+entregan+certificado+-+Diario+del+Cauca%22+site%3Adiariodelcauca.com.co" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2090,17 +2157,17 @@
             <div class="pie-tarjeta">
               <span class="medio">tropicanafm.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 20 días</span>
+              <span>hace 21 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cursos+de+inteligencia+artificial+GRATIS+en+Nvidia%3B+duran+hasta+8+horas+y+entregan+certificado+-+Tropicana+Colombia%22+site%3Atropicanafm.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
           
           
-          <article class="tarjeta normal" data-nuevo="si">
+          <article class="tarjeta normal" data-nuevo="no">
             <div class="fila-superior">
               
-              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              
               <span class="cifra-chica medio">8.5</span>
               
             </div>
@@ -2108,7 +2175,7 @@
             <div class="pie-tarjeta">
               <span class="medio">canariasenpleno.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 21 días</span>
+              <span>hace 22 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cursos+gratuitos+de+inteligencia+artificial+en+Fuerteventura%3A+el+Cabildo+busca+aut%C3%B3nomos+y+empresas+para+octubre+-+Canarias+en+Pleno%22+site%3Acanariasenpleno.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2126,7 +2193,7 @@
             <div class="pie-tarjeta">
               <span class="medio">radioacktiva.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 21 días</span>
+              <span>hace 22 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Nvidia+tiene+cursos+gratis+de+inteligencia+artificial%3A+Son+100%25+virtuales%2C+%C2%BFc%C3%B3mo+acceder%3F+-+Radioacktiva.com%22+site%3Aradioacktiva.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2144,7 +2211,7 @@
             <div class="pie-tarjeta">
               <span class="medio">elperiodic.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 22 días</span>
+              <span>hace 23 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Curso+gratuito+de+%E2%80%9CTareas+Administrativas+con+IA%E2%80%9D+en+el+Lab_Nucia+Abiertas+inscripciones+para+esta+formaci%C3%B3n+-+elperiodic.com%22+site%3Aelperiodic.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2162,7 +2229,7 @@
             <div class="pie-tarjeta">
               <span class="medio">lanucia.es</span>
               <span class="punto">&middot;</span>
-              <span>hace 22 días</span>
+              <span>hace 23 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Curso+gratuito+de+%E2%80%9CTareas+Administrativas+con+IA%E2%80%9D+en+el+Lab_Nucia+-+Ayuntamiento+de+la+Nucia%22+site%3Alanucia.es" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2180,7 +2247,7 @@
             <div class="pie-tarjeta">
               <span class="medio">qpasa.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 25 días</span>
+              <span>hace 26 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Google+ofrece+un+curso+gratis+para+dominar+su+IA+Gemini+en+espa%C3%B1ol+-+qpasa.com%22+site%3Aqpasa.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2198,7 +2265,7 @@
             <div class="pie-tarjeta">
               <span class="medio">andaluciainforma.es</span>
               <span class="punto">&middot;</span>
-              <span>hace 28 días</span>
+              <span>hace 29 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22La+Junta+de+Andaluc%C3%ADa+ofrece+630+plazas+gratis+en+cursos+de+IA%2C+IoT+y+realidad+virtual+que+arrancan+desde+octubre+-+Andaluc%C3%ADa+Informa%22+site%3Aandaluciainforma.es" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2216,7 +2283,7 @@
             <div class="pie-tarjeta">
               <span class="medio">sobretiza.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 29 días</span>
+              <span>hace 1 mes</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22IA%2C+tecnolog%C3%ADa+y+oficios%3A+nuevos+cursos+gratuitos+de+Educ.ar+-+Sobre+Tiza%22+site%3Asobretiza.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2234,7 +2301,7 @@
             <div class="pie-tarjeta">
               <span class="medio">diariodejerez.es</span>
               <span class="punto">&middot;</span>
-              <span>hace 29 días</span>
+              <span>hace 1 mes</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Empleo+ofrece+cursos+gratuitos+de+IA%2C+Internet+de+las+Cosas+y+Realidad+Virtual+en+Jerez+-+Diario+de+Jerez%22+site%3Adiariodejerez.es" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2576,7 +2643,7 @@
             <div class="pie-tarjeta">
               <span class="medio">es-us.noticias.yahoo.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 1 mes</span>
+              <span>hace 2 meses</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Platzi+ofrece+cursos+gratis+con+certificado+en+programaci%C3%B3n%2C+inteligencia+artificial+e+ingl%C3%A9s%3A+estos+son+los+requisitos+-+Yahoo%22+site%3Aes-us.noticias.yahoo.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2702,7 +2769,7 @@
             <div class="pie-tarjeta">
               <span class="medio">perfil.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 4 días</span>
+              <span>hace 5 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+CUI+abre+las+inscripciones+2027+con+nuevos+idiomas+y+Certificaci%C3%B3n+UBA+-+Perfil%22+site%3Aperfil.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2720,7 +2787,7 @@
             <div class="pie-tarjeta">
               <span class="medio">uv.es</span>
               <span class="punto">&middot;</span>
-              <span>hace 6 días</span>
+              <span>hace 7 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+Centre+d%E2%80%99Idiomes+UV+abre+la+matr%C3%ADcula+de+los+cursos+en+l%C3%ADnea+de+valenciano+e+ingl%C3%A9s+-+Universitat+de+Val%C3%A8ncia%22+site%3Auv.es" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2738,7 +2805,7 @@
             <div class="pie-tarjeta">
               <span class="medio">hoy.es</span>
               <span class="punto">&middot;</span>
-              <span>hace 19 días</span>
+              <span>hace 20 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22La+Escuela+Oficial+de+Idiomas+de+Plasencia+oferta+cinco+cursos+monogr%C3%A1ficos+-+Hoy%22+site%3Ahoy.es" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2756,7 +2823,7 @@
             <div class="pie-tarjeta">
               <span class="medio">uncuyo.edu.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 27 días</span>
+              <span>hace 28 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Inscripciones+abiertas+para+realizar+un+curso+de+ingl%C3%A9s+especializado+en+el+sector+de+energ%C3%ADa+y+minerales+-+Universidad+Nacional+de+Cuyo%22+site%3Auncuyo.edu.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2774,7 +2841,7 @@
             <div class="pie-tarjeta">
               <span class="medio">elsello.info</span>
               <span class="punto">&middot;</span>
-              <span>hace 27 días</span>
+              <span>hace 28 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Nuevo+curso+gratuito+de+Ingl%C3%A9s+T%C3%A9cnico+para+el+mundo+IT+-+elsello.info%22+site%3Aelsello.info" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2792,7 +2859,7 @@
             <div class="pie-tarjeta">
               <span class="medio">madariaga.gob.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 27 días</span>
+              <span>hace 28 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Nuevo+curso+gratuito+de+Ingl%C3%A9s+T%C3%A9cnico+para+el+mundo+IT+-+madariaga.gob.ar%22+site%3Amadariaga.gob.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2810,7 +2877,7 @@
             <div class="pie-tarjeta">
               <span class="medio">andaluciainformacion.es</span>
               <span class="punto">&middot;</span>
-              <span>hace 28 días</span>
+              <span>hace 29 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Bormujos+ampl%C3%ADa+su+oferta+formativa+con+nuevos+cursos+tecnol%C3%B3gicos+y+de+ingl%C3%A9s+-+Andaluc%C3%ADa+Informaci%C3%B3n%22+site%3Aandaluciainformacion.es" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -3215,7 +3282,7 @@
         <span class="clave">en seguimiento</span>
       </div>
       <div class="metrica">
-        <span class="valor acento">1</span>
+        <span class="valor">0</span>
         <span class="clave">nuevas (48 h)</span>
       </div>
       
@@ -3252,11 +3319,11 @@
     
 
     
-    <details class="tema" data-tema="bbva" open>
+    <details class="tema" data-tema="bbva">
       <summary>
         <span class="chevron" aria-hidden="true"></span>
         <span class="nombre-tema">BBVA / Banco Frances</span>
-        <span class="marca nueva">1 nueva</span>
+        
         
         <span class="cuenta-tema">25</span>
         <span class="tope bajo">7.0</span>
@@ -3302,7 +3369,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -3374,7 +3441,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -3440,7 +3507,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -3510,7 +3577,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -3578,7 +3645,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -3650,7 +3717,7 @@
                 
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -3718,7 +3785,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -3790,7 +3857,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -3862,7 +3929,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -3934,7 +4001,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -4006,7 +4073,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -4078,7 +4145,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -4148,7 +4215,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -4218,7 +4285,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -4288,7 +4355,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -4358,7 +4425,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -4428,7 +4495,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -4498,7 +4565,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -4568,7 +4635,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -4638,7 +4705,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -4708,7 +4775,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -4775,7 +4842,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -4998,7 +5065,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -5070,7 +5137,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -5142,7 +5209,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -5214,7 +5281,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -5286,7 +5353,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -5358,7 +5425,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -5430,7 +5497,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -5500,7 +5567,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -5570,7 +5637,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -5640,7 +5707,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -5710,7 +5777,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -5780,7 +5847,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 27/10
-                  <em>· vence en 6 días</em>
+                  <em>· vence en 5 días</em>
                 </span>
               </div>
             </div>
@@ -5847,7 +5914,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -5917,7 +5984,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -5985,7 +6052,7 @@
                 <span class="senal">solo 6 días por semana</span>
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -6055,7 +6122,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -6861,7 +6928,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -6929,7 +6996,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -6997,7 +7064,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -7065,7 +7132,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -7133,7 +7200,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -7201,7 +7268,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -7269,7 +7336,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -7337,7 +7404,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -7405,7 +7472,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -7473,7 +7540,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -7541,7 +7608,7 @@
                 
                 <span class="vigencia semana">
                   vence 31/10
-                  <em>· vence en 10 días</em>
+                  <em>· vence en 9 días</em>
                 </span>
               </div>
             </div>
@@ -7652,7 +7719,7 @@
     El puntaje mide qué tan bien encaja con el tema, no la calidad de lo que ofrece.
     <em>hace N días</em> es cuándo se publicó la nota, no cuándo cierra la inscripción;
     <em>vence</em> sí es una fecha real que declara la fuente.
-    <br>Se archivaron 192 avisos vencidos.
+    <br>Se archivaron 194 avisos vencidos.
   </footer>
 </main>
 
