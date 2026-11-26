@@ -753,7 +753,7 @@
 <aside class="barra-lateral">
   <header class="encabezado">
     <h1>Radar Porteño</h1>
-    <p class="sello">Actualizado 25/11/2026 21:22</p>
+    <p class="sello">Actualizado 26/11/2026 21:09</p>
   </header>
 
   
@@ -777,8 +777,8 @@
             aria-selected="false"
             tabindex="-1">
       <span class="nombre-pestana">Este finde</span>
-      <span class="cuenta-pestana">0</span>
-      
+      <span class="cuenta-pestana">1</span>
+      <span class="pip" aria-label="1 nuevas"></span>
     </button>
     
     <button class="pestana" type="button" role="tab"
@@ -788,8 +788,8 @@
             aria-selected="false"
             tabindex="-1">
       <span class="nombre-pestana">Cine</span>
-      <span class="cuenta-pestana">26</span>
-      <span class="pip" aria-label="5 nuevas"></span>
+      <span class="cuenta-pestana">27</span>
+      <span class="pip" aria-label="6 nuevas"></span>
     </button>
     
     <button class="pestana" type="button" role="tab"
@@ -799,8 +799,8 @@
             aria-selected="false"
             tabindex="-1">
       <span class="nombre-pestana">Agenda</span>
-      <span class="cuenta-pestana">127</span>
-      <span class="pip" aria-label="10 nuevas"></span>
+      <span class="cuenta-pestana">131</span>
+      <span class="pip" aria-label="11 nuevas"></span>
     </button>
     
     <button class="pestana" type="button" role="tab"
@@ -810,7 +810,7 @@
             aria-selected="false"
             tabindex="-1">
       <span class="nombre-pestana">Ofertas</span>
-      <span class="cuenta-pestana">49</span>
+      <span class="cuenta-pestana">48</span>
       <span class="pip" aria-label="4 nuevas"></span>
     </button>
     
@@ -905,14 +905,50 @@
     </div>
 
     
+    <section class="carrusel" aria-labelledby="titulo-carrusel-este-finde">
+      <div class="barra-carrusel">
+        <span class="rotulo" id="titulo-carrusel-este-finde">Lo mejor de esta semana</span>
+        <div class="flechas">
+          <button class="flecha" data-dir="-1" type="button" aria-label="Anterior">
+            <span class="punta izq" aria-hidden="true"></span>
+          </button>
+          <button class="flecha" data-dir="1" type="button" aria-label="Siguiente">
+            <span class="punta der" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="pista" tabindex="0" role="group" aria-label="Destacados de Este finde">
+        
+        
+        <article class="diapositiva">
+          <span class="led en-destacada" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+          <div class="cifra">10.0</div>
+          <div class="contenido-diapositiva">
+            <h2><a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxOZ2FtS3ZTZkU0U3RLNnhCZ0pReFhwVzdEZ21uZVdqT2tPYlV0ZmFrLXVkdWZ0cWJES2JsSnZNSC1EUnlSa3pwbG9MN2NoLUJ0WHloT3ZxaTQyTHRHZUYyblFzNU9LUkxzZDdUVjk5WVY0dkZVYzdtbmVOSjNzWEtHa0FSQncyaDZsWGhrd1o1bUtHa0c5amdqelZMZ0ozQlBNaldyNk1XZUVFNUFja29nRHY2aWktTlJMU1pEa2xTaFJiT0F4a3NYT3g0MjVQT05NS1AzelZNdUFxQQ?oc=5" target="_blank" rel="noopener noreferrer" title="5 planes gratis en Buenos Aires para despedir noviembre: qué hacer y dónde ir este fin de semana - Meteored Argentina">5 planes gratis en Buenos Aires para despedir noviembre: qué hacer y dónde ir este fin de semana - Meteored Argentina</a></h2>
+            <div class="pie-tarjeta">
+              <span class="medio">meteored.com.ar</span>
+              <span class="punto">&middot;</span>
+              <span>vence en 4 días</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%225+planes+gratis+en+Buenos+Aires+para+despedir+noviembre%3A+qu%C3%A9+hacer+y+d%C3%B3nde+ir+este+fin+de+semana+-+Meteored+Argentina%22+site%3Ameteored.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </div>
+        </article>
+        
+        
+      </div>
+
+      
+    </section>
+    
 
     <div class="metricas">
       <div class="metrica">
-        <span class="valor">0</span>
+        <span class="valor">1</span>
         <span class="clave">en seguimiento</span>
       </div>
       <div class="metrica">
-        <span class="valor">0</span>
+        <span class="valor acento">1</span>
         <span class="clave">nuevas (48 h)</span>
       </div>
       
@@ -926,8 +962,6 @@
     </div>
 
     
-    <p class="vacio-zona">Todavia no hay agenda del finde. Los medios la publican entre jueves y viernes; el lunes esto se vacia solo.</p>
-    
 
   
   <section class="familia" data-familia="Agenda del finde">
@@ -935,18 +969,19 @@
     
 
     
-    <details class="tema" data-tema="finde-caba">
+    <details class="tema" data-tema="finde-caba" open>
       <summary>
         <span class="chevron" aria-hidden="true"></span>
         <span class="nombre-tema">Musica, teatro y arte</span>
+        <span class="marca nueva">1 nueva</span>
         
         
-        
-        
+        <span class="tope alto">10.0</span>
       </summary>
       <div class="cuerpo-tema">
         
-        <p class="vacio">Todavía nada para este tema. Se revisa en cada corrida.</p>
+        
+        <p class="vacio">Lo de este tema está en los destacados, arriba.</p>
         
       </div>
     </details>
@@ -990,7 +1025,7 @@
             <div class="pie-tarjeta">
               <span class="medio">cadena3.com</span>
               <span class="punto">&middot;</span>
-              <span>hoy</span>
+              <span>ayer</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cine+espa%C3%B1ol+en+Buenos+Aires%3A+festivales+de+M%C3%A1laga+y+San+Sebasti%C3%A1n+con+proyecciones+gratuitas+-+Cadena+3+Argentina%22+site%3Acadena3.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -1006,7 +1041,7 @@
             <div class="pie-tarjeta">
               <span class="medio">noticiasargentinas.com</span>
               <span class="punto">&middot;</span>
-              <span>hoy</span>
+              <span>ayer</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Los+festivales+de+cine+de+M%C3%A1laga+y+San+Sebasti%C3%A1n+en+Buenos+Aires+con+entrada+gratuita+-+Agencia+Noticias+Argentinas%22+site%3Anoticiasargentinas.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -1022,8 +1057,24 @@
             <div class="pie-tarjeta">
               <span class="medio">diarioelnorte.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hoy</span>
+              <span>ayer</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cine+espa%C3%B1ol+en+Buenos+Aires%3A+Semana+de+Festivales+gratis+-+Diario+El+Norte+-+San+Nicol%C3%A1s%22+site%3Adiarioelnorte.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </div>
+        </article>
+        
+        
+        
+        <article class="diapositiva">
+          <span class="led en-destacada" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+          <div class="cifra">9.1</div>
+          <div class="contenido-diapositiva">
+            <h2><a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxNOXR6MXhFVkl5X0wtdDFYaDlZcnkzMkdmMm9jc0RUblRvUHZwNEtlZDF4dEY0XzFod2JqWEh5REphTXFJVVo2eVVRTTlzRGN1RjNhdGpkX19LN3NrVXU1TjhMR1Azd0t4ZjBJeF85ZWNJUkFwU1ZyUDY0YnhlbHpJRlpMUktpNDhvMVduV1hvQlc1U2d5RVFwSFptdzloaVRFQ3dBQ05YSXhvdUxFY0IyeWJoeHpDMkdMSjdYRQ?oc=5" target="_blank" rel="noopener noreferrer" title="Malba Puertos y Fundación Medifé presentan un nuevo ciclo de verano de cine mudo + música en vivo - Malba">Malba Puertos y Fundación Medifé presentan un nuevo ciclo de verano de cine mudo + música en vivo - Malba</a></h2>
+            <div class="pie-tarjeta">
+              <span class="medio">malba.org.ar</span>
+              <span class="punto">&middot;</span>
+              <span>hoy</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Malba+Puertos+y+Fundaci%C3%B3n+Medif%C3%A9+presentan+un+nuevo+ciclo+de+verano+de+cine+mudo+%2B+m%C3%BAsica+en+vivo+-+Malba%22+site%3Amalba.org.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
         </article>
@@ -1038,24 +1089,8 @@
             <div class="pie-tarjeta">
               <span class="medio">eldestapeweb.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 2 días</span>
-              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Beneficio+clave+para+jubilados+en+CABA%3A+c%C3%B3mo+reservar+entradas+para+los+festivales+de+Cine+de+M%C3%A1laga+y+San+Sebasti%C3%A1n+-+El+Destape%22+site%3Aeldestapeweb.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
-            </div>
-          </div>
-        </article>
-        
-        
-        
-        <article class="diapositiva">
-          
-          <div class="cifra">9.1</div>
-          <div class="contenido-diapositiva">
-            <h2><a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxQNzZpeGhIUTFBb05XZXpqaTM3LXpGbC1uM0c1TXBwY21UaVkza191OVgzUnVGazRlenR3SERVUEtMeDhZMDJacDhOVmNVTTMxNG1VR3gzWkVjcGhLblhuZkxHM2s1ZndZamtXdUliTkdkZDBSLVc3T1hROHVOSnRUZDdneHZtZHJOejdfeEJIMmJKeThYdUxmOHZCOEZHZVhmak1iS0hPS0JTdF9pODg4YWJsVEt3SEVXaWNHWVFBY0JYdGdMQi1SX3lBbDMwdw?oc=5" target="_blank" rel="noopener noreferrer" title="El Festival de Cine Indígena BAIn tendrá cinco jornadas de proyecciones en La Matanza, Morón y CABA - La Noticia 1">El Festival de Cine Indígena BAIn tendrá cinco jornadas de proyecciones en La Matanza, Morón y CABA - La Noticia 1</a></h2>
-            <div class="pie-tarjeta">
-              <span class="medio">lanoticia1.com</span>
-              <span class="punto">&middot;</span>
               <span>hace 3 días</span>
-              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+Festival+de+Cine+Ind%C3%ADgena+BAIn+tendr%C3%A1+cinco+jornadas+de+proyecciones+en+La+Matanza%2C+Mor%C3%B3n+y+CABA+-+La+Noticia+1%22+site%3Alanoticia1.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Beneficio+clave+para+jubilados+en+CABA%3A+c%C3%B3mo+reservar+entradas+para+los+festivales+de+Cine+de+M%C3%A1laga+y+San+Sebasti%C3%A1n+-+El+Destape%22+site%3Aeldestapeweb.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
         </article>
@@ -1093,11 +1128,11 @@
 
     <div class="metricas">
       <div class="metrica">
-        <span class="valor">26</span>
+        <span class="valor">27</span>
         <span class="clave">en seguimiento</span>
       </div>
       <div class="metrica">
-        <span class="valor acento">5</span>
+        <span class="valor acento">6</span>
         <span class="clave">nuevas (48 h)</span>
       </div>
       
@@ -1122,14 +1157,32 @@
       <summary>
         <span class="chevron" aria-hidden="true"></span>
         <span class="nombre-tema">Ciclos de cine</span>
-        <span class="marca nueva">5 nuevas</span>
+        <span class="marca nueva">6 nuevas</span>
         
-        <span class="cuenta-tema">26</span>
+        <span class="cuenta-tema">27</span>
         <span class="tope alto">9.9</span>
       </summary>
       <div class="cuerpo-tema">
         
         <div class="grilla ">
+          
+          
+          <article class="tarjeta semana" data-nuevo="no">
+            <div class="fila-superior">
+              
+              
+              <span class="cifra-chica alto">9.1</span>
+              
+            </div>
+            <h3><a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxQNzZpeGhIUTFBb05XZXpqaTM3LXpGbC1uM0c1TXBwY21UaVkza191OVgzUnVGazRlenR3SERVUEtMeDhZMDJacDhOVmNVTTMxNG1VR3gzWkVjcGhLblhuZkxHM2s1ZndZamtXdUliTkdkZDBSLVc3T1hROHVOSnRUZDdneHZtZHJOejdfeEJIMmJKeThYdUxmOHZCOEZHZVhmak1iS0hPS0JTdF9pODg4YWJsVEt3SEVXaWNHWVFBY0JYdGdMQi1SX3lBbDMwdw?oc=5" target="_blank" rel="noopener noreferrer">El Festival de Cine Indígena BAIn tendrá cinco jornadas de proyecciones en La Matanza, Morón y CABA - La Noticia 1</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">lanoticia1.com</span>
+              <span class="punto">&middot;</span>
+              <span>hace 4 días</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+Festival+de+Cine+Ind%C3%ADgena+BAIn+tendr%C3%A1+cinco+jornadas+de+proyecciones+en+La+Matanza%2C+Mor%C3%B3n+y+CABA+-+La+Noticia+1%22+site%3Alanoticia1.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </article>
+          
           
           
           <article class="tarjeta normal" data-nuevo="no">
@@ -1143,7 +1196,7 @@
             <div class="pie-tarjeta">
               <span class="medio">otroscines.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 8 días</span>
+              <span>hace 9 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Toda+la+programaci%C3%B3n+de+la+7%C2%AA+Semana+de+Cine+Latinoamericano+en+Buenos+Aires+-+Otros+Cines%22+site%3Aotroscines.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1161,7 +1214,7 @@
             <div class="pie-tarjeta">
               <span class="medio">escribiendocine.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 20 días</span>
+              <span>hace 21 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Toda+la+programaci%C3%B3n+de+la+Muestra+de+Cine+Ind%C3%ADgena+en+Buenos+Aires+2026+-+EscribiendoCine%22+site%3Aescribiendocine.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1179,7 +1232,7 @@
             <div class="pie-tarjeta">
               <span class="medio">otroscines.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 20 días</span>
+              <span>hace 21 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Anunciaron+la+programaci%C3%B3n+del+Buenos+Aires+Rojo+Sangre+2026+-+Otros+Cines%22+site%3Aotroscines.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1197,7 +1250,7 @@
             <div class="pie-tarjeta">
               <span class="medio">forbesargentina.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 24 días</span>
+              <span>hace 25 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+negocio+de+la+nostalgia%2C+anti-algoritmo+y+boutique%3A+por+qu%C3%A9+reviven+los+cineclubes+y+las+micro-salas+en+Buenos+Aires+-+Forbes+Argentina%22+site%3Aforbesargentina.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1215,7 +1268,7 @@
             <div class="pie-tarjeta">
               <span class="medio">infobae.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 26 días</span>
+              <span>hace 27 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+hombre+que+le+pregunt%C3%B3+a+Steve+Jobs+de+d%C3%B3nde+sale+la+innovaci%C3%B3n%2C+trae+a+Buenos+Aires+el+festival+de+cine+con+IA+-+Infobae%22+site%3Ainfobae.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1233,7 +1286,7 @@
             <div class="pie-tarjeta">
               <span class="medio">buenosaires.gob.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 26 días</span>
+              <span>hace 27 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Festival+Mundial+de+Cine+IA+Argentina%2C+en+Buenos+Aires+-+Buenos+Aires+Ciudad%22+site%3Abuenosaires.gob.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1251,7 +1304,7 @@
             <div class="pie-tarjeta">
               <span class="medio">infobae.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 27 días</span>
+              <span>hace 28 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22World+AI+Film+Festival+en+Buenos+Aires%3A+el+programa+completo+del+viernes+30%2C+con+entrada+libre+y+gratuita+-+Infobae%22+site%3Ainfobae.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1269,7 +1322,7 @@
             <div class="pie-tarjeta">
               <span class="medio">indiehoy.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 28 días</span>
+              <span>hace 29 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Festival+OFFNI+en+Buenos+Aires%3A+Programaci%C3%B3n%2C+fechas+y+c%C3%B3mo+ver+las+pel%C3%ADculas+con+entrada+gratuita+-+Indie+Hoy%22+site%3Aindiehoy.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1287,7 +1340,7 @@
             <div class="pie-tarjeta">
               <span class="medio">hoydia.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 28 días</span>
+              <span>hace 29 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Tras+su+paso+por+festivales%2C+%E2%80%9CEl+tren+fluvial%E2%80%9D+llega+al+Cineclub+%7C+28+de+octubre+de+2026+-+Hoy+D%C3%ADa+C%C3%B3rdoba%22+site%3Ahoydia.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1323,7 +1376,7 @@
             <div class="pie-tarjeta">
               <span class="medio">clarin.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 29 días</span>
+              <span>hace 1 mes</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Llega+a+Buenos+Aires+el+festival+de+cine+con+inteligencia+artificial%3A+180+proyectos%2C+funciones+gratis+y+un+premio+que+lleva+a+Cannes+-+Clarin.com%22+site%3Aclarin.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1341,7 +1394,7 @@
             <div class="pie-tarjeta">
               <span class="medio">infobae.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 29 días</span>
+              <span>hace 1 mes</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Paneles%2C+cine+y+experiencias+interactivas+con+IA%3A+se+conoci%C3%B3+el+programa+completo+del+World+AI+Film+Festival+en+Buenos+Aires+-+Infobae%22+site%3Ainfobae.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1553,7 +1606,7 @@
             <div class="pie-tarjeta">
               <span class="medio">cadena3.com</span>
               <span class="punto">&middot;</span>
-              <span>hoy</span>
+              <span>ayer</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Buenos+Aires+celebra+el+Teatro+Independiente+con+funciones+gratis%2C+a+la+gorra+y+descuentos+-+Cadena+3+Argentina%22+site%3Acadena3.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -1569,7 +1622,7 @@
             <div class="pie-tarjeta">
               <span class="medio">eldestapeweb.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 5 días</span>
+              <span>hace 6 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Wosh+Mach%C3%ADn+llega+con+una+obra+gratis+a+Buenos+Aires%3A+%22El+teatro+es+una+militancia+para+dignificar+vidas%22+-+El+Destape%22+site%3Aeldestapeweb.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -1585,7 +1638,7 @@
             <div class="pie-tarjeta">
               <span class="medio">universoturadio.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 5 días</span>
+              <span>hace 6 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Qu%C3%A9+hacer+en+Buenos+Aires+este+fin+de+semana%3A+m%C3%A1s+de+60+planes+para+disfrutar+del+viernes+20+al+feriado+del+lunes+23+con+recitales%2C+teatro%2C+cine%2C+streaming%2C+muestras+y+gratis+-+FM+Universo+97.3%22+site%3Auniversoturadio.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -1594,14 +1647,14 @@
         
         
         <article class="diapositiva">
-          <span class="led en-destacada" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+          
           <div class="cifra">9.5</div>
           <div class="contenido-diapositiva">
             <h2><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxOak9Ib3djVmduX2hJU1dwLWk4aEFsaUtMcFMtQVJXR21vYmdTSi1XVnFqWmRxVnB0dnpWNzBkaW1mSEpTeWw2eWNyQ3VuYVR2UEdEZnVOX3pIVTRtTk1nclFSUFlHRC1Ja2JvOVpzbXVYTTR5RmtlU0RaVEN2T2VidnJsMUZQb3J1a0FqcU9zdnJBLTBRR1RKNDFn?oc=5" target="_blank" rel="noopener noreferrer" title="El lago de los cisnes en el Teatro Argentino: funciones gratuitas - Música Clásica Buenos Aires">El lago de los cisnes en el Teatro Argentino: funciones gratuitas - Música Clásica Buenos Aires</a></h2>
             <div class="pie-tarjeta">
               <span class="medio">musicaclasica.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 2 días</span>
+              <span>hace 3 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+lago+de+los+cisnes+en+el+Teatro+Argentino%3A+funciones+gratuitas+-+M%C3%BAsica+Cl%C3%A1sica+Buenos+Aires%22+site%3Amusicaclasica.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -1617,7 +1670,7 @@
             <div class="pie-tarjeta">
               <span class="medio">noticiasargentinas.com</span>
               <span class="punto">&middot;</span>
-              <span>hoy</span>
+              <span>ayer</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Los+festivales+de+cine+de+M%C3%A1laga+y+San+Sebasti%C3%A1n+en+Buenos+Aires+con+entrada+gratuita+-+Agencia+Noticias+Argentinas%22+site%3Anoticiasargentinas.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </div>
@@ -1656,29 +1709,29 @@
 
     <div class="metricas">
       <div class="metrica">
-        <span class="valor">127</span>
+        <span class="valor">131</span>
         <span class="clave">en seguimiento</span>
       </div>
       <div class="metrica">
-        <span class="valor acento">10</span>
+        <span class="valor acento">11</span>
         <span class="clave">nuevas (48 h)</span>
       </div>
       
       
       <div class="metrica">
-        <span class="valor calor">7</span>
+        <span class="valor calor">9</span>
         <span class="clave">recién publicadas</span>
       </div>
       
       
       
       <div class="metrica">
-        <span class="valor">29</span>
+        <span class="valor">31</span>
         <span class="clave">Cultura porteña</span>
       </div>
       
       <div class="metrica">
-        <span class="valor">98</span>
+        <span class="valor">100</span>
         <span class="clave">Formación</span>
       </div>
       
@@ -1703,7 +1756,7 @@
         <span class="nombre-tema">Talleres y lectura</span>
         <span class="marca nueva">1 nueva</span>
         
-        <span class="cuenta-tema">6</span>
+        <span class="cuenta-tema">7</span>
         <span class="tope alto">10.0</span>
       </summary>
       <div class="cuerpo-tema">
@@ -1711,10 +1764,10 @@
         <div class="grilla ">
           
           
-          <article class="tarjeta caliente" data-nuevo="si">
+          <article class="tarjeta caliente" data-nuevo="no">
             <div class="fila-superior">
               
-              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              
               <span class="cifra-chica alto">9.2</span>
               <span class="marca reciente">recién</span>
             </div>
@@ -1722,8 +1775,26 @@
             <div class="pie-tarjeta">
               <span class="medio">g5noticias.cl</span>
               <span class="punto">&middot;</span>
-              <span>ayer</span>
+              <span>hace 2 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Con+talleres%2C+m%C3%BAsica+y+poes%C3%ADa+la+comunidad+porte%C3%B1a+celebr%C3%B3+los+35+a%C3%B1os+de+la+Librer%C3%ADa+Crisis+-+G5noticias%22+site%3Ag5noticias.cl" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </article>
+          
+          
+          
+          <article class="tarjeta semana" data-nuevo="si">
+            <div class="fila-superior">
+              
+              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              <span class="cifra-chica alto">9.2</span>
+              
+            </div>
+            <h3><a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxOY0ZicnVXVlpGNzFOeWZBcHhCbHpnOHphakpRN2JkX2RJV0g3eGlwa2V4dUtRbEl5UXgxdFh3SnBkcE1BemxrZWJuUVkycXFRNm1yckxBdklWWlRPVjlFbnJwWHpXM00yRkhPLVF5Q0RNRnBvekpvUnRCaHk1VlJyblBqSTRXTHBlUEFjX19wTWxWQzMwemhJcmhjM016Zk9vTmxIcktKR3MyTXJBdUVYZVFSTnBxdXZUY2FPQWZR?oc=5" target="_blank" rel="noopener noreferrer">Con talleres, música y poesía la comunidad Porteña celebró los 35 años de la Librería Crisis - Radio Festival</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">radiofestival.cl</span>
+              <span class="punto">&middot;</span>
+              <span>hace 3 días</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Con+talleres%2C+m%C3%BAsica+y+poes%C3%ADa+la+comunidad+Porte%C3%B1a+celebr%C3%B3+los+35+a%C3%B1os+de+la+Librer%C3%ADa+Crisis+-+Radio+Festival%22+site%3Aradiofestival.cl" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
@@ -1740,7 +1811,7 @@
             <div class="pie-tarjeta">
               <span class="medio">soybibliotecario.blogspot.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 21 días</span>
+              <span>hace 22 días</span>
               
             </div>
           </article>
@@ -1758,7 +1829,7 @@
             <div class="pie-tarjeta">
               <span class="medio">soybibliotecario.blogspot.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 26 días</span>
+              <span>hace 27 días</span>
               
             </div>
           </article>
@@ -1776,7 +1847,7 @@
             <div class="pie-tarjeta">
               <span class="medio">andaluciainformacion.es</span>
               <span class="punto">&middot;</span>
-              <span>hace 28 días</span>
+              <span>hace 29 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Arjona+celebra+el+D%C3%ADa+de+las+Bibliotecas+con+talleres%2C+actividades+y+participaci%C3%B3n+ciudadana+-+Andaluc%C3%ADa+Informaci%C3%B3n%22+site%3Aandaluciainformacion.es" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1827,9 +1898,9 @@
       <summary>
         <span class="chevron" aria-hidden="true"></span>
         <span class="nombre-tema">Festivales</span>
-        <span class="marca nueva">5 nuevas</span>
+        <span class="marca nueva">7 nuevas</span>
         
-        <span class="cuenta-tema">15</span>
+        <span class="cuenta-tema">16</span>
         <span class="tope alto">9.4</span>
       </summary>
       <div class="cuerpo-tema">
@@ -1844,11 +1915,47 @@
               <span class="cifra-chica alto">9.2</span>
               <span class="marca reciente">recién</span>
             </div>
+            <h3><a href="https://news.google.com/rss/articles/CBMi8AFBVV95cUxPc2tNMlhyN2pmMUpLdEpwcWtuVzdTNFpIUWtudm8yTUY1ZGd6c2JRaFVndElkR2QxVWxIb0RpeVhFZ1JXWk9wc3p3emt1LURtSmxWVzVSRDJGWnctZWJuNW04UEhBUlN5MVU2SGRaZF9xYTlTSU8xbUpvVTJVa0FyLXJXUERKOWo5VUdJZGNhVjBheVNZTzAxbWVvdGNZWUJRci1MV0txZGdUVUFBaWJLRDU2M2RKa0k5M1puN3dIWXctTVBZQ3FqNnBvOUkxelN5ZklwOXFtSUw4YnFqTlhmdEZ4RGxSUEdyUE9LNFljUy0?oc=5" target="_blank" rel="noopener noreferrer">Festival de Jazz Argentino 2026: cuatro días de música en vivo en Buenos Aires, con conciertos gratuitos y clases magistrales - Radio Hache 97.7</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">radiohache.com</span>
+              <span class="punto">&middot;</span>
+              <span>hoy</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Festival+de+Jazz+Argentino+2026%3A+cuatro+d%C3%ADas+de+m%C3%BAsica+en+vivo+en+Buenos+Aires%2C+con+conciertos+gratuitos+y+clases+magistrales+-+Radio+Hache+97.7%22+site%3Aradiohache.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </article>
+          
+          
+          
+          <article class="tarjeta caliente" data-nuevo="si">
+            <div class="fila-superior">
+              
+              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              <span class="cifra-chica alto">9.2</span>
+              <span class="marca reciente">recién</span>
+            </div>
+            <h3><a href="https://news.google.com/rss/articles/CBMi5wFBVV95cUxOcGJzMlNtdW5qY3g1UGFqS09uTm1GOWVMYXhOZ3ptLTAwU2V0aFRDTGRkMTN6UWFJTC1ndUlQT2lZdU5DQk52OEs2aURxLXR5T2lydGU2amhrNGIxLU5ZSEZfS2NjZ3JlQms4YnhYVGhkWF84dE14Ylg4a2U1RGk3VTYzYmhEaXk5WlY2Z2ttZWI2aklURWMyM2VycWZ1TU5FSVdEVE5mTjJxWGNfNFVUYTR0eXhkanZnNEpRN3lpNGRQZ3lyMS1wTmhwTGlmM3JrakloVWtYWVZ5cm1adUNYa3Zwd0lnX1XSAewBQVVfeXFMTlBtTzIzZkFsRmdFM2VPbnJlMEpBNllvQl9pUG5NMGFoR2E2enA1M18wRDhxdm1fZ0ZING8wUE42U2ZNeXVQelZQSXlWX1NyMFUzRDFTbjEzS2RCaUl0WS00TFdGYUtyNnRBS2kzTldxdk1XTHIxSGJ3aHlmYldoQ3B5YjJ5U2dneVBveU9Ub01sdTVZcERseUp4S0VncVlWYURHbkUyN1l2OG01TlI1TnAtbzdCcmhmY2FCU0dvWWIxU0xMNEdHMVlyVWkxbG5EcjlUS3VGNzc1Ykd5NGNzdGIwWUJfdEFoTmJOQ0M?oc=5" target="_blank" rel="noopener noreferrer">Festival de Jazz Argentino 2026: cuatro días de música en vivo en Buenos Aires, con conciertos gratuitos y clases magistrales - Clarin.com</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">clarin.com</span>
+              <span class="punto">&middot;</span>
+              <span>hoy</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Festival+de+Jazz+Argentino+2026%3A+cuatro+d%C3%ADas+de+m%C3%BAsica+en+vivo+en+Buenos+Aires%2C+con+conciertos+gratuitos+y+clases+magistrales+-+Clarin.com%22+site%3Aclarin.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </article>
+          
+          
+          
+          <article class="tarjeta caliente" data-nuevo="si">
+            <div class="fila-superior">
+              
+              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              <span class="cifra-chica alto">9.2</span>
+              <span class="marca reciente">recién</span>
+            </div>
             <h3><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxORW1mOWhBS2lMRjBhd3p4UEx5WWticDhnUU5WQk13ckd5VmRfVGhuRGtBcm8wTlZIc0NSNXhtQzBzZFRfWXdjMkVSTEowME9PT3hZNTdXRHBYOVRKVW8ydTY5eHhBTG5ZOXdlTTNjdXZVRlZFWTFfTVlGc2FGZGlkeHFUN29qaW0tQXlucDlsaw?oc=5" target="_blank" rel="noopener noreferrer">Cine español en Buenos Aires: Semana de Festivales gratis - Diario El Norte - San Nicolás</a></h3>
             <div class="pie-tarjeta">
               <span class="medio">diarioelnorte.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hoy</span>
+              <span>ayer</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cine+espa%C3%B1ol+en+Buenos+Aires%3A+Semana+de+Festivales+gratis+-+Diario+El+Norte+-+San+Nicol%C3%A1s%22+site%3Adiarioelnorte.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1866,7 +1973,7 @@
             <div class="pie-tarjeta">
               <span class="medio">cadena3.com</span>
               <span class="punto">&middot;</span>
-              <span>hoy</span>
+              <span>ayer</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cine+espa%C3%B1ol+en+Buenos+Aires%3A+festivales+de+M%C3%A1laga+y+San+Sebasti%C3%A1n+con+proyecciones+gratuitas+-+Cadena+3+Argentina%22+site%3Acadena3.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1884,7 +1991,7 @@
             <div class="pie-tarjeta">
               <span class="medio">municipiosur.com</span>
               <span class="punto">&middot;</span>
-              <span>ayer</span>
+              <span>hace 2 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Pedro+Miguel+Rosaldo+Garc%C3%ADa%2C+alcalde+porte%C3%B1o%2C+dio+a+conocer+la+cartelera+de+la+primera+edici%C3%B3n+del+Festival+Internacional+de+Cine+del+Mar+%28FICMAR%29+2026%2C+que+se+realizar%C3%A1+del+2+al+5+de+diciembre%2C+con+actividades+gratuitas+para+toda+la+poblaci%C3%B3n+-+MunicipioSur%22+site%3Amunicipiosur.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1902,7 +2009,7 @@
             <div class="pie-tarjeta">
               <span class="medio">radiobuenosaires.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 4 días</span>
+              <span>hace 5 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Festival+de+Jazz+Argentino%3A+27+shows%2C+masterclasses+gratis+y+artistas+de+todas+las+generaciones+-+Radio+Buenos+Aires+AM+1350%22+site%3Aradiobuenosaires.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1920,7 +2027,7 @@
             <div class="pie-tarjeta">
               <span class="medio">revistagente.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 4 días</span>
+              <span>hace 5 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Finde+XL+en+Buenos+Aires%3A+llega+el+festival+de+la+fugazzeta+al+Planetario+con+12+pizzer%C3%ADas%2C+shows+en+vivo+y+entrada+gratis+-+Revista+GENTE%22+site%3Arevistagente.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1938,7 +2045,7 @@
             <div class="pie-tarjeta">
               <span class="medio">canal26.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 4 días</span>
+              <span>hace 5 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22M%C3%A1s+de+50+artistas%2C+shows+de+Abel+Pintos+y+Soledad+y+gastronom%C3%ADa+regional%3A+el+festival+de+folklore+que+llega+a+Buenos+Aires+este+fin+de+semana+-+Canal26%22+site%3Acanal26.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1956,7 +2063,7 @@
             <div class="pie-tarjeta">
               <span class="medio">infobae.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 4 días</span>
+              <span>hace 5 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Rep%C3%BAblica+Folklore+llega+por+primera+vez+a+Buenos+Aires%3A+c%C3%B3mo+ser%C3%A1+el+festival+que+reunir%C3%A1+a+Abel+Pintos%2C+Soledad+y+Cazzu+-+Infobae%22+site%3Ainfobae.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1974,7 +2081,7 @@
             <div class="pie-tarjeta">
               <span class="medio">canal26.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 4 días</span>
+              <span>hace 5 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22M%C3%A1s+de+200+platos+t%C3%ADpicos+de+Italia+y+m%C3%BAsica+en+vivo%3A+el+festival+gastron%C3%B3mico+gratis+que+llega+a+Buenos+Aires+este+fin+de+semana+largo+-+Canal26%22+site%3Acanal26.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -1992,7 +2099,7 @@
             <div class="pie-tarjeta">
               <span class="medio">iprofesional.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 5 días</span>
+              <span>hace 6 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Planes+gratis+y+festivales+en+Buenos+Aires+el+fin+de+semana+largo+-+iProfesional%22+site%3Aiprofesional.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2010,7 +2117,7 @@
             <div class="pie-tarjeta">
               <span class="medio">radiobuenosaires.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 5 días</span>
+              <span>hace 6 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Arranca+la+tercera+edici%C3%B3n+del+festival+Infinito+Super+8+-+Radio+Buenos+Aires+AM+1350%22+site%3Aradiobuenosaires.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2028,7 +2135,7 @@
             <div class="pie-tarjeta">
               <span class="medio">perfil.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 6 días</span>
+              <span>hace 7 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Qu%C3%A9+hacer+este+fin+de+semana+largo+en+Buenos+Aires%3A+festivales%2C+m%C3%BAsica%2C+gastronom%C3%ADa+y+actividades+gratuitas+-+Perfil%22+site%3Aperfil.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2046,7 +2153,7 @@
             <div class="pie-tarjeta">
               <span class="medio">infoarenales.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 6 días</span>
+              <span>hace 7 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Buenos+Aires+Rojo+Sangre+y+Vicente+L%C3%B3pez%2C+Ciudad+del+Cine%3A+dos+festivales+para+exaltar+el+s%C3%A9ptimo+arte+-+Info+Arenales%22+site%3Ainfoarenales.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2064,26 +2171,8 @@
             <div class="pie-tarjeta">
               <span class="medio">perfil.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 9 días</span>
-              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Fugazzeta+Fest+en+la+Ciudad+de+Buenos+Aires%3A+cu%C3%A1ndo+y+d%C3%B3nde+ser%C3%A1+el+festival+de+pizza+con+entrada+gratuita+-+Perfil%22+site%3Aperfil.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
-            </div>
-          </article>
-          
-          
-          
-          <article class="tarjeta normal" data-nuevo="no">
-            <div class="fila-superior">
-              
-              
-              <span class="cifra-chica alto">9.1</span>
-              
-            </div>
-            <h3><a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxOaURURXhjV2M0blVDNmUybVZsS08tc0ZFTFNxZVFUU1JKR09oTE9ZWWw1SktENzJfQ3plSU4zOHlac1hoUFdZak9fTDNrNjVuY2dpTW9TWndnajMwZXhSeHJBc0RjdjVDM056S3lnU1pHQmc5MGh1blZmaUhEMTVvWWtqMG4yZ2Z3SGZMZHRrSU1BUUphWndFYW9FdWZWV2w4bE1DWEtwNVA1dFhtNFFPS0RPd2FLZ0pzemxiTUZpQdIBxAFBVV95cUxPWDdNalF6TjMxSlh1SElpNWFjaVZwbThmakFwMXItNVd2S29ScnQ1bTZzRlg3UlZGajFiZG9IRDVuVHgyN3BVNjRxRThXLTc0emM0Wnd4R0lkaDVkT2ZNRU9tOUZma1puV0pJMnVhQVMwbnJkV3QyZVZZdFotbzBoUTNQeXVzUTRjMy1YWXktZXdNQ095QkRDQ1J4cUp4VHhmWmhrbFBkby0xTnhnMDdoVS1iYlBuTVNSTkF0b2xhSkN6eHBF?oc=5" target="_blank" rel="noopener noreferrer">Fugazzeta: el festival de pizza porteña llega al Planetario con entrada libre y gratuita - Ambito</a></h3>
-            <div class="pie-tarjeta">
-              <span class="medio">ambito.com</span>
-              <span class="punto">&middot;</span>
               <span>hace 10 días</span>
-              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Fugazzeta%3A+el+festival+de+pizza+porte%C3%B1a+llega+al+Planetario+con+entrada+libre+y+gratuita+-+Ambito%22+site%3Aambito.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Fugazzeta+Fest+en+la+Ciudad+de+Buenos+Aires%3A+cu%C3%A1ndo+y+d%C3%B3nde+ser%C3%A1+el+festival+de+pizza+con+entrada+gratuita+-+Perfil%22+site%3Aperfil.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
@@ -2097,7 +2186,7 @@
       <summary>
         <span class="chevron" aria-hidden="true"></span>
         <span class="nombre-tema">Teatro gratis</span>
-        <span class="marca nueva">2 nuevas</span>
+        <span class="marca nueva">1 nueva</span>
         
         <span class="cuenta-tema">8</span>
         <span class="tope alto">10.0</span>
@@ -2118,7 +2207,7 @@
             <div class="pie-tarjeta">
               <span class="medio">escribiendocine.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 8 días</span>
+              <span>hace 9 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Semana+de+Cine+Latinoamericano+2026+en+Buenos+Aires%3A+programaci%C3%B3n+completa%2C+sedes+y+funciones+gratuitas+-+EscribiendoCine%22+site%3Aescribiendocine.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2136,7 +2225,7 @@
             <div class="pie-tarjeta">
               <span class="medio">buenosairesconnect.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 12 días</span>
+              <span>hace 13 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Hamlet+en+ojotas%3A+teatro+independiente+a+la+gorra+en+Villa+Crespo+-+Buenos+Aires+Connect%22+site%3Abuenosairesconnect.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2154,7 +2243,7 @@
             <div class="pie-tarjeta">
               <span class="medio">bairessecreta.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 19 días</span>
+              <span>hace 20 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Teatro+Col%C3%B3n+gratis%2C+cortos+animados+en+una+terraza+y+un+festival+con+el+Tata+Cedr%C3%B3n%3A+la+agenda+cultural+de+Buenos+Aires+del+6+al+13+de+noviembre%2C+casi+toda+gratis+-+Buenos+Aires+Secreta%22+site%3Abairessecreta.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2172,7 +2261,7 @@
             <div class="pie-tarjeta">
               <span class="medio">panoramadirecto.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 27 días</span>
+              <span>hace 28 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22En+voz+baja%E2%80%9D%3A+la+obra+de+Wosh+Mach%C3%ADn+llega+a+Buenos+Aires+con+entrada+gratuita+y+aborda+temas+sociales+tab%C3%BA+-+Panorama+Directo%22+site%3Apanoramadirecto.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2200,12 +2289,48 @@
         <span class="nombre-tema">Inteligencia artificial</span>
         <span class="marca nueva">2 nuevas</span>
         
-        <span class="cuenta-tema">77</span>
+        <span class="cuenta-tema">79</span>
         <span class="tope alto">9.9</span>
       </summary>
       <div class="cuerpo-tema">
         
         <div class="grilla ">
+          
+          
+          <article class="tarjeta caliente" data-nuevo="si">
+            <div class="fila-superior">
+              
+              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              <span class="cifra-chica medio">8.9</span>
+              <span class="marca reciente">recién</span>
+            </div>
+            <h3><a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTE03M1FvaWFpT25EeTVtRkU4REtTakQtUldIUmNSdkJVdnZta2tKNFRTYVotSzZieG9qMC1uRjFPdkhKMnRQam5pRmRKUnE1djVQcDFXeXRn?oc=5" target="_blank" rel="noopener noreferrer">Cursos de IA gratis de Anthropic, Google, Microsoft y OpenAI, y cuál tomar primero - WebAdictos</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">webadictos.com</span>
+              <span class="punto">&middot;</span>
+              <span>hoy</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Cursos+de+IA+gratis+de+Anthropic%2C+Google%2C+Microsoft+y+OpenAI%2C+y+cu%C3%A1l+tomar+primero+-+WebAdictos%22+site%3Awebadictos.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </article>
+          
+          
+          
+          <article class="tarjeta semana" data-nuevo="si">
+            <div class="fila-superior">
+              
+              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              <span class="cifra-chica alto">9.0</span>
+              
+            </div>
+            <h3><a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE1WYkFjNkN6aGdNMzVLN2oxUm9qM0pHcm8zNl9Fa1NEY0Nsc1o2b1FSTzBlSG9WcTBNU3p6Um9uV1QyQ1BhcVphMG1xUm9mSDNEVzRkcThqU2hEazZDQ0k2ag?oc=5" target="_blank" rel="noopener noreferrer">Los mejores cursos de IA gratis en 2026: con y sin certificado - Fello AI</a></h3>
+            <div class="pie-tarjeta">
+              <span class="medio">felloai.com</span>
+              <span class="punto">&middot;</span>
+              <span>hace 3 días</span>
+              <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Los+mejores+cursos+de+IA+gratis+en+2026%3A+con+y+sin+certificado+-+Fello+AI%22+site%3Afelloai.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
+            </div>
+          </article>
+          
           
           
           <article class="tarjeta semana" data-nuevo="no">
@@ -2219,7 +2344,7 @@
             <div class="pie-tarjeta">
               <span class="medio">pamplonaactual.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 4 días</span>
+              <span>hace 5 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22La+Cendea+de+Galar+ofrece+un+curso+gratuito+de+inteligencia+artificial+desde+diciembre+-+Pamplona+Actual%22+site%3Apamplonaactual.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2237,7 +2362,7 @@
             <div class="pie-tarjeta">
               <span class="medio">uoc.edu</span>
               <span class="punto">&middot;</span>
-              <span>hace 5 días</span>
+              <span>hace 6 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Curso+de+IA+generativa+gratuito+para+el+estudiantado+nuevo+de+la+UOC+-+Universitat+Oberta+de+Catalunya+%28UOC%29%22+site%3Auoc.edu" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2255,7 +2380,7 @@
             <div class="pie-tarjeta">
               <span class="medio">notigram.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 11 días</span>
+              <span>hace 12 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Congreso+de+Jalisco+y+PLAi+ofrecen+curso+gratuito+de+Inteligencia+Artificial+para+periodistas+y+comunicadores+-+Notigram%22+site%3Anotigram.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2273,7 +2398,7 @@
             <div class="pie-tarjeta">
               <span class="medio">notisistema.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 12 días</span>
+              <span>hace 13 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Congreso+de+Jalisco+y+PLAi+lanzan+curso+gratuito+de+IA+para+periodistas+-+Notisistema%22+site%3Anotisistema.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2291,7 +2416,7 @@
             <div class="pie-tarjeta">
               <span class="medio">qpasa.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 14 días</span>
+              <span>hace 15 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Anthropic+abri%C3%B3+m%C3%A1s+de+25+cursos+gratis+para+aprender+a+usar+Claude+con+certificado+-+QPASA%22+site%3Aqpasa.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2309,7 +2434,7 @@
             <div class="pie-tarjeta">
               <span class="medio">talent24h.okdiario.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 14 días</span>
+              <span>hace 15 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22EOI+prepara+un+curso+de+inteligencia+artificial+gratis+para+j%C3%B3venes+con+clases+por+la+tarde+y+sin+programar+-+Talent24h%22+site%3Atalent24h.okdiario.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2327,7 +2452,7 @@
             <div class="pie-tarjeta">
               <span class="medio">foro3d.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 14 días</span>
+              <span>hace 15 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Google+abre+certificaci%C3%B3n+gratuita+en+IA+con+20.000+licencias+en+Ucrania+-+Foro3D%22+site%3Aforo3d.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2345,7 +2470,7 @@
             <div class="pie-tarjeta">
               <span class="medio">qpasa.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 20 días</span>
+              <span>hace 21 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22El+creador+de+Coursera+regala+m%C3%A1s+de+100+cursos+de+inteligencia+artificial+-+QPASA%22+site%3Aqpasa.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2363,7 +2488,7 @@
             <div class="pie-tarjeta">
               <span class="medio">radio10mardelplata.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 20 días</span>
+              <span>hace 21 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22PotencIA+abri%C3%B3+una+tercera+edici%C3%B3n+extraordinaria+ante+la+alta+demanda+de+cursos+gratuitos+de+inteligencia+artificial+en+Mar+del+Plata+-+Radio+10+Mar+del+Plata%22+site%3Aradio10mardelplata.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2381,7 +2506,7 @@
             <div class="pie-tarjeta">
               <span class="medio">nacion.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 21 días</span>
+              <span>hace 22 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22CENSA+lanza+Escuela+de+Inteligencia+Artificial+y+ofrece+cinco+cursos+gratuitos+-+La+Naci%C3%B3n+Costa+Rica%22+site%3Anacion.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2399,7 +2524,7 @@
             <div class="pie-tarjeta">
               <span class="medio">welcometoibiza.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 21 días</span>
+              <span>hace 22 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Curso+inteligencia+artificial+en+Santa+Eulalia+%7C+Ibiza+2026+-+Welcometoibiza.com%22+site%3Awelcometoibiza.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2417,7 +2542,7 @@
             <div class="pie-tarjeta">
               <span class="medio">unjudiario.unju.edu.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 22 días</span>
+              <span>hace 23 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Contin%C3%BAa+la+preinscripci%C3%B3n+para+un+curso+gratuito+de+Inteligencia+Artificial+Aplicada+en+Alto+Comedero+-+UNJu+Diario%22+site%3Aunjudiario.unju.edu.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2435,17 +2560,17 @@
             <div class="pie-tarjeta">
               <span class="medio">nuevoenfoqueurbano.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 22 días</span>
+              <span>hace 23 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Adum+anunci%C3%B3+un+curso+sobre+Inteligencia+Artificial+para+la+ense%C3%B1anza+y+la+investigaci%C3%B3n+universitaria+-+Nuevo+Enfoque+Urbano%22+site%3Anuevoenfoqueurbano.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
           
           
-          <article class="tarjeta normal" data-nuevo="si">
+          <article class="tarjeta normal" data-nuevo="no">
             <div class="fila-superior">
               
-              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              
               <span class="cifra-chica bajo">7.8</span>
               
             </div>
@@ -2453,7 +2578,7 @@
             <div class="pie-tarjeta">
               <span class="medio">tramaeducativa.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 22 días</span>
+              <span>hace 23 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Adum+anunci%C3%B3+un+curso+sobre+Inteligencia+Artificial+para+la+ense%C3%B1anza+y+la+investigaci%C3%B3n+universitaria+-+Trama+Educativa%22+site%3Atramaeducativa.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2471,7 +2596,7 @@
             <div class="pie-tarjeta">
               <span class="medio">ecosistemastartup.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 23 días</span>
+              <span>hace 24 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Fotocasa+Pro+Academy%3A+cursos+gratis+de+IA+inmobiliaria+-+El+Ecosistema+Startup%22+site%3Aecosistemastartup.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2489,7 +2614,7 @@
             <div class="pie-tarjeta">
               <span class="medio">lavozdeibiza.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 23 días</span>
+              <span>hace 24 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Santa+Eul%C3%A0ria+ofrece+un+curso+gratuito+de+inteligencia+artificial+con+plazas+limitadas+-+Inscripciones+-+La+Voz+de+Ibiza%22+site%3Alavozdeibiza.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2507,7 +2632,7 @@
             <div class="pie-tarjeta">
               <span class="medio">periodicodeibiza.es</span>
               <span class="punto">&middot;</span>
-              <span>hace 23 días</span>
+              <span>hace 24 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Santa+Eul%C3%A0ria+abre+las+inscripciones+para+un+curso+gratuito+de+inteligencia+artificial+-+Peri%C3%B3dico+de+Ibiza+y+Formentera%22+site%3Aperiodicodeibiza.es" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2525,7 +2650,7 @@
             <div class="pie-tarjeta">
               <span class="medio">lavozdeibiza.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 23 días</span>
+              <span>hace 24 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Santa+Eul%C3%A0ria+estrena+un+curso+gratuito+de+IA+con+solo+13+plazas%3A+c%C3%B3mo+inscribirse+-+La+Voz+de+Ibiza%22+site%3Alavozdeibiza.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -2543,17 +2668,17 @@
             <div class="pie-tarjeta">
               <span class="medio">infobae.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 27 días</span>
+              <span>hace 28 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22UNI+lanza+cursos+gratis+sobre+IA%3A+conoce+el+link+de+la+inscripci%C3%B3n+y+la+lista+completa+de+materias+-+Infobae%22+site%3Ainfobae.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
           
           
           
-          <article class="tarjeta normal" data-nuevo="si">
+          <article class="tarjeta normal" data-nuevo="no">
             <div class="fila-superior">
               
-              <span class="led" aria-hidden="true"></span><span class="solo-lectores">Agregada hace menos de 48 horas.</span>
+              
               <span class="cifra-chica bajo">7.0</span>
               
             </div>
@@ -2561,7 +2686,7 @@
             <div class="pie-tarjeta">
               <span class="medio">andaluciaorienta.net</span>
               <span class="punto">&middot;</span>
-              <span>hace 28 días</span>
+              <span>hace 29 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%2222+cursos+de+formaci%C3%B3n+en+Inteligencia+Artificial+%28IA%29%2C+big+data+o+realidad+virtual+en+Andaluc%C3%ADa+%28abiertos+plazos+de+solicitud%29+-+Andaluc%C3%ADa+Orienta%22+site%3Aandaluciaorienta.net" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -3407,7 +3532,7 @@
             <div class="pie-tarjeta">
               <span class="medio">blogthinkbig.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 2 meses</span>
+              <span>hace 3 meses</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22%C2%BFQuieres+aprender+IA%3F+Claude+acaba+de+publicar+12+cursos+gratuitos+con+certificado+incluido+-+Blogthinkbig.com%22+site%3Ablogthinkbig.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -3623,7 +3748,7 @@
             <div class="pie-tarjeta">
               <span class="medio">airedesantafe.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 6 días</span>
+              <span>hace 7 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22La+UNL+abri%C3%B3+las+inscripciones+para+sus+cursos+de+idiomas+de+verano%3A+qu%C3%A9+se+puede+estudiar+y+c%C3%B3mo+anotarse+-+Aire+de+Santa+Fe%22+site%3Aairedesantafe.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -3641,7 +3766,7 @@
             <div class="pie-tarjeta">
               <span class="medio">reconquistahoy.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 15 días</span>
+              <span>hace 16 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22%C2%A1ACIR+abri%C3%B3+las+inscripciones+para+2027+con+descuentos+y+propuestas+para+todas+las+edades%21+Este+domingo+presenta+su+espect%C3%A1culo+anual+de+teatro+en+ingl%C3%A9s%3A+%22La+Bella+y+la+Bestia%22+-+ReconquistaHOY%22+site%3Areconquistahoy.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -3659,7 +3784,7 @@
             <div class="pie-tarjeta">
               <span class="medio">cemba.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 21 días</span>
+              <span>hace 22 días</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Idiomas+gratis+para+chicos+y+adolescentes%3A+abri%C3%B3+la+inscripci%C3%B3n+para+los+cursos+de+2027+-+Diario+CEMBA%22+site%3Acemba.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -3677,7 +3802,7 @@
             <div class="pie-tarjeta">
               <span class="medio">perfil.com</span>
               <span class="punto">&middot;</span>
-              <span>hace 29 días</span>
+              <span>hace 1 mes</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22La+Ciudad+de+Buenos+Aires+abri%C3%B3+la+inscripci%C3%B3n+para+estudiar+idiomas+gratis+en+2027+-+Perfil%22+site%3Aperfil.com" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -3695,7 +3820,7 @@
             <div class="pie-tarjeta">
               <span class="medio">prensalibreonline.com.ar</span>
               <span class="punto">&middot;</span>
-              <span>hace 29 días</span>
+              <span>hace 1 mes</span>
               <span class="punto">&middot;</span><a class="alterno" href="https://www.google.com/search?q=%22Preinscripci%C3%B3n+abierta+para+los+CECIEs+2027%3A+c%C3%B3mo+anotar+a+los+chicos+en+cursos+de+idiomas+gratis+-+Prensa+Libre+Online%22+site%3Aprensalibreonline.com.ar" target="_blank" rel="noopener noreferrer">buscar la nota</a>
             </div>
           </article>
@@ -4072,32 +4197,6 @@
         
         <article class="diapositiva promo">
           
-          <img class="logo grande" src="https://go.bbva.com.ar/fgo/sites/default/files/c2-subrubro-automotores-serviceauto-940x620-6.jpg" alt=""
-               loading="lazy" decoding="async" referrerpolicy="no-referrer"
-               onerror="this.remove()">
-          
-          <div class="contenido-diapositiva">
-            <h2><a href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer">Norauto</a></h2>
-            <div class="beneficio-destacado">
-              
-              
-                
-                <span class="cuotas">6 cuotas</span>
-              
-            </div>
-            <div class="pie-tarjeta">
-              
-              <span>Tarjetas de crédito BBVA</span>
-              <span class="vigencia caliente">vence 25/11</span>
-            </div>
-          </div>
-        </article>
-        
-        
-        
-        
-        <article class="diapositiva promo">
-          
           <div class="contenido-diapositiva">
             <h2><a href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer">Las Margaritas</a></h2>
             <div class="beneficio-destacado">
@@ -4139,6 +4238,28 @@
         </article>
         
         
+        
+        
+        <article class="diapositiva promo">
+          
+          <div class="contenido-diapositiva">
+            <h2><a href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer">Parfumerie</a></h2>
+            <div class="beneficio-destacado">
+              
+              
+                
+                <span class="cuotas">6 cuotas</span>
+              
+            </div>
+            <div class="pie-tarjeta">
+              
+              <span>Tarjetas de crédito BBVA</span>
+              <span class="vigencia semana">vence 30/11</span>
+            </div>
+          </div>
+        </article>
+        
+        
       </div>
 
       
@@ -4171,7 +4292,7 @@
 
     <div class="metricas">
       <div class="metrica">
-        <span class="valor">49</span>
+        <span class="valor">48</span>
         <span class="clave">en seguimiento</span>
       </div>
       <div class="metrica">
@@ -4181,14 +4302,14 @@
       
       
       <div class="metrica">
-        <span class="valor calor">23</span>
+        <span class="valor calor">22</span>
         <span class="clave">vencen en 7 días</span>
       </div>
       
       
       
       <div class="metrica">
-        <span class="valor">26</span>
+        <span class="valor">25</span>
         <span class="clave">Bancos y tarjetas</span>
       </div>
       
@@ -4218,7 +4339,7 @@
         <span class="nombre-tema">BBVA / Banco Frances</span>
         <span class="marca nueva">2 nuevas</span>
         
-        <span class="cuenta-tema">26</span>
+        <span class="cuenta-tema">25</span>
         <span class="tope bajo">6.5</span>
       </summary>
       <div class="cuerpo-tema">
@@ -4259,7 +4380,7 @@
                 
                 <span class="vigencia caliente">
                   vence 26/11
-                  <em>· vence mañana</em>
+                  <em>· último día</em>
                 </span>
               </div>
             </div>
@@ -4288,7 +4409,7 @@
           
           
           
-          <article class="tarjeta promo volteable semana" data-nuevo="si">
+          <article class="tarjeta promo volteable caliente" data-nuevo="si">
             
             <button class="voltear" type="button"
                     aria-expanded="false" aria-controls="dorso-bbva-2"
@@ -4318,9 +4439,9 @@
               <div class="pie-promo">
                 
                 
-                <span class="vigencia semana">
+                <span class="vigencia caliente">
                   vence 29/11
-                  <em>· vence en 4 días</em>
+                  <em>· vence en 3 días</em>
                 </span>
               </div>
             </div>
@@ -4381,7 +4502,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
@@ -4446,7 +4567,7 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
@@ -4511,7 +4632,7 @@
                 
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
@@ -4546,70 +4667,6 @@
             
             <button class="voltear" type="button"
                     aria-expanded="false" aria-controls="dorso-bbva-6"
-                    aria-label="Ver la letra chica de Parfumerie">
-              <span aria-hidden="true">i</span>
-            </button>
-            <div class="caras">
-            <div class="cara cara-frente">
-            
-            <div class="tapa">
-              <div class="encabezado-promo">
-                
-                <div class="identidad">
-                  <h3 class="comercio">Parfumerie</h3>
-                  <span class="plastico">Tarjetas de crédito BBVA</span>
-                </div>
-                
-              </div>
-
-              
-              <div class="beneficio">
-                
-                
-                  
-                  <span class="cuotas">6 cuotas</span>
-                
-              </div>
-              
-
-              <div class="pie-promo">
-                
-                
-                <span class="vigencia semana">
-                  vence 30/11
-                  <em>· vence en 5 días</em>
-                </span>
-              </div>
-            </div>
-            </div>
-
-            
-            <div class="cara cara-dorso" id="dorso-bbva-6" aria-hidden="true">
-              <h4 class="titulo-dorso">Parfumerie</h4>
-              <dl class="letra-chica">
-                
-                <div><dt>Vigencia</dt><dd>01/10 al 30/11</dd></div>
-                
-                
-                <div><dt>Aplica con</dt><dd>Tarjetas de crédito BBVA</dd></div>
-                
-                
-                
-                
-                <div><dt>Encaje</dt><dd>6.5 · senal: promocion, clave: cuotas</dd></div>
-              </dl>
-              <a class="enlace-dorso" href="https://www.bbva.com.ar/beneficios/" target="_blank" rel="noopener noreferrer" tabindex="-1">Ver en bbva.com.ar</a>
-            </div>
-            </div>
-          </article>
-          
-          
-          
-          
-          <article class="tarjeta promo volteable semana" data-nuevo="no">
-            
-            <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-7"
                     aria-label="Ver la letra chica de Juleriaque">
               <span aria-hidden="true">i</span>
             </button>
@@ -4641,14 +4698,14 @@
                 
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-7" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-6" aria-hidden="true">
               <h4 class="titulo-dorso">Juleriaque</h4>
               <dl class="letra-chica">
                 
@@ -4673,7 +4730,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-8"
+                    aria-expanded="false" aria-controls="dorso-bbva-7"
                     aria-label="Ver la letra chica de Duty Free Shop">
               <span aria-hidden="true">i</span>
             </button>
@@ -4702,14 +4759,14 @@
                 
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-8" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-7" aria-hidden="true">
               <h4 class="titulo-dorso">Duty Free Shop</h4>
               <dl class="letra-chica">
                 
@@ -4736,7 +4793,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-9"
+                    aria-expanded="false" aria-controls="dorso-bbva-8"
                     aria-label="Ver la letra chica de Ypf">
               <span aria-hidden="true">i</span>
             </button>
@@ -4765,14 +4822,14 @@
                 
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-9" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-8" aria-hidden="true">
               <h4 class="titulo-dorso">Ypf</h4>
               <dl class="letra-chica">
                 
@@ -4799,7 +4856,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-10"
+                    aria-expanded="false" aria-controls="dorso-bbva-9"
                     aria-label="Ver la letra chica de Las Margaritas">
               <span aria-hidden="true">i</span>
             </button>
@@ -4828,14 +4885,14 @@
                 <span class="senal">solo 1 día por semana</span>
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-10" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-9" aria-hidden="true">
               <h4 class="titulo-dorso">Las Margaritas</h4>
               <dl class="letra-chica">
                 
@@ -4864,7 +4921,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-11"
+                    aria-expanded="false" aria-controls="dorso-bbva-10"
                     aria-label="Ver la letra chica de Nika Sushi">
               <span aria-hidden="true">i</span>
             </button>
@@ -4893,14 +4950,14 @@
                 
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-11" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-10" aria-hidden="true">
               <h4 class="titulo-dorso">Nika Sushi</h4>
               <dl class="letra-chica">
                 
@@ -4927,7 +4984,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-12"
+                    aria-expanded="false" aria-controls="dorso-bbva-11"
                     aria-label="Ver la letra chica de Paru">
               <span aria-hidden="true">i</span>
             </button>
@@ -4956,14 +5013,14 @@
                 
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-12" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-11" aria-hidden="true">
               <h4 class="titulo-dorso">Paru</h4>
               <dl class="letra-chica">
                 
@@ -4990,7 +5047,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-13"
+                    aria-expanded="false" aria-controls="dorso-bbva-12"
                     aria-label="Ver la letra chica de Mare By Fran">
               <span aria-hidden="true">i</span>
             </button>
@@ -5019,14 +5076,14 @@
                 
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-13" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-12" aria-hidden="true">
               <h4 class="titulo-dorso">Mare By Fran</h4>
               <dl class="letra-chica">
                 
@@ -5053,7 +5110,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-14"
+                    aria-expanded="false" aria-controls="dorso-bbva-13"
                     aria-label="Ver la letra chica de Casa Saenz">
               <span aria-hidden="true">i</span>
             </button>
@@ -5082,14 +5139,14 @@
                 
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-14" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-13" aria-hidden="true">
               <h4 class="titulo-dorso">Casa Saenz</h4>
               <dl class="letra-chica">
                 
@@ -5116,7 +5173,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-15"
+                    aria-expanded="false" aria-controls="dorso-bbva-14"
                     aria-label="Ver la letra chica de Farinelli">
               <span aria-hidden="true">i</span>
             </button>
@@ -5145,14 +5202,14 @@
                 
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-15" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-14" aria-hidden="true">
               <h4 class="titulo-dorso">Farinelli</h4>
               <dl class="letra-chica">
                 
@@ -5179,7 +5236,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-16"
+                    aria-expanded="false" aria-controls="dorso-bbva-15"
                     aria-label="Ver la letra chica de Supermercados Vea QR Modo">
               <span aria-hidden="true">i</span>
             </button>
@@ -5208,14 +5265,14 @@
                 
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-16" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-15" aria-hidden="true">
               <h4 class="titulo-dorso">Supermercados Vea QR Modo</h4>
               <dl class="letra-chica">
                 
@@ -5242,7 +5299,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-17"
+                    aria-expanded="false" aria-controls="dorso-bbva-16"
                     aria-label="Ver la letra chica de Disco QR Modo">
               <span aria-hidden="true">i</span>
             </button>
@@ -5271,14 +5328,14 @@
                 
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-17" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-16" aria-hidden="true">
               <h4 class="titulo-dorso">Disco QR Modo</h4>
               <dl class="letra-chica">
                 
@@ -5305,7 +5362,7 @@
           <article class="tarjeta promo volteable semana" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-18"
+                    aria-expanded="false" aria-controls="dorso-bbva-17"
                     aria-label="Ver la letra chica de Jumbo QR Modo">
               <span aria-hidden="true">i</span>
             </button>
@@ -5334,14 +5391,14 @@
                 
                 <span class="vigencia semana">
                   vence 30/11
-                  <em>· vence en 5 días</em>
+                  <em>· vence en 4 días</em>
                 </span>
               </div>
             </div>
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-18" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-17" aria-hidden="true">
               <h4 class="titulo-dorso">Jumbo QR Modo</h4>
               <dl class="letra-chica">
                 
@@ -5368,7 +5425,7 @@
           <article class="tarjeta promo volteable normal" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-19"
+                    aria-expanded="false" aria-controls="dorso-bbva-18"
                     aria-label="Ver la letra chica de Gastronomía">
               <span aria-hidden="true">i</span>
             </button>
@@ -5404,7 +5461,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-19" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-18" aria-hidden="true">
               <h4 class="titulo-dorso">Gastronomía</h4>
               <dl class="letra-chica">
                 
@@ -5431,7 +5488,7 @@
           <article class="tarjeta promo volteable normal" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-20"
+                    aria-expanded="false" aria-controls="dorso-bbva-19"
                     aria-label="Ver la letra chica de Supermercados Y Combustible">
               <span aria-hidden="true">i</span>
             </button>
@@ -5467,7 +5524,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-20" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-19" aria-hidden="true">
               <h4 class="titulo-dorso">Supermercados Y Combustible</h4>
               <dl class="letra-chica">
                 
@@ -5494,7 +5551,7 @@
           <article class="tarjeta promo volteable normal" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-21"
+                    aria-expanded="false" aria-controls="dorso-bbva-20"
                     aria-label="Ver la letra chica de Super Y Combustible">
               <span aria-hidden="true">i</span>
             </button>
@@ -5530,7 +5587,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-21" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-20" aria-hidden="true">
               <h4 class="titulo-dorso">Super Y Combustible</h4>
               <dl class="letra-chica">
                 
@@ -5557,7 +5614,7 @@
           <article class="tarjeta promo volteable normal" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-22"
+                    aria-expanded="false" aria-controls="dorso-bbva-21"
                     aria-label="Ver la letra chica de Zara">
               <span aria-hidden="true">i</span>
             </button>
@@ -5596,7 +5653,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-22" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-21" aria-hidden="true">
               <h4 class="titulo-dorso">Zara</h4>
               <dl class="letra-chica">
                 
@@ -5621,7 +5678,7 @@
           <article class="tarjeta promo volteable normal" data-nuevo="no">
             
             <button class="voltear" type="button"
-                    aria-expanded="false" aria-controls="dorso-bbva-23"
+                    aria-expanded="false" aria-controls="dorso-bbva-22"
                     aria-label="Ver la letra chica de Cabify">
               <span aria-hidden="true">i</span>
             </button>
@@ -5657,7 +5714,7 @@
             </div>
 
             
-            <div class="cara cara-dorso" id="dorso-bbva-23" aria-hidden="true">
+            <div class="cara cara-dorso" id="dorso-bbva-22" aria-hidden="true">
               <h4 class="titulo-dorso">Cabify</h4>
               <dl class="letra-chica">
                 
@@ -7188,7 +7245,7 @@
     El puntaje mide qué tan bien encaja con el tema, no la calidad de lo que ofrece.
     <em>hace N días</em> es cuándo se publicó la nota, no cuándo cierra la inscripción;
     <em>vence</em> sí es una fecha real que declara la fuente.
-    <br>Se archivaron 346 avisos vencidos.
+    <br>Se archivaron 348 avisos vencidos.
   </footer>
 </main>
 
